@@ -9,7 +9,7 @@ using MedicalBookingProject.DataAccess.Configuration;
 using MedicalBookingProject.DataAccess.Entities;
 using MedicalBookingProject.DataAccess;
 using MedicalBookingProject.Domain.Models.Shedules;
-using MedicalBookingProject.DataAccess.Scripts;
+using MedicalBookingProject.DataAccess.Scripts;             // get slots
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
@@ -55,7 +55,6 @@ namespace MedicalBookingProject.DataAccess.Repo
                     TimeStart = shedule.TimeStart,
                     TimeStop = shedule.TimeStop,
                     TimeChunk = shedule.TimeChunk
-                    //IsBooked = false
                 };
                 await _context.SheduleEntities.AddAsync(sheduleEntity);
                 await _context.SaveChangesAsync();
@@ -73,7 +72,7 @@ namespace MedicalBookingProject.DataAccess.Repo
                .Where(item => item.SlotId == id)
                .ToList()
                .FirstOrDefault();
-            DateTime myDate = DateTime.ParseExact(entitie.StartDay, "M/d/yyyy",
+            DateTime myDate = DateTime.ParseExact(entitie!.StartDay, "M/d/yyyy",
                                        CultureInfo.InvariantCulture);
             var shedule = new Shedule(entitie.DoctorId, myDate, 
                                         entitie.Days, entitie.TimeStart, 
@@ -81,23 +80,15 @@ namespace MedicalBookingProject.DataAccess.Repo
             return shedule;
         }
 
+
+        // Patch
         public async Task<Guid> Booking(Guid id, Guid id1)
         {
-            //var entities = await _context.SheduleEntities
-            //    .AsNoTracking()
-            //    .ToListAsync();
-            //var entitie = entities
-            //   .Where(item => item.SlotId == id)
-            //   .ToList()
-            //   .FirstOrDefault();
-            //entitie.IsBooked = true;
-            //entitie.PatientId = new Guid("2AF9B351-3D1E-4634-B2CE-38913117B666"); 
-            //await _context.SaveChangesAsync();
             await _context.SheduleEntities
                 .Where(item => item.SlotId == id)
                 .ExecuteUpdateAsync(s => s
-                .SetProperty(s => s.IsBooked, s => true)
-                .SetProperty(s => s.PatientId, s => id1) //new Guid("2AF9B351-3D1E-4634-B2CE-38913117B666"))
+                .SetProperty(s => s.PatientId, s => id1)
+                .SetProperty(s => s.IsBooked, s => true)         
                 );
             return id;
         }

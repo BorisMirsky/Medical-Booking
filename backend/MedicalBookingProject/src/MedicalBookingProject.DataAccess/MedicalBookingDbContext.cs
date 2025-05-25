@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Logging;
 using MedicalBookingProject.Domain.Models.Users;
 using MedicalBookingProject.Domain.Models.Shedules;
+using MedicalBookingProject.Domain.Models.Bookings;
 
 
 
@@ -25,6 +26,7 @@ namespace MedicalBookingProject.DataAccess
         public DbSet<SheduleEntity> SheduleEntities { get; set; }
         public DbSet<Shedule> Shedules { get; set; }
         public DbSet<Timeslot> Timeslots { get; set; }
+        public DbSet<BookingEntity> BookingEntities { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.LogTo(logStream.WriteLine);

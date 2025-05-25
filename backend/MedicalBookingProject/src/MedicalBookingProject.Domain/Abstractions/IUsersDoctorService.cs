@@ -7,6 +7,10 @@ using MedicalBookingProject.Domain.Models;
 using MedicalBookingProject.Domain.Models.Users;
 
 
+
+
+
+
 namespace MedicalBookingProject.Domain.Abstractions
 {
     public interface IUsersDoctorService

@@ -15,16 +15,16 @@ namespace MedicalBookingProject.DataAccess.Entities
         public int? Id { get; set; }
 
         [Column("slotid")]
-        public Guid? SlotId { get; set; }
+        public Guid SlotId { get; set; }
 
         [Column("doctorid")]
         public Guid DoctorId { get; set; }
 
         [Column("slotdatetimestart")]
-        public string? SlotDatetimeStart { get; set; }
+        public string SlotDatetimeStart { get; set; } = "";
 
         [Column("slotdatetimestop")]
-        public string? SlotDatetimeStop { get; set; }
+        public string SlotDatetimeStop { get; set; } = "";
 
         [Column("isbooked")]
         public Boolean? IsBooked { get; set; }
@@ -33,7 +33,7 @@ namespace MedicalBookingProject.DataAccess.Entities
         public Guid? PatientId { get; set; }
 
         [Column("startday")]
-        public string? StartDay { get; set; }
+        public string StartDay { get; set; } = "";
 
         [Column("days")]
         public int Days { get; set; }
@@ -46,11 +46,5 @@ namespace MedicalBookingProject.DataAccess.Entities
 
         [Column("timechunk")]
         public int TimeChunk { get; set; }
-
-        //[Column("wascancelledby")]
-        //public string? WasCancelledBy { get; set; } = null;
-
-        //[Column("wascancelledat")]
-        //public string? WasCancelledAt { get; set; } = null;
     }
 }

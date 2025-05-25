@@ -22,7 +22,10 @@ string connection = builder.Configuration.GetConnectionString("DefaultConnection
 builder.Services.AddDbContext<MedicalBookingDbContext>(options => options.UseSqlite(connection));
 builder.Services.AddScoped<ISheduleService, SheduleService>();
 builder.Services.AddScoped<ISheduleRepo, ShedulesRepo>();
-builder.Services.AddScoped<IUsersDoctorService, UserDoctorService>();
+builder.Services.AddScoped<IUsersDoctorService, UsersDoctorService>();
+builder.Services.AddScoped<IUsersDoctorRepo, UsersDoctorRepo>();
+builder.Services.AddScoped<IBookingService, BookingService>();
+builder.Services.AddScoped<IBookingRepo, BookingRepo>();
 
 
 

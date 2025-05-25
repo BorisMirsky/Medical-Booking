@@ -17,10 +17,12 @@ namespace MedicalBookingProject.Web.Controllers
     public class ShedulesController : ControllerBase
     {
         private readonly ISheduleService _sheduleService;
+        private readonly IBookingService _bookingService;
 
-        public ShedulesController(ISheduleService sheduleService)
+        public ShedulesController(ISheduleService sheduleService, IBookingService bookingService)
         {
             _sheduleService = sheduleService;
+            _bookingService = bookingService;
         }
 
 
@@ -43,12 +45,13 @@ namespace MedicalBookingProject.Web.Controllers
             return Ok(slot);
         }
 
+
         [HttpPatch]
-        public async Task<ActionResult<Guid>> BookingSlotById(Guid id, Guid id1)
+        public async Task<ActionResult<Guid>> BookingSlot(Guid id, Guid id1)
         {
             var slotId = await _sheduleService.BookingSlot(id, id1);
+            var id2 = await _bookingService.CreateBooking(id, id1); 
             return Ok(slotId);
         }
-
     }
 }

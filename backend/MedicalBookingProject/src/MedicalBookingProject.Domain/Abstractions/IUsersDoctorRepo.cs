@@ -11,5 +11,6 @@ namespace MedicalBookingProject.Domain.Abstractions
     public interface IUsersDoctorRepo
     {
         Task<UserDoctor> Register(string email, string password, string username, string role, string speciality);
+        Task<UserDoctor> Get(Guid id);
     }
 }

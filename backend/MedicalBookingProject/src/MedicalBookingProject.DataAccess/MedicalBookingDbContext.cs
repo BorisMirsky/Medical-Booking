@@ -22,6 +22,7 @@ namespace MedicalBookingProject.DataAccess
         {
         }
         public DbSet<UserDoctorEntity> UsersDoctors { get; set; }
+        public DbSet<UserPatientEntity> UsersPatients { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<SheduleEntity> SheduleEntities { get; set; }
         public DbSet<Shedule> Shedules { get; set; }

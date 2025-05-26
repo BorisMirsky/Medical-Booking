@@ -30,5 +30,15 @@ namespace MedicalBookingProject.Application.Services
             return await _bookingRepo.Create(id, id1);
         }
 
+        public async Task<Booking> GetOneBooking(Guid id)
+        {
+            return await _bookingRepo.GetOneBooking(id);
+        }
+
+        public async Task<Booking> CancelBooking(Guid id)
+        {
+            return await _bookingRepo.Cancel(id);
+        }
+
     }
 }

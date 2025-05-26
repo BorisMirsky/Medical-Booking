@@ -23,7 +23,7 @@ namespace MedicalBookingProject.Web.Controllers
         private readonly IUsersDoctorService _doctorService;
         private readonly IUsersPatientService _patientService;
 
-        public UsersController(IUsersDoctorService doctorService)
+        public UsersController(IUsersDoctorService doctorService, IUsersPatientService patientService)
         {
             _doctorService = doctorService;
             _patientService = patientService;
@@ -59,6 +59,25 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
+
+        [Route("GetDoctor")]
+        [HttpGet]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        public async Task<IActionResult> GetDoctor(Guid id)
+        {
+            UserDoctor user = await _doctorService.Get(id);
+
+            if (user != null)
+            {
+                return Ok(user);
+            }
+
+            return BadRequest(new { message = "User Doctor is not recognized" });
+        }
+
+
+        // Patient
+
         [Route("RegisterPatient")]
         [HttpPost]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
@@ -73,23 +92,37 @@ namespace MedicalBookingProject.Web.Controllers
                 return BadRequest(new { message = "Password needs to entered" });
             }
 
-            UserPatient registeredUserPatient = await _doctorService.Register(request.Email,
+            UserPatient registeredPatient = await _patientService.Register(request.Email,
                                                                 request.Password,
                                                                 request.UserName,
-                                                                request.Role);
+                                                                request.Role,
+                                                                request.Gender);
 
-            if (registeredUserPatient != null)
+            if (registeredPatient != null)
             {
-                return Ok(registeredUserPatient);
+                return Ok(registeredPatient);
             }
 
             return BadRequest(new { message = "User Doctor registration unsuccessful" });
+        }
+
+
+        [Route("GetPatient")]
+        [HttpGet]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        public async Task<IActionResult> GetPatient(Guid id)
+        {
+            UserPatient user = await _patientService.Get(id);
+
+            if (user != null)
+            {
+                return Ok(user);
+            }
+
+            return BadRequest(new { message = "User Patient is not recognized" });
         }
     }
 
 
 }
 
-
-
-}

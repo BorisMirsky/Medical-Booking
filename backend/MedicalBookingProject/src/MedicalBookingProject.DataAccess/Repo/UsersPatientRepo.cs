@@ -6,63 +6,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Web;
-using BCrypt.Net;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-
-
 
 namespace MedicalBookingProject.DataAccess.Repo
 {
     using BCrypt.Net;
     using MedicalBookingProject.DataAccess;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.EntityFrameworkCore;
     using System.Diagnostics;
 
-    public class UsersDoctorRepo : IUsersDoctorRepo
+    public class UsersPatientRepo : IUsersPatientRepo
     {
         private readonly MedicalBookingDbContext _dbContext;
-        public UsersDoctorRepo(MedicalBookingDbContext dbContext) {
+        public UsersPatientRepo(MedicalBookingDbContext dbContext)
+        {
             _dbContext = dbContext;
         }
 
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
-        public async Task<UserDoctor> Register(string email, string password,
-                                               string username, string role,
-                                               string speciality)
+        public async Task<UserPatient> Register(string email, string password,
+                                               string username, string role, string gender)
         {
             var hashedPassword = BCrypt.HashPassword(password);
-            UserDoctorEntity userEntity = new UserDoctorEntity
+            UserPatientEntity userEntity = new UserPatientEntity
             {
                 Id = new Guid(),
                 UserName = username,
                 Password = hashedPassword,
                 Email = email,
                 Role = role,
-                Speciality = speciality,
+                Gender = gender
 
             };
-            _dbContext.UsersDoctors.Add(userEntity!);
+            _dbContext.UsersPatients.Add(userEntity!);
             await _dbContext.SaveChangesAsync();
 
-            UserDoctor user = new UserDoctor(email, hashedPassword, role, username, speciality);
+            UserPatient user = new UserPatient(email, hashedPassword, role, username, gender);
             user.Id = userEntity.Id;
             user.UserName = userEntity.UserName;
             user.Role = userEntity.Role;
             user.Email = userEntity.Email;
-            user.Speciality = userEntity.Speciality;
             return user;
         }
 
-        public async Task<UserDoctor> Get(Guid id)
+        public async Task<UserPatient> Get(Guid id)
         {
-            var entities = await _dbContext.UsersDoctors
+            var entities = await _dbContext.UsersPatients
                 .AsNoTracking()
                 .ToListAsync();
             var entity = entities
@@ -74,9 +63,9 @@ namespace MedicalBookingProject.DataAccess.Repo
                 Debug.WriteLine("Order with id {id} not found");
                 throw new Exception($"Order with id {id} not found");
             }
-            UserDoctor doctor = new(entity.UserName, entity.Password,
-                                       entity.Speciality, entity.Email, entity.Role);
-            return doctor!;
+            UserPatient patient = new (entity.UserName, entity.Password,
+                                       entity.Gender, entity.Email, entity.Role);
+            return patient!;
         }
 
     }

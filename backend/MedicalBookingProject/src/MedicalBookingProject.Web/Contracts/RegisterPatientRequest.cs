@@ -7,6 +7,7 @@
         public string Password { get; set; } = "";
         public string UserName { get; set; } = "";
         public string Role { get; set; } = "";
+        public string Gender { get; set; } = "";
         public int? RoleId { get; set; }
         public string? Token { get; set; } = "";
         public bool? IsActive { get; set; } = false;

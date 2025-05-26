@@ -19,6 +19,7 @@ namespace MedicalBookingProject.Domain.Abstractions
         Task<UserDoctor> Register(string email, string password, 
                                   string username, string role,
                                   string speciality);
+        Task<UserDoctor> Get(Guid id);
     }
 }
 

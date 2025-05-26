@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MedicalBookingProject.Domain.Models.Users;
 
 
+
 namespace MedicalBookingProject.Application.Services
 {
     public class UsersDoctorService : IUsersDoctorService
@@ -39,6 +40,11 @@ namespace MedicalBookingProject.Application.Services
         public async Task<UserDoctor> Register(string email, string password, string username, string role, string speciality)
         {
             return await _doctorRepo.Register(email, password, username, role, speciality);
+        }
+
+        public async Task<UserDoctor> Get(Guid id)
+        {
+            return await _doctorRepo.Get(id);
         }
 
     }

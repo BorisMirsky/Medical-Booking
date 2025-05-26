@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MedicalBookingProject.Domain.Models.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,12 @@ namespace MedicalBookingProject.Domain.Models.Bookings
 {
     public class Booking
     {
+        public Booking(Guid doctorId, Guid patientId, Guid slotId)
+        {
+            DoctorId = doctorId;
+            PatientId = patientId;
+            SlotId = slotId;
+        }
         public Guid Id { get; set; }                // лишнее
         public Guid DoctorId { get; set; }
         public Guid PatientId { get; set; }

@@ -2,9 +2,11 @@
 using MedicalBookingProject.DataAccess.Scripts;
 using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Bookings;
+using MedicalBookingProject.Domain.Models.Users;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,5 +50,43 @@ namespace MedicalBookingProject.DataAccess.Repo
             await _context.SaveChangesAsync();
             return bookingId;
         }
+
+        // by SlotId  ?
+        public async Task<Booking> GetOneBooking(Guid id)
+        {
+            var entities = await _context.BookingEntities
+                .AsNoTracking()
+                .ToListAsync();
+            var entity = entities
+               .Where(item => item.Id == id)
+               .ToList()
+               .FirstOrDefault();
+            if (entity == null)
+            {
+                Debug.WriteLine("booking with id {id} not found");
+                throw new Exception($"booking with id {id} not found");
+            }
+            Booking booking = new(entity.DoctorId, entity.PatientId, entity.SlotId);
+            return booking!;
+        }
+
+
+        public async Task<Booking> Cancel(Guid id)
+        {
+            await _context.BookingEntities
+                    .Where(item => item.Id == id)
+                    .ExecuteUpdateAsync(s => s
+                    .SetProperty(s => s.WasCancelled, s => true)
+                    .SetProperty(s => s.CancelledAt, s => DateTime.Now)
+                    );
+            var entity = _context.BookingEntities
+                    .Where(item => item.Id == id)
+                    .ToList()
+                    .FirstOrDefault();
+
+            Booking booking = new(entity.DoctorId, entity.PatientId, entity.SlotId);
+            return booking!;
+        }
+
     }
 }

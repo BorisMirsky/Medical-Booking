@@ -21,9 +21,9 @@ namespace MedicalBookingProject.Domain.Models.Bookings
         public Guid DoctorId { get; set; }
         public Guid PatientId { get; set; }
         public Guid SlotId { get; set; }
-        public Boolean? WasCancelled { get; set; } = false;    
-        public Guid? CancelledBy { get; set; }             
-        public DateTime? CancelledAt { get; set; }
+        public Boolean? WasCancelled { get; set; } = false;
+        public Guid? CancelledBy { get; set; } = null;            // doctorId or PatientId
+        public DateTime? CancelledAt { get; set; } = null;
 
     }
 }

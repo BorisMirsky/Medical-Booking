@@ -13,6 +13,6 @@ namespace MedicalBookingProject.Domain.Abstractions
     {
         Task<Guid> Create(Shedule shedule);
         Task<Shedule> Get(Guid id);   // + all, by day, by patient
-        Task<Guid> Booking(Guid id, Guid id1);  
+        Task<Guid> Booking(Guid slotid, Guid patientid, Boolean wascancelled);  
     }
 }

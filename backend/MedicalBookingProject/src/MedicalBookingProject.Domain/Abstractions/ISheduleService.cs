@@ -11,7 +11,7 @@ namespace MedicalBookingProject.Domain.Abstractions
     {
         Task<Guid> CreateShedule(Shedule shedule);
         Task<Shedule> GetSlot(Guid id);   // + by day, by patient, by doctor
-        Task<Guid> BookingSlot(Guid id, Guid id1);   
+        Task<Guid> BookingSlot(Guid slotid, Guid patientid, Boolean wascancelled);   
     }
 }
 

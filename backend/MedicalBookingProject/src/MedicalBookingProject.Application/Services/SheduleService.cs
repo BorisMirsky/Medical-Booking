@@ -36,12 +36,10 @@ namespace MedicalBookingProject.Application.Services
         }
 
 
-        // Создать bookingRequest. Передавать его вместе с двумя id
-        // в _bookingRepo.Create(). Там создать этот метод, а также контроллер,
-        // таблицу, модель, репо, сервис и всё что ещё нужно.
-        public async Task<Guid> BookingSlot(Guid id, Guid id1)
+        // bookingRequest ?
+        public async Task<Guid> BookingSlot(Guid slotid, Guid patientid, Boolean wascancelled)
         {
-            return await _sheduleRepo.Booking(id, id1);
+            return await _sheduleRepo.Booking(slotid, patientid, !wascancelled); // inverted wascancelled
         }
     }
 }

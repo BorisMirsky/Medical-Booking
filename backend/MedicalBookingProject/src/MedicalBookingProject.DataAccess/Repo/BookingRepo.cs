@@ -25,15 +25,17 @@ namespace MedicalBookingProject.DataAccess.Repo
         }
 
 
-        public async Task<Guid> Create(Guid id, Guid id1)  //Booking booking)
+        public async Task<Guid> Create(Guid slotid, Guid patientid,
+                          Boolean wascancelled, Guid? cancelledby,
+                          DateTime? CancelledAt)
         {
             var sheduleEntities = await _context.SheduleEntities
                 .AsNoTracking()
                 .ToListAsync();
             var sheduleEntitie = sheduleEntities
-               .Where(item => item.SlotId == id)
+               .Where(item => item.SlotId == slotid)
                .ToList()
-               .FirstOrDefault();
+               .LastOrDefault(); 
             //
             var bookingId = Guid.NewGuid();
             var bookingEntity = new BookingEntity
@@ -41,15 +43,17 @@ namespace MedicalBookingProject.DataAccess.Repo
                 Id = bookingId,
                 SlotId = sheduleEntitie!.SlotId,
                 DoctorId = sheduleEntitie.DoctorId,
-                PatientId = id1,
-                WasCancelled = false,
-                CancelledBy = id1,
+                PatientId = patientid,
+                WasCancelled = !wascancelled,
+                CancelledBy = patientid,
                 CancelledAt = DateTime.Now
             };
             await _context.BookingEntities.AddAsync(bookingEntity);
             await _context.SaveChangesAsync();
             return bookingId;
         }
+
+
 
         // by SlotId  ?
         public async Task<Booking> GetOneBooking(Guid id)
@@ -71,22 +75,22 @@ namespace MedicalBookingProject.DataAccess.Repo
         }
 
 
-        public async Task<Booking> Cancel(Guid id)
-        {
-            await _context.BookingEntities
-                    .Where(item => item.Id == id)
-                    .ExecuteUpdateAsync(s => s
-                    .SetProperty(s => s.WasCancelled, s => true)
-                    .SetProperty(s => s.CancelledAt, s => DateTime.Now)
-                    );
-            var entity = _context.BookingEntities
-                    .Where(item => item.Id == id)
-                    .ToList()
-                    .FirstOrDefault();
+        //public async Task<Booking> Cancel(Guid id)
+        //{
+        //    await _context.BookingEntities
+        //            .Where(item => item.Id == id)
+        //            .ExecuteUpdateAsync(s => s
+        //            .SetProperty(s => s.WasCancelled, s => true)
+        //            .SetProperty(s => s.CancelledAt, s => DateTime.Now)
+        //            );
+        //    var entity = _context.BookingEntities
+        //            .Where(item => item.Id == id)
+        //            .ToList()
+        //            .FirstOrDefault();
 
-            Booking booking = new(entity.DoctorId, entity.PatientId, entity.SlotId);
-            return booking!;
-        }
+        //    Booking booking = new(entity.DoctorId, entity.PatientId, entity.SlotId);
+        //    return booking!;
+        //}
 
     }
 }

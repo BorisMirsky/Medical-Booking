@@ -82,15 +82,15 @@ namespace MedicalBookingProject.DataAccess.Repo
 
 
         // Patch
-        public async Task<Guid> Booking(Guid id, Guid id1)
+        public async Task<Guid> Booking(Guid slotid, Guid patientid, Boolean wascancelled)
         {
             await _context.SheduleEntities
-                .Where(item => item.SlotId == id)
+                .Where(item => item.SlotId == slotid)
                 .ExecuteUpdateAsync(s => s
-                .SetProperty(s => s.PatientId, s => id1)
-                .SetProperty(s => s.IsBooked, s => true)         
+                .SetProperty(s => s.PatientId, s => patientid)
+                .SetProperty(s => s.IsBooked, s => wascancelled)     // invertes bool value     
                 );
-            return id;
+            return slotid;
         }
     }
 }

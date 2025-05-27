@@ -22,8 +22,11 @@ namespace MedicalBookingProject.DataAccess.Entities
         [Column("slotid")]
         public Guid SlotId { get; set; }
 
+        [Column("isbooked")]
+        public Boolean IsBooked { get; set; }
+
         [Column("wascancelled")]
-        public Boolean? WasCancelled { get; set; } = false;
+        public Boolean? WasCancelled { get; set; } 
 
         [Column("cancelledby")]
         public Guid? CancelledBy { get; set; }

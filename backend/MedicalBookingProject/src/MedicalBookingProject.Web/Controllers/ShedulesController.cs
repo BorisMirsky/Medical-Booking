@@ -49,10 +49,11 @@ namespace MedicalBookingProject.Web.Controllers
         [HttpPatch]
         public async Task<ActionResult<Guid>> BookingSlot([FromBody] BookingRequest request)
         {
-            var slotId = await _sheduleService.BookingSlot(request.SlotId, request.PatientId, request.WasCancelled);
-            await _bookingService.CreateBooking(request.SlotId, request.PatientId, 
-                                                request.WasCancelled, (Guid)request.CancelledBy, 
-                                                (DateTime)request.CancelledAt); 
+            var slotId = await _sheduleService.BookingSlot(request.SlotId, request.PatientId, 
+                                                           request.IsBooked);
+            await _bookingService.CreateBooking(request.SlotId, request.PatientId,
+                                                request.IsBooked, request.WasCancelled,
+                                                request.CancelledBy, request.CancelledAt); 
             return Ok(slotId);
         }
     }

@@ -27,13 +27,7 @@ namespace MedicalBookingProject.Domain.Models.Shedules
         public int TimeStart { get; set; }
         public int TimeStop { get; set; }
         public int TimeChunk { get; set; }
-
         public Boolean? IsBooked { get; set; }
-        //public UserPatient? UserPatient { get; set; } = null;
-        //public UserDoctor? UserDoctor { get; set; } = null;
         public Guid? UserPatientId { get; set; }
-        //public string? WasCancelledBy { get; set; } = null;
-        //public string? WasCancelledAt { get; set; } = null;
-
     }
 }

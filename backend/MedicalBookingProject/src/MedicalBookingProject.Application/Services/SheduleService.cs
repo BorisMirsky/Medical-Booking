@@ -36,10 +36,9 @@ namespace MedicalBookingProject.Application.Services
         }
 
 
-        // bookingRequest ?
-        public async Task<Guid> BookingSlot(Guid slotid, Guid patientid, Boolean wascancelled)
+        public async Task<Guid> BookingSlot(Guid slotid, Guid patientid, Boolean isbooked)
         {
-            return await _sheduleRepo.Booking(slotid, patientid, !wascancelled); // inverted wascancelled
+            return await _sheduleRepo.Booking(slotid, patientid, isbooked); 
         }
     }
 }

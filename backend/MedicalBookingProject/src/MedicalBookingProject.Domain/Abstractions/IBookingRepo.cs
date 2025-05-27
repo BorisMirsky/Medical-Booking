@@ -13,9 +13,9 @@ namespace MedicalBookingProject.Domain.Abstractions
 {
     public interface IBookingRepo
     {
-        Task<Guid> Create(Guid slotid, Guid patientid, 
-                          Boolean wascancelled, Guid? cancelledby, 
-                          DateTime? CancelledAt);
+        Task<Guid> Create(Guid slotid, Guid patientid,
+                          Boolean IsBooked, Boolean? wascancelled, 
+                          Guid cancelledby, DateTime cancelledat);
         Task<Booking> GetOneBooking(Guid id);
     }
 }

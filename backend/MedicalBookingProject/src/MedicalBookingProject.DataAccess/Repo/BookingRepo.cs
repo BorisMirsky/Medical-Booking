@@ -26,8 +26,8 @@ namespace MedicalBookingProject.DataAccess.Repo
 
 
         public async Task<Guid> Create(Guid slotid, Guid patientid,
-                          Boolean wascancelled, Guid? cancelledby,
-                          DateTime? CancelledAt)
+                          Boolean isbooked, Boolean? wascancelled, 
+                          Guid cancelledby, DateTime cancelledat)
         {
             var sheduleEntities = await _context.SheduleEntities
                 .AsNoTracking()
@@ -35,7 +35,7 @@ namespace MedicalBookingProject.DataAccess.Repo
             var sheduleEntitie = sheduleEntities
                .Where(item => item.SlotId == slotid)
                .ToList()
-               .LastOrDefault(); 
+               .LastOrDefault();   // no FirstOrDefault 
             //
             var bookingId = Guid.NewGuid();
             var bookingEntity = new BookingEntity
@@ -44,7 +44,8 @@ namespace MedicalBookingProject.DataAccess.Repo
                 SlotId = sheduleEntitie!.SlotId,
                 DoctorId = sheduleEntitie.DoctorId,
                 PatientId = patientid,
-                WasCancelled = !wascancelled,
+                IsBooked = isbooked,
+                WasCancelled = wascancelled,  
                 CancelledBy = patientid,
                 CancelledAt = DateTime.Now
             };
@@ -55,7 +56,6 @@ namespace MedicalBookingProject.DataAccess.Repo
 
 
 
-        // by SlotId  ?
         public async Task<Booking> GetOneBooking(Guid id)
         {
             var entities = await _context.BookingEntities
@@ -70,27 +70,13 @@ namespace MedicalBookingProject.DataAccess.Repo
                 Debug.WriteLine("booking with id {id} not found");
                 throw new Exception($"booking with id {id} not found");
             }
-            Booking booking = new(entity.DoctorId, entity.PatientId, entity.SlotId);
+            Booking booking = new(entity.DoctorId, entity.PatientId,
+                                  entity.SlotId);
+            booking.WasCancelled = entity.WasCancelled;
+            booking.CancelledBy = entity.CancelledBy;
+            booking.CancelledAt = entity.CancelledAt;
+            booking.Id = id;
             return booking!;
         }
-
-
-        //public async Task<Booking> Cancel(Guid id)
-        //{
-        //    await _context.BookingEntities
-        //            .Where(item => item.Id == id)
-        //            .ExecuteUpdateAsync(s => s
-        //            .SetProperty(s => s.WasCancelled, s => true)
-        //            .SetProperty(s => s.CancelledAt, s => DateTime.Now)
-        //            );
-        //    var entity = _context.BookingEntities
-        //            .Where(item => item.Id == id)
-        //            .ToList()
-        //            .FirstOrDefault();
-
-        //    Booking booking = new(entity.DoctorId, entity.PatientId, entity.SlotId);
-        //    return booking!;
-        //}
-
     }
 }

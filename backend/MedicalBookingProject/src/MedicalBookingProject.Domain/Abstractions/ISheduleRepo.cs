@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using MedicalBookingProject.DataAccess.Entities;
+
 
 
 namespace MedicalBookingProject.Domain.Abstractions
@@ -13,6 +13,6 @@ namespace MedicalBookingProject.Domain.Abstractions
     {
         Task<Guid> Create(Shedule shedule);
         Task<Shedule> Get(Guid id);   // + all, by day, by patient
-        Task<Guid> Booking(Guid slotid, Guid patientid, Boolean wascancelled);  
+        Task<Guid> Booking(Guid slotid, Guid patientid, Boolean isbooked);  
     }
 }

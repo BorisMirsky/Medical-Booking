@@ -13,8 +13,8 @@ namespace MedicalBookingProject.Domain.Abstractions
     public interface IBookingService
     {
         Task<Guid> CreateBooking(Guid slotid, Guid patientid, 
-                                  Boolean wascancelled, Guid CancelledBy, 
-                                  DateTime CancelledAt);
+                                  Boolean IsBooked, Boolean? wascancelled,
+                                  Guid CancelledBy, DateTime CancelledAt);
         Task<Booking> GetOneBooking(Guid id); 
     }
 }

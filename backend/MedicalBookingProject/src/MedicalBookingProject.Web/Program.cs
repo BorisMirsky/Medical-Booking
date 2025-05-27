@@ -28,8 +28,8 @@ builder.Services.AddScoped<ISheduleService, SheduleService>();
 builder.Services.AddScoped<ISheduleRepo, ShedulesRepo>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<IBookingRepo, BookingRepo>();
-
-
+builder.Services.AddScoped<IAppointmentService, AppointmentService>();
+builder.Services.AddScoped<IAppointmentRepo, AppointmentRepo>();
 
 
 builder.Services.AddAuthentication(opt =>

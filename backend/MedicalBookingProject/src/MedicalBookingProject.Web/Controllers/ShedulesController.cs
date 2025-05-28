@@ -30,10 +30,8 @@ namespace MedicalBookingProject.Web.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "manager")]
         public async Task<ActionResult<SheduleResponse>> CreateShedule([FromBody] SheduleRequest request)
         {
-            Shedule shedule = new Shedule(request.DoctorId, request.StartDay, request.Days,
-                                          request.TimeStart, request.TimeStop, request.TimeChunk);  
-            //Shedule shed = new( request.StartDay, request.Days);  //request.DoctorId,
-            var newShedule = await _sheduleService.CreateShedule(shedule);
+            var newShedule = await _sheduleService.CreateShedule(request.DoctorId, request.StartDay, request.Days,
+                                                             request.TimeStart, request.TimeStop, request.TimeChunk);
             return Ok(newShedule);
         }
 
@@ -41,8 +39,8 @@ namespace MedicalBookingProject.Web.Controllers
         [HttpGet]
         public async Task<ActionResult<Shedule>> GetSlotById(Guid id)
         {
-            Shedule slot = await _sheduleService.GetSlot(id);
-            return Ok(slot);
+            Shedule shedule = await _sheduleService.GetSlot(id);
+            return Ok(shedule);
         }
 
 

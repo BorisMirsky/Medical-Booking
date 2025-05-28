@@ -26,10 +26,10 @@ namespace MedicalBookingProject.Domain.Models.Appointments
         public Guid DoctorId { get; set; }
         public Guid PatientId { get; set; }
         public Guid SlotId { get; set; }
-        public Guid MedicalCardId { get; set; }
+        public Guid MedicalCardId { get; set; }      // удалить
 
         // behavior of patient
-        public Boolean PatientCame { get; set; } 
+        public Boolean PatientCame { get; set; }       
         public Boolean PatientIsLate {  get; set; }
         public String? PatientUnacceptableBehavior { get; set; } = String.Empty;
 

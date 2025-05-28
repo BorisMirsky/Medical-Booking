@@ -11,8 +11,8 @@ namespace MedicalBookingProject.Domain.Abstractions
 {
     public interface ISheduleRepo
     {
-        Task<Guid> Create(Shedule shedule);
-        Task<Shedule> Get(Guid id);   // + all, by day, by patient
+        Task<Guid> Create(List<List<string>> someList, Guid id); 
+        Task<Shedule> Get(Guid id);   
         Task<Guid> Booking(Guid slotid, Guid patientid, Boolean isbooked);  
     }
 }

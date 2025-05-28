@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MedicalBookingProject.Domain.Models.Shedules;
 using MedicalBookingProject.DataAccess;
 using MedicalBookingProject.DataAccess.Scripts;
+using Microsoft.AspNetCore.Mvc;
 
 
 
@@ -25,9 +26,13 @@ namespace MedicalBookingProject.Application.Services
         }
 
 
-        public async Task<Guid> CreateShedule(Shedule shedule)
-        { 
-            return await _sheduleRepo.Create(shedule);
+        public async Task<Guid> CreateShedule(Guid doctorId, DateTime startDay, int days,
+            int timeStart, int timeStop, int timeChunk)   //Shedule shedule)
+        {
+            CreateSlots slots = new(startDay.Year, startDay.Month, startDay.Day,
+                                timeStart, timeStop, timeChunk, days);
+            List<List<String>> splittedSlots = slots.Run();
+            return await _sheduleRepo.Create(splittedSlots, doctorId);
         }
 
         public async Task<Shedule> GetSlot(Guid id)

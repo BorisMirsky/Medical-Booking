@@ -9,7 +9,7 @@ using MedicalBookingProject.DataAccess.Configuration;
 using MedicalBookingProject.DataAccess.Entities;
 using MedicalBookingProject.DataAccess;
 using MedicalBookingProject.Domain.Models.Shedules;
-using MedicalBookingProject.DataAccess.Scripts;             // get slots
+using MedicalBookingProject.DataAccess.Scripts;          
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
@@ -28,35 +28,23 @@ namespace MedicalBookingProject.DataAccess.Repo
         }
 
 
-        public async Task<Guid> Create(Shedule shedule)
+        public async Task<Guid> Create(List<List<String>> slotsList, Guid doctorId )   
         {
             Guid sheduleIdGuid = Guid.NewGuid();      // только чтобы вернуть
-            int sheduleId = 0;
-            CreateSlots slots = new (shedule.StartDay.Year,
-                                            shedule.StartDay.Month,
-                                            shedule.StartDay.Day,
-                                            shedule.TimeStart, shedule.TimeStop,
-                                            shedule.TimeChunk, shedule.Days);
-            foreach (var slot in slots.Run())
+            int Id = 0;                               // порядковый номер
+            foreach (var slot in slotsList)
             {
-                Guid slotid = Guid.NewGuid();
-                sheduleId++;
-                DateTime startDay = new (shedule.StartDay.Year, shedule.StartDay.Month, shedule.StartDay.Day);
-                var day = startDay.Date.ToShortDateString();
-                var sheduleEntity = new SheduleEntity
+                Guid slotId = Guid.NewGuid();
+                Id++;
+                var entity = new SheduleEntity 
                 {
-                    Id = sheduleId,
-                    SlotId = slotid,
-                    DoctorId = shedule.DoctorId, 
+                    Id = Id,
+                    SlotId = slotId,
+                    DoctorId = doctorId, 
                     SlotDatetimeStart = slot[0],
                     SlotDatetimeStop = slot[1],
-                    StartDay = day.ToString(),
-                    Days = shedule.Days,
-                    TimeStart = shedule.TimeStart,
-                    TimeStop = shedule.TimeStop,
-                    TimeChunk = shedule.TimeChunk
                 };
-                await _context.SheduleEntities.AddAsync(sheduleEntity);
+                await _context.SheduleEntities.AddAsync(entity);
                 await _context.SaveChangesAsync();
             }
             return sheduleIdGuid;
@@ -72,11 +60,10 @@ namespace MedicalBookingProject.DataAccess.Repo
                .Where(item => item.SlotId == id)
                .ToList()
                .FirstOrDefault();
-            DateTime myDate = DateTime.ParseExact(entitie!.StartDay, "M/d/yyyy",
-                                       CultureInfo.InvariantCulture);
-            var shedule = new Shedule(entitie.DoctorId, myDate, 
-                                        entitie.Days, entitie.TimeStart, 
-                                        entitie.TimeStop, entitie.TimeChunk);
+            var shedule = new Shedule(entitie.DoctorId,
+                                      entitie.SlotDatetimeStart,
+                                      entitie.SlotDatetimeStop);
+            shedule.Id = entitie.SlotId;
             return shedule;
         }
 

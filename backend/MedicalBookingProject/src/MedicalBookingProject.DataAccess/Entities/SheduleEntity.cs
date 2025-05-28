@@ -21,30 +21,15 @@ namespace MedicalBookingProject.DataAccess.Entities
         public Guid DoctorId { get; set; }
 
         [Column("slotdatetimestart")]
-        public string SlotDatetimeStart { get; set; } = "";
+        public string? SlotDatetimeStart { get; set; } 
 
         [Column("slotdatetimestop")]
-        public string SlotDatetimeStop { get; set; } = "";
+        public string? SlotDatetimeStop { get; set; } 
 
         [Column("isbooked")]
-        public Boolean? IsBooked { get; set; }
+        public Boolean? IsBooked { get; set; } = false;
 
         [Column("patientid")]
         public Guid? PatientId { get; set; }
-
-        [Column("startday")]
-        public string StartDay { get; set; } = "";
-
-        [Column("days")]
-        public int Days { get; set; }
-
-        [Column("timestart")]
-        public int TimeStart { get; set; }
-
-        [Column("timestop")]
-        public int TimeStop { get; set; }
-
-        [Column("timechunk")]
-        public int TimeChunk { get; set; }
     }
 }

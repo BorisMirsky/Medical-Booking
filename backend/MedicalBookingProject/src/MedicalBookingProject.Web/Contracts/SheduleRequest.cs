@@ -5,7 +5,7 @@
 
 namespace MedicalBookingProject.Web.Contracts
 {
-    public record SheduleRequest
+    public record SheduleRequest                  // for create Shedule (many slots)
     {
         public Guid DoctorId { get; set; }
         public DateTime StartDay { get; set; }  

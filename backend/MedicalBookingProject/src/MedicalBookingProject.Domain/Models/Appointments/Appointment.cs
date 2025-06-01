@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MedicalBookingProject.Domain.Models.Appointments
 {
+    [Table("appointments")]
     public class Appointment
     {
+        [Key]
+        [Column("id")]
         public Guid Id { get; set; }
         public Appointment(Guid doctorId, Guid patientId, 
                            Guid slotId, Guid medicalCardId, 
@@ -23,26 +28,53 @@ namespace MedicalBookingProject.Domain.Models.Appointments
             FinalCost = finalCost;
         }
 
+        [Column("doctorid")]
         public Guid DoctorId { get; set; }
+
+        [Column("patientid")]
         public Guid PatientId { get; set; }
+
+        [Column("slotid")]
         public Guid SlotId { get; set; }
-        public Guid MedicalCardId { get; set; }      // удалить
+
+        [Column("medicalcardid")]
+        public Guid MedicalCardId { get; set; }
 
         // behavior of patient
-        public Boolean PatientCame { get; set; }       
-        public Boolean PatientIsLate {  get; set; }
-        public String? PatientUnacceptableBehavior { get; set; } = String.Empty;
+        [Column("patientcame")]
+        public Boolean PatientCame { get; set; }
+
+        [Column("patientislate")]
+        public Boolean PatientIsLate { get; set; }
+
+        [Column("patientunacceptablebehavior")]
+        public String PatientUnacceptableBehavior { get; set; } = String.Empty;
 
         // services rendered
-        public Boolean? VisualExaminationPatient { get; set; }
-        public Boolean? ListeningHeart { get; set; }
-        public Boolean? Procedure { get; set; }
-        public Boolean? ReferralTests { get; set; }
-        public Boolean? Medecins { get; set; }
-        public Boolean? MakingDiagnosis { get; set; }
-        public Boolean? Treatment { get; set; }
+        [Column("visualexamination")]
+        public Boolean VisualExamination { get; set; }
+
+        [Column("listeningheart")]
+        public Boolean ListeningHeart { get; set; }
+
+        [Column("procedure")]
+        public Boolean Procedure { get; set; }
+
+        [Column("referraltests")]
+        public Boolean ReferralTests { get; set; }
+
+        [Column("medecins")]
+        public Boolean Medecins { get; set; }
+
+        [Column("makingdiagnosis")]
+        public Boolean MakingDiagnosis { get; set; }
+
+        [Column("treatment")]
+        public Boolean Treatment { get; set; }
+
 
         //
-        public int FinalCost { get; set; } = 0;
+        [Column("finalcost")]
+        public int FinalCost { get; set; }
     }
 }

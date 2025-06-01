@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MedicalBookingProject.Domain.Abstractions;
+﻿using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models;
 using MedicalBookingProject.DataAccess.Configuration;
 using MedicalBookingProject.DataAccess.Entities;
@@ -36,18 +31,8 @@ namespace MedicalBookingProject.DataAccess.Repo
                 throw new ArgumentNullException(nameof(app));
             }
             Guid id = Guid.NewGuid();
-            var appointmentEntity = new AppointmentEntity
-            {
-                Id = id,
-                DoctorId = app.DoctorId,
-                PatientId = app.PatientId,
-                SlotId = app.SlotId,
-                MedicalCardId = app.MedicalCardId,
-                PatientCame = app.PatientCame,
-                PatientIsLate = app.PatientIsLate,
-                FinalCost = app.FinalCost
-            };
-            await _context.AppointmentEntities.AddAsync(appointmentEntity);
+            app.Id = id;
+            await _context.Appointments.AddAsync(app);
             await _context.SaveChangesAsync();
             return id;
         }
@@ -55,26 +40,17 @@ namespace MedicalBookingProject.DataAccess.Repo
 
         public async Task<Appointment> Get(Guid id)
         {
-            var entities = await _context.AppointmentEntities
-                .AsNoTracking()
-                .ToListAsync();
-            var entity = entities
-               .Where(item => item.Id == id)
-               .ToList()
-               .FirstOrDefault();
-            Appointment app = new(entity.DoctorId,
-                                   entity.PatientId, entity.SlotId,
-                                   entity.MedicalCardId, entity.PatientCame,
-                                   entity.PatientIsLate, entity.FinalCost);
-            app.Id = entity.Id;
-            return app;
+            Appointment? entity = await _context.Appointments
+                                    .AsNoTracking()
+                                    .FirstOrDefaultAsync(a => a.Id == id);
+            return entity!;
         }
 
 
         // Patch
         public async Task<Guid> UpdateUnacceptableBehavior(Guid id, String description)
         {
-            await _context.AppointmentEntities
+            await _context.Appointments
                 .Where(item => item.Id == id)
                 .ExecuteUpdateAsync(s => s
                 .SetProperty(s => s.PatientUnacceptableBehavior, s => description)

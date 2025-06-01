@@ -1,30 +1,41 @@
 ﻿using MedicalBookingProject.Domain.Models.Users;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace MedicalBookingProject.Domain.Models.Bookings
 {
+
+    [Table("bookings")]
     public class Booking
     {
-        public Booking(Guid doctorId, Guid patientId, Guid slotId)
+        public Booking(Guid doctorId, Guid? patientId, Guid slotId)
         {
             DoctorId = doctorId;
             PatientId = patientId;
             SlotId = slotId;
         }
-        public Guid Id { get; set; }                
+
+        [Column("doctorid")]
         public Guid DoctorId { get; set; }
-        public Guid PatientId { get; set; }
+
+        [Column("patientid")]
+        public Guid? PatientId { get; set; }
+
+        [Key]
+        [Column("slotid")]
         public Guid SlotId { get; set; }
-        public Boolean? IsBooked { get; set; } 
-        public Boolean? WasCancelled { get; set; } 
-        public Guid? CancelledBy { get; set; } = null;            // doctorId or PatientId
-        public DateTime? CancelledAt { get; set; } = null;
+
+        [Column("isbooked")]
+        public Boolean? IsBooked { get; set; }
+
+        [Column("cancelledby")]
+        public Guid? CancelledBy { get; set; } = null;
+
+        [Column("bookingorcanceldatetime")]
+        public DateTime? BookingOrCancelDatetime { get; set; } = null;
 
     }
 }

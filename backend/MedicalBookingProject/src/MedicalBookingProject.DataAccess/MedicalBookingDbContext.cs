@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using MedicalBookingProject.Domain.Models.Users;
 using MedicalBookingProject.Domain.Models.Shedules;
 using MedicalBookingProject.Domain.Models.Bookings;
+using MedicalBookingProject.Domain.Models.Appointments;
 
 
 
@@ -24,9 +25,9 @@ namespace MedicalBookingProject.DataAccess
         public DbSet<UserDoctorEntity> UsersDoctors { get; set; }
         public DbSet<UserPatientEntity> UsersPatients { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<SheduleEntity> SheduleEntities { get; set; }
-        public DbSet<BookingEntity> BookingEntities { get; set; }
-        public DbSet<AppointmentEntity> AppointmentEntities { get; set; }
+        public DbSet<Shedule> Shedules { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

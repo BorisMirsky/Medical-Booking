@@ -1,13 +1,12 @@
 ﻿namespace MedicalBookingProject.Web.Contracts
 {
-    public class BookingRequest
+    public class BookingRequest  
     {
+        public Guid SlotId { get; set; }
         public Guid DoctorId { get; set; }
         public Guid PatientId { get; set; }
-        public Guid SlotId { get; set; }
-        public Boolean IsBooked { get; set; } 
-        public Boolean? WasCancelled { get; set; }
+        public Boolean IsBooked { get; set; }
         public Guid CancelledBy { get; set; } = Guid.Empty;   
-        public DateTime CancelledAt { get; set; } = DateTime.MinValue;
+        public DateTime BookingOrCancelDatetime { get; set; } = DateTime.MinValue;
     }
 }

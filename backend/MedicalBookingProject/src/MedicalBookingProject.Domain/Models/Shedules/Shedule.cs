@@ -1,27 +1,40 @@
 ﻿using MedicalBookingProject.Domain.Models.Messages;
 using MedicalBookingProject.Domain.Models.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace MedicalBookingProject.Domain.Models.Shedules
 {
+    [Table("shedules")]
     public class Shedule
     {
-        public Shedule(Guid doctorid, string slotdatetimestart, string slotdatetimestop)
+        public Shedule(Guid doctorId, string slotDatetimeStart, 
+                        string slotDatetimeStop) 
         {
-            DoctorId = doctorid;
-            SlotDatetimeStart = slotdatetimestart;
-            SlotDatetimeStop = slotdatetimestop;
+            DoctorId = doctorId;
+            SlotDatetimeStart = slotDatetimeStart;
+            SlotDatetimeStop = slotDatetimeStop;
         }
-        public Guid Id { get; set; }
+        [Key]
+        [Column("slotid")]
+        public Guid SlotId { get; set; }
+
+        [Column("slotdatetimestart")]
         public string SlotDatetimeStart { get; set; }
+
+        [Column("slotdatetimestop")]
         public string SlotDatetimeStop { get; set; }
+
+        [Column("doctorid")]
         public Guid DoctorId { get; set; }
+
+        [Column("isbooked")]
         public Boolean? IsBooked { get; set; } = false;
+
+        [Column("patientid")]
         public Guid? PatientId { get; set; } = null;
+
     }
 }
 

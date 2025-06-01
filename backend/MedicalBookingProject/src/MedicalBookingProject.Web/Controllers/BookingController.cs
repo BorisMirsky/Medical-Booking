@@ -23,6 +23,7 @@ namespace MedicalBookingProject.Web.Controllers
             _bookingService = bookingService;
         }
 
+        // first operation with slot
         //[HttpPost]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "manager")]
         //public async Task<ActionResult<SheduleResponse>> CreateBooking() //[FromBody] BookingRequest request)
@@ -50,22 +51,6 @@ namespace MedicalBookingProject.Web.Controllers
 
             return BadRequest(new { message = "booking is not recognized" });
         }
-
-        // 
-        //[Route("CancelBooking")]
-        //[HttpPatch]
-        ////[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
-        //public async Task<IActionResult> CancelBooking(Guid id)
-        //{
-        //    Booking booking = await _bookingService.CancelBooking(id);
-
-        //    if (booking != null)
-        //    {
-        //        return Ok(booking);
-        //    }
-
-        //    return BadRequest(new { message = "booking is not recognized" });
-        //}
 
     }
 }

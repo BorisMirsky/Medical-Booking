@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MedicalBookingProject.Domain.Models.Appointments;
+﻿using MedicalBookingProject.Domain.Models.Appointments;
 
 
 namespace MedicalBookingProject.Domain.Abstractions

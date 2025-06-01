@@ -34,8 +34,8 @@ namespace MedicalBookingProject.Web.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "doctor")]
         public async Task<ActionResult<AppointmentResponse>> CreateAppointment([FromBody] AppointmentRequest request)
         {
-            Appointment app = new Appointment(request.DoctorId, request.SlotId, 
-                                              request.PatientId, request.MedicalCardId, 
+            Appointment app = new Appointment(request.DoctorId, request.PatientId, 
+                                              request.SlotId, request.MedicalCardId, 
                                               request.PatientCame, request.PatientIsLate,
                                               request.FinalCost);
             //Shedule shed = new( request.StartDay, request.Days);  //request.DoctorId,

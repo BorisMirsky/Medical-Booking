@@ -16,10 +16,10 @@ namespace MedicalBookingProject.Domain.Abstractions
     public interface IUsersDoctorService
     {
         //Task<UserDoctor> Login(string username, string password);
-        Task<UserDoctor> Register(string email, string password, 
+        Task<Doctor> Register(string email, string password, 
                                   string username, string role,
                                   string speciality);
-        Task<UserDoctor> Get(Guid id);
+        Task<Doctor> Get(Guid id);
     }
 }
 

@@ -7,7 +7,6 @@ using MedicalBookingProject.Web.Contracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using MedicalBookingProject.Domain.Models.Users;
-using MedicalBookingProject.DataAccess.Entities;
 using MedicalBookingProject.Application.Services;
 using MedicalBookingProject.Domain.Models.Shedules;
 

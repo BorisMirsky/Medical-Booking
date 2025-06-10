@@ -9,7 +9,7 @@ namespace MedicalBookingProject.Domain.Abstractions
 {
     public interface IUsersPatientRepo
     {
-        Task<UserPatient> Register(string email, string password, string username, string role, string gender);
-        Task<UserPatient> Get(Guid id);
+        Task<Patient> Register(string email, string password, string username, string role, string gender);
+        Task<Patient> Get(Guid id);
     }
 }

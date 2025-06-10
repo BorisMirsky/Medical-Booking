@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MedicalBookingProject.DataAccess.Scripts
+
+
+namespace MedicalBookingProject.Application.Scripts
 {
     public class CreateSlots
     {
@@ -90,19 +92,29 @@ namespace MedicalBookingProject.DataAccess.Scripts
         {
             int counter = 0;    // сквозной счётчкик
             int step = 0;       // >=2
+            int resultTimeCompare = 0;    // сравним две метки
             List<List<string>> result = new List<List<string>>();
             List<string> slot = new List<string>(2);
+            DateTime myDate1 = default(DateTime);
+            DateTime myDate2 = default(DateTime);
             while (allSplits.Count() > (counter - step))
             {
                 if (slot.Count() == 0)
                 {
                     slot.Insert(0, allSplits[counter - step]);
                     counter++;
+                    myDate1 = Convert.ToDateTime(slot[0]);
                 }
                 else if (slot.Count() == 1)
                 {
-                    slot.Insert(1, allSplits[counter - step]);
-                    result.Add(slot);
+                    myDate2 = Convert.ToDateTime(allSplits[counter - step]);
+                    resultTimeCompare = TimeSpan.Compare(myDate1.TimeOfDay,
+                                                         myDate2.TimeOfDay);
+                    if (resultTimeCompare == -1)
+                    {
+                        slot.Insert(1, allSplits[counter - step]);
+                        result.Add(slot);
+                    }
                     slot = new List<string>(2);
                     counter++;
                     step++;
@@ -110,6 +122,6 @@ namespace MedicalBookingProject.DataAccess.Scripts
             }
             return result;
         }
-        }
+    }
 }
 

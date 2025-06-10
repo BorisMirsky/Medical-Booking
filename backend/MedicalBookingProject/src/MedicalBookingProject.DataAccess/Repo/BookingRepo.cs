@@ -1,6 +1,4 @@
-﻿using MedicalBookingProject.DataAccess.Entities;
-using MedicalBookingProject.DataAccess.Scripts;
-using MedicalBookingProject.Domain.Abstractions;
+﻿using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Bookings;
 using MedicalBookingProject.Domain.Models.Users;
 using Microsoft.EntityFrameworkCore;

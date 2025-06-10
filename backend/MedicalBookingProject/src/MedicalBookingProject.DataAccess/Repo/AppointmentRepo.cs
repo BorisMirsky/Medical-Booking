@@ -1,7 +1,7 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models;
 using MedicalBookingProject.DataAccess.Configuration;
-using MedicalBookingProject.DataAccess.Entities;
+//using MedicalBookingProject.DataAccess.Entities;
 using MedicalBookingProject.DataAccess;
 using MedicalBookingProject.Domain.Models.Appointments;
 using System.Diagnostics;

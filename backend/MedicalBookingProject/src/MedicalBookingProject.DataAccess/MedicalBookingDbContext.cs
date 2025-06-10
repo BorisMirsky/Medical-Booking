@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MedicalBookingProject.DataAccess.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Logging;
 using MedicalBookingProject.Domain.Models.Users;
@@ -18,22 +12,31 @@ namespace MedicalBookingProject.DataAccess
 {
     public class MedicalBookingDbContext : DbContext
     {
+
         public MedicalBookingDbContext(DbContextOptions<MedicalBookingDbContext> options)
                 : base(options)
         {
         }
-        public DbSet<UserDoctorEntity> UsersDoctors { get; set; }
-        public DbSet<UserPatientEntity> UsersPatients { get; set; }
+
+        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Patient> Patients { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Shedule> Shedules { get; set; }
+        public DbSet<Timeslot> Timeslots { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {}
+           
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //optionsBuilder.LogTo(logStream.WriteLine);
-            //optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
+            modelBuilder.ApplyConfiguration(new Configuration.TimeslotConfiguration());
+            modelBuilder.ApplyConfiguration(new Configuration.DoctorConfiguration());
+            modelBuilder.ApplyConfiguration(new Configuration.PatientConfiguration());
+            modelBuilder.ApplyConfiguration(new Configuration.RoleConfiguration());
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

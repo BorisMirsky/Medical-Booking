@@ -4,11 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
+
+
 namespace MedicalBookingProject.Domain.Models.Shedules
 {
     [Table("shedules")]
     public class Shedule
     {
+
         public Shedule(Guid doctorId, string slotDatetimeStart, 
                         string slotDatetimeStop) 
         {
@@ -16,9 +19,12 @@ namespace MedicalBookingProject.Domain.Models.Shedules
             SlotDatetimeStart = slotDatetimeStart;
             SlotDatetimeStop = slotDatetimeStop;
         }
+
         [Key]
         [Column("slotid")]
         public Guid SlotId { get; set; }
+
+        //public List<Timeslot> Timeslots { get; set; } = new();
 
         [Column("slotdatetimestart")]
         public string SlotDatetimeStart { get; set; }

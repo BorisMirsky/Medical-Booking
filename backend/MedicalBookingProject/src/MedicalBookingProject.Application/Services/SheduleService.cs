@@ -4,8 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MedicalBookingProject.Domain.Models.Shedules;
 using MedicalBookingProject.DataAccess;
-using MedicalBookingProject.DataAccess.Scripts;
+//using MedicalBookingProject.DataAccess.Scripts;
+using MedicalBookingProject.Application.Services; 
 using Microsoft.AspNetCore.Mvc;
+using MedicalBookingProject.Application.Scripts;
 
 
 

@@ -1,15 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MedicalBookingProject.Domain.Models.Users
 {
+
+    [Table("users_role")]
     public class Role
     {
+
+        [Key]
+        [Column("id")]
         public int Id { get; set; }
+
+        [Column("name")]
         public string Name { get; set; }
         public Role(string name) => Name = name;
+        public List<Doctor>? Doctors { get; set; }
+        public List<Patient>? Patients { get; set; }
     }
 }

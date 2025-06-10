@@ -3,7 +3,7 @@ using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models;
 using MedicalBookingProject.DataAccess.Configuration;
 using MedicalBookingProject.Domain.Models.Shedules;
-using MedicalBookingProject.DataAccess.Scripts;          
+       
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
@@ -20,6 +20,7 @@ namespace MedicalBookingProject.DataAccess.Repo
         {
             _context = context;
         }
+
 
         // POST
         public async Task<Guid> Create(List<List<String>> slotsList, Guid doctorId )   

@@ -44,7 +44,7 @@ namespace MedicalBookingProject.Web.Controllers
                 return BadRequest(new { message = "Password needs to entered" });
             }
 
-            UserDoctor registeredUserDoctor = await _doctorService.Register(request.Email,
+            Doctor registeredUserDoctor = await _doctorService.Register(request.Email,
                                                                 request.Password,
                                                                 request.UserName,
                                                                 request.Role,
@@ -65,7 +65,7 @@ namespace MedicalBookingProject.Web.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
         public async Task<IActionResult> GetDoctor(Guid id)
         {
-            UserDoctor user = await _doctorService.Get(id);
+            Doctor user = await _doctorService.Get(id);
 
             if (user != null)
             {
@@ -92,7 +92,7 @@ namespace MedicalBookingProject.Web.Controllers
                 return BadRequest(new { message = "Password needs to entered" });
             }
 
-            UserPatient registeredPatient = await _patientService.Register(request.Email,
+            Patient registeredPatient = await _patientService.Register(request.Email,
                                                                 request.Password,
                                                                 request.UserName,
                                                                 request.Role,
@@ -112,7 +112,7 @@ namespace MedicalBookingProject.Web.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
         public async Task<IActionResult> GetPatient(Guid id)
         {
-            UserPatient user = await _patientService.Get(id);
+            Patient user = await _patientService.Get(id);
 
             if (user != null)
             {

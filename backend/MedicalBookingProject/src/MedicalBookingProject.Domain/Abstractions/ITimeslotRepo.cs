@@ -1,5 +1,4 @@
 ﻿using MedicalBookingProject.Domain.Models.Shedules;
-using MedicalBookingProject.Domain.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace MedicalBookingProject.Domain.Abstractions
 {
-    public interface IUsersDoctorRepo
+    public interface ITimeslotRepo
     {
-        Task<Doctor> Register(string email, string password, string username, string role, string speciality);
-        Task<Doctor> Get(Guid id);
+        Task<Guid> Create(List<List<string>> someList, Guid id);
+        Task<Timeslot> Get(Guid id);
+        Task<Guid> Update(Guid slotid, Guid? patientid, Boolean isbooked);
     }
 }

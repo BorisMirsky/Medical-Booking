@@ -37,12 +37,12 @@ namespace MedicalBookingProject.Application.Services
             _doctorRepo = doctorRepo;
         }
 
-        public async Task<UserDoctor> Register(string email, string password, string username, string role, string speciality)
+        public async Task<Doctor> Register(string email, string password, string username, string role, string speciality)
         {
             return await _doctorRepo.Register(email, password, username, role, speciality);
         }
 
-        public async Task<UserDoctor> Get(Guid id)
+        public async Task<Doctor> Get(Guid id)
         {
             return await _doctorRepo.Get(id);
         }

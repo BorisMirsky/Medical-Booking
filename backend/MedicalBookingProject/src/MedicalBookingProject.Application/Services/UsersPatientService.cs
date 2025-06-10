@@ -20,12 +20,12 @@ namespace MedicalBookingProject.Application.Services
             _patientRepo = patientRepo;
         }
 
-        public async Task<UserPatient> Register(string email, string password, string username, string role, string gender)
+        public async Task<Patient> Register(string email, string password, string username, string role, string gender)
         {
             return await _patientRepo.Register(email, password, username, role, gender);
         }
 
-        public async Task<UserPatient> Get(Guid id)
+        public async Task<Patient> Get(Guid id)
         {
             return await _patientRepo.Get(id);
         }

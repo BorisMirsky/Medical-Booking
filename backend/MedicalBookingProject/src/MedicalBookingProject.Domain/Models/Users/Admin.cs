@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MedicalBookingProject.Domain.Models.Users
 {
-    public class UserAdmin
+    public class Admin
     {
         [Key]
         public Guid? Id { get; set; }

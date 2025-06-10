@@ -2,13 +2,11 @@
 {
     public record TimeslotRequest
     {
-        public Guid Id { get; set; }
-        public string slotDatetimeStart { get; set; } = "";
-        public string slotDatetimeStop { get; set; } = "";
         public Guid DoctorId { get; set; }
-        public Boolean? IsBooked { get; set; } = false;
-        public Guid? PatientId { get; set; } = null;
-        public string? WasCancelledBy { get; set; } = null;
-        public string? WasCancelledAt { get; set; } = null;
+        public DateTime StartDay { get; set; }
+        public int Days { get; set; }
+        public int TimeStart { get; set; }
+        public int TimeStop { get; set; }
+        public int TimeChunk { get; set; }
     }
 }

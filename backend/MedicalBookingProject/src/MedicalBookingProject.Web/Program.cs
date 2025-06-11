@@ -19,18 +19,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 string connection = builder.Configuration.GetConnectionString("DefaultConnection")!;
+
 builder.Services.AddDbContext<MedicalBookingDbContext>(options => options.UseSqlite(connection));
-builder.Services.AddScoped<IUsersDoctorService, UsersDoctorService>();
-builder.Services.AddScoped<IUsersDoctorRepo, UsersDoctorRepo>();
-builder.Services.AddScoped<IUsersPatientService, UsersPatientService>();
-builder.Services.AddScoped<IUsersPatientRepo, UsersPatientRepo>();
+builder.Services.AddScoped<IDoctorService, DoctorService>();
+builder.Services.AddScoped<IDoctorRepo, DoctorRepo>();
+builder.Services.AddScoped<IPatientService, PatientService>();
+builder.Services.AddScoped<IPatientRepo, PatientRepo>();
 builder.Services.AddScoped<ISheduleService, SheduleService>();
 builder.Services.AddScoped<ISheduleRepo, ShedulesRepo>();
-
 builder.Services.AddScoped<ITimeslotService, TimeslotService>();
 builder.Services.AddScoped<ITimeslotRepo, TimeslotRepo>();
-
-
 builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<IBookingRepo, BookingRepo>();
 builder.Services.AddScoped<IAppointmentService, AppointmentService>();

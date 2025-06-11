@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using MedicalBookingProject.Domain.Models.Bookings;
 
 
 
 namespace MedicalBookingProject.Domain.Models.Appointments
 {
-
     [Table("appointments")]
     public class Appointment
     {
@@ -14,21 +14,17 @@ namespace MedicalBookingProject.Domain.Models.Appointments
         [Column("id")]
         public Guid Id { get; set; }
 
-        public Appointment(Guid doctorId, Guid patientId, 
-                           Guid slotId, Guid medicalCardId)
-                           //bool patientCame, bool patientIsLate,int finalCost)
-        {
-            DoctorId = doctorId;
-            PatientId = patientId;
-            SlotId = slotId;
-            MedicalCardId = medicalCardId;
-            //PatientCame = patientCame;
-            //PatientIsLate = patientIsLate;
-            //FinalCost = finalCost;
-        }
+        public Booking Booking { get; set; } //= new Booking();
+
+        public Guid BookingId { get; set; }
+
+        //public Appointment(Guid bookingId)
+        //{
+        //    BookingId = bookingId;
+        //}
 
         [Column("doctorid")]
-        public Guid DoctorId { get; set; }
+        public Guid DoctorId { get; set; }   
 
         [Column("patientid")]
         public Guid PatientId { get; set; }
@@ -47,7 +43,7 @@ namespace MedicalBookingProject.Domain.Models.Appointments
         public Boolean? PatientIsLate { get; set; }
 
         [Column("patientunacceptablebehavior")]
-        public String? PatientUnacceptableBehavior { get; set; } //= String.Empty;
+        public String? PatientUnacceptableBehavior { get; set; } 
 
         // services rendered
         [Column("visualexamination")]
@@ -71,7 +67,7 @@ namespace MedicalBookingProject.Domain.Models.Appointments
         [Column("treatment")]
         public Boolean? Treatment { get; set; }
 
-        //
+        // 
         [Column("finalcost")]
         public int? FinalCost { get; set; }
     }

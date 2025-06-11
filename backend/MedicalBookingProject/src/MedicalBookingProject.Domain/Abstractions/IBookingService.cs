@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MedicalBookingProject.Domain.Models.Bookings;
+﻿using MedicalBookingProject.Domain.Models.Bookings;
 
 
 
@@ -12,9 +7,13 @@ namespace MedicalBookingProject.Domain.Abstractions
 {
     public interface IBookingService
     {
-        Task<Guid> CreateBooking(Guid slotid, Guid? patientid, 
-                                  Guid doctorid, Boolean? isbooked, 
-                                  Guid? cancelledby, DateTime? cancelledat);
+        Task<Guid> CreateBooking(Guid slotid, 
+                                 Guid? cancelledby, 
+                                 DateTime? cancelledat,
+                                 Guid patientId, 
+                                 //Guid doctorId, 
+                                 Boolean? isBooked);
+
         Task<Booking> GetOneBooking(Guid id); 
     }
 }

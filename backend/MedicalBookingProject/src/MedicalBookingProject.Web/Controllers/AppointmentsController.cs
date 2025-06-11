@@ -33,12 +33,12 @@ namespace MedicalBookingProject.Web.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "doctor")]
         public async Task<ActionResult<AppointmentResponse>> CreateAppointment([FromBody] AppointmentRequest request)
         {
-            Appointment app = new Appointment(request.DoctorId, request.PatientId, 
-                                              request.SlotId, request.MedicalCardId, 
-                                              request.PatientCame, request.PatientIsLate,
-                                              request.FinalCost);
-            //Shedule shed = new( request.StartDay, request.Days);  //request.DoctorId,
-            var newApp = await _appointmentService.CreateAppointment(app);
+            Appointment app = new Appointment(); //.request.BookingId);
+                //request.DoctorId, request.PatientId, request.SlotId, request.MedicalCardId); 
+                //request.PatientCame, request.PatientIsLate,
+                //request.FinalCost);
+                //Shedule shed = new( request.StartDay, request.Days);  //request.DoctorId,
+            var newApp = await _appointmentService.CreateAppointment(request.BookingId);
             return Ok(newApp);
         }
 

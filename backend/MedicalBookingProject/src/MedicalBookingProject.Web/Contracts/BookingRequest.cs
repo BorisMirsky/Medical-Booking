@@ -7,6 +7,6 @@
         public Guid PatientId { get; set; }
         public Boolean IsBooked { get; set; }
         public Guid? CancelledBy { get; set; } 
-        public DateTime BookingOrCancelDatetime { get; set; } = DateTime.MinValue;
+        public DateTime? BookingOrCancelDatetime { get; set; } 
     }
 }

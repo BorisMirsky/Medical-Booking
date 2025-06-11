@@ -11,10 +11,10 @@ namespace MedicalBookingProject.DataAccess.Repo
     using Microsoft.EntityFrameworkCore;
     using System.Diagnostics;
 
-    public class UsersPatientRepo : IUsersPatientRepo
+    public class PatientRepo : IPatientRepo
     {
         private readonly MedicalBookingDbContext _dbContext;
-        public UsersPatientRepo(MedicalBookingDbContext dbContext)
+        public PatientRepo(MedicalBookingDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -26,7 +26,7 @@ namespace MedicalBookingProject.DataAccess.Repo
         {
             var hashedPassword = BCrypt.HashPassword(password);
             Patient patient = new Patient(email, hashedPassword, role, username, gender);
-            patient.Id = new Guid();
+            patient.Id = Guid.NewGuid();
             _dbContext.Patients.Add(patient!);
             await _dbContext.SaveChangesAsync();
             return patient;

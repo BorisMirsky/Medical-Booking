@@ -44,7 +44,8 @@ namespace MedicalBookingProject.DataAccess.Repo
             Timeslot? entity = await _context.Timeslots
                                         .AsNoTracking()
                                         .FirstOrDefaultAsync(s => s.Id == id);
-            return entity!;
+            //ArgumentNullException.ThrowIfNull(entity);
+            return entity;
         }
 
 

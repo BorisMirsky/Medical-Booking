@@ -48,9 +48,9 @@ namespace MedicalBookingProject.Web.Controllers
         public async Task<ActionResult<Guid>> UpdateBooking([FromBody] BookingRequest request)
         {
             var slotId = await _timeslotService.UpdateTimeslot(request.SlotId, request.PatientId, request.IsBooked);
-            await _bookingService.CreateBooking(request.SlotId, request.PatientId,
-                                                request.DoctorId, request.IsBooked,
-                                                request.CancelledBy, request.BookingOrCancelDatetime);
+            await _bookingService.CreateBooking(request.SlotId, request.CancelledBy,
+                                                request.BookingOrCancelDatetime,
+                                                request.PatientId, request.IsBooked);
             return Ok(slotId);
         }
 

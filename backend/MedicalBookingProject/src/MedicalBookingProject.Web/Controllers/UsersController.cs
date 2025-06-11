@@ -4,7 +4,6 @@ using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Web.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
-//using System.IdentityModel.Tokens.Jwt;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Identity.Data;
 //using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -20,10 +19,10 @@ namespace MedicalBookingProject.Web.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly IUsersDoctorService _doctorService;
-        private readonly IUsersPatientService _patientService;
+        private readonly IDoctorService _doctorService;
+        private readonly IPatientService _patientService;
 
-        public UsersController(IUsersDoctorService doctorService, IUsersPatientService patientService)
+        public UsersController(IDoctorService doctorService, IPatientService patientService)
         {
             _doctorService = doctorService;
             _patientService = patientService;
@@ -44,15 +43,16 @@ namespace MedicalBookingProject.Web.Controllers
                 return BadRequest(new { message = "Password needs to entered" });
             }
 
-            Doctor registeredUserDoctor = await _doctorService.Register(request.Email,
+            Doctor registeredDoctor = await _doctorService.Register(request.Email,
                                                                 request.Password,
                                                                 request.UserName,
                                                                 request.Role,
-                                                                request.Speciality);
+                                                                request.Speciality,
+                                                                request.Gender);
 
-            if (registeredUserDoctor != null)
+            if (registeredDoctor != null)
             {
-                return Ok(registeredUserDoctor);
+                return Ok(registeredDoctor);
             }
 
             return BadRequest(new { message = "User Doctor registration unsuccessful" });

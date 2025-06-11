@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using MedicalBookingProject.Domain.Abstractions;
+﻿using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Users;
 
 
 
 namespace MedicalBookingProject.Application.Services
 {
-    public class UsersPatientService : IUsersPatientService
+    public class PatientService : IPatientService
     {
-        private readonly IUsersPatientRepo _patientRepo;
+        private readonly IPatientRepo _patientRepo;
 
-        public UsersPatientService(IUsersPatientRepo patientRepo)
+        public PatientService(IPatientRepo patientRepo)
         {
             _patientRepo = patientRepo;
         }

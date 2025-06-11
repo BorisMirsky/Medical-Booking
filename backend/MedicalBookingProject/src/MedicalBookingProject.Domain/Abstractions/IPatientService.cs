@@ -5,11 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
 namespace MedicalBookingProject.Domain.Abstractions
 {
-    public interface IUsersPatientRepo
+    public interface IPatientService
     {
-        Task<Patient> Register(string email, string password, string username, string role, string gender);
+        //Task<UserDoctor> Login(string username, string password);
+        Task<Patient> Register(string email, string password,
+                                  string username, string role, string gender);
         Task<Patient> Get(Guid id);
     }
 }

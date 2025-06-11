@@ -8,6 +8,10 @@ namespace MedicalBookingProject.Domain.Models.Users
     [Table("users_patient")]
     public class Patient
     {
+        public Patient()
+        {
+        }
+
         public Patient(string email, string password, 
                        string rolename, string gender, 
                        string username)
@@ -35,7 +39,7 @@ namespace MedicalBookingProject.Domain.Models.Users
         [Column("rolename")]
         public string Rolename { get; set; }
 
-        public Role Role { get; set; } 
+        public Role? Role { get; set; } 
 
         [Column("gender")]
         public string Gender { get; set; } 
@@ -48,7 +52,5 @@ namespace MedicalBookingProject.Domain.Models.Users
 
         [Column("token")]
         public string? Token { get; set; }
-
-        //public Role? Role { get; set; }
     }
 }

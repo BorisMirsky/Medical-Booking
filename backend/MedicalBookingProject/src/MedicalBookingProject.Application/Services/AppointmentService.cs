@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MedicalBookingProject.Domain.Abstractions;
-using MedicalBookingProject.DataAccess.Entities;
+﻿using MedicalBookingProject.Domain.Abstractions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MedicalBookingProject.Domain.Models.Appointments;
 using MedicalBookingProject.DataAccess;
-using MedicalBookingProject.DataAccess.Scripts;
 using MedicalBookingProject.DataAccess.Repo;
 using MedicalBookingProject.Domain.Models.Shedules;
 
@@ -26,9 +19,9 @@ namespace MedicalBookingProject.Application.Services
         }
 
 
-        public async Task<Guid> CreateAppointment(Appointment app)
+        public async Task<Guid> CreateAppointment(Guid bookingId)
         {
-            return await _appointmentRepo.Create(app);
+            return await _appointmentRepo.Create(bookingId);
         }       
 
          public async Task<Appointment> GetAppointment(Guid id)

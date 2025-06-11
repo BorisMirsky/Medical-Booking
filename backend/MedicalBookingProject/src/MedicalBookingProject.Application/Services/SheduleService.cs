@@ -1,5 +1,5 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
-using MedicalBookingProject.DataAccess.Entities;
+//using MedicalBookingProject.DataAccess.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MedicalBookingProject.Domain.Models.Shedules;

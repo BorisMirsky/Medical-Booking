@@ -1,6 +1,7 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Bookings;
-using MedicalBookingProject.Domain.Models.Users;
+using MedicalBookingProject.Domain.Models.Shedules;
+using MedicalBookingProject.DataAccess.Repo;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,23 +17,47 @@ namespace MedicalBookingProject.DataAccess.Repo
     public class BookingRepo : IBookingRepo
     {
         private readonly MedicalBookingDbContext _context;
+        public TimeslotRepo slotRepo;
 
         public BookingRepo(MedicalBookingDbContext context)
         {
             _context = context;
+            slotRepo = new TimeslotRepo(_context);
         }
 
 
-        public async Task<Guid> Create(Guid slotId, Guid? patientId, Guid doctorId,
-                                       Boolean? isBooked, Guid? cancelledBy, 
-                                       DateTime? bookingOrCancelDatetime)
+        public async Task<Guid> Create(Guid slotId, 
+                                        Guid? cancelledBy, 
+                                        DateTime? bookingOrCancelDatetime)
         {
             var bookingId = Guid.NewGuid();
-            var entity = new Booking(doctorId, patientId, slotId);
-            entity.IsBooked = isBooked;
-            entity.CancelledBy = cancelledBy;
-            entity.BookingOrCancelDatetime = bookingOrCancelDatetime;
-            await _context.Bookings.AddAsync(entity);
+            var booking = new Booking();
+            Timeslot slot = await slotRepo.Get(slotId);
+            booking.TimeslotId = slotId;
+            booking.DoctorId = slot.DoctorId;
+
+            if (slot.IsBooked == null)
+            {
+                booking.IsBooked = false;
+            }
+            else
+            {
+                booking.IsBooked = (Boolean)slot.IsBooked;
+            }
+
+            if (slot.PatientId == null)
+            {
+                booking.PatientId = Guid.Empty;
+            }
+            else
+            {
+                booking.PatientId = (Guid)slot.PatientId;
+            }
+
+            booking.Id = bookingId;
+            booking.CancelledBy = cancelledBy;
+            booking.BookingOrCancelDatetime = bookingOrCancelDatetime;
+            await _context.Bookings.AddAsync(booking);
             await _context.SaveChangesAsync();
             return bookingId;
         }
@@ -41,10 +66,10 @@ namespace MedicalBookingProject.DataAccess.Repo
 
         public async Task<Booking> GetOneBooking(Guid id)
         {
-            Booking? entity = await _context.Bookings
+            Booking? booking = await _context.Bookings
                                     .AsNoTracking()
-                                    .FirstOrDefaultAsync(s => s.SlotId == id);
-            return entity!;
+                                    .FirstOrDefaultAsync(s => s.Id == id);
+            return booking!;
         }
     }
 }

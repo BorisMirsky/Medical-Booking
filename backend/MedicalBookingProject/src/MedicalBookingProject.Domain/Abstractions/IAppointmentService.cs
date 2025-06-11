@@ -6,7 +6,7 @@ namespace MedicalBookingProject.Domain.Abstractions
 {
     public interface IAppointmentService
     {
-        Task<Guid> CreateAppointment(Appointment app);
+        Task<Guid> CreateAppointment(Guid bookingId);
         Task<Appointment> GetAppointment(Guid id);
         Task<Guid> UpdateUnacceptableBehavior(Guid id, String description);
     }

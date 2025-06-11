@@ -1,4 +1,5 @@
-﻿using MedicalBookingProject.Domain.Models.Users;
+﻿using MedicalBookingProject.Domain.Models.Bookings;
+using MedicalBookingProject.Domain.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -33,6 +34,8 @@ namespace MedicalBookingProject.Domain.Models.Shedules
         public Boolean? IsBooked { get; set; } 
 
         [Column("patientid")]
-        public Guid? PatientId { get; set; }                              
+        public Guid? PatientId { get; set; }     
+        
+        public Booking? Booking { get; set; }
     }
 }

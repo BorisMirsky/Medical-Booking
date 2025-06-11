@@ -8,21 +8,26 @@ namespace MedicalBookingProject.Domain.Models.Users
     [Table("users_doctor")]
     public class Doctor
     {
+        public Doctor()
+        { 
+        }
+
         public Doctor(string email, string password, string rolename,
-                  string speciality, string username)
+                  string speciality, string username, string gender)
         {
             Email = email;
             Password = password;
             Rolename = rolename;
             Speciality = speciality;
             UserName = username;
+            Gender = gender;
         }
         [Key]
         [Column("id")]
         public Guid Id { get; set; }
 
         [Column("username")]
-        public string UserName { get; set; } 
+        public string UserName { get; set; }  
 
         [Column("email")]
         public string Email { get; set; } 
@@ -39,13 +44,13 @@ namespace MedicalBookingProject.Domain.Models.Users
         public int? RoleId { get; set; }                 // ?
 
         [Column("isactive")]
-        public bool? IsActive { get; set; } = false;
+        public bool? IsActive { get; set; }
 
         [Column("token")]
-        public string? Token { get; set; } = "";
+        public string Token { get; set; } = String.Empty;
 
         [Column("gender")]
-        public string? Gender { get; set; } = "";
+        public string Gender { get; set; } 
 
         [Column("speciality")]
         public string Speciality { get; set; }

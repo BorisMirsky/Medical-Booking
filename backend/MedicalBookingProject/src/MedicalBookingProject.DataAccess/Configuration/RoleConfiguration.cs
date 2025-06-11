@@ -22,23 +22,6 @@ namespace MedicalBookingProject.DataAccess.Configuration
             builder
                 .Property(r => r.Name)
                 .IsRequired();
-            //builder.HasData(
-            //        new Role("Admin")
-            //        {
-            //            Id = 1,
-            //            Name = "ADMIN"
-            //        },
-            //        new Role("Doctor")
-            //        {
-            //            Id = 2,
-            //            Name = "Doctor"
-            //        },
-            //        new Role("Patient")
-            //        {
-            //            Id = 3,
-            //            Name = "PATIENT"
-            //        }
-            //);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MedicalBookingProject.Domain.Models.Bookings;
+using MedicalBookingProject.Domain.Models.MedicalRecords;
 using MedicalBookingProject.Domain.Models.Shedules;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -57,6 +58,8 @@ namespace MedicalBookingProject.Domain.Models.Users
 
         public List<Timeslot> Timeslots { get; set; } 
 
-        public List<Booking> Bookings { get; set; } 
+        public List<Booking> Bookings { get; set; }
+
+        public List<MedicalRecord> MedicalRecords { get; set; }
     }
 }

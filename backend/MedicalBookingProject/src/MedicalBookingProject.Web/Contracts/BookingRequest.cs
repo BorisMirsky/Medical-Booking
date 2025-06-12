@@ -1,6 +1,6 @@
 ﻿namespace MedicalBookingProject.Web.Contracts
 {
-    public class BookingRequest  
+    public record BookingRequest  
     {
         public Guid SlotId { get; set; }
         //public Guid DoctorId { get; set; }

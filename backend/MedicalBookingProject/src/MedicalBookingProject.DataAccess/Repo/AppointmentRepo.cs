@@ -6,8 +6,6 @@ using MedicalBookingProject.Domain.Models.Appointments;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
-using MedicalBookingProject.Domain.Models.Shedules;
-using MedicalBookingProject.Domain.Models.MedicalCards;
 using MedicalBookingProject.Domain.Models.Bookings;
 
 

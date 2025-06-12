@@ -25,8 +25,6 @@ builder.Services.AddScoped<IDoctorService, DoctorService>();
 builder.Services.AddScoped<IDoctorRepo, DoctorRepo>();
 builder.Services.AddScoped<IPatientService, PatientService>();
 builder.Services.AddScoped<IPatientRepo, PatientRepo>();
-builder.Services.AddScoped<ISheduleService, SheduleService>();
-builder.Services.AddScoped<ISheduleRepo, ShedulesRepo>();
 builder.Services.AddScoped<ITimeslotService, TimeslotService>();
 builder.Services.AddScoped<ITimeslotRepo, TimeslotRepo>();
 builder.Services.AddScoped<IBookingService, BookingService>();

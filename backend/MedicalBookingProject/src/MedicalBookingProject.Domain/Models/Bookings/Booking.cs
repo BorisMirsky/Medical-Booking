@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using MedicalBookingProject.Domain.Models.Shedules;
+using MedicalBookingProject.Domain.Models.Users;
 
 
 
@@ -25,8 +26,6 @@ namespace MedicalBookingProject.Domain.Models.Bookings
         [Column("patientid")]
         public Guid PatientId { get; set; }
 
-        public Timeslot Timeslot { get; set; } //= new Timeslot();
-
         [Column("slotid")]
         public Guid TimeslotId { get; set; }
 
@@ -39,6 +38,12 @@ namespace MedicalBookingProject.Domain.Models.Bookings
         [Column("bookingorcanceldatetime")]
         public DateTime? BookingOrCancelDatetime { get; set; }
 
+        public Patient Patient { get; set; }
+
+        public Doctor Doctor { get; set; }
+
         public Appointment? Appointment { get; set; }
+
+        public Timeslot Timeslot { get; set; }
     }
 }

@@ -27,16 +27,10 @@ namespace MedicalBookingProject.DataAccess.Configuration
             builder.Property(a => a.PatientIsLate);
             builder.Property(a => a.PatientUnacceptableBehavior);
             builder.Property(a => a.VisualExamination);
-            builder.Property(a => a.ListeningHeart);
-            builder.Property(a => a.Procedure);
             builder.Property(a => a.ReferralTests);
-            builder.Property(a => a.Medecins);
             builder.Property(a => a.MakingDiagnosis);
             builder.Property(a => a.Treatment);
             builder.Property(a => a.FinalCost);
-
-
-
         }
     }
 }

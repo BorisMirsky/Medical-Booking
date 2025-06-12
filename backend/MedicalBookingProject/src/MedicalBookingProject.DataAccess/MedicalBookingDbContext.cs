@@ -21,7 +21,6 @@ namespace MedicalBookingProject.DataAccess
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<Shedule> Shedules { get; set; }
         public DbSet<Timeslot> Timeslots { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
@@ -32,10 +31,12 @@ namespace MedicalBookingProject.DataAccess
            
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new Configuration.TimeslotConfiguration());
             modelBuilder.ApplyConfiguration(new Configuration.DoctorConfiguration());
             modelBuilder.ApplyConfiguration(new Configuration.PatientConfiguration());
             modelBuilder.ApplyConfiguration(new Configuration.RoleConfiguration());
+            modelBuilder.ApplyConfiguration(new Configuration.TimeslotConfiguration());
+            modelBuilder.ApplyConfiguration(new Configuration.AppointmentConfiguration());
+            modelBuilder.ApplyConfiguration(new Configuration.BookingConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -14,14 +14,10 @@ namespace MedicalBookingProject.Domain.Models.Appointments
         [Column("id")]
         public Guid Id { get; set; }
 
-        public Booking Booking { get; set; } //= new Booking();
+        public Booking Booking { get; set; }          // ?
 
+        [Column("bookingid")]
         public Guid BookingId { get; set; }
-
-        //public Appointment(Guid bookingId)
-        //{
-        //    BookingId = bookingId;
-        //}
 
         [Column("doctorid")]
         public Guid DoctorId { get; set; }   
@@ -49,17 +45,8 @@ namespace MedicalBookingProject.Domain.Models.Appointments
         [Column("visualexamination")]
         public Boolean? VisualExamination { get; set; }
 
-        [Column("listeningheart")]
-        public Boolean? ListeningHeart { get; set; }
-
-        [Column("procedure")]
-        public Boolean? Procedure { get; set; }
-
         [Column("referraltests")]
         public Boolean? ReferralTests { get; set; }
-
-        [Column("medecins")]
-        public Boolean? Medecins { get; set; }
 
         [Column("makingdiagnosis")]
         public Boolean? MakingDiagnosis { get; set; }
@@ -67,7 +54,6 @@ namespace MedicalBookingProject.Domain.Models.Appointments
         [Column("treatment")]
         public Boolean? Treatment { get; set; }
 
-        // 
         [Column("finalcost")]
         public int? FinalCost { get; set; }
     }

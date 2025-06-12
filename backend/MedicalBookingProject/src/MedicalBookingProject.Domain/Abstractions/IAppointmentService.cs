@@ -8,6 +8,10 @@ namespace MedicalBookingProject.Domain.Abstractions
     {
         Task<Guid> CreateAppointment(Guid bookingId);
         Task<Appointment> GetAppointment(Guid id);
-        Task<Guid> UpdateUnacceptableBehavior(Guid id, String description);
+        Task<Guid>UpdateAppointment(Guid Id, Boolean? PatientCame, Boolean? PatientIsLate,
+                                     string? PatientUnacceptableBehavior,
+                                     Boolean? Treatment, Boolean? MakingDiagnosis,
+                                     Boolean? ReferralTests, Boolean? VisualExaminationPatient,
+                                     int FinalCost);
     }
 }

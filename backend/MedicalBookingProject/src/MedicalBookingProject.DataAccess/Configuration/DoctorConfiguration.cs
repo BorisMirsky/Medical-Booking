@@ -14,9 +14,15 @@ namespace MedicalBookingProject.DataAccess.Configuration
         {
             builder.HasKey(d => d.Id);
             builder.HasOne(d => d.Role)
-                .WithMany(c => c.Doctors)
-                .HasForeignKey(x => x.RoleId)
+                .WithMany(r => r.Doctors)
+                .HasForeignKey(d => d.RoleId)
                 .IsRequired();
+            builder
+                .HasMany(d => d.Timeslots)
+                .WithOne(t => t.Doctor);
+            builder
+               .HasMany(d => d.Bookings)
+               .WithOne(b => b.Doctor);
             builder.Property(d => d.Email)
                 .IsRequired();
             builder.Property(d => d.Password)

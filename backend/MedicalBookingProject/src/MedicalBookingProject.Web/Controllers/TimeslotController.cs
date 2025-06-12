@@ -47,7 +47,10 @@ namespace MedicalBookingProject.Web.Controllers
         [HttpPatch]
         public async Task<ActionResult<Guid>> UpdateBooking([FromBody] BookingRequest request)
         {
+            // Изменение в таблице Слотс
             var slotId = await _timeslotService.UpdateTimeslot(request.SlotId, request.PatientId, request.IsBooked);
+            // Изменение (добавление) в таблице Букингс
+            // будет убрано в отдельный контроллер
             await _bookingService.CreateBooking(request.SlotId, request.CancelledBy,
                                                 request.BookingOrCancelDatetime,
                                                 request.PatientId, request.IsBooked);

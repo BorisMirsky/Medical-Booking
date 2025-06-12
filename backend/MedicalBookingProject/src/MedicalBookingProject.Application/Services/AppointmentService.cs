@@ -29,11 +29,19 @@ namespace MedicalBookingProject.Application.Services
             return await _appointmentRepo.Get(id);
         }
         
-        public async Task<Guid> UpdateUnacceptableBehavior(Guid id, String description)
+        public async Task<Guid> UpdateAppointment(Guid Id, Boolean? PatientCame, 
+                                     Boolean? PatientIsLate,
+                                     string? PatientUnacceptableBehavior,
+                                     Boolean? Treatment, Boolean? MakingDiagnosis,
+                                     Boolean? ReferralTests, Boolean? VisualExaminationPatient,
+                                     int FinalCost)
         {
-            Guid id_ = await _appointmentRepo.UpdateUnacceptableBehavior(id, description);
-            return id_;
+            await _appointmentRepo.Update(Id, PatientCame, PatientIsLate,
+                                     PatientUnacceptableBehavior,
+                                     Treatment, MakingDiagnosis,
+                                     ReferralTests, VisualExaminationPatient,
+                                     FinalCost);
+            return Id;
         }
-
     }
 }

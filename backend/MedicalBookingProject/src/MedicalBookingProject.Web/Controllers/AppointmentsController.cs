@@ -28,20 +28,13 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
-
         [HttpPost]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "doctor")]
         public async Task<ActionResult<AppointmentResponse>> CreateAppointment([FromBody] AppointmentRequest request)
         {
-            Appointment app = new Appointment(); //.request.BookingId);
-                //request.DoctorId, request.PatientId, request.SlotId, request.MedicalCardId); 
-                //request.PatientCame, request.PatientIsLate,
-                //request.FinalCost);
-                //Shedule shed = new( request.StartDay, request.Days);  //request.DoctorId,
-            var newApp = await _appointmentService.CreateAppointment(request.BookingId);
-            return Ok(newApp);
+            var app = await _appointmentService.CreateAppointment(request.BookingId);
+            return Ok(app);
         }
-
 
 
         [HttpGet]
@@ -52,13 +45,15 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
-        [HttpPatch]
-        public async Task<ActionResult<Guid>> PatientUnacceptableBehavior(Guid id, string description)
+        [HttpPut]
+        public async Task<ActionResult<Guid>> PatientUnacceptableBehavior([FromBody] AppointmentRequest request)
         {
-            await _appointmentService.UpdateUnacceptableBehavior(id, description);
-            return Ok(id);
+            await _appointmentService.UpdateAppointment(request.Id, request.PatientCame, request.PatientIsLate,
+                                                        request.PatientUnacceptableBehavior,
+                                                        request.Treatment, request.MakingDiagnosis,
+                                                        request.ReferralTests, request.VisualExaminationPatient,
+                                                        request.FinalCost);
+            return Ok(request.Id);
         }
-
-
     }
 }

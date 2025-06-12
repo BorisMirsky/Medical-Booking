@@ -1,12 +1,8 @@
 ﻿using MedicalBookingProject.Domain.Models.Bookings;
 using MedicalBookingProject.Domain.Models.Users;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 
 
@@ -37,5 +33,18 @@ namespace MedicalBookingProject.Domain.Models.Shedules
         public Guid? PatientId { get; set; }     
         
         public Booking? Booking { get; set; }
+
+        public Patient? Patient { get; set; }
+
+        public Doctor Doctor { get; set; }
     }
 }
+
+
+//public Shedule(Guid doctorId, string slotDatetimeStart,
+//                string slotDatetimeStop)
+//{
+//    DoctorId = doctorId;
+//    SlotDatetimeStart = slotDatetimeStart;
+//    SlotDatetimeStop = slotDatetimeStop;
+//}

@@ -11,6 +11,17 @@ namespace MedicalBookingProject.DataAccess.Configuration
         public void Configure(EntityTypeBuilder<Booking> builder)
         {
             builder.HasKey(b => b.Id);
+
+            builder.HasOne(b => b.Doctor)
+                .WithMany(d => d.Bookings)
+                .HasForeignKey(b => b.DoctorId)
+                .IsRequired();
+
+            builder.HasOne(b => b.Patient)
+                .WithMany(d => d.Bookings)
+                .HasForeignKey(b => b.PatientId)
+                .IsRequired();
+
             builder.Property(b => b.DoctorId)
                 .IsRequired();
             builder.Property(b => b.PatientId)

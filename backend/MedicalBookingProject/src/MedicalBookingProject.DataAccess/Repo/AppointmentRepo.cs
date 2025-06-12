@@ -28,18 +28,18 @@ namespace MedicalBookingProject.DataAccess.Repo
             bookingRepo = new BookingRepo(_context);
         }
 
+
         public async Task<Guid> Create(Guid bookingId)
         {
             //ArgumentNullException.ThrowIfNull(bookingId);
             Guid id = Guid.NewGuid();
             Booking booking = await bookingRepo.GetOneBooking(bookingId);
             Appointment app = new Appointment();
-            app.Booking = booking;
-            app.BookingId = booking.Id;
             app.Id = id;
-            app.PatientId = app.Booking.PatientId;
-            app.DoctorId = app.Booking.DoctorId;
-            app.SlotId = app.Booking.TimeslotId;
+            app.PatientId = booking.PatientId;
+            app.DoctorId = booking.DoctorId;
+            app.SlotId = booking.TimeslotId;
+            app.BookingId = bookingId;
             await _context.Appointments.AddAsync(app);
             await _context.SaveChangesAsync();
             return id;
@@ -55,16 +55,25 @@ namespace MedicalBookingProject.DataAccess.Repo
         }
 
 
-        // Patch
-        public async Task<Guid> UpdateUnacceptableBehavior(Guid id, String description)
+        public async Task<Guid> Update(Guid Id, Boolean? PatientCame, Boolean? PatientIsLate,
+                                     string? PatientUnacceptableBehavior,
+                                     Boolean? Treatment, Boolean? MakingDiagnosis,
+                                     Boolean? ReferralTests, Boolean? VisualExamination,
+                                     int FinalCost)
         {
             await _context.Appointments
-                .Where(item => item.Id == id)
+                .Where(item => item.Id == Id)
                 .ExecuteUpdateAsync(s => s
-                .SetProperty(s => s.PatientUnacceptableBehavior, s => description)
+                .SetProperty(s => s.PatientCame, s => PatientCame)
+                .SetProperty(s => s.PatientIsLate, s => PatientIsLate)
+                .SetProperty(s => s.PatientUnacceptableBehavior, s => PatientUnacceptableBehavior)
+                .SetProperty(s => s.Treatment, s => Treatment)
+                .SetProperty(s => s.MakingDiagnosis, s => MakingDiagnosis)
+                .SetProperty(s => s.ReferralTests, s => ReferralTests)
+                .SetProperty(s => s.VisualExamination, s => VisualExamination)
+                .SetProperty(s => s.FinalCost, s => FinalCost)
                 );
-            return id;
-
+            return Id;
         }
     }
 }

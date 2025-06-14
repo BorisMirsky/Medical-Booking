@@ -36,7 +36,7 @@ namespace MedicalBookingProject.DataAccess.Repo
             app.Id = id;
             app.PatientId = booking.PatientId;
             app.DoctorId = booking.DoctorId;
-            app.SlotId = booking.TimeslotId;
+            app.TimeslotId = booking.TimeslotId;
             app.BookingId = bookingId;
             await _context.Appointments.AddAsync(app);
             await _context.SaveChangesAsync();

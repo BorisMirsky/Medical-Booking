@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using MedicalBookingProject.Domain.Models.Bookings;
+using MedicalBookingProject.Domain.Models.Shedules;
+using MedicalBookingProject.Domain.Models.Users;
 
 
 
@@ -26,7 +28,7 @@ namespace MedicalBookingProject.Domain.Models.Appointments
         public Guid PatientId { get; set; }
 
         [Column("slotid")]
-        public Guid SlotId { get; set; }
+        public Guid TimeslotId { get; set; }
 
         [Column("medicalcardid")]
         public Guid MedicalCardId { get; set; }
@@ -56,5 +58,11 @@ namespace MedicalBookingProject.Domain.Models.Appointments
 
         [Column("finalcost")]
         public int? FinalCost { get; set; }
+
+        public Patient Patient { get; set; }
+
+        public Doctor Doctor { get; set; }
+
+        public Timeslot Timeslot { get; set; }
     }
 }

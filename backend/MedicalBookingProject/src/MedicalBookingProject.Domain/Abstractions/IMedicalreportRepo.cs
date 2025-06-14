@@ -5,9 +5,12 @@ namespace MedicalBookingProject.Domain.Abstractions
 {
     public interface IMedicalreportRepo
     {
-        Task<Guid> Create(string Symptoms,
-                               string Diagnosis,
-                               string PrescribedTreatment);
+        Task<Guid> Create(string Diagnosis,
+                            string Symptoms,
+                            string PrescribedTreatment,
+                            Guid AppointmentId);
+                            //Guid DoctorId,
+                            //Guid PatientId);
 
         Task<MedicalRecord> Get(Guid id);
 

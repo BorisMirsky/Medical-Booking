@@ -16,13 +16,14 @@ namespace MedicalBookingProject.Application.Services
             _medicalreportRepo = medicalreportRepo;
         }
 
-        public async Task<Guid> CreateMedicalRecord(string Symptoms,
-                                       string Diagnosis,
-                                       string PrescribedTreatment)
+        public async Task<Guid> CreateMedicalRecord(string Diagnosis,
+                                       string Symptoms,
+                                       string PrescribedTreatment,
+                                       Guid AppointmentId)
         {
-            return await _medicalreportRepo.Create(Symptoms,
-                                                   Diagnosis,
-                                                   PrescribedTreatment);
+            return await _medicalreportRepo.Create(Diagnosis, Symptoms,
+                                                   PrescribedTreatment,
+                                                   AppointmentId); 
         }
 
         public async Task<MedicalRecord> GetMedicalRecord(Guid id)

@@ -31,9 +31,11 @@ namespace MedicalBookingProject.Web.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "doctor")]
         public async void CreateMedicalrecord([FromBody] MedicalRecordRequest request)
         {
-            await _medicalrecordService.CreateMedicalRecord(request.Symptoms,
-                                                            request.Diagnosis,
-                                                            request.PrescribedTreatment);
+            await _medicalrecordService.CreateMedicalRecord(request.Diagnosis, 
+                                                            request.Symptoms,
+                                                            request.PrescribedTreatment,
+                                                            request.AppointmentId
+                                                            );
         }
 
 
@@ -46,7 +48,7 @@ namespace MedicalBookingProject.Web.Controllers
 
 
         [HttpPut]
-        public async Task<ActionResult<Guid>> PatientUnacceptableBehavior([FromBody] MedicalRecordRequest request)
+        public async Task<ActionResult<Guid>> UpdateMedicalRecord([FromBody] MedicalRecordRequest request)
         {
             await _medicalrecordService.UpdateMedicalRecord(request.Id, request.Symptoms,
                                                             request.Diagnosis, request.PrescribedTreatment);

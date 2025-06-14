@@ -20,7 +20,7 @@ namespace MedicalBookingProject.DataAccess.Configuration
                 .IsRequired();
             builder.Property(a => a.PatientId)
                 .IsRequired();
-            builder.Property(a => a.SlotId)
+            builder.Property(a => a.TimeslotId)
                 .IsRequired();
             builder.Property(a => a.MedicalCardId);
             builder.Property(a => a.PatientCame);

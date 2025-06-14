@@ -3,6 +3,7 @@ using MedicalBookingProject.Domain.Models.Shedules;
 using MedicalBookingProject.Domain.Models.MedicalRecords;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using MedicalBookingProject.Domain.Models.Appointments;
 
 
 namespace MedicalBookingProject.Domain.Models.Users
@@ -11,9 +12,9 @@ namespace MedicalBookingProject.Domain.Models.Users
     [Table("users_doctor")]
     public class Doctor
     {
-        //public Doctor()
-        //{ 
-        //}
+        public Doctor()
+        {
+        }
 
         public Doctor(string email, string password, string rolename,
                   string speciality, string username, string gender)
@@ -69,6 +70,8 @@ namespace MedicalBookingProject.Domain.Models.Users
         public List<Booking> Bookings { get; set; } //= new();
 
         public List<MedicalRecord> MedicalRecords { get; set; }
+
+        public List<Appointment> Appointments { get; set; }
 
     }
 }

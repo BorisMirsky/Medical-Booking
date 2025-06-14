@@ -12,15 +12,19 @@ namespace MedicalBookingProject.Domain.Models.MedicalRecords
     public class MedicalRecord
     {
 
+        public MedicalRecord()
+        { }
+
+
         [Key]
         [Column("id")]
         public Guid Id { get; set; }
 
         [Column("slotstart")]
-        public DateTime SlotStart { get; set; }
+        public string SlotStart { get; set; }
 
         [Column("slotstop")]
-        public DateTime SlotStop { get; set; }
+        public string SlotStop { get; set; }
 
         [Column("symptoms")]
         public string? Symptoms { get; set; }
@@ -37,10 +41,13 @@ namespace MedicalBookingProject.Domain.Models.MedicalRecords
 
         public Appointment Appointment { get; set; }
 
+        [Column("patientid")]
         public Guid PatientId { get; set; }
 
+        [Column("doctorid")]
         public Guid DoctorId { get; set; }
 
+        [Column("appointmentid")]
         public Guid AppointmentId { get; set; }
     }
 }

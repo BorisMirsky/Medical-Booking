@@ -1,14 +1,12 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
-using MedicalBookingProject.Domain.Models;
-using MedicalBookingProject.DataAccess.Configuration;
-using MedicalBookingProject.DataAccess;
+using MedicalBookingProject.Domain.Models.Bookings;
+using MedicalBookingProject.Domain.Models.Appointments;
+using MedicalBookingProject.Domain.Models.Shedules;
 using MedicalBookingProject.Domain.Models.MedicalRecords;
+using MedicalBookingProject.DataAccess.Configuration;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
-using MedicalBookingProject.Domain.Models.Bookings;
-using MedicalBookingProject.Domain.Models.Appointments;
-
 
 
 
@@ -20,26 +18,36 @@ namespace MedicalBookingProject.DataAccess.Repo
         private readonly MedicalBookingDbContext _context;
         public TimeslotRepo slotRepo;
         public BookingRepo bookingRepo;
+        public AppointmentRepo appointmentRepo;
 
         public MedicalreportRepo(MedicalBookingDbContext context)
         {
             _context = context;
             slotRepo = new TimeslotRepo(_context);
             bookingRepo = new BookingRepo(_context);
+            appointmentRepo = new AppointmentRepo(_context);
         }
 
-        public async Task<Guid> Create(string? Symptoms,
-                                       string? Diagnosis,
-                                       string? PrescribedTreatment)
+        public async Task<Guid> Create(string? Diagnosis,
+                                       string? Symptoms,
+                                       string? PrescribedTreatment,
+                                       Guid AppointmentId)
         {
             //ArgumentNullException.ThrowIfNull(bookingId);
             Guid id = Guid.NewGuid();
             //Booking booking = await bookingRepo.GetOneBooking(bookingId);
-            MedicalRecord medRec = new ();
+            MedicalRecord medRec = new();
             medRec.Id = id;
             medRec.PrescribedTreatment = PrescribedTreatment;
             medRec.Diagnosis = Diagnosis;
             medRec.Symptoms = Symptoms;
+            medRec.AppointmentId = AppointmentId;
+            Appointment app = await appointmentRepo.Get(AppointmentId);
+            medRec.PatientId = app.PatientId;
+            medRec.DoctorId = app.DoctorId; 
+            Timeslot slot = await slotRepo.Get(app.TimeslotId);
+            medRec.SlotStart = slot.DatetimeStart;
+            medRec.SlotStop = slot.DatetimeStop;
             await _context.MedicalRecords.AddAsync(medRec);
             await _context.SaveChangesAsync();
             return id;

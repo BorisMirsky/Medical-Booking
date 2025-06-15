@@ -45,7 +45,7 @@ namespace MedicalBookingProject.DataAccess.Repo
                                         .AsNoTracking()
                                         .FirstOrDefaultAsync(s => s.Id == id);
             //ArgumentNullException.ThrowIfNull(entity);
-            return entity;
+            return entity!;
         }
 
 

@@ -76,6 +76,25 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
+
+        //[Route("GetDoctorsBySpeciality")]
+        //[HttpGet]
+        ////[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        ////Task<ActionResult<List<OrdersResponse>>>
+        //public async Task<IActionResult<List<Doctor>>> GetDoctorsBySpeciality(string speciality)
+        //{
+        //    Doctor users = await _doctorService.GetDoctorsBySpeciality(speciality);
+
+        //    if (users != null)
+        //    {
+        //        return Ok(users);
+        //    }
+
+        //    return BadRequest(new { message = "User Doctor is not recognized" });
+        //}
+
+
+
         // Patient
 
         [Route("RegisterPatient")]

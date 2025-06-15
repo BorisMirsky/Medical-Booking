@@ -44,25 +44,25 @@ namespace MedicalBookingProject.Domain.Models.Users
         public string Rolename { get; set; }
 
         [Column("gender")]
-        public string Gender { get; set; } 
+        public string Gender { get; set; }
 
         [Column("roleid")]
-        public int? RoleId { get; set; }
+        public int RoleId { get; set; } = 3;
 
         [Column("isactive")]
-        public bool? IsActive { get; set; } 
+        public bool IsActive { get; set; } = false;
 
         [Column("token")]
-        public string? Token { get; set; }
+        public string Token { get; set; } = string.Empty;
 
         public Role? Role { get; set; }
 
-        public List<Timeslot> Timeslots { get; set; } 
+        public List<Timeslot?> Timeslots { get; set; } 
 
-        public List<Booking> Bookings { get; set; }
+        public List<Booking?> Bookings { get; set; }
 
-        public List<MedicalRecord> MedicalRecords { get; set; }
+        public List<MedicalRecord?> MedicalRecords { get; set; }
 
-        public List<Appointment> Appointments { get; set; }
+        public List<Appointment?> Appointments { get; set; }
     }
 }

@@ -33,17 +33,17 @@ namespace MedicalBookingProject.Domain.Models.Bookings
         public Boolean IsBooked { get; set; }
 
         [Column("cancelledby")]
-        public Guid? CancelledBy { get; set; } 
+        public Guid CancelledBy { get; set; } = Guid.Empty;
 
         [Column("bookingorcanceldatetime")]
         public DateTime? BookingOrCancelDatetime { get; set; }
 
-        public Patient Patient { get; set; }
+        public Patient? Patient { get; set; }
 
-        public Doctor Doctor { get; set; }
+        public Doctor? Doctor { get; set; }
 
         public Appointment? Appointment { get; set; }
 
-        public Timeslot Timeslot { get; set; }
+        public Timeslot? Timeslot { get; set; }
     }
 }

@@ -27,16 +27,16 @@ namespace MedicalBookingProject.Domain.Models.Shedules
         public Guid DoctorId { get; set; } = Guid.Empty;
 
         [Column("isbooked")]
-        public Boolean? IsBooked { get; set; } 
+        public Boolean IsBooked { get; set; } = false;
 
         [Column("patientid")]
-        public Guid? PatientId { get; set; }     
+        public Guid PatientId { get; set; } = Guid.Empty;
         
         public Booking? Booking { get; set; }
 
         public Patient? Patient { get; set; }
 
-        public Doctor Doctor { get; set; }
+        public Doctor? Doctor { get; set; }
     }
 }
 

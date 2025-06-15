@@ -31,47 +31,47 @@ namespace MedicalBookingProject.Domain.Models.Users
         public Guid Id { get; set; }
 
         [Column("username")]
-        public string UserName { get; set; }  
+        public string UserName { get; set; } = String.Empty;
 
         [Column("email")]
-        public string Email { get; set; } 
+        public string Email { get; set; } = String.Empty;
 
         [Column("password")]
-        public string Password { get; set; }    // PasswordHash
+        public string Password { get; set; } = String.Empty;   // PasswordHash
 
         [Column("rolename")]
-        public string Rolename { get; set; } 
+        public string Rolename { get; set; } = String.Empty;
 
         [Column("roleid")]
-        public int? RoleId { get; set; }                 // ?
+        public int RoleId { get; set; } = 2;
 
         [Column("isactive")]
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; } = false;
 
         [Column("token")]
         public string Token { get; set; } = String.Empty;
 
         [Column("gender")]
-        public string Gender { get; set; } 
+        public string Gender { get; set; } = String.Empty;
 
         [Column("speciality")]
-        public string Speciality { get; set; }
+        public string Speciality { get; set; } = String.Empty;
 
         [Column("price")]
-        public int? Price { get; set; }
+        public int Price { get; set; } = 0;
 
         [Column("salary")]
-        public int? Salary { get; set; }
+        public int Salary { get; set; } = 0;
 
         public Role Role { get; set; }
 
-        public List<Timeslot> Timeslots { get; set; } //= new();
-        
-        public List<Booking> Bookings { get; set; } //= new();
+        public List<Timeslot?> Timeslots { get; set; } 
+       
+        public List<Booking?> Bookings { get; set; } 
 
-        public List<MedicalRecord> MedicalRecords { get; set; }
+        public List<MedicalRecord?> MedicalRecords { get; set; }
 
-        public List<Appointment> Appointments { get; set; }
+        public List<Appointment?> Appointments { get; set; }
 
     }
 }

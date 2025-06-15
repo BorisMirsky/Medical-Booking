@@ -36,7 +36,7 @@ namespace MedicalBookingProject.DataAccess.Repo
             booking.TimeslotId = slotId;
             booking.DoctorId = slot.DoctorId;
 
-            if (slot.IsBooked == null)
+            if (slot.IsBooked == false)
             {
                 booking.IsBooked = false;
             }
@@ -45,7 +45,7 @@ namespace MedicalBookingProject.DataAccess.Repo
                 booking.IsBooked = (Boolean)slot.IsBooked;
             }
 
-            if (slot.PatientId == null)
+            if (slot.PatientId == Guid.Empty)
             {
                 booking.PatientId = Guid.Empty;
             }
@@ -55,7 +55,7 @@ namespace MedicalBookingProject.DataAccess.Repo
             }
 
             booking.Id = bookingId;
-            booking.CancelledBy = cancelledBy;
+            booking.CancelledBy = (Guid)cancelledBy;
             booking.BookingOrCancelDatetime = bookingOrCancelDatetime;
             await _context.Bookings.AddAsync(booking);
             await _context.SaveChangesAsync();

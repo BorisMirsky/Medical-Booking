@@ -16,6 +16,7 @@ namespace MedicalBookingProject.DataAccess.Repo
 {
     using BCrypt.Net;
     using MedicalBookingProject.DataAccess;
+    using MedicalBookingProject.Domain.Models.Shedules;
     using Microsoft.AspNetCore.Authorization;
     using System.Diagnostics;
 
@@ -41,24 +42,29 @@ namespace MedicalBookingProject.DataAccess.Repo
             return doctor;
         }
 
+
+
         public async Task<Doctor> Get(Guid id)
         {
-            var entities = await _dbContext.Doctors
+            Doctor? entity = await _dbContext.Doctors
                 .AsNoTracking()
-                .ToListAsync();
-            var entity = entities
-               .Where(item => item.Id == id)
-               .ToList()
-               .FirstOrDefault();
-            if (entity == null)
+                .FirstOrDefaultAsync(s => s.Id == id);
+            return entity!; 
+        }
+
+
+        public async Task<List<Doctor>> GetDoctorsBySpeciality(string speciality)
+        {
+            var entities = await _dbContext.Doctors
+               .Where(item => item.Speciality == speciality)
+               .ToListAsync();
+            if (entities == null)
             {
-                Debug.WriteLine("Order with id {id} not found");
-                throw new Exception($"Order with id {id} not found");
+                Debug.WriteLine("Doctors with speciality {speciality} not found");
+                throw new Exception($"Doctors with speciality {speciality} not found");
             }
-            Doctor doctor = new(entity.UserName, entity.Password,
-                                       entity.Speciality, 
-                                       entity.Email, entity.Rolename, entity.Gender);
-            return doctor!;
+
+            return entities;
         }
 
     }

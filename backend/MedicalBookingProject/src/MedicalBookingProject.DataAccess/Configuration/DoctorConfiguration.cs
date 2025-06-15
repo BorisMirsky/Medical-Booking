@@ -34,7 +34,7 @@ namespace MedicalBookingProject.DataAccess.Configuration
             builder.Property(d => d.IsActive);
             builder.Property(d => d.Token);
             builder.Property(d => d.Gender);
-            builder.Property(d => d.Speciality);
+            //builder.Property(d => d.Speciality);
             builder.Property(d => d.Price);
             builder.Property(d => d.Salary);
         }

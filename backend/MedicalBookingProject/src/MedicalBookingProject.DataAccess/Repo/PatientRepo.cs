@@ -34,21 +34,10 @@ namespace MedicalBookingProject.DataAccess.Repo
 
         public async Task<Patient> Get(Guid id)
         {
-            var entities = await _dbContext.Patients
+            Patient? entity = await _dbContext.Patients
                 .AsNoTracking()
-                .ToListAsync();
-            var entity = entities
-               .Where(item => item.Id == id)
-               .ToList()
-               .FirstOrDefault();
-            if (entity == null)
-            {
-                Debug.WriteLine("Order with id {id} not found");
-                throw new Exception($"Order with id {id} not found");
-            }
-            Patient patient = new (entity.UserName, entity.Password,
-                                       entity.Gender, entity.Email, entity.Rolename);
-            return patient!;
+                .FirstOrDefaultAsync(s => s.Id == id);
+            return entity!;
         }
 
     }

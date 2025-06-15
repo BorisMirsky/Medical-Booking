@@ -35,7 +35,7 @@ namespace MedicalBookingProject.Application.Services
         {
 
             Guid _patientid = (isBooked == true) ? patientId : Guid.Empty;
-            Guid? _cancelledby = (isBooked == true) ? null : cancelledBy;
+            Guid? _cancelledby = (isBooked == true) ? Guid.Empty : cancelledBy;
             //DateTime? _cancelledat = (isbooked == true) ? null : DateTime.Now;
             DateTime? _cancelledat = DateTime.Now;
 

@@ -41,7 +41,7 @@ namespace MedicalBookingProject.Domain.Models.Appointments
         public Boolean? PatientIsLate { get; set; }
 
         [Column("patientunacceptablebehavior")]
-        public String? PatientUnacceptableBehavior { get; set; } 
+        public String PatientUnacceptableBehavior { get; set; } = String.Empty;
 
         // services rendered
         [Column("visualexamination")]
@@ -57,7 +57,7 @@ namespace MedicalBookingProject.Domain.Models.Appointments
         public Boolean? Treatment { get; set; }
 
         [Column("finalcost")]
-        public int? FinalCost { get; set; }
+        public int FinalCost { get; set; } = 0;
 
         public Patient Patient { get; set; }
 

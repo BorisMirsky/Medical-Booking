@@ -55,13 +55,14 @@ namespace MedicalBookingProject.DataAccess.Repo
 
         public async Task<List<Doctor>> GetDoctorsBySpeciality(string speciality)
         {
+            //string speciality = "surgeon";
             var entities = await _dbContext.Doctors
                .Where(item => item.Speciality == speciality)
                .ToListAsync();
-            if (entities == null)
+            if (entities.Count() == 0)
             {
                 Debug.WriteLine("Doctors with speciality {speciality} not found");
-                throw new Exception($"Doctors with speciality {speciality} not found");
+                //throw new Exception($"Doctors with speciality {speciality} not found");
             }
 
             return entities;

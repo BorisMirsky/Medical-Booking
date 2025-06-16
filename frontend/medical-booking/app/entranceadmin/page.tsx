@@ -27,6 +27,7 @@ export default function entranceAdmin() {
 
     const onFinish: FormProps<UserLoginRequest>['onFinish'] = (values) => {
         console.log('values ', values)
+        window.location.href = 'profileadmin';
         //loginUser(values);
     }
 

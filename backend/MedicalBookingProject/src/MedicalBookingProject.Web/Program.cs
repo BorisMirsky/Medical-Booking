@@ -14,13 +14,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
 string connection = builder.Configuration.GetConnectionString("DefaultConnection")!;
 
 builder.Services.AddDbContext<MedicalBookingDbContext>(options => options.UseSqlite(connection));
+
+builder.Services.AddControllers();
+
 builder.Services.AddScoped<IDoctorService, DoctorService>();
 builder.Services.AddScoped<IDoctorRepo, DoctorRepo>();
 builder.Services.AddScoped<IPatientService, PatientService>();
@@ -57,20 +56,20 @@ builder.Services.AddAuthentication(opt =>
     };
 });
 
+builder.Services.AddHealthChecks();
+builder.Services.AddSwaggerGen();
 builder.Services.AddAuthorization();
 
 
-
-
-
 var app = builder.Build();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseHttpsRedirection();
 
+app.UseHttpsRedirection();
 
 app.UseCors(x =>
 {
@@ -79,14 +78,7 @@ app.UseCors(x =>
     x.WithMethods().AllowAnyMethod();
 });
 
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-
-
-//app.MapControllerRoute(
-//    name: "Auth",
-//    pattern: "{controller=auth}/{action=login}");
-
 app.Run();
-
-//  "applicationUrl": "http://localhost:5032",

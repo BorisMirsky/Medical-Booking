@@ -2,18 +2,25 @@
 "use client"
 
 import React from 'react';
-//import { UserLoginRequest } from "@/app/Services/service";   //loginResponse  loginUser, 
+import { getDoctorsBySpeciality } from "@/app/Services/service";
+import { Doctor } from "@/app/Models/Doctor";
+//loginResponse  loginUser, 
 //import { Button, Space } from 'antd';
-import { Select } from 'antd';
+import { Select, Space, DatePicker } from 'antd';
 import Title from "antd/es/typography/Title";
 import { useEffect, useState } from "react";
 //import Link from "next/link";
 //import ModalComponent from '../Components/ModalComponent';
 //general practitioner - GP
 
+
+
+
 export default function profilePatient() {
-    let specialitySelected = false;
+    //let specialitySelected = undefined;
     //const [currentRole, setCurrentRole] = useState("");
+    //const [order, setOrder] = useState<Order[]>([]);
+    const [doctors, setDoctors] = useState<Doctor[]>([]);  
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -25,12 +32,27 @@ export default function profilePatient() {
 
 
     const handleSelectSpeciality = (value: string) => {
-        specialitySelected = true; 
-        console.log(`selected ${value}`);
+        setDoctors([]);
+        const getDoctors = async () => {
+            const responce = await getDoctorsBySpeciality(value);
+            setLoading(false);
+            setDoctors(responce);
+        }
+        getDoctors();
     };
+
+    const doctorsData = doctors.map((doctor, index) => ({
+        key: index,
+        value: doctor.userName,
+        label: doctor.userName
+    })); 
 
 
     const handleSelectName = (value: string) => {
+        console.log(`selected ${value}`);
+    };
+
+    const onSelectSlot = (value: string) => {
         console.log(`selected ${value}`);
     };
 
@@ -51,34 +73,45 @@ export default function profilePatient() {
                     ) : (
                             <div>
                                 <div>
+                                <Space size='large'>
                                 Подбор врача по специализации 
                                 <Select
-                                    //defaultValue="lucy"
-                                    style={{ width: 120 }}
+                                    style={{ width: 200 }}
                                     onChange={handleSelectSpeciality}
                                     options={[
-                                        { value: 'neurologist', label: 'Невролог' },
-                                        { value: 'surgeon', label: 'Хирург' },
-                                        { value: 'oncologist', label: 'Гастроэнтеролог' }
+                                        { value: 'Neurologist', label: 'Невролог' },
+                                        { value: 'Surgeon', label: 'Хирург' },
+                                        { value: 'Oncologist', label: 'Онколог' },
+                                        { value: 'Dentist', label: 'Дантист' }
                                     ]}
-                                    />
-                                 </div>
+                                        />
+                                </Space>
+                                </div>
+
+                                <br></br>
                                 <br></br>
                                 <br></br>
 
                                 <div>
-                                    Подбор врача по имени
-                                    <Select
-                                        //defaultValue="lucy"
-                                        style={{ width: 120 }}
-                                        onChange={handleSelectSpeciality}
-                                        options={[
-                                            { value: 'neurologist', label: 'Невролог' },
-                                            { value: 'surgeon', label: 'Хирург' },
-                                            { value: 'gastroenterologist', label: 'Гастроэнтеролог' },
-                                            { value: 'disabled', label: 'Disabled', disabled: true },
-                                        ]}
+                                <Space size='large'>
+                                Подбор врача по имени
+                                <Select
+                                    style={{ width: 200 }}
+                                    onChange={handleSelectName}
+                                    options={doctorsData}
                                     />
+                                </Space>
+                                </div>
+
+                                <br></br>
+                                <br></br>
+                                <br></br>
+
+                                <div>
+                                    <Space size='large'>
+                                        Подбор даты и времени
+                                        <DatePicker onChange={onSelectSlot} />
+                                    </Space>
                                 </div>
 
 

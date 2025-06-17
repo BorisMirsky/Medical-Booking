@@ -21,8 +21,35 @@ export interface CurrentUser {
     password: string;
 }
 
+export interface DoctorRegisterRequest {
+    email: string;
+    password: string;
+    username: string;
+    role: string;
+    speciality: string;
+    gender: string;
+}
 
-let doctors: object = undefined; 
+export interface SmallDoctorRequest {
+    username: string;
+    speciality: string;
+}
+
+
+//request.DoctorId, request.StartDay, 
+//request.Days, request.TimeStart,
+//    request.TimeStop, request.TimeChunk
+export interface TimeSlotCreateRequest {
+    id: string;
+    speciality: string;
+    username: string; 
+    startday: string;
+    days: string;
+    timestart: string;
+    timestop: string;
+    timechunk: string;
+}
+
 
 
 export const getDoctorsBySpeciality = async (speciality: string) => {
@@ -47,7 +74,7 @@ export const getDoctorsBySpeciality = async (speciality: string) => {
             }
         })
         .then(data => {
-            console.log('data ', data);
+            //console.log('data ', data);
             return data;
         })
         .catch(function(err) {
@@ -56,25 +83,6 @@ export const getDoctorsBySpeciality = async (speciality: string) => {
     return response;
 };
 
-
-//getDoctorsBySpeciality/
-export const getDoctorsBySpeciality1 = async (speciality: string) => {
-    const response = await fetch("http://localhost:5032/doctors/" + speciality, {
-        headers: {
-            'Content-type': 'application/json'
-        },
-        method: 'GET',
-        mode: 'cors'
-    })
-        .then(response => (response.ok)
-            ? response.json()
-            : Promise.reject("not ok " + response.status)
-         )
-        .catch((err) => {
-            console.warn('Error: ', err);
-        });
-    return response;
-};
 
 export const getDoctorById = async (id: string) => {
     const response = await fetch("http://localhost:5032/doctors/" + id, {
@@ -99,6 +107,57 @@ export const getDoctorById = async (id: string) => {
     return response;
 };
 
+
+export const registerDoctor = async (request: DoctorRegisterRequest) => {
+    //const token = localStorage.getItem('token');
+    await fetch("http://localhost:5032/doctors/register", {
+        method: 'POST',
+        mode: 'cors',
+        //credentials: true,
+        headers: {
+            'Content-Type': 'application/json',
+            //'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(request)
+    }).then(response => {
+        if (!response.ok) {
+            alert("Ошибка регистрации");
+            console.log("Ошибка регистрации");
+        }
+        else {
+            alert("Регистрация прошла успешно")
+            //window.location.href = 'login';
+        }
+    }).catch(err => {
+        console.log('registerError: ', err);
+    });
+}
+
+
+export const CreateShedule = async (request: TimeSlotCreateRequest) => {
+    //const token = localStorage.getItem('token');
+    await fetch("http://localhost:5032/timeslots/createtimeslot", {
+        method: 'POST',
+        mode: 'cors',
+        //credentials: true,
+        headers: {
+            'Content-Type': 'application/json',
+            //'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(request)
+    }).then(response => {
+        if (!response.ok) {
+            alert("Ошибка создания расписания");
+            console.log("Ошибка создания расписания");
+        }
+        else {
+            alert("Расписание создано")
+            //window.location.href = 'login';
+        }
+    }).catch(err => {
+        console.log('Error: ', err);
+    });
+}
 
 
 //export const getOneOrder = async (id: string) => {

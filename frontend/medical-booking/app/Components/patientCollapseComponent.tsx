@@ -10,13 +10,18 @@ import SelectDoctorBySpeciality from '../Components/SelectComponent';
 const items: CollapseProps['items'] = [
     {
         key: '1',
-        label: 'Регистрация врача',
-        children: <DoctorRegistration></DoctorRegistration>,
+        label: 'Запись к врачу',
+        children: <p></p>,
     },
     {
         key: '2',
-        label: 'Создать расписание для врача',
-        children: <SelectDoctorBySpeciality></SelectDoctorBySpeciality>,
+        label: 'Ещё там шняга какая-то',
+        children: <p></p>,
+    },
+    {
+        key: '3',
+        label: 'И ещё',
+        children: <p>ups...</p>,
     }
 ];
 

@@ -6,7 +6,8 @@ namespace MedicalBookingProject.Domain.Abstractions
 {
     public interface ITimeslotService
     {
-        Task<Guid> CreateTimeslot(Guid doctorId, DateTime startDay, int days,
+        Task<Guid> CreateTimeslot(Guid id,
+                DateTime startDay, int days,
                int timeStart, int timeStop, int timeChunk);
         Task<Timeslot> GetTimeslot(Guid id);
         Task<Guid> UpdateTimeslot(Guid slotid, Guid patientid, Boolean isbooked);

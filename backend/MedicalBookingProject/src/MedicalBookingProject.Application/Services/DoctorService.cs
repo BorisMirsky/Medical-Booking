@@ -42,5 +42,10 @@ namespace MedicalBookingProject.Application.Services
             return await _doctorRepo.GetDoctorsBySpeciality(speciality);
         }
 
+        public async Task<Doctor> GetDoctorBySpecialityAndName(string speciality, string username)
+        {
+            return await _doctorRepo.GetDoctorBySpecialityAndName(speciality, username);
+        }
+
     }
 }

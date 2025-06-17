@@ -4,7 +4,7 @@
 import React from 'react';
 import Title from "antd/es/typography/Title";
 import { useEffect, useState } from "react";
-import CollapseElement from '../Components/CollapseComponent';
+import CollapseElement from '../Components/adminCollapseComponent';
 
 
 

@@ -9,7 +9,7 @@ namespace MedicalBookingProject.Domain.Abstractions
 {
     public interface ITimeslotRepo
     {
-        Task<Guid> Create(List<List<string>> someList, Guid id);
+        Task<Guid> Create(List<List<string>> someList, Guid Id);
         Task<Timeslot> Get(Guid id);
         Task<Guid> Update(Guid slotid, Guid? patientid, Boolean isbooked);
     }

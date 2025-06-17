@@ -27,10 +27,10 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
-        [Route("RegisterDoctor")]
+        [Route("Register")]
         [HttpPost]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
-        public async Task<IActionResult> RegisterDoctor([FromBody] RegisterDoctorRequest request)
+        public async Task<IActionResult> Register([FromBody] RegisterDoctorRequest request)
         {
             if (String.IsNullOrEmpty(request.Email))
             {
@@ -59,11 +59,10 @@ namespace MedicalBookingProject.Web.Controllers
 
 
         //[Route("GetDoctor")]
-        //[HttpGet]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        //[HttpGet] //("{id}")]
+        ////[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
         //public async Task<ActionResult<DoctorResponse>> GetDoctor(Guid id)
         //{
-
         //    Doctor user = await _doctorService.Get(id);
 
         //    if (user != null)
@@ -73,6 +72,7 @@ namespace MedicalBookingProject.Web.Controllers
 
         //    return BadRequest(new { message = "User Doctor is not recognized" });
         //}
+
 
 
         [Route("GetDoctorsBySpeciality")]
@@ -89,6 +89,26 @@ namespace MedicalBookingProject.Web.Controllers
 
             return BadRequest(new { message = "User Doctor is not recognized" });
         }
+
+
+
+        //[Route("GetDoctorBySpecialityAndName")]
+        //[HttpGet("{username, speciality}")]
+        ////[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        ////public async Task<ActionResult<DoctorResponse>> GetDoctorBySpecialityAndName(string speciality, string username)
+        //public async Task<Guid> GetDoctorBySpecialityAndName(string speciality, string username)
+        //{
+        //    Doctor doctor = await _doctorService.GetDoctorBySpecialityAndName(speciality, username);
+
+        //    if (doctor != null)
+        //    {
+        //        //return Ok(doctor.Id);
+        //        return doctor.Id;
+        //    }
+
+        //    //return BadRequest(new { message = "User Doctor is not recognized" });
+        //    return Guid.Empty;
+        //}
     }
 }
 

@@ -30,8 +30,10 @@ namespace MedicalBookingProject.Web.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "manager")]
         public async void CreateTimeslot([FromBody] TimeslotRequest request)
         {
-            await _timeslotService.CreateTimeslot(request.DoctorId, request.StartDay, request.Days,
-                                                             request.TimeStart, request.TimeStop, request.TimeChunk);
+            await _timeslotService.CreateTimeslot(request.DoctorId,
+                                                  request.StartDay, 
+                                                  request.Days, request.TimeStart, 
+                                                  request.TimeStop, request.TimeChunk);
             //return Ok(newShedule);
         }
 

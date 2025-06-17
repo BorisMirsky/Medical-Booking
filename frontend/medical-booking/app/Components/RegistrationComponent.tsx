@@ -1,7 +1,7 @@
 ﻿//import '../App.css';
 import { Select, FormProps, Button, Form, Input, Space } from 'antd';
 const { Option } = Select;
-
+import { registerDoctor } from '../Services/service';
 
 
 export interface DoctorRegisterRequest {
@@ -17,12 +17,16 @@ export interface DoctorRegisterRequest {
 
 export default function DoctorRegistration() {
 
+    const [form] = Form.useForm();
+
     const onFinishFailed: FormProps<DoctorRegisterRequest>['onFinishFailed'] = (errorInfo) => {
         console.log('onFinishFailed:', errorInfo);
     }
 
     const onFinish: FormProps<DoctorRegisterRequest>['onFinish'] = (values) => {
-        console.log('values ', values)
+        registerDoctor(values);
+        form.resetFields();
+        //console.log('values ', values)
     }
 
 
@@ -32,10 +36,11 @@ export default function DoctorRegistration() {
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
             style={{ maxWidth: 600 }}
-            initialValues={{ remember: true }}
+            initialValues={{ role: "doctor" }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
+            form={form}
         >
             <Form.Item<DoctorRegisterRequest>
                 label="Email"
@@ -67,7 +72,7 @@ export default function DoctorRegistration() {
                 rules={[{ required: true, message: 'Please input role!' }]}
             >
                 <Input
-                    defaultValue="doctor"
+                    disabled={true}
                 />
             </Form.Item>
 
@@ -79,9 +84,10 @@ export default function DoctorRegistration() {
                 <Select
                     placeholder="Select a speciality"
                 >
-                    <Option value="oncologist">Oncologist</Option>
-                    <Option value="neurologist">Neurologist</Option>
-                    <Option value="surgeon">Surgeon</Option>
+                    <Option value="Oncologist">Oncologist</Option>
+                    <Option value="Neurologist">Neurologist</Option>
+                    <Option value="Surgeon">Surgeon</Option>
+                    <Option value="Dentist">Dentist</Option>
                 </Select>
             </Form.Item>
 

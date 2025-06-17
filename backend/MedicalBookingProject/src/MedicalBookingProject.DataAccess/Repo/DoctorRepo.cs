@@ -68,5 +68,20 @@ namespace MedicalBookingProject.DataAccess.Repo
             return entities;
         }
 
+
+        public async Task<Doctor> GetDoctorBySpecialityAndName(string speciality, string username)
+        {
+            var entity = await _dbContext.Doctors
+               .Where(item => item.Speciality == speciality && item.UserName == username)
+               .FirstOrDefaultAsync();
+            if (entity == null)
+            {
+                Debug.WriteLine("Doctor not found");
+                //throw new Exception($"Doctor not found");
+            }
+
+            return entity;
+        }
+
     }
 }

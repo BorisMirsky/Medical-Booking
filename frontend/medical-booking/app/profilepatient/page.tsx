@@ -9,6 +9,7 @@ import { Doctor } from "@/app/Models/Doctor";
 import { Select, Space, DatePicker } from 'antd';
 import Title from "antd/es/typography/Title";
 import { useEffect, useState } from "react";
+//import CollapseElement from '../Components/patientCollapseComponent';
 //import Link from "next/link";
 //import ModalComponent from '../Components/ModalComponent';
 //general practitioner - GP

@@ -22,13 +22,14 @@ namespace MedicalBookingProject.Application.Services
             _timeslotRepo = timeslotRepo;
         }
 
-        public async Task<Guid> CreateTimeslot(Guid doctorId, DateTime startDay, int days,
-            int timeStart, int timeStop, int timeChunk)
+        public async Task<Guid> CreateTimeslot(Guid id,
+                                                DateTime startDay, int days,
+                                                int timeStart, int timeStop, int timeChunk)
         {
             CreateSlots slots = new(startDay.Year, startDay.Month, startDay.Day,
                                 timeStart, timeStop, timeChunk, days);
             List<List<String>> splittedSlots = slots.Run();
-            return await _timeslotRepo.Create(splittedSlots, doctorId);
+            return await _timeslotRepo.Create(splittedSlots, id);
         }
 
 

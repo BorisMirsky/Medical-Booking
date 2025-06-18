@@ -49,6 +49,27 @@ namespace MedicalBookingProject.DataAccess.Repo
         }
 
 
+        public async Task<List<Timeslot>> GetByDoctor(Guid id)
+        {
+            var entities = await _context.Timeslots
+                                                 .Where(item => item.DoctorId == id)
+                                                 .ToListAsync();
+            //ArgumentNullException.ThrowIfNull(entity);
+            return entities!;
+        }
+
+
+
+        public async Task<List<Timeslot>> GetByDoctorAndDay(Guid id, DateTime day)
+        {
+            var entities = await _context.Timeslots
+                                                 .Where(item => item.DoctorId == id) // && item.DatetimeStart == day.ToString())
+                                                 .ToListAsync();
+            //ArgumentNullException.ThrowIfNull(entity);
+            return entities!;
+        }
+
+
         // Patch
         public async Task<Guid> Update(Guid slotId, 
                                         Guid? patientId, 

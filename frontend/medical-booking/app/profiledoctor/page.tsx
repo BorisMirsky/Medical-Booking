@@ -1,4 +1,4 @@
-﻿/* eslint-disable react-hooks/rules-of-hooks */
+﻿///* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 
 import React from 'react';
@@ -13,11 +13,11 @@ import { useEffect, useState } from "react";
 //import Link from "next/link";
 //import ModalComponent from '../Components/ModalComponent';
 //general practitioner - GP
-import CollapseElement from '../Components/patientCollapseComponent';
+import CollapseElement from '../Components/doctorCollapseComponent';
 
 
 
-export default function profilePatient() {
+export default function profileDoctor() {
     //let specialitySelected = undefined;
     //const [currentRole, setCurrentRole] = useState("");
     //const [order, setOrder] = useState<Order[]>([]);
@@ -30,32 +30,6 @@ export default function profilePatient() {
         //localStorage.clear();
         setLoading(false);
     }, []);
-
-
-    //const handleSelectSpeciality = (value: string) => {
-    //    setDoctors([]);
-    //    const getDoctors = async () => {
-    //        const responce = await getDoctorsBySpeciality(value);
-    //        setLoading(false);
-    //        setDoctors(responce);
-    //    }
-    //    getDoctors();
-    //};
-
-    //const doctorsData = doctors.map((doctor, index) => ({
-    //    key: index,
-    //    value: doctor.userName,
-    //    label: doctor.userName
-    //})); 
-
-
-    //const handleSelectName = (value: string) => {
-    //    console.log(`selected ${value}`);
-    //};
-
-    //const onSelectSlot = (value: string) => {
-    //    console.log(`selected ${value}`);
-    //};
 
 
     return (

@@ -13,17 +13,17 @@ import SelectSlot from '../Components/patientSelectSlotComponent';
 const items: CollapseProps['items'] = [
     {
         key: '1',
-        label: 'Запись к врачу',
+        label: 'Расписание врача',
         children: <SelectSlot></SelectSlot>,
     },
     {
         key: '2',
-        label: 'Мои записи к врачам',
+        label: 'Отработанные посещения',
         children: <p>лылылылы</p>,
     },
     {
         key: '3',
-        label: 'Мои посещения врачей',
+        label: 'Статистика врача',
         children: <p>ups...</p>,
     }
 ];

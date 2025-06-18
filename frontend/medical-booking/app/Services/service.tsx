@@ -30,15 +30,6 @@ export interface DoctorRegisterRequest {
     gender: string;
 }
 
-export interface SmallDoctorRequest {
-    username: string;
-    speciality: string;
-}
-
-
-//request.DoctorId, request.StartDay, 
-//request.Days, request.TimeStart,
-//    request.TimeStop, request.TimeChunk
 export interface TimeSlotCreateRequest {
     id: string;
     speciality: string;
@@ -50,6 +41,12 @@ export interface TimeSlotCreateRequest {
     timechunk: string;
 }
 
+export interface DoctorSheduleRequest {
+    id: string;
+    speciality: string;
+    username: string;
+    day: string;
+}
 
 
 export const getDoctorsBySpeciality = async (speciality: string) => {
@@ -64,7 +61,7 @@ export const getDoctorsBySpeciality = async (speciality: string) => {
     })
         .then(response => {
             if (!response.ok) {
-                throw new Error("Not 2xx response", { cause: response });
+                throw new Error("Not response", { cause: response });
                 //console.log('response.ok'); // 'token ', '\n', token);
                 //window.location.href = 'noauthorized';
             }
@@ -134,9 +131,11 @@ export const registerDoctor = async (request: DoctorRegisterRequest) => {
 }
 
 
-export const CreateShedule = async (request: TimeSlotCreateRequest) => {
+
+// 
+export const createShedule = async (request: TimeSlotCreateRequest) => {
     //const token = localStorage.getItem('token');
-    await fetch("http://localhost:5032/timeslots/createtimeslot", {
+    await fetch("http://localhost:5032/timeslots/createtimeslot", {      
         method: 'POST',
         mode: 'cors',
         //credentials: true,
@@ -160,119 +159,35 @@ export const CreateShedule = async (request: TimeSlotCreateRequest) => {
 }
 
 
-//export const getOneOrder = async (id: string) => {
-//    const token = localStorage.getItem('token');
-//    const response = await fetch("http://localhost:5134/orders/" + id, {
-//        headers: {
-//            'Content-type': 'application/json',
-//            'Authorization': `Bearer ${token}`
-//        },
-//        method: 'GET'
-//    })
-//        .then((response) => {
-//            if (!response.ok) {
-//                //console.log('!response.ok ', '\n', token, '\n');
-//                console.log('!response.status ', '\n', response.headers);
-//                //window.location.href = 'error';
-//            }
-//            else {
-//                return response.json();
-//            }
-//        })
-//        .then(data => {
-//            return data;
-//        })
-//        .catch(err => {
-//            console.log('Error: ', err);
-//        });
-//    return response;
-//};
-
-//export const createOrder = async (orderRequest: OrderRequest) => {
-//    //console.log('orderRequest ', orderRequest)
-//    const token = localStorage.getItem('token');
-//    await fetch("http://localhost:5134/orders/", {
-//        method: 'POST',
-//        headers: {
-//            'Content-type': 'application/json',
-//            'Authorization': `Bearer ${token}`,
-//        },
-//        body: JSON.stringify(orderRequest)
-//    }).catch(error => console.log("createOrderError: ", error));
-//}
-
-//export const updateOrder = async (id: string, orderRequest: OrderRequest) => {
-//    const token = localStorage.getItem('token');
-//    await fetch('http://localhost:5134/orders/' + id, {
-//        method: 'PUT',
-//        headers: {
-//            'Content-type': 'application/json',
-//            'Authorization': `Bearer ${token}`,
-//        },
-//        body: JSON.stringify(orderRequest)
-//    });
-//}
-
-//export const loginUser = async (request: UserLoginRequest) => {
-//    let username: string = "";
-//    let token: string = ""
-//    let role: string = "";
-
-//    await fetch("http://localhost:5134/accounts/login", {
-//        method: 'POST',
-//        mode: 'cors',
-//        headers: {
-//            'Content-Type': 'application/json',
-//        },
-//        body: JSON.stringify(request)
-//    })
-//        .then((response) => {
-//            if (!response.ok) {
-//                alert("Неверные логин или пароль")
-//            }
-//            else {
-//                return response.json();
-//            }
-//        })
-//        .then(data => {
-//            username = data['userName'];
-//            role = data['rolename'];
-//            token = data['token'];
-//            localStorage.setItem('username', username);
-//            localStorage.setItem('role', role);
-//            localStorage.setItem('token', token);
-//            window.location.href = '/';
-//        })
-//        .catch(err => {
-//            console.log('Error: ', err);
-//        });
-//}
-
-//export const registerUser = async (request: UserRegistrationRequest) => {
-//    const token = localStorage.getItem('token');
-//    await fetch("http://localhost:5134/accounts/register", {
-//        method: 'POST',
-//        mode: 'cors',
-//        //credentials: true,
-//        headers: {
-//            'Content-Type': 'application/json',
-//            'Authorization': `Bearer ${token}`
-//        },
-//        body: JSON.stringify(request)
-//    }).then(response => {
-//        if (!response.ok) {
-//            alert("Ошибка регистрации");
-//            console.log("Ошибка регистрации");
-//        }
-//        else {
-//            alert("Регистрация прошла успешно")
-//            //window.location.href = 'login';
-//        }
-//    }).catch(err => {
-//        console.log('registerError: ', err);
-//    });
-//}
-
-//export const logOut = async () => {
-//    await fetch("http://localhost:5134/accounts/logout/");
-//}
+export const getSlotsByDoctorIdAndDay = async (id: string, day: string) => {
+    const url = 'http://localhost:5032/timeslots/ByDoctorId/'; // bydayanddoctorid/';
+    //const params = new URLSearchParams({ id, day }).toString()
+    //const token = localStorage.getItem('token');
+    console.log(day);
+    const response = await fetch(url + id, {
+        headers: {
+            'Content-type': 'application/json'
+            //'Authorization': `Bearer ${token}`,
+        },
+        method: 'GET',
+        mode: 'cors'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Not response", { cause: response });
+                //window.location.href = 'noauthorized';
+            }
+            else {
+                //console.log('response.json() ', response.json());
+                return response.json();
+            }
+        })
+        .then(data => {
+            console.log('data ', data);
+            return data;
+        })
+        .catch(function (err) {
+            console.log('Error: ', err);
+        });
+    return response;
+};

@@ -3,6 +3,7 @@ import type { CollapseProps } from 'antd';
 import { Collapse } from 'antd';
 import DoctorRegistration from '../Components/RegistrationComponent';
 import CreateSlots from '../Components/doctorSlotComponent';
+import DoctorShedule from '../Components/doctorSheduleComponent';
 
 
 
@@ -20,7 +21,7 @@ const items: CollapseProps['items'] = [
     {
         key: '3',
         label: 'Просмотр расписания врача',
-        children: <p>Выбор врача --- Выбор дня --- Все слоты</p>,
+        children: <DoctorShedule></DoctorShedule>
     }
 ];
 

@@ -28,6 +28,7 @@ export default function entranceDoctor() {
     const onFinish: FormProps<UserLoginRequest>['onFinish'] = (values) => {
         console.log('values ', values)
         //loginUser(values);
+        window.location.href = 'profiledoctor';
     }
 
     return (

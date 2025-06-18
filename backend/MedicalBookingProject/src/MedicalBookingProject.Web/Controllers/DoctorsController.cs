@@ -40,43 +40,41 @@ namespace MedicalBookingProject.Web.Controllers
             {
                 return BadRequest(new { message = "Password needs to entered" });
             }
-
             Doctor registeredDoctor = await _doctorService.Register(request.Email,
                                                                 request.Password,
                                                                 request.UserName,
                                                                 request.Role,
                                                                 request.Speciality,
                                                                 request.Gender);
-
             if (registeredDoctor != null)
             {
                 return Ok(registeredDoctor);
             }
-
             return BadRequest(new { message = "User Doctor registration unsuccessful" });
         }
 
 
 
-        //[Route("GetDoctor")]
-        //[HttpGet] //("{id}")]
-        ////[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
-        //public async Task<ActionResult<DoctorResponse>> GetDoctor(Guid id)
-        //{
-        //    Doctor user = await _doctorService.Get(id);
+        [Route("GetDoctor")]
+        [HttpGet] //("{id:int}")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        public async Task<ActionResult<DoctorResponse>> GetDoctor(Guid id)
+        {
+            Doctor user = await _doctorService.Get(id);
 
-        //    if (user != null)
-        //    {
-        //        return Ok(user);
-        //    }
+            if (user != null)
+            {
+                return Ok(user);
+            }
 
-        //    return BadRequest(new { message = "User Doctor is not recognized" });
-        //}
+            return BadRequest(new { message = "User Doctor is not recognized" });
+        }
 
 
 
         [Route("GetDoctorsBySpeciality")]
         [HttpGet("{speciality}")]
+        //"[HttpGet("{id:int}")]"
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
         public async Task<ActionResult<List<DoctorResponse>>> GetDoctorsBySpeciality(string speciality)
         {
@@ -89,26 +87,6 @@ namespace MedicalBookingProject.Web.Controllers
 
             return BadRequest(new { message = "User Doctor is not recognized" });
         }
-
-
-
-        //[Route("GetDoctorBySpecialityAndName")]
-        //[HttpGet("{username, speciality}")]
-        ////[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
-        ////public async Task<ActionResult<DoctorResponse>> GetDoctorBySpecialityAndName(string speciality, string username)
-        //public async Task<Guid> GetDoctorBySpecialityAndName(string speciality, string username)
-        //{
-        //    Doctor doctor = await _doctorService.GetDoctorBySpecialityAndName(speciality, username);
-
-        //    if (doctor != null)
-        //    {
-        //        //return Ok(doctor.Id);
-        //        return doctor.Id;
-        //    }
-
-        //    //return BadRequest(new { message = "User Doctor is not recognized" });
-        //    return Guid.Empty;
-        //}
     }
 }
 

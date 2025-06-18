@@ -13,36 +13,56 @@ namespace MedicalBookingProject.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TimeslotController : ControllerBase
+    public class TimeslotsController : ControllerBase
     {
 
         private readonly ITimeslotService _timeslotService;
 
         private readonly IBookingService _bookingService;
 
-        public TimeslotController(ITimeslotService timeslotService, IBookingService bookingService)
+        public TimeslotsController(ITimeslotService timeslotService, IBookingService bookingService)
         {
             _timeslotService = timeslotService;
             _bookingService = bookingService;
         }
 
-        [HttpPost]   //Task<ActionResult<TimeslotResponse>>
+
+        [Route("CreateTimeslot")]
+        [HttpPost]  
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "manager")]
-        public async void CreateTimeslot([FromBody] TimeslotRequest request)
+        public async Task<ActionResult<String>> CreateTimeslot([FromBody] TimeslotRequest request)
         {
-            await _timeslotService.CreateTimeslot(request.DoctorId,
-                                                  request.StartDay, 
+            await _timeslotService.CreateTimeslot(request.DoctorId, request.StartDay, 
                                                   request.Days, request.TimeStart, 
                                                   request.TimeStop, request.TimeChunk);
-            //return Ok(newShedule);
+            return Ok("ok");
         }
 
 
-        [HttpGet]
-        public async Task<ActionResult<Timeslot>> GetById(Guid id)
+        //[Route("GetById")]
+        //[HttpGet]  //("{slotId:int}")]
+        //public async Task<ActionResult<Timeslot>> GetById(Guid slotId)
+        //{
+        //    Timeslot timeslot = await _timeslotService.GetTimeslot(slotId);
+        //    return Ok(timeslot);
+        //}
+
+
+        [Route("ByDoctorId")]
+        [HttpGet] //("{id:int}")]
+        public async Task<ActionResult<List<Timeslot>>> ByDoctorId(Guid id)
         {
-            Timeslot timeslot = await _timeslotService.GetTimeslot(id);
-            return Ok(timeslot);
+            var timeslots = await _timeslotService.GetTimeslot(id);
+            return Ok(timeslots);
+        }
+
+
+        [Route("ByDayAndDoctorId")]
+        [HttpGet]
+        public async Task<ActionResult<List<Timeslot>>> ByDayAndDoctorId(Guid id, DateTime day)
+        {
+            var timeslots = await _timeslotService.GetTimeslot(id);
+            return Ok(timeslots);
         }
 
 

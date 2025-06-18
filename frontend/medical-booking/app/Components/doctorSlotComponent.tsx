@@ -1,11 +1,11 @@
-﻿/* eslint-disable react-hooks/rules-of-hooks */
+﻿///* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 
 import React from 'react';
 import {
     getDoctorsBySpeciality,
     TimeSlotCreateRequest,
-    CreateShedule} from "@/app/Services/service";    
+    createShedule} from "@/app/Services/service";    
 import { Doctor } from "@/app/Models/Doctor";
 import { Select, Space, DatePicker, Button, Form, FormProps } from 'antd';
 import { useEffect, useState } from "react";
@@ -37,36 +37,23 @@ export default function CreateSlots() {
 
 
     const onFinish: FormProps<TimeSlotCreateRequest>['onFinish'] = (values) => {
-        const request: TimeSlotCreateRequest = {
-            id: '',
-            speciality: '',
-            username: '',
-            startday: '',
-            days: '',
-            timestart: '',
-            timestop: '',
-            timechunk: ''
-        };
 
         for (const variable in doctors) {
             if (doctors[variable].userName == values.username && doctors[variable].speciality == values.speciality) {
-                request.id = doctors[variable].id;
+                values.id = doctors[variable].id;
             }
         }
-        request.speciality = values.speciality;
-        request.username = values.username;
-        request.startday = dayjs(values.startday).format('YYYY-MM-DD');
-        request.days = values.days;
-        request.timestart = dayjs(values.timestart).format('HH-mm');
-        request.timestop = dayjs(values.timestop).format('HH-mm');
-        request.timechunk = dayjs(values.timechunk).format('mm');
-        CreateShedule(request);
+        values.startday = dayjs(values.startday).format('YYYY-MM-DD');
+        values.timestart = dayjs(values.timestart).format('HH-mm');
+        values.timestop = dayjs(values.timestop).format('HH-mm');
+        values.timechunk = dayjs(values.timechunk).format('mm');
+        createShedule(values);
         form.resetFields();
     }
 
 
 
-    const handleSelectSpeciality = (value: string) => {
+    function handleSelectSpeciality(value: string) {
         setDoctors([]);
         const getDoctors = async () => {
             const responce = await getDoctorsBySpeciality(value);
@@ -109,7 +96,6 @@ export default function CreateSlots() {
 
     return (
         <Form
-            name="basic"
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
             style={{ maxWidth: 600 }}
@@ -143,7 +129,6 @@ export default function CreateSlots() {
             >
                 <Select
                     style={{ width: 200 }}
-                    //onChange={handleSelectName}
                     options={doctorsData}
                 />
             </Form.Item>
@@ -202,7 +187,6 @@ export default function CreateSlots() {
                     <Button
                         type="primary"
                         htmlType="submit"
-                        //onClick={handleCreateShedule}
                     >
                         Создать расписание
                     </Button>
@@ -210,9 +194,7 @@ export default function CreateSlots() {
                         Сбросить
                     </Button>
             </Space>
-
             </Form>
-
     );
 }
 

@@ -11,6 +11,8 @@ namespace MedicalBookingProject.Domain.Abstractions
     {
         Task<Guid> Create(List<List<string>> someList, Guid Id);
         Task<Timeslot> Get(Guid id);
+        Task<List<Timeslot>> GetByDoctor(Guid id);
+        Task<List<Timeslot>> GetByDoctorAndDay(Guid id, DateTime day);
         Task<Guid> Update(Guid slotid, Guid? patientid, Boolean isbooked);
     }
 }

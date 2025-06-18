@@ -39,6 +39,18 @@ namespace MedicalBookingProject.Application.Services
         }
 
 
+        public async Task<List<Timeslot>> GetTimeslotsByDoctor(Guid id)
+        {
+            return await _timeslotRepo.GetByDoctor(id);
+        }
+
+
+        public async Task<List<Timeslot>> GetByDoctorIdAndDay(Guid id, DateTime day)
+        {
+            return await _timeslotRepo.GetByDoctorAndDay(id, day); 
+        }
+
+
         public async Task<Guid> UpdateTimeslot(Guid slotid, Guid patientid, Boolean isbooked)
         {
             Guid? _patientid = (isbooked == true) ? patientid : null;

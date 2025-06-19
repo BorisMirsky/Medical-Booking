@@ -31,11 +31,11 @@ export interface DoctorRegisterRequest {
 }
 
 export interface TimeSlotCreateRequest {
-    id: string;
-    speciality: string;
-    username: string; 
+    doctorid: string;
     startday: string;
     days: string;
+    speciality: string;
+    username: string; 
     timestart: string;
     timestop: string;
     timechunk: string;
@@ -62,16 +62,13 @@ export const getDoctorsBySpeciality = async (speciality: string) => {
         .then(response => {
             if (!response.ok) {
                 throw new Error("Not response", { cause: response });
-                //console.log('response.ok'); // 'token ', '\n', token);
                 //window.location.href = 'noauthorized';
             }
             else {
-                //console.log('response.json() ', response.json());
                 return response.json();
             }
         })
         .then(data => {
-            //console.log('data ', data);
             return data;
         })
         .catch(function(err) {
@@ -79,6 +76,7 @@ export const getDoctorsBySpeciality = async (speciality: string) => {
         });
     return response;
 };
+
 
 
 export const getDoctorById = async (id: string) => {
@@ -103,6 +101,7 @@ export const getDoctorById = async (id: string) => {
         .catch(e => console.log('Connection error', e));
     return response;
 };
+
 
 
 export const registerDoctor = async (request: DoctorRegisterRequest) => {
@@ -132,7 +131,6 @@ export const registerDoctor = async (request: DoctorRegisterRequest) => {
 
 
 
-// 
 export const createShedule = async (request: TimeSlotCreateRequest) => {
     //const token = localStorage.getItem('token');
     await fetch("http://localhost:5032/timeslots/createtimeslot", {      
@@ -148,15 +146,50 @@ export const createShedule = async (request: TimeSlotCreateRequest) => {
         if (!response.ok) {
             alert("Ошибка создания расписания");
             console.log("Ошибка создания расписания");
+            throw new Error("Not 2xx response", { cause: response });
         }
         else {
             alert("Расписание создано")
             //window.location.href = 'login';
         }
-    }).catch(err => {
+    }).catch(function(err) {
         console.log('Error: ', err);
     });
 }
+
+
+
+export const getSlotsByDoctorId = async (id: string) => {
+    const url = 'http://localhost:5032/timeslots/';      //ByDoctorId 
+    //const params = new URLSearchParams({ id, day }).toString()
+    //const token = localStorage.getItem('token');
+    const response = await fetch(url + id, {
+        headers: {
+            'Content-type': 'application/json'
+            //'Authorization': `Bearer ${token}`,
+        },
+        method: 'GET',
+        mode: 'cors'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Not response", { cause: response });
+                //window.location.href = 'noauthorized';
+            }
+            else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            console.log('data ', data);
+            return data;
+        })
+        .catch(function (err) {
+            console.log('Error: ', err);
+        });
+    return response;
+};
+
 
 
 export const getSlotsByDoctorIdAndDay = async (id: string, day: string) => {

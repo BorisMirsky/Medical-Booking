@@ -74,7 +74,6 @@ namespace MedicalBookingProject.Web.Controllers
 
         [Route("GetDoctorsBySpeciality")]
         [HttpGet("{speciality}")]
-        //"[HttpGet("{id:int}")]"
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
         public async Task<ActionResult<List<DoctorResponse>>> GetDoctorsBySpeciality(string speciality)
         {

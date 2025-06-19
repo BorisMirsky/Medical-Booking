@@ -37,7 +37,7 @@ export default function profileDoctor() {
             <br></br>
             <br></br>
             <br></br>
-            <h2>Профиль пациента</h2>
+            <h2>Профиль врача</h2>
             <br></br>
             <br></br>
             <br></br>

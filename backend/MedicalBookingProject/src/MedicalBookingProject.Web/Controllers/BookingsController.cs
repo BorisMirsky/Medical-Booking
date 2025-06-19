@@ -14,11 +14,11 @@ namespace MedicalBookingProject.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BookingController : ControllerBase
+    public class BookingsController : ControllerBase
     {
         private readonly IBookingService _bookingService;
 
-        public BookingController(IBookingService bookingService)
+        public BookingsController(IBookingService bookingService)
         {
             _bookingService = bookingService;
         }

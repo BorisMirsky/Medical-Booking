@@ -18,7 +18,7 @@ import dayjs from 'dayjs';
 
 
 
-export default function CreateSlots() {
+export default function CreateShedule() {
     //const [currentRole, setCurrentRole] = useState("");
     const [doctors, setDoctors] = useState<Doctor[]>([]);
 
@@ -40,14 +40,15 @@ export default function CreateSlots() {
 
         for (const variable in doctors) {
             if (doctors[variable].userName == values.username && doctors[variable].speciality == values.speciality) {
-                values.id = doctors[variable].id;
+                values.doctorid = doctors[variable].id;
             }
         }
         values.startday = dayjs(values.startday).format('YYYY-MM-DD');
-        values.timestart = dayjs(values.timestart).format('HH-mm');
-        values.timestop = dayjs(values.timestop).format('HH-mm');
+        values.timestart = dayjs(values.timestart).format('HH');
+        values.timestop = dayjs(values.timestop).format('HH');
         values.timechunk = dayjs(values.timechunk).format('mm');
         createShedule(values);
+        console.log("createShedule(values) ", values)
         form.resetFields();
     }
 
@@ -77,7 +78,7 @@ export default function CreateSlots() {
     //    }
     //};
 
-    const timeFormat = 'HH:mm';
+    const timeFormat = 'HH';
     const timeFormat1 = 'mm';
 
     const myOptions: number[] = [];  

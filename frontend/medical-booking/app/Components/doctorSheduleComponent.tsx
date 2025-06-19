@@ -4,8 +4,10 @@
 import React from 'react';
 import {
     getDoctorsBySpeciality, DoctorSheduleRequest,
-    getSlotsByDoctorIdAndDay} from "@/app/Services/service";
+    getSlotsByDoctorId
+} from "@/app/Services/service";   //getSlotsByDoctorIdAndDay
 import { Doctor } from "@/app/Models/Doctor";
+import { Slot } from "@/app/Models/Slot";
 import { Select, Space, DatePicker, Button, Form, FormProps } from 'antd';
 import { useEffect, useState } from "react";
 import dayjs from 'dayjs';
@@ -15,6 +17,7 @@ import dayjs from 'dayjs';
 export default function DoctorShedule() {
     //const [currentRole, setCurrentRole] = useState("");
     const [doctors, setDoctors] = useState<Doctor[]>([]);
+    const [slots, setSlots] = useState<Slot[]>([]);
 
 
     useEffect(() => {
@@ -31,20 +34,26 @@ export default function DoctorShedule() {
 
 
     const onFinish: FormProps<DoctorSheduleRequest>['onFinish'] = (values) => {
-
         for (const variable in doctors) {
             if (doctors[variable].userName == values.username && doctors[variable].speciality == values.speciality) {
                 values.id = doctors[variable].id;
             }
         }
         values.day = dayjs(values.day).format('MM-DD-YYYY');
-        getSlotsByDoctorIdAndDay(values.id, values.day)
-        //console.log('values ', values);
+        //getSlotsByDoctorIdAndDay(values.id, values.day)
+        getSlotsByDoctorId(values.id);
+        //setSlots(response1);
+        //const getAllSlots = async () => {
+        //    const responce1 = await getSlotsByDoctorId(value.id);
+        //    setSlots(responce1);
+        //    }
+        //getAllSlots();
+        //};
         form.resetFields();
     }
 
 
-
+    // после выбора специальности
     const handleSelectSpeciality = (value: string) => {
         setDoctors([]);
         const getDoctors = async () => {
@@ -59,6 +68,18 @@ export default function DoctorShedule() {
         value: doctor.userName,
         label: doctor.userName
     }));
+
+
+    // после выбора врача
+    const handleSelectDoctor = (value: string) => {
+        setSlots([]);
+        const getSlots = async () => {
+            const responce1 = await getSlotsByDoctorId(value);
+            setSlots(responce1);
+        }
+        getSlots();
+        console.log(slots)
+    }; 
 
 
 
@@ -99,6 +120,7 @@ export default function DoctorShedule() {
                 <Select
                     style={{ width: 200 }}
                     options={doctorsData}
+                    //onChange={handleSelectDoctor}
                 />
             </Form.Item>
 

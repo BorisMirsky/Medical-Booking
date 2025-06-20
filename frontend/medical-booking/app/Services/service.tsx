@@ -161,7 +161,6 @@ export const createShedule = async (request: TimeSlotCreateRequest) => {
 
 export const getSlotsByDoctorId = async (id: string) => {
     const url = 'http://localhost:5032/timeslots/';      //ByDoctorId 
-    //const params = new URLSearchParams({ id, day }).toString()
     //const token = localStorage.getItem('token');
     const response = await fetch(url + id, {
         headers: {
@@ -181,46 +180,46 @@ export const getSlotsByDoctorId = async (id: string) => {
             }
         })
         .then(data => {
-            console.log('data ', data);
+            //console.log('data ', data);
             return data;
         })
         .catch(function (err) {
             console.log('Error: ', err);
         });
-    return response;
+    return response; 
 };
 
 
 
-export const getSlotsByDoctorIdAndDay = async (id: string, day: string) => {
-    const url = 'http://localhost:5032/timeslots/ByDoctorId/'; // bydayanddoctorid/';
-    //const params = new URLSearchParams({ id, day }).toString()
-    //const token = localStorage.getItem('token');
-    console.log(day);
-    const response = await fetch(url + id, {
-        headers: {
-            'Content-type': 'application/json'
-            //'Authorization': `Bearer ${token}`,
-        },
-        method: 'GET',
-        mode: 'cors'
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Not response", { cause: response });
-                //window.location.href = 'noauthorized';
-            }
-            else {
-                //console.log('response.json() ', response.json());
-                return response.json();
-            }
-        })
-        .then(data => {
-            console.log('data ', data);
-            return data;
-        })
-        .catch(function (err) {
-            console.log('Error: ', err);
-        });
-    return response;
-};
+//export const getSlotsByDoctorIdAndDay = async (id: string, day: string) => {
+//    const url = 'http://localhost:5032/timeslots/ByDoctorId/'; // bydayanddoctorid/';
+//    //const params = new URLSearchParams({ id, day }).toString()
+//    //const token = localStorage.getItem('token');
+//    console.log(day);
+//    const response = await fetch(url + id, {
+//        headers: {
+//            'Content-type': 'application/json'
+//            //'Authorization': `Bearer ${token}`,
+//        },
+//        method: 'GET',
+//        mode: 'cors'
+//    })
+//        .then(response => {
+//            if (!response.ok) {
+//                throw new Error("Not response", { cause: response });
+//                //window.location.href = 'noauthorized';
+//            }
+//            else {
+//                //console.log('response.json() ', response.json());
+//                return response.json();
+//            }
+//        })
+//        .then(data => {
+//            console.log('data ', data);
+//            return data;
+//        })
+//        .catch(function (err) {
+//            console.log('Error: ', err);
+//        });
+//    return response;
+//};

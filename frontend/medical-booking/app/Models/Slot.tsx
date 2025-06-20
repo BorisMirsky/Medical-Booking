@@ -1,6 +1,6 @@
 ﻿export interface Slot {
     id: string;
-    datetimestart: string;
+    datetimeStart: string;
     datetimestop: string;
     doctorid: string;
     isbooked: number;

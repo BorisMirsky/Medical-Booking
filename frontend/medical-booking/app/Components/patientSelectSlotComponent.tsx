@@ -2,10 +2,7 @@
 "use client"
 
 import React from 'react';
-import {
-    getDoctorsBySpeciality, DoctorSheduleRequest,
-    getSlotsByDoctorIdAndDay
-} from "@/app/Services/service";
+import { getDoctorsBySpeciality, DoctorSheduleRequest } from "@/app/Services/service";
 import { Doctor } from "@/app/Models/Doctor";
 import { Select, Space, DatePicker, Button, Form, FormProps } from 'antd';
 import { useEffect, useState } from "react";
@@ -26,12 +23,12 @@ export default function SelectSlot() {
 
     const [form] = Form.useForm();
 
-    const onFinishFailed: FormProps<DoctorSheduleRequest>['onFinishFailed'] = (errorInfo) => {
+    const onFinishFailed: FormProps<DoctorSheduleRequest>['onFinishFailed'] = (errorInfo: any) => {
         console.log('onFinishFailed:', errorInfo);
     }
 
 
-    const onFinish: FormProps<DoctorSheduleRequest>['onFinish'] = (values) => {
+    const onFinish: FormProps<DoctorSheduleRequest>['onFinish'] = (values: any) => {
 
         for (const variable in doctors) {
             if (doctors[variable].userName == values.username && doctors[variable].speciality == values.speciality) {
@@ -39,7 +36,7 @@ export default function SelectSlot() {
             }
         }
         values.day = dayjs(values.day).format('MM-DD-YYYY');
-        getSlotsByDoctorIdAndDay(values.id, values.day)
+        //getSlotsByDoctorIdAndDay(values.id, values.day)
         //console.log('values ', values);
         form.resetFields();
     }
@@ -55,7 +52,7 @@ export default function SelectSlot() {
         getDoctors();
     };
 
-    const doctorsData = doctors.map((doctor, index) => ({
+    const doctorsData = doctors.map((doctor: Doctor, index:number) => ({
         key: index,
         value: doctor.userName,
         label: doctor.userName

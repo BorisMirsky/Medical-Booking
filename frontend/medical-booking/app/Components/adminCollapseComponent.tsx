@@ -1,9 +1,11 @@
-﻿import React from 'react';
+﻿///* eslint-disable @typescript-eslint/no-unused-vars */
+import React from 'react';
 import type { CollapseProps } from 'antd';
 import { Collapse } from 'antd';
 import DoctorRegistration from '../Components/RegistrationComponent';
 import CreateShedule from '../Components/adminCreateSheduleComponent';
 import DoctorShedule from '../Components/doctorSheduleComponent';
+//import DisabledComponent from '../Components/disabledDateComponent';
 
 
 
@@ -25,8 +27,8 @@ const items: CollapseProps['items'] = [
     },
     {
         key: '4',
-        label: 'Пациенты с нарушениями дисциплины',
-        children: <p> Таблица из appointments с частью полей</p>
+        label: 'Пациенты с нарушениями дисциплины (need?) ',
+        children: <p>DisabledComponent </p>
     },
     {
         key: '5',

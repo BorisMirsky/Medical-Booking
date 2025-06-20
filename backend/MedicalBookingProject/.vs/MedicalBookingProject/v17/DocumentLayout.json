@@ -64,7 +64,7 @@
               "RelativeDocumentMoniker": "src\\MedicalBookingProject.Web\\Controllers\\DoctorsController.cs",
               "ToolTip": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.Web\\Controllers\\DoctorsController.cs",
               "RelativeToolTip": "src\\MedicalBookingProject.Web\\Controllers\\DoctorsController.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAcwEsAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-19T14:32:44.331Z",
               "EditorCaption": ""
@@ -79,8 +79,7 @@
               "RelativeToolTip": "src\\MedicalBookingProject.Application\\Scripts\\CreateSlots.cs",
               "ViewState": "AgIAAEwAAAAAAAAAAADwvxMAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-19T08:30:52.484Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-19T08:30:52.484Z"
             },
             {
               "$type": "Document",
@@ -92,8 +91,7 @@
               "RelativeToolTip": "src\\MedicalBookingProject.Web\\Controllers\\TimeslotsController.cs",
               "ViewState": "AgIAACgAAAAAAAAAAAAswD8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-19T08:05:34.777Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-19T08:05:34.777Z"
             },
             {
               "$type": "Document",
@@ -105,8 +103,7 @@
               "RelativeToolTip": "src\\MedicalBookingProject.DataAccess\\Repo\\TimeslotRepo.cs",
               "ViewState": "AgIAACIAAAAAAAAAAAA7wEAAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T15:13:05.778Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-17T15:13:05.778Z"
             },
             {
               "$type": "Document",
@@ -118,8 +115,7 @@
               "RelativeToolTip": "src\\MedicalBookingProject.Application\\Services\\TimeslotService.cs",
               "ViewState": "AgIAABwAAAAAAAAAAAA7wCsAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T15:11:25.988Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-17T15:11:25.988Z"
             }
           ]
         }

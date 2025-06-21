@@ -3,31 +3,32 @@
 
 import React from 'react';
 import {
-    getDoctorsBySpeciality, DoctorSheduleRequest,
-    getSlotsByDoctorId
+    getDoctorsBySpeciality, DoctorSheduleRequest, getSlotsByDoctorId //, uniqueDays
 } from "@/app/Services/service";   
 import { Doctor } from "@/app/Models/Doctor";
 import { Slot } from "@/app/Models/Slot";
 import { Select, Space, DatePicker, Button, Form, FormProps } from 'antd';
-import { useEffect, useState } from "react";
-//import dayjs from 'dayjs';
-//import { Dayjs } from 'dayjs';   
-import moment from "moment";   //, { Moment }
-//import * as moment from 'moment'
+import { useState, useEffect } from "react";  
+import dayjs, { Dayjs } from 'dayjs'; 
+import moment from "moment";   
+
+
 
 
 export default function DoctorShedule() {
     //const [currentRole, setCurrentRole] = useState("");
     const [doctors, setDoctors] = useState<Doctor[]>([]);
     const [slots, setSlots] = useState<Slot[]>([]);
-    const doctorWorkingDays = new Set(); 
+    //const [uniqueDays, setUniqueDays] = useState<Slot[]>([]);
+    //const doctorWorkingDays = new Set(); 
 
 
-    //useEffect(() => {
+    useEffect(() => {
         //const role = localStorage.getItem("role") || "";
         //setCurrentRole(role);
         //localStorage.clear();
-    //}, []);
+    }, []);
+
 
     const [form] = Form.useForm();
 
@@ -38,7 +39,7 @@ export default function DoctorShedule() {
 
     const onFinish: FormProps<DoctorSheduleRequest>['onFinish'] = (values: DoctorSheduleRequest) => {
         console.log('values ', values);
-        console.log('doctorWorkingDays ', doctorWorkingDays);
+        //console.log('doctorWorkingDays ', doctorWorkingDays);
         form.resetFields();
     }
 
@@ -51,7 +52,7 @@ export default function DoctorShedule() {
             setDoctors(responce);
         }
         getDoctors();
-    };
+    }
 
 
     //                                 выбор врача
@@ -81,31 +82,32 @@ export default function DoctorShedule() {
 
 
 
-    // need for !disabled array
+
     //const uniqueDays = async (mySlots: object) => {
     //    for (const variable in mySlots) {
-    //        const day = mySlots[variable as keyof typeof mySlots].datetimeStart.split(" ")[0];
+    //        const day = mySlots[variable as keyof typeof mySlots]["datetimeStart"]; //   .split(" ")[0];
+    //        console.log(day);
     //        doctorWorkingDays.add(day);
     //    }
     //};
 
 
+    const allowedDates = ['2025-27-06', '2025-30-06', '2025-05-07', '2025-10-07'].map(date =>
+        dayjs(date, 'YYYY-DD-MM')
+    );
 
-    //function disabledDate(current: object) {               //Dayjs
-    //    //return current && current < moment().endOf('day');
-    //    const customDate = '2025-25-06';
-    //    //console.log('typeof current ', typeof current);
-    //    return current && current == moment(customDate, "YYYY-MM-DD");
-    //}
-
+    function disabledDateFunc(current: Dayjs): boolean {
+        return current && !allowedDates.some(allowed => allowed.isSame(current, 'day'));
+    }
 
 
     //                   выбор даты
     // должен возвращать 'day' : [slots...]
     const selectDate = (value: string) => {
-        console.log("selected date", value);
-        console.log("selected date", moment(value).format("M/D/YYYY"));
-        console.log("slots", slots);
+        const selectedDay = moment(value.toString()).format("MM/DD/YYYY");
+        console.log(selectedDay);
+        console.log('selectDate ', slots[0].id);
+        //console.log(doctorWorkingDays);
     };
 
 
@@ -156,10 +158,10 @@ export default function DoctorShedule() {
                 rules={[{ required: true, message: 'Please input startday!' }]}
             >
                 <DatePicker
-                    format="YYYY-MM-DD"
-                    //disabledDate={disabledDate}
                     onChange={selectDate}
+                    disabledDate={disabledDateFunc}
                 />
+
             </Form.Item>
 
             <Space size='large'>

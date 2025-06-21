@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Identity.Data;
+using MedicalBookingProject.Application.Services;
 //using Microsoft.AspNetCore.Authentication.JwtBearer;
 //  + LoginDoctor + RegisterPatient + LoginPatient + LoginAdmin (все POST)
 // + возможность редактирования Doctor           (UPDATE)
@@ -70,8 +71,25 @@ namespace MedicalBookingProject.Web.Controllers
 
             return BadRequest(new { message = "User Patient is not recognized" });
         }
+
+
+
+        [Route("GetPatients")]
+        [HttpGet]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        public async Task<ActionResult> GetPatients()
+        {
+            List<Patient> users = await _patientService.GetAll();
+
+            if (users != null)
+            {
+                return Ok(users);
+            }
+
+            return BadRequest(new { message = "___WTF___" });
+        }
+
+
     }
-
-
 }
 

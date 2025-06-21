@@ -5,6 +5,8 @@ import { Collapse } from 'antd';
 import DoctorRegistration from '../Components/RegistrationComponent';
 import CreateShedule from '../Components/adminCreateSheduleComponent';
 import DoctorShedule from '../Components/doctorSheduleComponent';
+import AllDoctors from '../Components/adminAllDoctorsComponent';
+import AllPatients from '../Components/adminAllPatientsComponent';
 //import DisabledComponent from '../Components/disabledDateComponent';
 
 
@@ -28,17 +30,17 @@ const items: CollapseProps['items'] = [
     {
         key: '4',
         label: 'Пациенты с нарушениями дисциплины (need?) ',
-        children: <p>DisabledComponent </p>
-    },
-    {
-        key: '5',
-        label: 'Блокировка пациентов',
         children: <p>тобi пiзда, тiкай с городу</p>
     },
     {
+        key: '5',
+        label: 'Все пациенты',
+        children: <AllPatients></AllPatients> 
+    },
+    {
         key: '6',
-        label: 'Блокировка врачей',
-        children: <p>пiздно</p>
+        label: 'Все врачи',
+        children: <AllDoctors></AllDoctors>
     }
 ];
 

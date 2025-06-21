@@ -55,8 +55,24 @@ namespace MedicalBookingProject.Web.Controllers
 
 
 
+        [Route("GetDoctors")]
+        [HttpGet] 
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        public async Task<ActionResult<DoctorResponse>> GetDoctors()
+        {
+            List<Doctor> users = await _doctorService.GetAllDoctors();
+
+            if (users != null)
+            {
+                return Ok(users);
+            }
+
+            return BadRequest(new { message = "___WTF___" });
+        }
+
+
         [Route("GetDoctor")]
-        [HttpGet] //("{id:int}")]
+        [HttpGet("{id:int}")]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
         public async Task<ActionResult<DoctorResponse>> GetDoctor(Guid id)
         {

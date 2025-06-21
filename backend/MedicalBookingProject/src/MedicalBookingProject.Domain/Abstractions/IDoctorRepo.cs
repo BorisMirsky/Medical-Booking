@@ -11,6 +11,8 @@ namespace MedicalBookingProject.Domain.Abstractions
 
         Task<Doctor> Get(Guid id);
 
+        Task<List<Doctor>> GetAll();
+
         Task<List<Doctor>> GetDoctorsBySpeciality(string speciality);
         Task<Doctor> GetDoctorBySpecialityAndName(string speciality, string username);
     }

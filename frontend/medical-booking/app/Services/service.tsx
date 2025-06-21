@@ -30,6 +30,14 @@ export interface DoctorRegisterRequest {
     gender: string;
 }
 
+export interface PatientRegisterRequest {
+    email: string;
+    password: string;
+    username: string;
+    role: string;
+    gender: string;
+}
+
 export interface TimeSlotCreateRequest {
     doctorid: string;
     startday: string;
@@ -47,6 +55,8 @@ export interface DoctorSheduleRequest {
     username: string;
     day: string;
 }
+
+
 
 
 export const getDoctorsBySpeciality = async (speciality: string) => {
@@ -72,6 +82,66 @@ export const getDoctorsBySpeciality = async (speciality: string) => {
             return data;
         })
         .catch(function(err) {
+            console.log('Error: ', err);
+        });
+    return response;
+};
+
+
+
+export const getDoctorsFetch = async () => {
+    //const token = localStorage.getItem('token');
+    const response = await fetch("http://localhost:5032/doctors/GetDoctors", {
+        headers: {
+            'Content-type': 'application/json'
+            //'Authorization': `Bearer ${token}`,
+        },
+        method: 'GET',
+        mode: 'cors'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Not response", { cause: response });
+            }
+            else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            //console.log('data: ', data);
+            return data;
+        })
+        .catch(function (err) {
+            console.log('Error: ', err);
+        });
+    return response;
+};
+
+
+
+export const getPatientsFetch = async () => {
+    //const token = localStorage.getItem('token');
+    const response = await fetch("http://localhost:5032/patients/GetPatients", {
+        headers: {
+            'Content-type': 'application/json'
+            //'Authorization': `Bearer ${token}`,
+        },
+        method: 'GET',
+        mode: 'cors'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Not response", { cause: response });
+            }
+            else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            //console.log('data: ', data);
+            return data;
+        })
+        .catch(function (err) {
             console.log('Error: ', err);
         });
     return response;
@@ -131,6 +201,32 @@ export const registerDoctor = async (request: DoctorRegisterRequest) => {
 
 
 
+export const registerPatient = async (request: PatientRegisterRequest) => {
+    //const token = localStorage.getItem('token');
+    await fetch("http://localhost:5032/patients/registerpatient", {
+        method: 'POST',
+        mode: 'cors',
+        //credentials: true,
+        headers: {
+            'Content-Type': 'application/json',
+            //'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(request)
+    }).then(response => {
+        if (!response.ok) {
+            alert("Ошибка регистрации");
+            console.log("Ошибка регистрации");
+        }
+        else {
+            alert("Регистрация прошла успешно")
+            //window.location.href = 'login';
+        }
+    }).catch(err => {
+        console.log('registerError: ', err);
+    });
+}
+
+
 export const createShedule = async (request: TimeSlotCreateRequest) => {
     //const token = localStorage.getItem('token');
     await fetch("http://localhost:5032/timeslots/createtimeslot", {      
@@ -188,6 +284,20 @@ export const getSlotsByDoctorId = async (id: string) => {
         });
     return response; 
 };
+
+
+
+export function uniqueDays(mySlots: object) {
+    console.log('mySlots ', mySlots);
+    const doctorWorkingDays = new Set(); 
+    for (const variable in mySlots) {
+        const day = mySlots[variable as keyof typeof mySlots]["datetimeStart"]; //   .split(" ")[0];
+        console.log('variable ', variable);
+        doctorWorkingDays.add(day);
+    }
+    return doctorWorkingDays;
+};
+
 
 
 

@@ -1,4 +1,5 @@
-﻿using MedicalBookingProject.Domain.Abstractions;
+﻿using MedicalBookingProject.DataAccess.Repo;
+using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Users;
 
 
@@ -22,6 +23,11 @@ namespace MedicalBookingProject.Application.Services
         public async Task<Patient> Get(Guid id)
         {
             return await _patientRepo.Get(id);
+        }
+
+        public async Task<List<Patient>> GetAll()
+        {
+            return await _patientRepo.GetAll();
         }
     }
 }

@@ -40,5 +40,13 @@ namespace MedicalBookingProject.DataAccess.Repo
             return entity!;
         }
 
+
+        public async Task<List<Patient>> GetAll()
+        {
+            var entities = await _dbContext.Patients
+               .ToListAsync();
+            return entities;
+        }
+
     }
 }

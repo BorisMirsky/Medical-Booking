@@ -6,6 +6,7 @@ using MedicalBookingProject.Domain.Models.Shedules;
 using MedicalBookingProject.Domain.Models.Bookings;
 using MedicalBookingProject.Domain.Models.Appointments;
 using MedicalBookingProject.Domain.Models.MedicalRecords;
+using MedicalBookingProject.Domain.Models.Messages;
 
 
 
@@ -26,6 +27,7 @@ namespace MedicalBookingProject.DataAccess
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -39,6 +41,7 @@ namespace MedicalBookingProject.DataAccess
             modelBuilder.ApplyConfiguration(new Configuration.TimeslotConfiguration());
             modelBuilder.ApplyConfiguration(new Configuration.AppointmentConfiguration());
             modelBuilder.ApplyConfiguration(new Configuration.BookingConfiguration());
+            modelBuilder.ApplyConfiguration(new Configuration.MessageConfiguration());
             //modelBuilder.ApplyConfiguration(new Configuration.MedicalrecordConfiguration());
             base.OnModelCreating(modelBuilder);
         }

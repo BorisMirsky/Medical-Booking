@@ -8,7 +8,7 @@ namespace MedicalBookingProject.Domain.Models.Messages
 {
     public enum MessageStatus
     {
-        Read,
-        NotRead
+        NotRead,
+        Read
     }
 }

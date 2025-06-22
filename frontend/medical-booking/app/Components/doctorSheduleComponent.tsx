@@ -27,7 +27,9 @@ export default function DoctorShedule() {
         //const role = localStorage.getItem("role") || "";
         //setCurrentRole(role);
         //localStorage.clear();
-    }, []);
+        processSlots(slots);
+        //console.log('slots1 from useEffect ', slots1);
+    }, [slots]);
 
 
     const [form] = Form.useForm();
@@ -39,7 +41,6 @@ export default function DoctorShedule() {
 
     const onFinish: FormProps<DoctorSheduleRequest>['onFinish'] = (values: DoctorSheduleRequest) => {
         console.log('values ', values);
-        //console.log('doctorWorkingDays ', doctorWorkingDays);
         form.resetFields();
     }
 
@@ -82,101 +83,110 @@ export default function DoctorShedule() {
 
 
 
-
-    //const uniqueDays = async (mySlots: object) => {
-    //    for (const variable in mySlots) {
-    //        const day = mySlots[variable as keyof typeof mySlots]["datetimeStart"]; //   .split(" ")[0];
-    //        console.log(day);
-    //        doctorWorkingDays.add(day);
-    //    }
-    //};
-
-
-    const allowedDates = ['2025-27-06', '2025-30-06', '2025-05-07', '2025-10-07'].map(date =>
-        dayjs(date, 'YYYY-DD-MM')
-    );
-
-    function disabledDateFunc(current: Dayjs): boolean {
-        return current && !allowedDates.some(allowed => allowed.isSame(current, 'day'));
+    const processSlots = (slotsArray: Slot[]) => {
+        for (const variable in slotsArray) {
+            //const day = slotsArray[variable as keyof typeof slotsArray]["datetimeStart"]; //   .split(" ")[0];
+            console.log(typeof variable, variable);
+        }
     }
 
 
-    //                   выбор даты
-    // должен возвращать 'day' : [slots...]
-    const selectDate = (value: string) => {
-        const selectedDay = moment(value.toString()).format("MM/DD/YYYY");
-        console.log(selectedDay);
-        console.log('selectDate ', slots[0].id);
-        //console.log(doctorWorkingDays);
-    };
+
+
+        //const uniqueDays = async (mySlots: object) => {
+        //    for (const variable in mySlots) {
+        //        const day = mySlots[variable as keyof typeof mySlots]["datetimeStart"]; //   .split(" ")[0];
+        //        console.log(day);
+        //        doctorWorkingDays.add(day);
+        //    }
+        //};
+
+
+        const allowedDates = ['2025-27-06', '2025-30-06', '2025-05-07', '2025-10-07'].map(date =>
+            dayjs(date, 'YYYY-DD-MM')
+        );
+
+        function disabledDateFunc(current: Dayjs): boolean {
+            return current && !allowedDates.some(allowed => allowed.isSame(current, 'day'));
+        }
+
+
+        //                   выбор даты
+        // должен возвращать 'day' : [slots...]
+        const selectDate = (value: string) => {
+            const selectedDay = moment(value.toString()).format("MM/DD/YYYY");
+            console.log(selectedDay);
+            //console.log('selectDate ', slots[2]);
+            //console.log(doctorWorkingDays);
+        };
 
 
 
-    return (
-        <Form
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 16 }}
-            style={{ maxWidth: 600 }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-            form={form}
-        >
-
-            <Form.Item<DoctorSheduleRequest>
-                label="Специализация врача"
-                name="speciality"
-                rules={[{ required: true, message: 'Please input speciality!' }]}
+        return (
+            <Form
+                labelCol={{ span: 8 }}
+                wrapperCol={{ span: 16 }}
+                style={{ maxWidth: 600 }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+                form={form}
             >
-                <Select
-                    style={{ width: 200 }}
-                    onChange={handleSelectSpeciality}
-                    options={[
-                        { value: 'Neurologist', label: 'Невролог' },
-                        { value: 'Surgeon', label: 'Хирург' },
-                        { value: 'Oncologist', label: 'Онколог' },
-                        { value: 'Dentist', label: 'Дантист' }
-                    ]}
-                />
-            </Form.Item>
 
-            <Form.Item<DoctorSheduleRequest>
-                label="Имя врача"
-                name="username"
-                rules={[{ required: true, message: 'Please input username!' }]}
-            >
-                <Select
-                    style={{ width: 200 }}
-                    options={doctorsData}
-                    onChange={handleSelectDoctor}
-                />
-            </Form.Item>
-
-            <Form.Item<DoctorSheduleRequest>
-                label="Выбрать день"
-                name="day"
-                rules={[{ required: true, message: 'Please input startday!' }]}
-            >
-                <DatePicker
-                    onChange={selectDate}
-                    disabledDate={disabledDateFunc}
-                />
-
-            </Form.Item>
-
-            <Space size='large'>
-                <Button
-                    type="primary"
-                    htmlType="submit"
+                <Form.Item<DoctorSheduleRequest>
+                    label="Специализация врача"
+                    name="speciality"
+                    rules={[{ required: true, message: 'Please input speciality!' }]}
                 >
-                    Получить расписание
-                </Button>
-                <Button htmlType="reset">
-                    Сбросить
-                </Button>
-            </Space>
+                    <Select
+                        style={{ width: 200 }}
+                        onChange={handleSelectSpeciality}
+                        options={[
+                            { value: 'Neurologist', label: 'Невролог' },
+                            { value: 'Surgeon', label: 'Хирург' },
+                            { value: 'Oncologist', label: 'Онколог' },
+                            { value: 'Dentist', label: 'Дантист' }
+                        ]}
+                    />
+                </Form.Item>
 
-        </Form>
-    );
+                <Form.Item<DoctorSheduleRequest>
+                    label="Имя врача"
+                    name="username"
+                    rules={[{ required: true, message: 'Please input username!' }]}
+                >
+                    <Select
+                        style={{ width: 200 }}
+                        options={doctorsData}
+                        onChange={handleSelectDoctor}
+                    />
+                </Form.Item>
+
+                <Form.Item<DoctorSheduleRequest>
+                    label="Выбрать день"
+                    name="day"
+                    rules={[{ required: true, message: 'Please input startday!' }]}
+                >
+                    <DatePicker
+                        onChange={selectDate}
+                        disabledDate={disabledDateFunc}
+                    />
+
+                </Form.Item>
+
+                <Space size='large'>
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                    >
+                        Получить расписание
+                    </Button>
+                    <Button htmlType="reset">
+                        Сбросить
+                    </Button>
+                </Space>
+
+            </Form>
+        );
 }
 

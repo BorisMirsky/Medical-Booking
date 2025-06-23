@@ -27,7 +27,8 @@ export default function DoctorShedule() {
         //const role = localStorage.getItem("role") || "";
         //setCurrentRole(role);
         //localStorage.clear();
-        processSlots(slots);
+        //processSlots(slots);
+        uniqueDays(slots);
         //console.log('slots1 from useEffect ', slots1);
     }, [slots]);
 
@@ -83,42 +84,49 @@ export default function DoctorShedule() {
 
 
 
-    const processSlots = (slotsArray: Slot[]) => {
-        for (const variable in slotsArray) {
-            //const day = slotsArray[variable as keyof typeof slotsArray]["datetimeStart"]; //   .split(" ")[0];
-            console.log(typeof variable, variable);
+
+    //let allowedDates1 = new Array<Dayjs>();
+
+    const uniqueDays = (slotsArray: Slot[]) => {
+        const mySet = new Set<string>();
+        for (let i = 0; i < slotsArray.length; i++) {
+            let elem = slotsArray[i].datetimeStart.split(" ")[0];
+            let elem1 = elem.split("/");
+
+
+            //mySet.add(slotsArray[i].datetimeStart.split(" ")[0]);
         }
+        console.log('mySet ', mySet);                    // {'6/26/2025', '6/27/2025'}
+        const allowedDates1 = Array.from(mySet);
+        allowedDates1.map(date => dayjs(date, 'YYYY-DD-MM'));
+        console.log('allowedDates1 ', allowedDates1); //['6/26/2025', '6/27/2025']
+        //return allowedDates; 
     }
 
 
 
-
-        //const uniqueDays = async (mySlots: object) => {
-        //    for (const variable in mySlots) {
-        //        const day = mySlots[variable as keyof typeof mySlots]["datetimeStart"]; //   .split(" ")[0];
-        //        console.log(day);
-        //        doctorWorkingDays.add(day);
-        //    }
-        //};
+    //const allowedDates = uniqueDays(slotsArray); 
+    //processSlots
 
 
-        const allowedDates = ['2025-27-06', '2025-30-06', '2025-05-07', '2025-10-07'].map(date =>
-            dayjs(date, 'YYYY-DD-MM')
-        );
+    const allowedDates = ['2025-27-06', '2025-30-06', '2025-05-07', '2025-10-07'].map(date =>
+        dayjs(date, 'YYYY-DD-MM')
+    );
 
-        function disabledDateFunc(current: Dayjs): boolean {
-            return current && !allowedDates.some(allowed => allowed.isSame(current, 'day'));
-        }
+    function disabledDateFunc(current: Dayjs): boolean {
+        //console.log('from disabledDateFunc  ', allowedDates);
+        return current && !allowedDates.some(allowed => allowed.isSame(current, 'day'));
+    }
 
 
-        //                   выбор даты
-        // должен возвращать 'day' : [slots...]
-        const selectDate = (value: string) => {
-            const selectedDay = moment(value.toString()).format("MM/DD/YYYY");
-            console.log(selectedDay);
-            //console.log('selectDate ', slots[2]);
-            //console.log(doctorWorkingDays);
-        };
+    //                   выбор даты
+    // должен возвращать 'day' : [slots...]
+    const selectDate = (value: string) => {
+        const selectedDay = moment(value.toString()).format("MM/DD/YYYY");
+        console.log(selectedDay);
+        //console.log('selectDate ', slots[2]);
+        //console.log(doctorWorkingDays);
+    };
 
 
 

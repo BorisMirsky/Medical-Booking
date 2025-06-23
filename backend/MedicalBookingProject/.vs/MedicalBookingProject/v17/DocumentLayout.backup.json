@@ -38,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -47,6 +47,18 @@
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
               "$type": "Document",
@@ -71,8 +83,7 @@
               "RelativeToolTip": "src\\MedicalBookingProject.Web\\Controllers\\MessagesController.cs",
               "ViewState": "AgIAAC4AAAAAAAAAAAAAADYAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T16:45:18.366Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-22T16:45:18.366Z"
             },
             {
               "$type": "Document",
@@ -84,8 +95,7 @@
               "RelativeToolTip": "src\\MedicalBookingProject.Domain\\Abstractions\\IMessageService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T10:34:04.811Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-22T10:34:04.811Z"
             },
             {
               "$type": "Document",
@@ -97,8 +107,7 @@
               "RelativeToolTip": "src\\MedicalBookingProject.Application\\Services\\MessageService.cs",
               "ViewState": "AgIAAB0AAAAAAAAAAAAcwC0AAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T10:33:07.869Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-22T10:33:07.869Z"
             },
             {
               "$type": "Document",
@@ -110,8 +119,7 @@
               "RelativeToolTip": "src\\MedicalBookingProject.Domain\\Abstractions\\IMessageRepo.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T10:29:52.229Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-22T10:29:52.229Z"
             },
             {
               "$type": "Document",
@@ -123,16 +131,7 @@
               "RelativeToolTip": "src\\MedicalBookingProject.DataAccess\\Repo\\MessageRepo.cs",
               "ViewState": "AgIAACEAAAAAAAAAAAAAADUAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T08:27:12.227Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+              "WhenOpened": "2025-06-22T08:27:12.227Z"
             },
             {
               "$type": "Document",
@@ -144,12 +143,7 @@
               "RelativeToolTip": "src\\MedicalBookingProject.Domain\\Models\\Messages\\Message.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T07:49:20.876Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "WhenOpened": "2025-06-22T07:49:20.876Z"
             }
           ]
         }

@@ -11,6 +11,7 @@ import { Select, Space, DatePicker, Button, Form, FormProps } from 'antd';
 import { useState, useEffect } from "react";  
 import dayjs, { Dayjs } from 'dayjs'; 
 import moment from "moment";   
+//import { Interface } from 'node:readline/promises';
 
 
 
@@ -27,8 +28,8 @@ export default function DoctorShedule() {
         //const role = localStorage.getItem("role") || "";
         //setCurrentRole(role);
         //localStorage.clear();
-        //processSlots(slots);
-        uniqueDays(slots);
+        processSlots(slots);
+        //uniqueDays(slots);
         //console.log('slots1 from useEffect ', slots1);
     }, [slots]);
 
@@ -84,30 +85,60 @@ export default function DoctorShedule() {
 
 
 
-
-    //let allowedDates1 = new Array<Dayjs>();
-
-    const uniqueDays = (slotsArray: Slot[]) => {
-        const mySet = new Set<string>();
-        for (let i = 0; i < slotsArray.length; i++) {
-            let elem = slotsArray[i].datetimeStart.split(" ")[0];
-            let elem1 = elem.split("/");
+    //interface StringDictionary {
+    //    [key: string]: number; // Keys are strings, values are numbers
+    //}
 
 
-            //mySet.add(slotsArray[i].datetimeStart.split(" ")[0]);
-        }
-        console.log('mySet ', mySet);                    // {'6/26/2025', '6/27/2025'}
-        const allowedDates1 = Array.from(mySet);
-        allowedDates1.map(date => dayjs(date, 'YYYY-DD-MM'));
-        console.log('allowedDates1 ', allowedDates1); //['6/26/2025', '6/27/2025']
-        //return allowedDates; 
+    const processSlots = (data: Array<Slot>) => {
+        interface my_dict_interface {
+            [key: string]: Array<Slot>                   // {"2025-25-06": ["...", "...", "..."]}
+        };
+        let my_dict: my_dict_interface;
+        const result = Array<my_dict_interface>;     // [{my_dict}, {my_dict}, {my_dict}]
+        const keys_list: string[] = [];                     // unique keys of my_dict    (like Set())
+        for (let i = 0; i < data.length; i++) {
+            const slot: Slot = data[i];
+            const elem_key: string = slot['datetimeStart'].split(" ")[0];
+            if (elem_key in keys_list) {
+                for (my_dict in result) {
+                    try {
+                        my_dict[elem_key] = slot;
+                    }
+                    catch (e: unknown) {
+                        console.log("...ups, i did it again ", e)
+                    }
+                }
+            }
+            else {
+                const elem_value: Slot[] = []
+                my_dict[elem_key] = elem_value;
+                elem_value.add(slot);
+                result.add(my_dict);
+                keys_list.add(elem_key);
+            }
+        }  
+        return [result, keys_list]; 
     }
 
 
+    //let allowedDates1 = new Array<Dayjs>();
 
-    //const allowedDates = uniqueDays(slotsArray); 
-    //processSlots
+    //const uniqueDays = (slotsArray: Slot[]) => {
+    //    const mySet = new Set<string>();
+    //    for (let i = 0; i < slotsArray.length; i++) {
+    //        let elem = slotsArray[i].datetimeStart.split(" ")[0];
+    //        let elem1 = elem.split("/");
+    //        //mySet.add(slotsArray[i].datetimeStart.split(" ")[0]);
+    //    }
+    //    console.log('mySet ', mySet);                    // {'6/26/2025', '6/27/2025'}
+    //    const allowedDates1 = Array.from(mySet);
+    //    allowedDates1.map(date => dayjs(date, 'YYYY-DD-MM'));
+    //    console.log('allowedDates1 ', allowedDates1); //['6/26/2025', '6/27/2025']
+    //    //return allowedDates; 
+    //}
 
+    //const allowedDates = uniqueDays(slotsArray);
 
     const allowedDates = ['2025-27-06', '2025-30-06', '2025-05-07', '2025-10-07'].map(date =>
         dayjs(date, 'YYYY-DD-MM')

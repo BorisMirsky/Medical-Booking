@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +35,18 @@ namespace MedicalBookingProject.Application.Scripts
         {
             List<string> result = SplitedDay(this.Y, this.M, this.D, this.StartTime, this.StopTime, this.Chunk, this.Days);
             List<List<string>> result1 = CollectSlots(result);
-            return result1;
+            List<List<string>> result2 = [];
+            //
+            foreach (var slot in result1)
+            {
+                List<string> slot1 = new List<string>(2);
+                var n0 = DateTime.Parse(slot[0]);
+                slot1.Insert(0, n0.ToString("yyyy-dd-MM HH:mm"));
+                var n1 = DateTime.Parse(slot[1]);
+                slot1.Insert(1, n1.ToString("yyyy-dd-MM HH:mm"));
+                result2.Add(slot1);
+            }
+            return result2;
             }
 
 

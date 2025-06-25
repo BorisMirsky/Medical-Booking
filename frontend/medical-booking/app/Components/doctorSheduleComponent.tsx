@@ -29,8 +29,6 @@ export default function DoctorShedule() {
         //setCurrentRole(role);
         //localStorage.clear();
         processSlots(slots);
-        //uniqueDays(slots);
-        //console.log('slots1 from useEffect ', slots1);
     }, [slots]);
 
 
@@ -42,7 +40,8 @@ export default function DoctorShedule() {
 
 
     const onFinish: FormProps<DoctorSheduleRequest>['onFinish'] = (values: DoctorSheduleRequest) => {
-        console.log('values ', values);
+        console.log('onFinish ', values);
+        console.log('processedSlots[selectedDay] ', processedSlots[selectedDay]);
         form.resetFields();
     }
 
@@ -83,52 +82,42 @@ export default function DoctorShedule() {
         getSlots();
     }; 
 
-
-
+    // даты приёма врача
     const uniquePrefixes = new Set(slots.map(item => item.datetimeStart.split(' ')[0]));
-
 
     interface MyResult {
         [key: string]: Array<Slot>;
     }
 
+    const processedSlots: MyResult = {};
+
+    // преобразование массива слотов
     const processSlots = (data: Array<Slot>) => {
-        const result: MyResult = {};
         uniquePrefixes.forEach(prefix => {
-            result[prefix] = data.filter(item => item.datetimeStart.startsWith(prefix));
+            processedSlots[prefix] = data.filter(item => item.datetimeStart.startsWith(prefix));
         })
-        //console.log('result ', result);
-        //console.log('uniquePrefixes ', uniquePrefixes);
     };
 
-
-
-    //const allowedDates = ['2025-27-06', '2025-30-06', '2025-05-07', '2025-10-07'].map(date =>
-    //    dayjs(date, 'YYYY-DD-MM')
-    //);
-    const allowedDates = Array.from(uniquePrefixes.values());
-    const allowedDates1 = allowedDates.map(date =>
-        dayjs(date, 'YYYY-DD-MM')
-    );
+    // даты для календаря
+    const allowedDates = Array.from(uniquePrefixes.values())
+        .map(date => dayjs(date, 'YYYY-DD-MM'));
 
     function disabledDateFunc(current: Dayjs): boolean {
-        console.log('allowedDates1  ', allowedDates);
-        return current && !allowedDates1.some(allowed => allowed.isSame(current, 'day'));
+        return current && !allowedDates.some(allowed => allowed.isSame(current, 'day'));
     };
 
 
     //                   выбор даты
-    // должен возвращать 'day' : [slots...]
+    let selectedDay: string = "";
+
     const selectDate = (value: string) => {
-        const selectedDay = moment(value.toString()).format("MM/DD/YYYY");
+        selectedDay = moment(value.toString()).format('YYYY-DD-MM'); 
         console.log(selectedDay);
-        //console.log('selectDate ', slots[2]);
-        //console.log(doctorWorkingDays);
     };
 
 
-
-        return (
+    return (
+            <div>
             <Form
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
@@ -193,6 +182,12 @@ export default function DoctorShedule() {
                 </Space>
 
             </Form>
+            <br></br><br></br><br></br>
+            <div>
+
+            </div>
+        </div>
+
         );
 }
 

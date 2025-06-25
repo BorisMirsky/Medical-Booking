@@ -85,69 +85,36 @@ export default function DoctorShedule() {
 
 
 
-    //interface StringDictionary {
-    //    [key: string]: number; // Keys are strings, values are numbers
-    //}
+    const uniquePrefixes = new Set(slots.map(item => item.datetimeStart.split(' ')[0]));
 
 
-    const processSlots = (data: Array<Slot>) => {
-        interface my_dict_interface {
-            [key: string]: Array<Slot>                   // {"2025-25-06": ["...", "...", "..."]}
-        };
-        let my_dict: my_dict_interface;
-        const result = Array<my_dict_interface>;     // [{my_dict}, {my_dict}, {my_dict}]
-        const keys_list: string[] = [];                     // unique keys of my_dict    (like Set())
-        for (let i = 0; i < data.length; i++) {
-            const slot: Slot = data[i];
-            const elem_key: string = slot['datetimeStart'].split(" ")[0];
-            if (elem_key in keys_list) {
-                for (my_dict in result) {
-                    try {
-                        my_dict[elem_key] = slot;
-                    }
-                    catch (e: unknown) {
-                        console.log("...ups, i did it again ", e)
-                    }
-                }
-            }
-            else {
-                const elem_value: Slot[] = []
-                my_dict[elem_key] = elem_value;
-                elem_value.add(slot);
-                result.add(my_dict);
-                keys_list.add(elem_key);
-            }
-        }  
-        return [result, keys_list]; 
+    interface MyResult {
+        [key: string]: Array<Slot>;
     }
 
+    const processSlots = (data: Array<Slot>) => {
+        const result: MyResult = {};
+        uniquePrefixes.forEach(prefix => {
+            result[prefix] = data.filter(item => item.datetimeStart.startsWith(prefix));
+        })
+        //console.log('result ', result);
+        //console.log('uniquePrefixes ', uniquePrefixes);
+    };
 
-    //let allowedDates1 = new Array<Dayjs>();
 
-    //const uniqueDays = (slotsArray: Slot[]) => {
-    //    const mySet = new Set<string>();
-    //    for (let i = 0; i < slotsArray.length; i++) {
-    //        let elem = slotsArray[i].datetimeStart.split(" ")[0];
-    //        let elem1 = elem.split("/");
-    //        //mySet.add(slotsArray[i].datetimeStart.split(" ")[0]);
-    //    }
-    //    console.log('mySet ', mySet);                    // {'6/26/2025', '6/27/2025'}
-    //    const allowedDates1 = Array.from(mySet);
-    //    allowedDates1.map(date => dayjs(date, 'YYYY-DD-MM'));
-    //    console.log('allowedDates1 ', allowedDates1); //['6/26/2025', '6/27/2025']
-    //    //return allowedDates; 
-    //}
 
-    //const allowedDates = uniqueDays(slotsArray);
-
-    const allowedDates = ['2025-27-06', '2025-30-06', '2025-05-07', '2025-10-07'].map(date =>
+    //const allowedDates = ['2025-27-06', '2025-30-06', '2025-05-07', '2025-10-07'].map(date =>
+    //    dayjs(date, 'YYYY-DD-MM')
+    //);
+    const allowedDates = Array.from(uniquePrefixes.values());
+    const allowedDates1 = allowedDates.map(date =>
         dayjs(date, 'YYYY-DD-MM')
     );
 
     function disabledDateFunc(current: Dayjs): boolean {
-        //console.log('from disabledDateFunc  ', allowedDates);
-        return current && !allowedDates.some(allowed => allowed.isSame(current, 'day'));
-    }
+        console.log('allowedDates1  ', allowedDates);
+        return current && !allowedDates1.some(allowed => allowed.isSame(current, 'day'));
+    };
 
 
     //                   выбор даты

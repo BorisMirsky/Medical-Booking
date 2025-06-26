@@ -2,11 +2,14 @@
 "use client"
 
 import React from 'react';
+import "../globals.css";
 import {
-    getDoctorsBySpeciality, DoctorSheduleRequest, getSlotsByDoctorId //, uniqueDays
+    getDoctorsBySpeciality, DoctorSheduleRequest, getSlotsByDoctorId 
 } from "@/app/Services/service";   
 import { Doctor } from "@/app/Models/Doctor";
-import { Slot } from "@/app/Models/Slot";
+import { Slot, SlotObject } from "@/app/Models/Slot";
+import TimeslotsButtons from "../Components/timeslotsButtonsComponent"; 
+//'../Components/adminAllDoctorsComponent';
 import { Select, Space, DatePicker, Button, Form, FormProps } from 'antd';
 import { useState, useEffect } from "react";  
 import dayjs, { Dayjs } from 'dayjs'; 
@@ -20,8 +23,10 @@ export default function DoctorShedule() {
     //const [currentRole, setCurrentRole] = useState("");
     const [doctors, setDoctors] = useState<Doctor[]>([]);
     const [slots, setSlots] = useState<Slot[]>([]);
-    //const [uniqueDays, setUniqueDays] = useState<Slot[]>([]);
-    //const doctorWorkingDays = new Set(); 
+    const [slots1, setSlots1] = useState<SlotObject[]>([]);
+    const [buttonsFlag, setButtonsFlag] = useState<number>(0);
+
+
 
 
     useEffect(() => {
@@ -29,6 +34,7 @@ export default function DoctorShedule() {
         //setCurrentRole(role);
         //localStorage.clear();
         processSlots(slots);
+        //console.log('processedSlots ', processedSlots);
     }, [slots]);
 
 
@@ -41,8 +47,14 @@ export default function DoctorShedule() {
 
     const onFinish: FormProps<DoctorSheduleRequest>['onFinish'] = (values: DoctorSheduleRequest) => {
         console.log('onFinish ', values);
-        console.log('processedSlots[selectedDay] ', processedSlots[selectedDay]);
-        form.resetFields();
+        console.log('processedSlots[selectedDay] ',
+            typeof processedSlots[selectedDay], processedSlots[selectedDay]);
+        console.log("");
+        console.log('processedSlots ',
+            typeof processedSlots, processedSlots);
+        setSlots1(processedSlots[selectedDay]);
+        setButtonsFlag(1);
+        //form.resetFields();
     }
 
 
@@ -111,8 +123,11 @@ export default function DoctorShedule() {
     let selectedDay: string = "";
 
     const selectDate = (value: string) => {
-        selectedDay = moment(value.toString()).format('YYYY-DD-MM'); 
-        console.log(selectedDay);
+        try {
+            selectedDay = moment(value.toString()).format('YYYY-DD-MM');
+        } catch (e) {
+            console.log(e);
+        }
     };
 
 
@@ -165,6 +180,8 @@ export default function DoctorShedule() {
                     <DatePicker
                         onChange={selectDate}
                         disabledDate={disabledDateFunc}
+                        className="datapicker-enabled-days"
+
                     />
 
                 </Form.Item>
@@ -182,12 +199,22 @@ export default function DoctorShedule() {
                 </Space>
 
             </Form>
+
             <br></br><br></br><br></br>
             <div>
-
+                {
+                    (buttonsFlag === 0) ? (
+                        <div></div>
+                    ) : (
+                            <div>
+                                <TimeslotsButtons
+                                    {...slots1}
+                                />
+                            </div>
+                    )
+                }
             </div>
         </div>
-
         );
 }
 

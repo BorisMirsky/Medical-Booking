@@ -1,4 +1,4 @@
-﻿///* eslint-disable react-hooks/rules-of-hooks */
+﻿
 "use client"
 
 import React from 'react';
@@ -48,7 +48,7 @@ export default function CreateShedule() {
         values.timestop = dayjs(values.timestop).format('HH');
         values.timechunk = dayjs(values.timechunk).format('mm');
         createShedule(values);
-        console.log("createShedule(values) ", values)
+        //console.log("createShedule(values) ", values)
         form.resetFields();
     }
 

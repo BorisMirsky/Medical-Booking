@@ -1,74 +1,43 @@
-﻿///* eslint-disable react-hooks/rules-of-hooks */
+﻿
 "use client"
 
 import React from 'react';
 import "../globals.css";
-import { SlotObject } from "@/app/Models/Slot";   //Slot
+import { Slot } from "@/app/Models/Slot";   
 import { Button } from 'antd';
-//import { useState, useEffect } from "react";
 
 
 
-//Array<MySlot>
-//type MySlot = Record<string, object>;
-//Array<Slot>
+export default function TimeslotsButtons(slots: Array<Slot> ) {
+
+    const data = Object.keys(slots).map((slot, index) => ({
+        key: index,
+        id: slots[index].id,
+        datetimeStart: slots[index].datetimeStart,
+        datetimeStop: slots[index].datetimeStop,
+        label: slots[index].datetimeStart.split(" ")[1] + " - " + slots[index].datetimeStop.split(" ")[1],
+        isBooked: slots[index].isBooked
+    }));
 
 
-interface MyResult {
-    [key: string]: Array<SlotObject>;
-}
-
-export default function TimeslotsButtons(slots: MyResult ) {
-    //const slotsConverted = Array.from(slots);
-
-
-
-    //const data = slots.map((index: number, slot: Slot) => ({
-    //    key: index,
-    //    uniqid: slot.id,
-    //    datetimeStart: slot.datetimeStart,
-    //    datetimeStop: slot.datetimeStop,
-    //    isBooked: slot.isBooked
-    //}));
-
-
-    const handleClick = () => {
-        //console.log("TimeslotsButtons ", slotsConverted);
-        console.log("TimeslotsButtons1 ", slots);
+    const handleClick = (value: string) => {
+        console.log(value);
     };
 
 
     return (
-        <div>
-            
-
-            {
-                <Button
-                    onClick={handleClick}
-                >
-                    timeslot
-                </Button>
-            }
-
-        </div>
-            );
+            <div>
+                {data.map((s) => (
+                    <Button
+                        key={s.id}
+                        onClick={() => handleClick(s.id)}
+                    >
+                        {s.label}
+                    </Button>
+                ))}
+            </div>
+    );
 }
 
 
-
-//{
-//    data.map(dataItem => (
-//        <Button
-//            key={dataItem.key}
-//            onClick={handleClick}
-//        >
-//            timeslot
-//        </Button>))
-//}
-
-//<Button
-//    onClick={handleClick}
-//>
-//    timeslot
-//</Button>))
 

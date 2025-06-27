@@ -40,10 +40,10 @@ namespace MedicalBookingProject.Application.Scripts
             foreach (var slot in result1)
             {
                 List<string> slot1 = new List<string>(2);
-                var n0 = DateTime.Parse(slot[0]);
-                slot1.Insert(0, n0.ToString("yyyy-dd-MM HH:mm"));
-                var n1 = DateTime.Parse(slot[1]);
-                slot1.Insert(1, n1.ToString("yyyy-dd-MM HH:mm"));
+                var s0 = DateTime.Parse(slot[0]);
+                slot1.Insert(0, s0.ToString("yyyy-dd-MM HH:mm"));
+                var s1 = DateTime.Parse(slot[1]);
+                slot1.Insert(1, s1.ToString("yyyy-dd-MM HH:mm"));
                 result2.Add(slot1);
             }
             return result2;

@@ -7,7 +7,7 @@ import {
     getDoctorsBySpeciality, DoctorSheduleRequest, getSlotsByDoctorId 
 } from "@/app/Services/service";   
 import { Doctor } from "@/app/Models/Doctor";
-import { Slot, SlotObject } from "@/app/Models/Slot";
+import { Slot } from "@/app/Models/Slot";           //SlotObject
 import TimeslotsButtons from "../Components/timeslotsButtonsComponent"; 
 //'../Components/adminAllDoctorsComponent';
 import { Select, Space, DatePicker, Button, Form, FormProps } from 'antd';
@@ -23,7 +23,7 @@ export default function DoctorShedule() {
     //const [currentRole, setCurrentRole] = useState("");
     const [doctors, setDoctors] = useState<Doctor[]>([]);
     const [slots, setSlots] = useState<Slot[]>([]);
-    const [slots1, setSlots1] = useState<SlotObject[]>([]);
+    const [slots1, setSlots1] = useState<Slot[]>([]);
     const [buttonsFlag, setButtonsFlag] = useState<number>(0);
 
 
@@ -47,11 +47,11 @@ export default function DoctorShedule() {
 
     const onFinish: FormProps<DoctorSheduleRequest>['onFinish'] = (values: DoctorSheduleRequest) => {
         console.log('onFinish ', values);
-        console.log('processedSlots[selectedDay] ',
-            typeof processedSlots[selectedDay], processedSlots[selectedDay]);
-        console.log("");
-        console.log('processedSlots ',
-            typeof processedSlots, processedSlots);
+        //console.log(' ',);
+        //console.log('processedSlots[selectedDay] ',
+        //    typeof processedSlots[selectedDay], processedSlots[selectedDay]);
+        //console.log("");
+        //console.log('processedSlots ', typeof processedSlots, processedSlots);
         setSlots1(processedSlots[selectedDay]);
         setButtonsFlag(1);
         //form.resetFields();
@@ -207,9 +207,7 @@ export default function DoctorShedule() {
                         <div></div>
                     ) : (
                             <div>
-                                <TimeslotsButtons
-                                    {...slots1}
-                                />
+                                <TimeslotsButtons {...slots1} />
                             </div>
                     )
                 }

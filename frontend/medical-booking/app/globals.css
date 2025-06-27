@@ -1,27 +1,24 @@
 
 
-/*.datapicker-enabled-days.day-unit {
-    background-color: green !important;
-    }*/
-
-.datapicker-enabled-days
-.ant-picker-cell-in-view.ant-picker-cell-in-view   
-.ant-picker-cell-inner {
+.datapicker-enabled-days.ant-picker-cell-in-view.ant-picker-cell-inner {
     background-color: #27c456 !important;
 }
 
+/*.datapicker-enabled-days.ant-picker-cell-inner {
+    position: relative;
+}
 
-/*.datapicker-enabled-days
-.ant-picker-cell-inner {
-    border-color: green !important;                  
+datapicker-enabled-days.ant-picker-cell-inner::before {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    width: 4px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: red;
+    left: 50%;
+    transform: translateX(-50%);
 }*/
-
-
-/* #1f9643e5      .ant-picker-cell-in-view*/
-
-
-
-
 
 
 

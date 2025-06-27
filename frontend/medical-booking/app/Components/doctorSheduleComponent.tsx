@@ -1,4 +1,4 @@
-﻿///* eslint-disable react-hooks/rules-of-hooks */
+﻿
 "use client"
 
 import React from 'react';
@@ -7,14 +7,12 @@ import {
     getDoctorsBySpeciality, DoctorSheduleRequest, getSlotsByDoctorId 
 } from "@/app/Services/service";   
 import { Doctor } from "@/app/Models/Doctor";
-import { Slot } from "@/app/Models/Slot";           //SlotObject
+import { Slot } from "@/app/Models/Slot";         
 import TimeslotsButtons from "../Components/timeslotsButtonsComponent"; 
-//'../Components/adminAllDoctorsComponent';
 import { Select, Space, DatePicker, Button, Form, FormProps } from 'antd';
 import { useState, useEffect } from "react";  
 import dayjs, { Dayjs } from 'dayjs'; 
 import moment from "moment";   
-//import { Interface } from 'node:readline/promises';
 
 
 
@@ -27,14 +25,12 @@ export default function DoctorShedule() {
     const [buttonsFlag, setButtonsFlag] = useState<number>(0);
 
 
-
-
     useEffect(() => {
         //const role = localStorage.getItem("role") || "";
         //setCurrentRole(role);
         //localStorage.clear();
         processSlots(slots);
-        //console.log('processedSlots ', processedSlots);
+        // eslint-disable-next-line react-hooks/exhaustive-deps   
     }, [slots]);
 
 
@@ -47,18 +43,12 @@ export default function DoctorShedule() {
 
     const onFinish: FormProps<DoctorSheduleRequest>['onFinish'] = (values: DoctorSheduleRequest) => {
         console.log('onFinish ', values);
-        //console.log(' ',);
-        //console.log('processedSlots[selectedDay] ',
-        //    typeof processedSlots[selectedDay], processedSlots[selectedDay]);
-        //console.log("");
-        //console.log('processedSlots ', typeof processedSlots, processedSlots);
         setSlots1(processedSlots[selectedDay]);
         setButtonsFlag(1);
-        //form.resetFields();
     }
 
 
-    //                            выбор специальности
+    //                      поле 'выбор специальности'
     const handleSelectSpeciality = (value: string) => {
         setDoctors([]);
         const getDoctors = async () => {
@@ -69,7 +59,7 @@ export default function DoctorShedule() {
     }
 
 
-    //                                 выбор врача
+    //                        поле 'выбор врача'
     const doctorsData = doctors.map((doctor: Doctor, index: number) => ({
         key: index,
         value : doctor.userName,
@@ -119,7 +109,7 @@ export default function DoctorShedule() {
     };
 
 
-    //                   выбор даты
+    //                        поле 'выбор даты'
     let selectedDay: string = "";
 
     const selectDate = (value: string) => {
@@ -181,21 +171,23 @@ export default function DoctorShedule() {
                         onChange={selectDate}
                         disabledDate={disabledDateFunc}
                         className="datapicker-enabled-days"
-
                     />
 
                 </Form.Item>
 
                 <Space size='large'>
+
                     <Button
-                        type="primary"
                         htmlType="submit"
+                        type="default"
                     >
                         Получить расписание
                     </Button>
+
                     <Button htmlType="reset">
                         Сбросить
                     </Button>
+
                 </Space>
 
             </Form>

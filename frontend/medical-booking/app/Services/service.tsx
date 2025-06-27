@@ -56,9 +56,17 @@ export interface DoctorSheduleRequest {
     day: string;
 }
 
+export interface BookingRequest {
+    id: string;
+    bookingorcanceldatetime: string;
+    patientid: string;
+    cancelledby: string; 
+    isbooked: number;
+}
 
 
 
+// doctors by speciality
 export const getDoctorsBySpeciality = async (speciality: string) => {
     //const token = localStorage.getItem('token');
     const response = await fetch("http://localhost:5032/doctors/" + speciality, {
@@ -88,7 +96,7 @@ export const getDoctorsBySpeciality = async (speciality: string) => {
 };
 
 
-
+// all doctors
 export const getDoctorsFetch = async () => {
     //const token = localStorage.getItem('token');
     const response = await fetch("http://localhost:5032/doctors/GetDoctors", {
@@ -118,7 +126,7 @@ export const getDoctorsFetch = async () => {
 };
 
 
-
+// all patients
 export const getPatientsFetch = async () => {
     //const token = localStorage.getItem('token');
     const response = await fetch("http://localhost:5032/patients/GetPatients", {
@@ -286,7 +294,38 @@ export const getSlotsByDoctorId = async (id: string) => {
 };
 
 
+export const updateBooking = async (request: BookingRequest) => {
+    //const token = localStorage.getItem('token');
+    await fetch("http://localhost:5032/timeslots/updatebooking", {
+        method: 'UPDATE',  //HttpPatch
+        mode: 'cors',
+        //credentials: true,
+        headers: {
+            'Content-Type': 'application/json',
+            //'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(request)
+    }).then(response => {
+        if (!response.ok) {
+            alert("Ошибка обновления записи к врачу");
+            console.log("обновления записи к врачу");
+            throw new Error("Not 2xx response", { cause: response });
+        }
+        else {
+            alert("Запись к врачу обновлена")
+            //window.location.href = 'login';
+        }
+    }).catch(function (err) {
+        console.log('Error: ', err);
+    });
+}
 
+
+
+
+
+
+// need ?
 export function uniqueDays(mySlots: object) {
     console.log('mySlots ', mySlots);
     const doctorWorkingDays = new Set(); 

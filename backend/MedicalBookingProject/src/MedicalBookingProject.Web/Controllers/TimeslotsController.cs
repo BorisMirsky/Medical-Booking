@@ -62,7 +62,7 @@ namespace MedicalBookingProject.Web.Controllers
 
 
 
-        // Доктор + день
+        // Доктор + день                  need?
         //[Route("ByDayAndDoctorId")]
         //[HttpGet]
         //public async Task<ActionResult<List<Timeslot>>> ByDayAndDoctorId(Guid id, DateTime day)

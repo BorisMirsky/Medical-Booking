@@ -1,8 +1,9 @@
 ﻿import React from 'react';
 import type { CollapseProps } from 'antd';
 import { Collapse } from 'antd';
-//import DoctorRegistration from '../Components/RegistrationComponent';
-import SelectSlot from '../Components/patientSelectSlotComponent';
+//import SelectSlot from '../Components/patientSelectSlotComponent';
+import DoctorShedule from '../Components/doctorSheduleComponent';
+
 
 
 //  Выбрать специальность - выбрать врача - выбрать слот
@@ -14,12 +15,12 @@ const items: CollapseProps['items'] = [
     {
         key: '1',
         label: 'Запись к врачу',
-        children: <SelectSlot></SelectSlot>,
+        children: <DoctorShedule></DoctorShedule>
     },
     {
         key: '2',
         label: 'Мои записи к врачам',
-        children: <p>лылылылы</p>,
+        children: <p>xxx</p>
     },
     {
         key: '3',

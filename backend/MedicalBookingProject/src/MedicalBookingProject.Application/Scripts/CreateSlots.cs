@@ -107,8 +107,8 @@ namespace MedicalBookingProject.Application.Scripts
             int resultTimeCompare = 0;    // сравним две метки
             List<List<string>> result = new List<List<string>>();
             List<string> slot = new List<string>(2);
-            DateTime myDate1 = default(DateTime);
-            DateTime myDate2 = default(DateTime);
+            DateTime myDate1 = default; // (DateTime);
+            DateTime myDate2 = default; // (DateTime);
             while (allSplits.Count() > (counter - step))
             {
                 if (slot.Count() == 0)

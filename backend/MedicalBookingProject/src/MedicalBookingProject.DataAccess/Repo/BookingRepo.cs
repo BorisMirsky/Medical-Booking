@@ -3,12 +3,7 @@ using MedicalBookingProject.Domain.Models.Bookings;
 using MedicalBookingProject.Domain.Models.Shedules;
 using MedicalBookingProject.DataAccess.Repo;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 
 
@@ -26,8 +21,8 @@ namespace MedicalBookingProject.DataAccess.Repo
         }
 
 
-        public async Task<Guid> Create(Guid slotId, 
-                                        Guid? cancelledBy, 
+        public async Task<Guid> Create(Guid slotId, Guid patientId, Guid doctorId,
+                                        Boolean isBooked, Guid? cancelledBy, 
                                         DateTime? bookingOrCancelDatetime)
         {
             var bookingId = Guid.NewGuid();

@@ -32,16 +32,16 @@ export default function AllDoctors() {
             render: (id: string) => (
                 <Link
                     href={{
-                        pathname: "oneorder",
+                        pathname: "profiledoctor",
                         query: {
                             id: id
                         }
                     }}
-                    legacyBehavior={true}
+                    //legacyBehavior={true}
                 >
-                    <a className="tableLink" >
+                    {/*<a className="tableLink" >*/}
                         {id}
-                    </a>
+                    {/*</a>*/}
                 </Link>
             )
         },

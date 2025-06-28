@@ -36,16 +36,16 @@ export default function AllPatients() {
             render: (id: string) => (
                 <Link
                     href={{
-                        pathname: "oneorder",
+                        pathname: "profilepatient",
                         query: {
                             id: id
                         }
                     }}
-                    legacyBehavior={true}
+                    //legacyBehavior={true}
                 >
-                    <a className="tableLink" >
+                    {/*<a className="tableLink" >*/}
                         {id}
-                    </a>
+                    {/*</a>*/}
                 </Link>
             )
         },

@@ -3,12 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1FB07890-4671-435B-BF96-5F8CC6E8C186}|src\\MedicalBookingProject.Web\\MedicalBookingProject.Web.csproj|c:\\users\\alexander\\source\\medical-booking\\backend\\medicalbookingproject\\src\\medicalbookingproject.web\\contracts\\bookingrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1FB07890-4671-435B-BF96-5F8CC6E8C186}|src\\MedicalBookingProject.Web\\MedicalBookingProject.Web.csproj|solutionrelative:src\\medicalbookingproject.web\\contracts\\bookingrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1FB07890-4671-435B-BF96-5F8CC6E8C186}|src\\MedicalBookingProject.Web\\MedicalBookingProject.Web.csproj|c:\\users\\alexander\\source\\medical-booking\\backend\\medicalbookingproject\\src\\medicalbookingproject.web\\controllers\\bookingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1FB07890-4671-435B-BF96-5F8CC6E8C186}|src\\MedicalBookingProject.Web\\MedicalBookingProject.Web.csproj|solutionrelative:src\\medicalbookingproject.web\\controllers\\bookingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1FB07890-4671-435B-BF96-5F8CC6E8C186}|src\\MedicalBookingProject.Web\\MedicalBookingProject.Web.csproj|c:\\users\\alexander\\source\\medical-booking\\backend\\medicalbookingproject\\src\\medicalbookingproject.web\\controllers\\doctorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1FB07890-4671-435B-BF96-5F8CC6E8C186}|src\\MedicalBookingProject.Web\\MedicalBookingProject.Web.csproj|solutionrelative:src\\medicalbookingproject.web\\controllers\\doctorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1FB07890-4671-435B-BF96-5F8CC6E8C186}|src\\MedicalBookingProject.Web\\MedicalBookingProject.Web.csproj|c:\\users\\alexander\\source\\medical-booking\\backend\\medicalbookingproject\\src\\medicalbookingproject.web\\controllers\\timeslotscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1FB07890-4671-435B-BF96-5F8CC6E8C186}|src\\MedicalBookingProject.Web\\MedicalBookingProject.Web.csproj|solutionrelative:src\\medicalbookingproject.web\\controllers\\timeslotscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1496A439-6975-4C27-A50B-FA187241089C}|src\\MedicalBookingProject.DataAccess\\MedicalBookingProject.DataAccess.csproj|c:\\users\\alexander\\source\\medical-booking\\backend\\medicalbookingproject\\src\\medicalbookingproject.dataaccess\\repo\\bookingrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1496A439-6975-4C27-A50B-FA187241089C}|src\\MedicalBookingProject.DataAccess\\MedicalBookingProject.DataAccess.csproj|solutionrelative:src\\medicalbookingproject.dataaccess\\repo\\bookingrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43340045-5065-4A61-B644-142F677FDEE7}|src\\MedicalBookingProject.Domain\\MedicalBookingProject.Domain.csproj|c:\\users\\alexander\\source\\medical-booking\\backend\\medicalbookingproject\\src\\medicalbookingproject.domain\\abstractions\\ibookingrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43340045-5065-4A61-B644-142F677FDEE7}|src\\MedicalBookingProject.Domain\\MedicalBookingProject.Domain.csproj|solutionrelative:src\\medicalbookingproject.domain\\abstractions\\ibookingrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D72CCA2C-AFD1-4B6A-85EE-CBEDC4A1522B}|src\\MedicalBookingProject.Application\\MedicalBookingProject.Application.csproj|c:\\users\\alexander\\source\\medical-booking\\backend\\medicalbookingproject\\src\\medicalbookingproject.application\\services\\bookingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D72CCA2C-AFD1-4B6A-85EE-CBEDC4A1522B}|src\\MedicalBookingProject.Application\\MedicalBookingProject.Application.csproj|solutionrelative:src\\medicalbookingproject.application\\services\\bookingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1FB07890-4671-435B-BF96-5F8CC6E8C186}|src\\MedicalBookingProject.Web\\MedicalBookingProject.Web.csproj|c:\\users\\alexander\\source\\medical-booking\\backend\\medicalbookingproject\\src\\medicalbookingproject.web\\contracts\\bookingrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1FB07890-4671-435B-BF96-5F8CC6E8C186}|src\\MedicalBookingProject.Web\\MedicalBookingProject.Web.csproj|solutionrelative:src\\medicalbookingproject.web\\contracts\\bookingrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43340045-5065-4A61-B644-142F677FDEE7}|src\\MedicalBookingProject.Domain\\MedicalBookingProject.Domain.csproj|c:\\users\\alexander\\source\\medical-booking\\backend\\medicalbookingproject\\src\\medicalbookingproject.domain\\abstractions\\ibookingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43340045-5065-4A61-B644-142F677FDEE7}|src\\MedicalBookingProject.Domain\\MedicalBookingProject.Domain.csproj|solutionrelative:src\\medicalbookingproject.domain\\abstractions\\ibookingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,10 +58,6 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
@@ -46,26 +66,104 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
+              "Title": "IBookingRepo.cs",
+              "DocumentMoniker": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.Domain\\Abstractions\\IBookingRepo.cs",
+              "RelativeDocumentMoniker": "src\\MedicalBookingProject.Domain\\Abstractions\\IBookingRepo.cs",
+              "ToolTip": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.Domain\\Abstractions\\IBookingRepo.cs",
+              "RelativeToolTip": "src\\MedicalBookingProject.Domain\\Abstractions\\IBookingRepo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T17:34:12.412Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IBookingService.cs",
+              "DocumentMoniker": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.Domain\\Abstractions\\IBookingService.cs",
+              "RelativeDocumentMoniker": "src\\MedicalBookingProject.Domain\\Abstractions\\IBookingService.cs",
+              "ToolTip": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.Domain\\Abstractions\\IBookingService.cs",
+              "RelativeToolTip": "src\\MedicalBookingProject.Domain\\Abstractions\\IBookingService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T17:31:41.404Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BookingRepo.cs",
+              "DocumentMoniker": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.DataAccess\\Repo\\BookingRepo.cs",
+              "RelativeDocumentMoniker": "src\\MedicalBookingProject.DataAccess\\Repo\\BookingRepo.cs",
+              "ToolTip": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.DataAccess\\Repo\\BookingRepo.cs",
+              "RelativeToolTip": "src\\MedicalBookingProject.DataAccess\\Repo\\BookingRepo.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAA7wCcAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T17:23:45.569Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BookingService.cs",
+              "DocumentMoniker": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.Application\\Services\\BookingService.cs",
+              "RelativeDocumentMoniker": "src\\MedicalBookingProject.Application\\Services\\BookingService.cs",
+              "ToolTip": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.Application\\Services\\BookingService.cs",
+              "RelativeToolTip": "src\\MedicalBookingProject.Application\\Services\\BookingService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABIAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T17:21:26.152Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "BookingRequest.cs",
               "DocumentMoniker": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.Web\\Contracts\\BookingRequest.cs",
               "RelativeDocumentMoniker": "src\\MedicalBookingProject.Web\\Contracts\\BookingRequest.cs",
               "ToolTip": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.Web\\Contracts\\BookingRequest.cs",
               "RelativeToolTip": "src\\MedicalBookingProject.Web\\Contracts\\BookingRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-27T15:15:42.263Z",
+              "WhenOpened": "2025-06-28T17:17:13.066Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "DoctorsController.cs",
+              "DocumentMoniker": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.Web\\Controllers\\DoctorsController.cs",
+              "RelativeDocumentMoniker": "src\\MedicalBookingProject.Web\\Controllers\\DoctorsController.cs",
+              "ToolTip": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.Web\\Controllers\\DoctorsController.cs",
+              "RelativeToolTip": "src\\MedicalBookingProject.Web\\Controllers\\DoctorsController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABIAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T16:39:09.412Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BookingsController.cs",
+              "DocumentMoniker": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.Web\\Controllers\\BookingsController.cs",
+              "RelativeDocumentMoniker": "src\\MedicalBookingProject.Web\\Controllers\\BookingsController.cs",
+              "ToolTip": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.Web\\Controllers\\BookingsController.cs",
+              "RelativeToolTip": "src\\MedicalBookingProject.Web\\Controllers\\BookingsController.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T06:05:07.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "TimeslotsController.cs",
               "DocumentMoniker": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.Web\\Controllers\\TimeslotsController.cs",
               "RelativeDocumentMoniker": "src\\MedicalBookingProject.Web\\Controllers\\TimeslotsController.cs",
               "ToolTip": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.Web\\Controllers\\TimeslotsController.cs",
               "RelativeToolTip": "src\\MedicalBookingProject.Web\\Controllers\\TimeslotsController.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAswFUAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAIA5wDMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-27T15:09:03.629Z",
               "EditorCaption": ""

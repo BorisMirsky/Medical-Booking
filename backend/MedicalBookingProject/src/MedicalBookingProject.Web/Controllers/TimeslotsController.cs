@@ -31,7 +31,7 @@ namespace MedicalBookingProject.Web.Controllers
         [Route("CreateTimeslot")]
         [HttpPost]  
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "manager")]
-        public async Task<ActionResult> CreateTimeslot([FromBody] TimeslotRequest request)
+        public async Task<ActionResult> CreateTimeslot([FromBody] TimeslotCreateRequest request)
         {
             await _timeslotService.CreateTimeslot(request.DoctorId, request.StartDay, 
                                                   request.Days, request.TimeStart, 
@@ -61,29 +61,13 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
-
-        // Доктор + день                  need?
-        //[Route("ByDayAndDoctorId")]
-        //[HttpGet]
-        //public async Task<ActionResult<List<Timeslot>>> ByDayAndDoctorId(Guid id, DateTime day)
-        //{
-        //    var timeslots = await _timeslotService.GetTimeslot(id);
-        //    return Ok(timeslots);
-        //}
-
-
-        [HttpPatch]
-        public async Task<ActionResult<Guid>> UpdateBooking([FromBody] BookingRequest request)
+        [HttpPatch] 
+        public async Task<ActionResult<Guid>> UpdateTimeslot([FromBody] TimeslotUpdateRequest request)
         {
-            // Изменение в таблице Слотс
-            var slotId = await _timeslotService.UpdateTimeslot(request.SlotId, request.PatientId, request.IsBooked);
-            // Изменение (добавление) в таблице Букингс
-            // будет убрано в отдельный контроллер
-            await _bookingService.CreateBooking(request.SlotId, request.CancelledBy,
-                                                request.BookingOrCancelDatetime,
-                                                request.PatientId, request.IsBooked);
+            var slotId = await _timeslotService.UpdateTimeslot(request.SlotId, 
+                                                                request.PatientId, 
+                                                                request.IsBooked);
             return Ok(slotId);
         }
-
     }
 }

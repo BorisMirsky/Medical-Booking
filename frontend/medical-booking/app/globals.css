@@ -1,27 +1,8 @@
 
 
-.datapicker-enabled-days.ant-picker-cell-in-view.ant-picker-cell-inner {
-    background-color: #27c456 !important;
+.custom-datepicker {
+
 }
-
-/*.datapicker-enabled-days.ant-picker-cell-inner {
-    position: relative;
-}
-
-datapicker-enabled-days.ant-picker-cell-inner::before {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    width: 4px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: red;
-    left: 50%;
-    transform: translateX(-50%);
-}*/
-
-
-
 
 
 

@@ -170,7 +170,7 @@ export default function DoctorShedule() {
                     <DatePicker
                         onChange={selectDate}
                         disabledDate={disabledDateFunc}
-                        className="datapicker-enabled-days"
+                        className="custom-datepicker"
                     />
 
                 </Form.Item>

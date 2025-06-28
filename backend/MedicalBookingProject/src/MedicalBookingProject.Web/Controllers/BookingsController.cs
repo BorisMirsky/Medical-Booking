@@ -12,8 +12,8 @@ using MedicalBookingProject.Domain.Models.Users;
 
 namespace MedicalBookingProject.Web.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class BookingsController : ControllerBase
     {
         private readonly IBookingService _bookingService;
@@ -23,17 +23,16 @@ namespace MedicalBookingProject.Web.Controllers
             _bookingService = bookingService;
         }
 
-        // first operation with slot
-        //[HttpPost]
+
+        [HttpPost]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "manager")]
-        //public async Task<ActionResult<SheduleResponse>> CreateBooking() //[FromBody] BookingRequest request)
-        //{
-        //Shedule shedule = new Shedule(request.DoctorId, request.StartDay, request.Days,
-        //                              request.TimeStart, request.TimeStop, request.TimeChunk);
-        //Shedule shed = new(request.StartDay, request.Days);  //request.DoctorId,
-        //var newShedule = await _sheduleService.CreateShedule(shedule);
-        //return Ok(); // newShedule);
-        //}
+        public async Task<ActionResult> CreateBooking([FromBody] BookingRequest request)
+        {
+            await _bookingService.CreateBooking(request.SlotId, request.PatientId, request.DoctorId,
+                                                request.IsBooked,
+                                                request.CancelledBy, request.BookingOrCancelDatetime);
+            return Ok(); // newShedule);
+        }
 
 
 

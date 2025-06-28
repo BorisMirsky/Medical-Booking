@@ -71,6 +71,7 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
+
         [Route("GetDoctor")]
         [HttpGet("{id:int}")]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]

@@ -38,7 +38,7 @@ export interface PatientRegisterRequest {
     gender: string;
 }
 
-export interface TimeSlotCreateRequest {
+export interface SheduleCreateRequest {
     doctorid: string;
     startday: string;
     days: string;
@@ -49,6 +49,25 @@ export interface TimeSlotCreateRequest {
     timechunk: string;
 }
 
+
+export interface TimeSlotUpdateRequest {
+    patientid: string;
+    slotid: string;
+    isbooked: number;
+}
+
+
+//export interface BookingCreateRequest {                   
+//    doctorid: string;
+//    startday: string;
+//    days: string;
+//    speciality: string;
+//    username: string;
+//    timestart: string;
+//    timestop: string;
+//    timechunk: string;
+//}
+
 export interface DoctorSheduleRequest {
     id: string;
     speciality: string;
@@ -56,12 +75,13 @@ export interface DoctorSheduleRequest {
     day: string;
 }
 
-export interface BookingRequest {
-    id: string;
-    bookingorcanceldatetime: string;
+export interface BookingCreateRequest {                             
+    slotid: string;
     patientid: string;
-    cancelledby: string; 
+    doctorid: string;
     isbooked: number;
+    cancelledby?: string; 
+    bookingorcanceldatetime?: string;
 }
 
 
@@ -235,11 +255,12 @@ export const registerPatient = async (request: PatientRegisterRequest) => {
 }
 
 
-export const createShedule = async (request: TimeSlotCreateRequest) => {
+
+export const createShedule = async (request: SheduleCreateRequest) => {
     //const token = localStorage.getItem('token');
     await fetch("http://localhost:5032/timeslots/createtimeslot", {      
         method: 'POST',
-        mode: 'cors',
+        //mode: 'cors',
         //credentials: true,
         headers: {
             'Content-Type': 'application/json',
@@ -294,11 +315,39 @@ export const getSlotsByDoctorId = async (id: string) => {
 };
 
 
-export const updateBooking = async (request: BookingRequest) => {
+
+export const updateTimeslot = async (request: TimeSlotUpdateRequest) => {
+    //const token = localStorage.getItem('token');`
+    await fetch("http://localhost:5032/timeslots/updatetimeslot", {
+        method: 'PATCH',  
+        //mode: 'cors',
+        //credentials: true,
+        headers: {
+            'Content-Type': 'application/json',
+            //'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(request)
+    })
+    .then(response => {
+        if (!response.ok) {
+            alert("Ошибка обновления записи к врачу");
+            //console.log("Ошибка обновления записи к врачу");
+            throw new Error("Not 2xx response", { cause: response });
+        }
+        else {
+            alert("Запись к врачу обновлена")
+        }
+    }).catch(function (err) {
+        console.log('Error: ', err);
+    });
+};
+
+
+export const createBooking = async (request: BookingCreateRequest) => {
     //const token = localStorage.getItem('token');
-    await fetch("http://localhost:5032/timeslots/updatebooking", {
-        method: 'UPDATE',  //HttpPatch
-        mode: 'cors',
+    await fetch("http://localhost:5032/bookings/createbooking", {
+        method: 'POST',
+        //mode: 'cors',
         //credentials: true,
         headers: {
             'Content-Type': 'application/json',
@@ -307,21 +356,18 @@ export const updateBooking = async (request: BookingRequest) => {
         body: JSON.stringify(request)
     }).then(response => {
         if (!response.ok) {
-            alert("Ошибка обновления записи к врачу");
-            console.log("обновления записи к врачу");
+            alert("Ошибка создания бронирования");
+            //console.log("Ошибка создания бронирования");
             throw new Error("Not 2xx response", { cause: response });
         }
         else {
-            alert("Запись к врачу обновлена")
+            alert("Бронирование создано")
             //window.location.href = 'login';
         }
     }).catch(function (err) {
         console.log('Error: ', err);
     });
 }
-
-
-
 
 
 
@@ -336,39 +382,3 @@ export function uniqueDays(mySlots: object) {
     }
     return doctorWorkingDays;
 };
-
-
-
-
-//export const getSlotsByDoctorIdAndDay = async (id: string, day: string) => {
-//    const url = 'http://localhost:5032/timeslots/ByDoctorId/'; // bydayanddoctorid/';
-//    //const params = new URLSearchParams({ id, day }).toString()
-//    //const token = localStorage.getItem('token');
-//    console.log(day);
-//    const response = await fetch(url + id, {
-//        headers: {
-//            'Content-type': 'application/json'
-//            //'Authorization': `Bearer ${token}`,
-//        },
-//        method: 'GET',
-//        mode: 'cors'
-//    })
-//        .then(response => {
-//            if (!response.ok) {
-//                throw new Error("Not response", { cause: response });
-//                //window.location.href = 'noauthorized';
-//            }
-//            else {
-//                //console.log('response.json() ', response.json());
-//                return response.json();
-//            }
-//        })
-//        .then(data => {
-//            console.log('data ', data);
-//            return data;
-//        })
-//        .catch(function (err) {
-//            console.log('Error: ', err);
-//        });
-//    return response;
-//};

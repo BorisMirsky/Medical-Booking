@@ -24,14 +24,15 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
+        [Route("CreateBooking")]     
         [HttpPost]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "manager")]
         public async Task<ActionResult> CreateBooking([FromBody] BookingRequest request)
         {
-            await _bookingService.CreateBooking(request.SlotId, request.PatientId, request.DoctorId,
-                                                request.IsBooked,
+            await _bookingService.CreateBooking(request.SlotId, request.PatientId, 
+                                                request.DoctorId, request.IsBooked,
                                                 request.CancelledBy, request.BookingOrCancelDatetime);
-            return Ok(); // newShedule);
+            return Ok();
         }
 
 

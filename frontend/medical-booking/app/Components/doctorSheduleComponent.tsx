@@ -113,6 +113,7 @@ export default function DoctorShedule() {
     let selectedDay: string = "";
 
     const selectDate = (value: string) => {
+        // Обработка удаления даты через 'x'
         try {
             selectedDay = moment(value.toString()).format('YYYY-DD-MM');
         } catch (e) {

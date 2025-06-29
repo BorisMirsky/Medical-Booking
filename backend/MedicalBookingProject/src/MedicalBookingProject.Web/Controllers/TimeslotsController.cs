@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using MedicalBookingProject.Domain.Models.Users;
 using MedicalBookingProject.Application.Services;
+using System.Diagnostics;
 
 
 
@@ -61,12 +62,11 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
+        [Route("UpdateTimeslot")]       
         [HttpPatch] 
         public async Task<ActionResult<Guid>> UpdateTimeslot([FromBody] TimeslotUpdateRequest request)
         {
-            var slotId = await _timeslotService.UpdateTimeslot(request.SlotId, 
-                                                                request.PatientId, 
-                                                                request.IsBooked);
+            var slotId = await _timeslotService.UpdateTimeslot(request.SlotId, request.PatientId, request.IsBooked);
             return Ok(slotId);
         }
     }

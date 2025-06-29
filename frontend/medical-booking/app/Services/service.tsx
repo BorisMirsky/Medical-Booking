@@ -53,20 +53,9 @@ export interface SheduleCreateRequest {
 export interface TimeSlotUpdateRequest {
     patientid: string;
     slotid: string;
-    isbooked: number;
+    isbooked: boolean;
 }
 
-
-//export interface BookingCreateRequest {                   
-//    doctorid: string;
-//    startday: string;
-//    days: string;
-//    speciality: string;
-//    username: string;
-//    timestart: string;
-//    timestop: string;
-//    timechunk: string;
-//}
 
 export interface DoctorSheduleRequest {
     id: string;
@@ -79,9 +68,9 @@ export interface BookingCreateRequest {
     slotid: string;
     patientid: string;
     doctorid: string;
-    isbooked: number;
-    cancelledby?: string; 
-    bookingorcanceldatetime?: string;
+    isbooked: boolean;
+    cancelledby: string; 
+    bookingorcanceldatetime: string;
 }
 
 
@@ -283,7 +272,6 @@ export const createShedule = async (request: SheduleCreateRequest) => {
 }
 
 
-
 export const getSlotsByDoctorId = async (id: string) => {
     const url = 'http://localhost:5032/timeslots/';      //ByDoctorId 
     //const token = localStorage.getItem('token');
@@ -315,7 +303,6 @@ export const getSlotsByDoctorId = async (id: string) => {
 };
 
 
-
 export const updateTimeslot = async (request: TimeSlotUpdateRequest) => {
     //const token = localStorage.getItem('token');`
     await fetch("http://localhost:5032/timeslots/updatetimeslot", {
@@ -331,7 +318,7 @@ export const updateTimeslot = async (request: TimeSlotUpdateRequest) => {
     .then(response => {
         if (!response.ok) {
             alert("Ошибка обновления записи к врачу");
-            //console.log("Ошибка обновления записи к врачу");
+            //console.log("updateTimeslot ", request);
             throw new Error("Not 2xx response", { cause: response });
         }
         else {
@@ -347,18 +334,16 @@ export const createBooking = async (request: BookingCreateRequest) => {
     //const token = localStorage.getItem('token');
     await fetch("http://localhost:5032/bookings/createbooking", {
         method: 'POST',
-        //mode: 'cors',
-        //credentials: true,
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json; charset=UTF-8',
             //'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(request)
     }).then(response => {
         if (!response.ok) {
             alert("Ошибка создания бронирования");
-            //console.log("Ошибка создания бронирования");
-            throw new Error("Not 2xx response", { cause: response });
+            const err = new Error("HTTP status code: " + response.status);
+            throw err
         }
         else {
             alert("Бронирование создано")
@@ -366,7 +351,7 @@ export const createBooking = async (request: BookingCreateRequest) => {
         }
     }).catch(function (err) {
         console.log('Error: ', err);
-    });
+    }); 
 }
 
 

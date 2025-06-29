@@ -4,7 +4,7 @@
 import React from 'react';
 import {
     getDoctorsBySpeciality,
-    TimeSlotCreateRequest,
+    SheduleCreateRequest,
     createShedule} from "@/app/Services/service";    
 import { Doctor } from "@/app/Models/Doctor";
 import { Select, Space, DatePicker, Button, Form, FormProps } from 'antd';
@@ -31,12 +31,12 @@ export default function CreateShedule() {
 
     const [form] = Form.useForm();
 
-    const onFinishFailed: FormProps<TimeSlotCreateRequest>['onFinishFailed'] = (errorInfo) => {
+    const onFinishFailed: FormProps<SheduleCreateRequest>['onFinishFailed'] = (errorInfo) => {
         console.log('onFinishFailed:', errorInfo);
     }
 
 
-    const onFinish: FormProps<TimeSlotCreateRequest>['onFinish'] = (values) => {
+    const onFinish: FormProps<SheduleCreateRequest>['onFinish'] = (values) => {
 
         for (const variable in doctors) {
             if (doctors[variable].userName == values.username && doctors[variable].speciality == values.speciality) {
@@ -106,7 +106,7 @@ export default function CreateShedule() {
             form={form}
         >
 
-            <Form.Item<TimeSlotCreateRequest>
+            <Form.Item<SheduleCreateRequest>
                 label="Специализация врача"
                 name="speciality"
                 rules={[{ required: true, message: 'Please input speciality!' }]}
@@ -123,7 +123,7 @@ export default function CreateShedule() {
                 />
             </Form.Item>
 
-            <Form.Item<TimeSlotCreateRequest>
+            <Form.Item<SheduleCreateRequest>
                 label="Имя врача"
                 name="username"
                 rules={[{ required: true, message: 'Please input username!' }]}
@@ -134,7 +134,7 @@ export default function CreateShedule() {
                 />
             </Form.Item>
 
-            <Form.Item<TimeSlotCreateRequest>
+            <Form.Item<SheduleCreateRequest>
                 label="Первый день расписания"
                 name="startday"
                 rules={[{ required: true, message: 'Please input startday!' }]}
@@ -143,7 +143,7 @@ export default function CreateShedule() {
                 />
             </Form.Item>
 
-            <Form.Item<TimeSlotCreateRequest>
+            <Form.Item<SheduleCreateRequest>
                 label="Сколько рабочих дней (до 50)"
                 name="days"
                 rules={[{ required: true, message: 'Please input days!' }]}
@@ -154,7 +154,7 @@ export default function CreateShedule() {
                     />
             </Form.Item>
 
-            <Form.Item<TimeSlotCreateRequest>
+            <Form.Item<SheduleCreateRequest>
                 label="Начало рабочего дня"
                 name="timestart"
                 rules={[{ required: true, message: 'Please input timestart!' }]}
@@ -164,7 +164,7 @@ export default function CreateShedule() {
                     />
             </Form.Item>
 
-            <Form.Item<TimeSlotCreateRequest>
+            <Form.Item<SheduleCreateRequest>
                 label="Окончание рабочего дня"
                 name="timestop"
                 rules={[{ required: true, message: 'Please input timestop!' }]}
@@ -174,7 +174,7 @@ export default function CreateShedule() {
                     />
             </Form.Item>
  
-            <Form.Item<TimeSlotCreateRequest>
+            <Form.Item<SheduleCreateRequest>
                 label="Норма времени на пациента"
                 name="timechunk"
                 rules={[{ required: true, message: 'Please input timechunk!' }]}

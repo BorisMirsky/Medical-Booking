@@ -9,8 +9,7 @@ import {
     updateTimeslot, TimeSlotUpdateRequest,
     createBooking, BookingCreateRequest
 } from "@/app/Services/service";
-//BookingRequest
-//import moment from 'moment'
+import moment from 'moment';
 
 
 
@@ -28,33 +27,29 @@ export default function TimeslotsButtons(slots: Array<Slot> ) {
     }));
 
 
-    const timelsotRequest: TimeSlotUpdateRequest = { patientid: '', slotid: '', isbooked: 0 };
+    const timelsotRequest: TimeSlotUpdateRequest = { patientid: '', slotid: '', isbooked: false };
     const bookingRequest: BookingCreateRequest = {
         slotid: "",
         patientid: "",
         doctorid: "",
-        isbooked: 0,
-        cancelledby: undefined,
-        bookingorcanceldatetime: undefined
+        isbooked: false,
+        cancelledby: "",
+        bookingorcanceldatetime: ""
     };
 
 
     const handleClick = (value: Slot) => {
-        console.log('handleClick ', value.id, value.isBooked, value.patientId);
-        //const request: BookingRequest{};
         timelsotRequest.slotid = value.id;
-        timelsotRequest.patientid = "00000000-0000-0000-0000-000000000007"; // value.patientId;
-        timelsotRequest.isbooked = 1;  // ? value.isBooked==0 : 0;         // ?
-        //request.bookingorcanceldatetime = moment(new Date()).format('LLLL');
-        //request.cancelledby = value.patientId;                         // ?
-        //updateTimeslot(request);
+        timelsotRequest.patientid = "00000000-0000-0000-0000-000000000007"; 
+        timelsotRequest.isbooked = true;  
+        updateTimeslot(timelsotRequest);
         //
         bookingRequest.slotid = value.id;
-        bookingRequest.patientid = "00000000-0000-0000-0000-000000000008";
-        bookingRequest.doctorid = "00000000-0000-0000-0000-000000000017";
-        bookingRequest.isbooked = 1;
-        //bookingRequest.cancelledby = value.id;d
-        //bookingRequest.bookingorcanceldatetime = value.id;d
+        bookingRequest.patientid = "00000000-0000-0000-0000-000000000338";
+        bookingRequest.doctorid =  "00000000-0000-0000-0000-000000000217";
+        bookingRequest.isbooked = true;
+        bookingRequest.cancelledby="00000000-0000-0000-0000-000000004338";
+        bookingRequest.bookingorcanceldatetime = moment(new Date()).format('LLLL').toString();
         //
         //updateTimeslot(timelsotRequest);
         createBooking(bookingRequest);

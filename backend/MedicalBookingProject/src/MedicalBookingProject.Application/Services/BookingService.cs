@@ -1,5 +1,7 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Bookings;
+using MedicalBookingProject.Domain.Models.Users;
+using System.Runtime.CompilerServices;
 
 
 
@@ -15,38 +17,21 @@ namespace MedicalBookingProject.Application.Services
 
         // Внесение в таблицу букинг - бронирование либо отмена.
         public async Task<Guid> CreateBooking(Guid slotid, Guid patientid, Guid doctorid,
-                                              Boolean isbooked, 
-                                              Guid? cancelledby, DateTime? cancelledat)
+                                              Boolean isbooked) 
         {
-            if (isbooked == false)
-            {
-                cancelledby = patientid;
-                cancelledat = DateTime.Now;
-            }
-            return await _bookingRepo.Create(slotid, patientid, doctorid, isbooked,
-                                             cancelledby, cancelledat);
+            return await _bookingRepo.Create(slotid, patientid, doctorid, isbooked);
         }
 
-        // patch booking
-        //public async Task<Guid> CreateBooking(Guid slotId, 
-        //                                      Guid? cancelledBy, 
-        //                                      DateTime? bookingOrCancelDatetime,
-        //                                      Guid patientId, Boolean? isBooked) // Guid doctorId,
+        public async Task<List<Booking>> GetByPatient(Guid patientId)
+        {
+            return await _bookingRepo.GetByPatient(patientId);
+        }
 
+
+
+        //public async Task<Booking> GetOneBooking(Guid id)
         //{
-
-        //    Guid _patientid = (isBooked == true) ? patientId : Guid.Empty;
-        //    Guid? _cancelledby = (isBooked == true) ? Guid.Empty : cancelledBy;
-        //    //DateTime? _cancelledat = (isbooked == true) ? null : DateTime.Now;
-        //    DateTime? _cancelledat = DateTime.Now;
-
-        //    return await _bookingRepo.Create(slotId, _cancelledby, _cancelledat);
-        //    //_patientid, doctorId, isBooked,                                           
+        //    return await _bookingRepo.GetOneBooking(id);
         //}
-
-        public async Task<Booking> GetOneBooking(Guid id)
-        {
-            return await _bookingRepo.GetOneBooking(id);
-        }
     }
 }

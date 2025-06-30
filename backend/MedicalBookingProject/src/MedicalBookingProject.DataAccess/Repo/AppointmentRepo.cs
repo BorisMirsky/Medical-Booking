@@ -31,7 +31,8 @@ namespace MedicalBookingProject.DataAccess.Repo
         {
             //ArgumentNullException.ThrowIfNull(bookingId);
             Guid id = Guid.NewGuid();
-            Booking booking = await bookingRepo.GetOneBooking(bookingId);
+            //Booking booking = await bookingRepo.GetOneBooking(bookingId);
+            Booking booking = new Booking();                                        // !!!!
             Appointment app = new Appointment();
             app.Id = id;
             app.PatientId = booking.PatientId;

@@ -29,8 +29,8 @@ namespace MedicalBookingProject.DataAccess.Configuration
             builder.Property(b => b.TimeslotId)
                 .IsRequired();
             builder.Property(b => b.IsBooked);
-            builder.Property(b => b.CancelledBy);
-            builder.Property(b => b.BookingOrCancelDatetime);
+            //builder.Property(b => b.CancelledBy);
+            //builder.Property(b => b.BookingOrCancelDatetime);
         }
     }
 }

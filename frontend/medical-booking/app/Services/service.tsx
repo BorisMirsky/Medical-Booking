@@ -69,8 +69,8 @@ export interface BookingCreateRequest {
     patientid: string;
     doctorid: string;
     isbooked: boolean;
-    cancelledby: string; 
-    bookingorcanceldatetime: string;
+    //cancelledby?: string; 
+    //bookingorcanceldatetime?: string;
 }
 
 
@@ -156,6 +156,36 @@ export const getPatientsFetch = async () => {
         })
         .then(data => {
             //console.log('data: ', data);
+            return data;
+        })
+        .catch(function (err) {
+            console.log('Error: ', err);
+        });
+    return response;
+};
+
+
+//bookings by patientId
+export const getBookingsByPatient = async (id: string) => {
+    //const token = localStorage.getItem('token');
+    const response = await fetch("http://localhost:5032/bookings/GetByPatient/" + id, {
+        headers: {
+            'Content-type': 'application/json'
+            //'Authorization': `Bearer ${token}`,
+        },
+        method: 'GET',
+        mode: 'cors'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Not response", { cause: response });
+            }
+            else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            console.log('getBookingsByPatient data: ', data);
             return data;
         })
         .catch(function (err) {

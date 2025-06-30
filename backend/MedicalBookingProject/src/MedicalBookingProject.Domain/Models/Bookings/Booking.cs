@@ -11,11 +11,6 @@ namespace MedicalBookingProject.Domain.Models.Bookings
     [Table("bookings")]
     public class Booking
     {
-        //public Booking(Guid slotId)  
-        //{
-        //    TimeslotId = slotId;
-        //}
-
         [Key]
         [Column("id")]
         public Guid Id { get; set; }
@@ -32,11 +27,11 @@ namespace MedicalBookingProject.Domain.Models.Bookings
         [Column("isbooked")]
         public Boolean IsBooked { get; set; }
 
-        [Column("cancelledby")]
-        public Guid CancelledBy { get; set; } = Guid.Empty;
+        //[Column("cancelledby")]
+        //public Guid CancelledBy { get; set; } = Guid.Empty;
 
-        [Column("bookingorcanceldatetime")]
-        public DateTime? BookingOrCancelDatetime { get; set; }
+        //[Column("bookingorcanceldatetime")]
+        //public DateTime? BookingOrCancelDatetime { get; set; }
 
         public Patient? Patient { get; set; }
 

@@ -9,11 +9,12 @@ import {
     updateTimeslot, TimeSlotUpdateRequest,
     createBooking, BookingCreateRequest
 } from "@/app/Services/service";
-import moment from 'moment';
+//import moment from 'moment';
+//import { useState, useCallback  } from "react";  
 
 
-
-export default function TimeslotsButtons(slots: Array<Slot> ) {
+export default function TimeslotsButtons(slots: Array<Slot>) {
+    //const [count, setCount] = useState(0);
 
     const data = Object.keys(slots).map((slot, index) => ({
         key: index,
@@ -26,32 +27,33 @@ export default function TimeslotsButtons(slots: Array<Slot> ) {
         patientId: slots[index].patientId
     }));
 
-
     const timelsotRequest: TimeSlotUpdateRequest = { patientid: '', slotid: '', isbooked: false };
+
     const bookingRequest: BookingCreateRequest = {
         slotid: "",
         patientid: "",
         doctorid: "",
-        isbooked: false,
-        cancelledby: "",
-        bookingorcanceldatetime: ""
+        isbooked: false
+        //cancelledby: undefined,
+        //bookingorcanceldatetime: undefined
     };
 
+    //const runRerender = useCallback(() => {
+    //    setCount(count + 1);
+    //}, []);
 
     const handleClick = (value: Slot) => {
         timelsotRequest.slotid = value.id;
-        timelsotRequest.patientid = "00000000-0000-0000-0000-000000000007"; 
-        timelsotRequest.isbooked = true;  
-        updateTimeslot(timelsotRequest);
+        timelsotRequest.patientid = "192A59D9-43DF-43EC-943A-8E4290386B1E";
+        //timelsotRequest.isbooked = (!value.isBooked) ? true : false;
+        timelsotRequest.isbooked = true;
         //
         bookingRequest.slotid = value.id;
-        bookingRequest.patientid = "00000000-0000-0000-0000-000000000338";
-        bookingRequest.doctorid =  "00000000-0000-0000-0000-000000000217";
+        bookingRequest.patientid = "192A59D9-43DF-43EC-943A-8E4290386B1E";
+        bookingRequest.doctorid = value.doctorId;
+        //bookingRequest.isbooked = (!value.isBooked) ? true : false;
         bookingRequest.isbooked = true;
-        bookingRequest.cancelledby="00000000-0000-0000-0000-000000004338";
-        bookingRequest.bookingorcanceldatetime = moment(new Date()).format('LLLL').toString();
-        //
-        //updateTimeslot(timelsotRequest);
+        updateTimeslot(timelsotRequest);
         createBooking(bookingRequest);
     };
 
@@ -59,20 +61,17 @@ export default function TimeslotsButtons(slots: Array<Slot> ) {
     return (
         <div>
             <Space size='large'>
-                {data.map((s) => (
-
-                    <Button
-                        key={s.id}
-                        onClick={() => handleClick(s)}
-                        type="default"
-                    >
-                        {s.label}
-                    </Button>
-            ))}
+                    {data.map((s) => (
+                        <Button
+                            key={s.id}
+                            onClick={() => handleClick(s)}
+                            color={(!s.isBooked) ? "primary" : "danger"}
+                            variant="solid"
+                         >
+                    {s.label}
+                </Button>
+                    ))}
             </Space>
             </div>
     );
 }
-
-
-//   type={"primary" ? {s.isBooked == false } : "danger"}

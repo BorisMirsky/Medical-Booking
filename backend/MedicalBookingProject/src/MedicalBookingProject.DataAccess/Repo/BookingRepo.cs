@@ -3,6 +3,7 @@ using MedicalBookingProject.Domain.Models.Bookings;
 using MedicalBookingProject.Domain.Models.Shedules;
 using MedicalBookingProject.DataAccess.Repo;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 
 
@@ -21,50 +22,43 @@ namespace MedicalBookingProject.DataAccess.Repo
         }
 
 
-        public async Task<Guid> Create(Guid slotId, Guid patientId, Guid doctorId,
-                                        Boolean isBooked, Guid? cancelledBy, 
-                                        DateTime? bookingOrCancelDatetime)
+        public async Task<Guid> Create(Guid slotId, Guid patientId, 
+                                       Guid doctorId, Boolean isBooked)
         {
             var bookingId = Guid.NewGuid();
             var booking = new Booking();
-            Timeslot slot = await slotRepo.Get(slotId);
+            //Timeslot slot = await slotRepo.Get(slotId);
             booking.TimeslotId = slotId;
-            booking.DoctorId = slot.DoctorId;
-
-            if (slot.IsBooked == false)
-            {
-                booking.IsBooked = false;
-            }
-            else
-            {
-                booking.IsBooked = (Boolean)slot.IsBooked;
-            }
-
-            if (slot.PatientId == Guid.Empty)
-            {
-                booking.PatientId = Guid.Empty;
-            }
-            else
-            {
-                booking.PatientId = (Guid)slot.PatientId;
-            }
+            booking.DoctorId = doctorId; // slot.DoctorId;
+            booking.PatientId = patientId;  // slot.PatientId;
+            booking.IsBooked = isBooked; // slot.IsBooked;
 
             booking.Id = bookingId;
-            booking.CancelledBy = (Guid)cancelledBy;
-            booking.BookingOrCancelDatetime = bookingOrCancelDatetime;
             await _context.Bookings.AddAsync(booking);
             await _context.SaveChangesAsync();
             return bookingId;
         }
 
-
-
-        public async Task<Booking> GetOneBooking(Guid id)
+        public async Task<List<Booking>> GetByPatient(Guid patientId)
         {
-            Booking? booking = await _context.Bookings
-                                    .AsNoTracking()
-                                    .FirstOrDefaultAsync(s => s.Id == id);
-            return booking!;
+            var entities = await _context.Bookings
+               .Where(item => item.PatientId == patientId && item.IsBooked == true)
+               .ToListAsync();
+            if (entities.Count() == 0)
+            {
+                Debug.WriteLine("there'are not bookings for that patient");
+                //throw new Exception($"Doctors with speciality {speciality} not found");
+            }
+            return entities;
         }
     }
 }
+
+
+//public async Task<Booking> GetOneBooking(Guid id)
+//{
+//    Booking? booking = await _context.Bookings
+//                            .AsNoTracking()
+//                            .FirstOrDefaultAsync(s => s.Id == id);
+//    return booking!;
+//}

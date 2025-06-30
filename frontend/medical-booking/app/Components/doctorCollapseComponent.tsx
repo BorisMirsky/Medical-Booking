@@ -2,8 +2,8 @@
 import type { CollapseProps } from 'antd';
 import { Collapse } from 'antd';
 //import DoctorRegistration from '../Components/RegistrationComponent';
-import SelectSlot from '../Components/patientSelectSlotComponent';
-
+//import SelectSlot from '../Components/patientSelectSlotComponent';
+import DoctorSheduleWatchOnly from '../Components/doctorSheduleWatchOnlyComponent';
 
 //  Выбрать специальность - выбрать врача - выбрать слот
 //  Все мои записи
@@ -14,15 +14,20 @@ const items: CollapseProps['items'] = [
     {
         key: '1',
         label: 'Расписание врача',
-        children: <SelectSlot></SelectSlot>,
+        children: <DoctorSheduleWatchOnly></DoctorSheduleWatchOnly>,
     },
     {
         key: '2',
-        label: 'Отработанные посещения',
+        label: 'Приём пациента',
         children: <p>лылылылы</p>,
     },
     {
         key: '3',
+        label: 'Отработанные посещения',
+        children: <p>лылылылы</p>,
+    },
+    {
+        key: '4',
         label: 'Статистика врача',
         children: <p>ups...</p>,
     }

@@ -29,6 +29,7 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
+        // CreateShedule
         [Route("CreateTimeslot")]
         [HttpPost]  
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "manager")]

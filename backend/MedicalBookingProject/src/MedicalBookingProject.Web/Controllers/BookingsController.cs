@@ -6,6 +6,7 @@ using MedicalBookingProject.Web.Contracts;
 using MedicalBookingProject.Application.Services;
 using MedicalBookingProject.Domain.Models.Shedules;
 using MedicalBookingProject.Domain.Models.Users;
+using System.Diagnostics;
 
 
 
@@ -29,28 +30,42 @@ namespace MedicalBookingProject.Web.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "manager")]
         public async Task<ActionResult> CreateBooking([FromBody] BookingRequest request)
         {
-            await _bookingService.CreateBooking(request.SlotId, request.PatientId, 
-                                                request.DoctorId, request.IsBooked,
-                                                request.CancelledBy, request.BookingOrCancelDatetime);
+            await _bookingService.CreateBooking(request.SlotId, request.PatientId,
+                                                request.DoctorId, request.IsBooked);
             return Ok();
         }
 
 
 
-        [Route("GetOneBooking")]
-        [HttpGet]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
-        public async Task<IActionResult> GetOneBooking(Guid id)
-        {
-            Booking booking = await _bookingService.GetOneBooking(id);
+        //[Route("GetOneBooking")]
+        //[HttpGet]
+        ////[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        //public async Task<IActionResult> GetOneBooking(Guid id)
+        //{
+        //    Booking booking = await _bookingService.GetOneBooking(id);
 
-            if (booking != null)
+        //    if (booking != null)
+        //    {
+        //        return Ok(booking);
+        //    }
+
+        //    return BadRequest(new { message = "booking is not recognized" });
+        //}
+
+
+        [Route("GetByPatient")]
+        [HttpGet("{id}")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        public async Task<IActionResult> GetByPatient(Guid id)
+        {
+            List<Booking> bookings = await _bookingService.GetByPatient(id);
+
+            if (bookings != null)
             {
-                return Ok(booking);
+                return Ok(bookings);
             }
 
-            return BadRequest(new { message = "booking is not recognized" });
+            return BadRequest(new { message = "there'are not bookings for that patient" });
         }
-
     }
 }

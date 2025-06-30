@@ -1,4 +1,5 @@
 ﻿using MedicalBookingProject.Domain.Models.Bookings;
+using MedicalBookingProject.Domain.Models.Users;
 
 
 
@@ -10,10 +11,10 @@ namespace MedicalBookingProject.Domain.Abstractions
         Task<Guid> CreateBooking(Guid slotid,
                                  Guid patientId,
                                  Guid doctorId,
-                                 Boolean isBooked,
-                                 Guid? cancelledby, 
-                                 DateTime? cancelledat);
+                                 Boolean isBooked);
+        //Guid? cancelledby, DateTime? cancelledat);
 
-        Task<Booking> GetOneBooking(Guid id); 
+        //Task<Booking> GetOneBooking(Guid id); 
+        Task<List<Booking>> GetByPatient(Guid patientId);
     }
 }

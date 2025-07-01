@@ -10,11 +10,12 @@ import {
     createBooking, BookingCreateRequest
 } from "@/app/Services/service";
 //import moment from 'moment';
-//import { useState, useCallback  } from "react";  
+import { useReducer } from "react";         //useState
 
 
 export default function TimeslotsButtons(slots: Array<Slot>) {
-    //const [count, setCount] = useState(0);
+    const [, forceUpdate] = useReducer(x => x + 1, 0)
+
 
     const data = Object.keys(slots).map((slot, index) => ({
         key: index,
@@ -38,23 +39,22 @@ export default function TimeslotsButtons(slots: Array<Slot>) {
         //bookingorcanceldatetime: undefined
     };
 
-    //const runRerender = useCallback(() => {
-    //    setCount(count + 1);
-    //}, []);
 
     const handleClick = (value: Slot) => {
-        timelsotRequest.slotid = value.id;
-        timelsotRequest.patientid = "192A59D9-43DF-43EC-943A-8E4290386B1E";
-        //timelsotRequest.isbooked = (!value.isBooked) ? true : false;
-        timelsotRequest.isbooked = true;
-        //
-        bookingRequest.slotid = value.id;
-        bookingRequest.patientid = "192A59D9-43DF-43EC-943A-8E4290386B1E";
-        bookingRequest.doctorid = value.doctorId;
-        //bookingRequest.isbooked = (!value.isBooked) ? true : false;
-        bookingRequest.isbooked = true;
-        updateTimeslot(timelsotRequest);
-        createBooking(bookingRequest);
+        if (!value.isBooked)
+        {
+            timelsotRequest.slotid = value.id;
+            timelsotRequest.patientid = "192A59D9-43DF-43EC-943A-8E4290386B1E";
+            timelsotRequest.isbooked = true;
+            //
+            bookingRequest.slotid = value.id;
+            bookingRequest.patientid = "192A59D9-43DF-43EC-943A-8E4290386B1E";
+            bookingRequest.doctorid = value.doctorId;
+            bookingRequest.isbooked = true;
+            updateTimeslot(timelsotRequest);
+            createBooking(bookingRequest);
+            forceUpdate();
+        }
     };
 
 

@@ -28,6 +28,10 @@ namespace MedicalBookingProject.Application.Services
         }
 
 
+        public async Task<List<Booking>> GetByDoctor(Guid doctorId)
+        {
+            return await _bookingRepo.GetByDoctor(doctorId);
+        }
 
         //public async Task<Booking> GetOneBooking(Guid id)
         //{

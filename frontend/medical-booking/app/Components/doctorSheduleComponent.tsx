@@ -121,6 +121,9 @@ export default function DoctorShedule() {
         }
     };
 
+    const forceRerender = () => {
+        setSlots1([]);
+    }
 
     return (
             <div>
@@ -185,7 +188,10 @@ export default function DoctorShedule() {
                         Получить расписание
                     </Button>
 
-                    <Button htmlType="reset">
+                    <Button
+                        htmlType="reset"
+                        onClick={forceRerender}
+                    >
                         Сбросить
                     </Button>
 

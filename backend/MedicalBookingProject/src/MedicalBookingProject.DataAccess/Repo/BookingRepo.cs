@@ -39,6 +39,7 @@ namespace MedicalBookingProject.DataAccess.Repo
             return bookingId;
         }
 
+
         public async Task<List<Booking>> GetByPatient(Guid patientId)
         {
             var entities = await _context.Bookings
@@ -51,8 +52,28 @@ namespace MedicalBookingProject.DataAccess.Repo
             }
             return entities;
         }
+
+
+
+        public async Task<List<Booking>> GetByDoctor(Guid doctortId)
+        {
+            var entities = await _context.Bookings
+               .Where(item => item.DoctorId == doctortId && item.IsBooked == true)
+               .ToListAsync();
+            if (entities.Count() == 0)
+            {
+                Debug.WriteLine("there'are not bookings for that doctor");
+                //throw new Exception($"Doctors with speciality {speciality} not found");
+            }
+            return entities;
+        }
     }
 }
+
+
+
+
+
 
 
 //public async Task<Booking> GetOneBooking(Guid id)

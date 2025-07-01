@@ -25,7 +25,7 @@ namespace MedicalBookingProject.DataAccess.Repo
                                                string gender)
         {
             var hashedPassword = BCrypt.HashPassword(password);
-            Patient patient = new Patient(email, hashedPassword, role, username, gender);
+            Patient patient = new Patient(email, hashedPassword, role, gender, username);
             patient.Id = Guid.NewGuid();
             _dbContext.Patients.Add(patient!);
             await _dbContext.SaveChangesAsync();

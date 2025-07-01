@@ -11,5 +11,6 @@ namespace MedicalBookingProject.Domain.Abstractions
 
         //Task<Booking> GetOneBooking(Guid id);
         Task<List<Booking>> GetByPatient(Guid patientId);
+        Task<List<Booking>> GetByDoctor(Guid patientId);
     }
 }

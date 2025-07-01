@@ -49,13 +49,11 @@ export interface SheduleCreateRequest {
     timechunk: string;
 }
 
-
 export interface TimeSlotUpdateRequest {
     patientid: string;
     slotid: string;
     isbooked: boolean;
 }
-
 
 export interface DoctorSheduleRequest {
     id: string;
@@ -168,7 +166,9 @@ export const getPatientsFetch = async () => {
 //bookings by patientId
 export const getBookingsByPatient = async (id: string) => {
     //const token = localStorage.getItem('token');
-    const response = await fetch("http://localhost:5032/bookings/GetByPatient/" + id, {
+    const url = "http://localhost:5032/bookings/GetByPatient?patientId=" + id;
+    console.log('getBookingsByPatient url: ', url);
+    const response = await fetch(url, {
         headers: {
             'Content-type': 'application/json'
             //'Authorization': `Bearer ${token}`,
@@ -185,7 +185,7 @@ export const getBookingsByPatient = async (id: string) => {
             }
         })
         .then(data => {
-            console.log('getBookingsByPatient data: ', data);
+            //console.log('getBookingsByPatient data: ', data);
             return data;
         })
         .catch(function (err) {
@@ -266,7 +266,7 @@ export const registerPatient = async (request: PatientRegisterRequest) => {
         }
         else {
             alert("Регистрация прошла успешно")
-            //window.location.href = 'login';
+            window.location.href = 'entrancepatient';
         }
     }).catch(err => {
         console.log('registerError: ', err);
@@ -302,6 +302,7 @@ export const createShedule = async (request: SheduleCreateRequest) => {
 }
 
 
+
 export const getSlotsByDoctorId = async (id: string) => {
     const url = 'http://localhost:5032/timeslots/';      //ByDoctorId 
     //const token = localStorage.getItem('token');
@@ -333,6 +334,7 @@ export const getSlotsByDoctorId = async (id: string) => {
 };
 
 
+
 export const updateTimeslot = async (request: TimeSlotUpdateRequest) => {
     //const token = localStorage.getItem('token');`
     await fetch("http://localhost:5032/timeslots/updatetimeslot", {
@@ -358,6 +360,7 @@ export const updateTimeslot = async (request: TimeSlotUpdateRequest) => {
         console.log('Error: ', err);
     });
 };
+
 
 
 export const createBooking = async (request: BookingCreateRequest) => {

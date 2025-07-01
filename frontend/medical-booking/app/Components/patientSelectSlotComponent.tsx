@@ -1,4 +1,4 @@
-﻿///* eslint-disable react-hooks/rules-of-hooks */
+﻿
 "use client"
 
 import React from 'react';
@@ -105,7 +105,9 @@ export default function SelectSlot() {
                 name="day"
                 rules={[{ required: true, message: 'Please input startday!' }]}
             >
-                <DatePicker />
+                <DatePicker
+                    //className="custom-datepicker"
+                />
             </Form.Item>
 
             <Space size='large'>

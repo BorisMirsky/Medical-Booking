@@ -53,19 +53,41 @@ namespace MedicalBookingProject.Web.Controllers
         //}
 
 
+
         [Route("GetByPatient")]
-        [HttpGet("{id}")]
+        [HttpGet("{patientId}")]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
-        public async Task<IActionResult> GetByPatient(Guid id)
+        public async Task<ActionResult<List<Booking>>> GetByPatient(Guid patientId)
         {
-            List<Booking> bookings = await _bookingService.GetByPatient(id);
+            Debug.WriteLine("");
+            Debug.WriteLine(patientId);
+            Debug.WriteLine("");
+            //Guid id1 = new Guid("CD1E0477-C80C-43EC-8BA6-8B000D26DE29");
+            List<Booking> bookings = await _bookingService.GetByPatient(patientId);
 
             if (bookings != null)
             {
                 return Ok(bookings);
             }
 
-            return BadRequest(new { message = "there'are not bookings for that patient" });
+            return BadRequest(new { message = "there'are not that patient" });
         }
+
+
+
+        //[Route("GetByDoctor")]
+        //[HttpGet("{doctorId}")]
+        ////[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        //public async Task<IActionResult> GetByDoctor(Guid doctorId)
+        //{
+        //    List<Booking> bookings = await _bookingService.GetByDoctor(doctorId);
+
+        //    if (bookings != null)
+        //    {
+        //        return Ok(bookings);
+        //    }
+
+        //    return BadRequest(new { message = "there'are not bookings for that doctor" });
+        //}
     }
 }

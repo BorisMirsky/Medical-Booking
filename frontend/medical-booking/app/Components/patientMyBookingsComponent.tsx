@@ -62,21 +62,20 @@ export default function PatientBookings() {
     const data = bookings.map((booking: Booking, index: number) => ({
         key: index,
         n: (index + 1),
-        username: booking.doctorId
-        //speciality: booking.speciality,
-        //gender: booking.gender
-        //date: moment(order.date).format("DD/MM/YYYY")
+        username: booking.doctorId,
+        speciality: 'booking.doctorId',
+        timeslot: "q",  //booking.gender,
+        cancel: "a"  //booking.gender,
     }));
 
 
 
     return (
         <div>
-            <br></br><br></br>
-            <h1>Все записи (бронирования) этого пациента</h1>
-            <br></br><br></br>
+            <br></br>
+            <h2>Мои записи к врачам (бронирования)</h2>
             <div>
-                <br></br><br></br><br></br>
+                <br></br><br></br>
                 <Table
                     dataSource={data}
                     columns={columns}

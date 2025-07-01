@@ -1,8 +1,10 @@
 
 
-.custom-datepicker {
-
-}
+.custom-datepicker
+    .ant-picker-cell-in-view.custom-datepicker
+    .ant-picker-cell-inner {
+        background-color: #27c456 !important;
+    }
 
 
 

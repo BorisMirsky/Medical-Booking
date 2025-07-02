@@ -2,7 +2,7 @@
 import React from 'react';
 import type { CollapseProps } from 'antd';
 import { Collapse } from 'antd';
-import DoctorRegistration from '../Components/RegistrationComponent';
+import DoctorRegistration from '../Components/doctorRegistrationComponent';
 import CreateShedule from '../Components/adminCreateSheduleComponent';
 //import DoctorShedule from '../Components/doctorSheduleComponent';
 import DoctorSheduleWatchOnly from '../Components/doctorSheduleWatchOnlyComponent';

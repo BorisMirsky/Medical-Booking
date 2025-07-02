@@ -34,7 +34,8 @@ export default function TimeslotsButtons(slots: Array<Slot>) {
         slotid: "",
         patientid: "",
         doctorid: "",
-        isbooked: false
+        doctorusername: "",
+        isbooked: false,
         //cancelledby: undefined,
         //bookingorcanceldatetime: undefined
     };
@@ -50,6 +51,7 @@ export default function TimeslotsButtons(slots: Array<Slot>) {
             bookingRequest.slotid = value.id;
             bookingRequest.patientid = "192A59D9-43DF-43EC-943A-8E4290386B1E";
             bookingRequest.doctorid = value.doctorId;
+            //bookingRequest.doctorusername = value.doctorId;
             bookingRequest.isbooked = true;
             updateTimeslot(timelsotRequest);
             createBooking(bookingRequest);

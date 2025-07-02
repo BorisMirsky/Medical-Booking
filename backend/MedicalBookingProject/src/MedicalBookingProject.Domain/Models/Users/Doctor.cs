@@ -63,7 +63,7 @@ namespace MedicalBookingProject.Domain.Models.Users
         [Column("salary")]
         public int Salary { get; set; } = 0;
 
-        public Role Role { get; set; }
+        public Role Role { get; set; } 
 
         public List<Timeslot?> Timeslots { get; set; } 
        

@@ -23,12 +23,12 @@ export default function PatientBookings() {
             key: 'n',
         },
         {
-            title: 'Имя Врача',
+            title: 'Врач',
             dataIndex: 'username',
             key: 'username',
         },
         {
-            title: 'Специализация',
+            title: 'Специальность',
             dataIndex: 'speciality',
             key: 'speciality',
         },
@@ -41,6 +41,11 @@ export default function PatientBookings() {
             title: 'Отмена',
             dataIndex: 'cancel',
             key: 'cancel',
+            render: (text: string, record: string) => (
+                <Button onClick={() => console.log(record)}>
+                    {"Отмена"}
+                </Button>
+            ),
         }
     ]
 

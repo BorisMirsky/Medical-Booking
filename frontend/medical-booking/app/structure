@@ -1,0 +1,26 @@
+Admin
+   adminCollapseComponent/CollapseElement
+   admin AllDoctorsComponent/AllDoctors
+   adminAllPatientsComponent/AllPatients
+   adminCreateSheduleComponent/CreateShedule
+   doctorRegistrationComponent/DoctorRegistration
+   doctorSheduleWatchOnlyComponent/DoctorSheduleWatchOnly
+   SelectComponent/SelectDoctorBySpeciality
+   timeslotsButtonsWatchOnlyComponent/TimeslotsButtonsWatchOnly
+
+doctor
+   doctorCollapseComponent/CollapseElement
+   doctorSheduleWatchOnlyComponent/DoctorSheduleWatchOnly
+   timeslotsButtonsWatchOnlyComponent/TimeslotsButtonsWatchOnly
+
+patient
+   doctorSheduleComponent/DoctorShedule
+   patientCollapseComponent/CollapseElement
+   patientMyBookingComponent/PatientBookings
+   SelectComponent/SelectDoctorBySpeciality
+   timeslotButtonsComponent/TimeslotsButtons
+
+
+
+
+

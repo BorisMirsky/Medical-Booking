@@ -66,6 +66,7 @@ export interface BookingCreateRequest {
     slotid: string;
     patientid: string;
     doctorid: string;
+    doctorusername: string;
     isbooked: boolean;
     //cancelledby?: string; 
     //bookingorcanceldatetime?: string;
@@ -166,8 +167,8 @@ export const getPatientsFetch = async () => {
 //bookings by patientId
 export const getBookingsByPatient = async (id: string) => {
     //const token = localStorage.getItem('token');
-    const url = "http://localhost:5032/bookings/GetByPatient?patientId=" + id;
-    console.log('getBookingsByPatient url: ', url);
+    const url = "http://localhost:5032/bookings/GetByPatient/" + id;
+    //console.log('getBookingsByPatient url: ', url);
     const response = await fetch(url, {
         headers: {
             'Content-type': 'application/json'
@@ -185,7 +186,7 @@ export const getBookingsByPatient = async (id: string) => {
             }
         })
         .then(data => {
-            //console.log('getBookingsByPatient data: ', data);
+            console.log('getBookingsByPatient data: ', data);
             return data;
         })
         .catch(function (err) {

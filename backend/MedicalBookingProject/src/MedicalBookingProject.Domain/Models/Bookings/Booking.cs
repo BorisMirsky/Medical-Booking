@@ -27,11 +27,8 @@ namespace MedicalBookingProject.Domain.Models.Bookings
         [Column("isbooked")]
         public Boolean IsBooked { get; set; }
 
-        //[Column("cancelledby")]
-        //public Guid CancelledBy { get; set; } = Guid.Empty;
-
-        //[Column("bookingorcanceldatetime")]
-        //public DateTime? BookingOrCancelDatetime { get; set; }
+        //[Column("doctorusername")]
+        //public String DoctorUserName { get; set; } = String.Empty; // = Doctor?.UserName;
 
         public Patient? Patient { get; set; }
 
@@ -40,5 +37,11 @@ namespace MedicalBookingProject.Domain.Models.Bookings
         public Appointment? Appointment { get; set; }
 
         public Timeslot? Timeslot { get; set; }
+
+        //[Column("cancelledby")]
+        //public Guid CancelledBy { get; set; } = Guid.Empty;
+
+        //[Column("bookingorcanceldatetime")]
+        //public DateTime? BookingOrCancelDatetime { get; set; }
     }
 }

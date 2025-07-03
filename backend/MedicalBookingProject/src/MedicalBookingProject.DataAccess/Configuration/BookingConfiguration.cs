@@ -22,6 +22,11 @@ namespace MedicalBookingProject.DataAccess.Configuration
                 .HasForeignKey(b => b.PatientId)
                 .IsRequired();
 
+            builder.HasOne(b => b.Timeslot)
+                .WithOne(d => d.Booking)
+                //.HasForeignKey(static b => b.)
+                .IsRequired();
+
             builder.Property(b => b.DoctorId)
                 .IsRequired();
             builder.Property(b => b.PatientId)
@@ -29,8 +34,6 @@ namespace MedicalBookingProject.DataAccess.Configuration
             builder.Property(b => b.TimeslotId)
                 .IsRequired();
             builder.Property(b => b.IsBooked);
-            //builder.Property(b => b.CancelledBy);
-            //builder.Property(b => b.BookingOrCancelDatetime);
         }
     }
 }

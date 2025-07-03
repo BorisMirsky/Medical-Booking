@@ -13,6 +13,9 @@ import {
 import { useReducer } from "react";         //useState
 
 
+
+
+
 export default function TimeslotsButtons(slots: Array<Slot>) {
     const [, forceUpdate] = useReducer(x => x + 1, 0)
 
@@ -45,7 +48,7 @@ export default function TimeslotsButtons(slots: Array<Slot>) {
         if (!value.isBooked)
         {
             timelsotRequest.slotid = value.id;
-            timelsotRequest.patientid = "192A59D9-43DF-43EC-943A-8E4290386B1E";
+            timelsotRequest.patientid = "290FA7D6-1C7E-43C0-A335-BBB14FC91B48";
             timelsotRequest.isbooked = true;
             //
             bookingRequest.slotid = value.id;

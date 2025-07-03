@@ -168,10 +168,10 @@ export const getPatientsFetch = async () => {
 export const getBookingsByPatient = async (id: string) => {
     //const token = localStorage.getItem('token');
     const url = "http://localhost:5032/bookings/GetByPatient/" + id;
-    //console.log('getBookingsByPatient url: ', url);
     const response = await fetch(url, {
         headers: {
-            'Content-type': 'application/json'
+            //'Content-type': 'application/json'
+            'Content-Type': 'application/x-www-form-urlencoded'
             //'Authorization': `Bearer ${token}`,
         },
         method: 'GET',
@@ -186,7 +186,6 @@ export const getBookingsByPatient = async (id: string) => {
             }
         })
         .then(data => {
-            console.log('getBookingsByPatient data: ', data);
             return data;
         })
         .catch(function (err) {

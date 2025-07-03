@@ -57,13 +57,15 @@ namespace MedicalBookingProject.Web.Controllers
         [Route("GetByPatient/{id}")] 
         [HttpGet] 
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
-        public async Task<ActionResult<List<Booking>>> GetByPatient(Guid id)
+        public async Task<ActionResult<IEnumerable<BookingDTO>>> GetByPatient(Guid id)
         {
+            Debug.WriteLine("");
             Debug.WriteLine("");
             Debug.WriteLine(id);
             Debug.WriteLine("");
+            Debug.WriteLine("");
             //Guid id1 = new Guid("CD1E0477-C80C-43EC-8BA6-8B000D26DE29");
-            List<Booking> bookings = await _bookingService.GetByPatient(id);
+            IEnumerable<BookingDTO> bookings = await _bookingService.GetByPatient(id);
 
             if (bookings != null)
             {

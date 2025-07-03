@@ -4,5 +4,6 @@
     doctorId: string;
     //doctorName: string;
     slotId: string;
-    isBooked: boolean;
+    doctorSpeciality: string;
+    doctorUserName: string;
 }

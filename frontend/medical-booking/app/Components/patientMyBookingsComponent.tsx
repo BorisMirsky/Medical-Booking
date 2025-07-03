@@ -12,6 +12,8 @@ import "../globals.css";
 
 
 
+
+// profilepatient  --- Мои записи к врачам (возможность отмены)
 export default function PatientBookings() {
     //const [currentRole, setCurrentRole] = useState("");
     const [bookings, setBookings] = useState<Booking[]>([]);
@@ -38,6 +40,11 @@ export default function PatientBookings() {
             key: 'timeslot',
         },
         {
+            title: 'Id слота',
+            dataIndex: 'timeslotId',
+            key: 'timeslotId',
+        },
+        {
             title: 'Отмена',
             dataIndex: 'cancel',
             key: 'cancel',
@@ -56,8 +63,9 @@ export default function PatientBookings() {
         //localStorage.clear();
         //
         setBookings([]);
-        const getBookings = async () => {
+        const getBookings = async () => {        
             const responce = await getBookingsByPatient("192A59D9-43DF-43EC-943A-8E4290386B1E");
+            //console.log("responce ", responce);
             setBookings(responce);
         }
         getBookings();
@@ -67,10 +75,11 @@ export default function PatientBookings() {
     const data = bookings.map((booking: Booking, index: number) => ({
         key: index,
         n: (index + 1),
-        username: booking.doctorId,
-        speciality: 'booking.doctorId',
-        timeslot: "q",  //booking.gender,
-        cancel: "a"  //booking.gender,
+        username: booking.doctorUserName,
+        speciality: booking.doctorSpeciality,
+        timeslotId: booking.slotId,
+        timeslot: "q",  //booking.slots,
+        cancel: ""  
     }));
 
 

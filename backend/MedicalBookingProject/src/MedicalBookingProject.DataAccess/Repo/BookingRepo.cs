@@ -5,6 +5,7 @@ using MedicalBookingProject.DataAccess.Repo;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using MedicalBookingProject.Domain.Models.Users;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 
 
@@ -41,18 +42,26 @@ namespace MedicalBookingProject.DataAccess.Repo
         }
 
 
-        public async Task<List<Booking>> GetByPatient(Guid patientId)
+        public async Task<IEnumerable<BookingDTO>> GetByPatient(Guid patientId)
         {
             var entities = await _context.Bookings
-               .Include(item => item.Doctor)
                .Where(item => item.PatientId == patientId && item.IsBooked == true)
+               .Include(item => item.Doctor)
                .ToListAsync();
             if (entities.Count() == 0)
             {
                 Debug.WriteLine("there are not shit bookings for that patient");
                 //throw new Exception($"Doctors with speciality {speciality} not found");
             }
-            return entities;
+
+            var Dtos = entities
+                .Select(b => new BookingDTO(b.Id, b.DoctorId, b.PatientId,
+                                            b.TimeslotId, b.Doctor.UserName,
+                                            b.Doctor.Speciality));
+                                            //b.Timeslot.DatetimeStart,
+                                            //b.Timeslot.DatetimeStop));
+
+            return Dtos;
         }
 
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using MedicalBookingProject.Domain.Models.Users;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-
+using System.Linq;
 
 
 
@@ -46,8 +46,11 @@ namespace MedicalBookingProject.DataAccess.Repo
         {
             var entities = await _context.Bookings
                .Where(item => item.PatientId == patientId && item.IsBooked == true)
-               .Include(item => item.Doctor)
+               .OrderByDescending(s => s.TimeslotId)
+               //.LastOrDefaultAsync()
+               //.Include(item => item.Doctor)
                .ToListAsync();
+
             if (entities.Count() == 0)
             {
                 Debug.WriteLine("there are not shit bookings for that patient");

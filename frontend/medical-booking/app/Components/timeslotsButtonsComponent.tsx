@@ -31,7 +31,7 @@ export default function TimeslotsButtons(slots: Array<Slot>) {
         patientId: slots[index].patientId
     }));
 
-    const timelsotRequest: TimeSlotUpdateRequest = { patientid: '', slotid: '', isbooked: false };
+    const timeslotRequest: TimeSlotUpdateRequest = { patientid: '', slotid: '', isbooked: false };
 
     const bookingRequest: BookingCreateRequest = {
         slotid: "",
@@ -47,16 +47,16 @@ export default function TimeslotsButtons(slots: Array<Slot>) {
     const handleClick = (value: Slot) => {
         if (!value.isBooked)
         {
-            timelsotRequest.slotid = value.id;
-            timelsotRequest.patientid = "290FA7D6-1C7E-43C0-A335-BBB14FC91B48";
-            timelsotRequest.isbooked = true;
+            timeslotRequest.slotid = value.id;
+            timeslotRequest.patientid = "192A59D9-43DF-43EC-943A-8E4290386B1E";
+            timeslotRequest.isbooked = true;
             //
             bookingRequest.slotid = value.id;
             bookingRequest.patientid = "192A59D9-43DF-43EC-943A-8E4290386B1E";
             bookingRequest.doctorid = value.doctorId;
             //bookingRequest.doctorusername = value.doctorId;
             bookingRequest.isbooked = true;
-            updateTimeslot(timelsotRequest);
+            updateTimeslot(timeslotRequest);
             createBooking(bookingRequest);
             forceUpdate();
         }

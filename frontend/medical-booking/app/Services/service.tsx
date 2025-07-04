@@ -337,6 +337,7 @@ export const getSlotsByDoctorId = async (id: string) => {
 
 export const updateTimeslot = async (request: TimeSlotUpdateRequest) => {
     //const token = localStorage.getItem('token');`
+    let alertText: string = "";
     await fetch("http://localhost:5032/timeslots/updatetimeslot", {
         method: 'PATCH',  
         //mode: 'cors',
@@ -350,11 +351,11 @@ export const updateTimeslot = async (request: TimeSlotUpdateRequest) => {
     .then(response => {
         if (!response.ok) {
             alert("Ошибка обновления записи к врачу");
-            //console.log("updateTimeslot ", request);
             throw new Error("Not 2xx response", { cause: response });
         }
         else {
-            alert("Запись к врачу обновлена")
+            alertText = request.isbooked ? "Запись к врачу обновлена" : "Запись к врачу отменена";
+            alert(alertText);
         }
     }).catch(function (err) {
         console.log('Error: ', err);
@@ -365,6 +366,7 @@ export const updateTimeslot = async (request: TimeSlotUpdateRequest) => {
 
 export const createBooking = async (request: BookingCreateRequest) => {
     //const token = localStorage.getItem('token');
+    let alertText: string = "";
     await fetch("http://localhost:5032/bookings/createbooking", {
         method: 'POST',
         headers: {
@@ -379,7 +381,9 @@ export const createBooking = async (request: BookingCreateRequest) => {
             throw err
         }
         else {
-            alert("Бронирование создано")
+            alertText = request.isbooked ? "Бронирование создано" : "Бронирование отменено";
+            alert(alertText);
+            //alert("Бронирование создано")
             //window.location.href = 'login';
         }
     }).catch(function (err) {

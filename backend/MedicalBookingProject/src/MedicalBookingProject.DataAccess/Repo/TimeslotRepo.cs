@@ -72,7 +72,7 @@ namespace MedicalBookingProject.DataAccess.Repo
 
         // Patch
         public async Task<Guid> Update(Guid slotId, 
-                                        Guid? patientId, 
+                                        Guid patientId, 
                                         Boolean isBooked)
         {
             await _context.Timeslots

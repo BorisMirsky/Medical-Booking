@@ -2,8 +2,7 @@
     id: string;
     patientId: string;
     doctorId: string;
-    //doctorName: string;
-    slotId: string;
+    timeslotId: string;
     doctorSpeciality: string;
     doctorUserName: string;
 }

@@ -30,21 +30,14 @@ namespace MedicalBookingProject.Domain.Models.Shedules
         public Boolean IsBooked { get; set; } = false;
 
         [Column("patientid")]
-        public Guid PatientId { get; set; } = Guid.Empty;
-        
-        public Booking? Booking { get; set; }
+        public Guid? PatientId { get; set; }
 
-        public Patient? Patient { get; set; }
+        public List<Booking>? Bookings { get; set; }
 
-        public Doctor? Doctor { get; set; }
+        public Patient? Patient { get; set; } 
+
+        public Doctor? Doctor { get; set; } 
     }
 }
 
 
-//public Shedule(Guid doctorId, string slotDatetimeStart,
-//                string slotDatetimeStop)
-//{
-//    DoctorId = doctorId;
-//    SlotDatetimeStart = slotDatetimeStart;
-//    SlotDatetimeStop = slotDatetimeStop;
-//}

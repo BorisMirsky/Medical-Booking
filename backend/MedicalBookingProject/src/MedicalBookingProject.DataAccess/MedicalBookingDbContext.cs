@@ -20,12 +20,12 @@ namespace MedicalBookingProject.DataAccess
         {
         }
 
-        public DbSet<Doctor> Doctors { get; set; }
-        public DbSet<Patient> Patients { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<Timeslot> Timeslots { get; set; }
-        public DbSet<Booking> Bookings { get; set; }
-        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Doctor> Doctors { get; set; } = null!;
+        public DbSet<Patient> Patients { get; set; } = null!;
+        public DbSet<Role> Roles { get; set; } = null!;
+        public DbSet<Timeslot> Timeslots { get; set; } = null!;
+        public DbSet<Booking> Bookings { get; set; } = null!;
+        public DbSet<Appointment> Appointments { get; set; } = null!;
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
         public DbSet<Message> Messages { get; set; }
 
@@ -33,6 +33,7 @@ namespace MedicalBookingProject.DataAccess
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {}
            
+        // Fluent API
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Configuration.DoctorConfiguration());

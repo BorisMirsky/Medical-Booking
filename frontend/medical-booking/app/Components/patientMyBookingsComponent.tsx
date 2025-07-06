@@ -41,21 +41,21 @@ export default function PatientBookings() {
             key: 'speciality',
         },
         {
-            title: 'Время приёма',
-            dataIndex: 'timeslot',
-            key: 'timeslot',
+            title: 'Начало приёма',
+            dataIndex: 'timeslotStart',
+            key: 'timeslotStart',
         },
         {
-            title: 'Id слота',
-            dataIndex: 'timeslotId',
-            key: 'timeslotId',
+            title: 'Конец приёма',
+            dataIndex: 'timeslotStop',
+            key: 'timeslotStop',
         },
         {
             title: 'Отмена',
             dataIndex: 'cancel',
             key: 'cancel',
             render: (text: string, record: object) => (
-                <Button onClick={() => cancelBooking(record['key'])}>
+                <Button onClick={() => cancelBooking(record['key' as keyof typeof record])}>
                     {"Отмена"}
                 </Button>
             ),
@@ -71,7 +71,7 @@ export default function PatientBookings() {
         setBookings([]);
         const getBookings = async () => {        
             const responce = await getBookingsByPatient("192A59D9-43DF-43EC-943A-8E4290386B1E");
-            console.log("responce ", responce);
+            //console.log("responce ", responce);
             setBookings(responce);
         }
         getBookings();
@@ -84,7 +84,8 @@ export default function PatientBookings() {
         username: booking.doctorUserName,
         speciality: booking.doctorSpeciality,
         timeslotId: booking.timeslotId,
-        timeslot: "",
+        timeslotStart: booking.timeslotDatetimeStart,
+        timeslotStop: booking.timeslotDatetimeStop,
         cancel: ""  
     }));
 
@@ -106,7 +107,7 @@ export default function PatientBookings() {
 
 
     const cancelBooking = (key: number) => {
-        console.log("bookings ", bookings[key]); 
+        //console.log("bookings ", bookings[key], key); 
         //if (value.isBooked) {
         timeslotRequest.slotid = bookings[key].timeslotId;
         timeslotRequest.patientid = "192A59D9-43DF-43EC-943A-8E4290386B1E";
@@ -118,8 +119,8 @@ export default function PatientBookings() {
         bookingRequest.doctorusername = bookings[key].doctorUserName;
         bookingRequest.isbooked = false;
         updateTimeslot(timeslotRequest);
-        createBooking(bookingRequest);
-        forceUpdate();
+        //createBooking(bookingRequest);
+        //forceUpdate();
         //}
     }  
 

@@ -5,6 +5,7 @@ using MedicalBookingProject.Domain.Models.Shedules;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using System.Collections.Generic;
 
 
 
@@ -29,6 +30,7 @@ namespace MedicalBookingProject.DataAccess.Repo
                 var entity = new Timeslot(); 
                 entity.Id = Guid.NewGuid();
                 entity.DoctorId = doctorId;
+                //entity.PatientId = patientId;
                 entity.DatetimeStart = slot[0];
                 entity.DatetimeStop = slot[1];
                 await _context.Timeslots.AddAsync(entity);
@@ -52,12 +54,10 @@ namespace MedicalBookingProject.DataAccess.Repo
         public async Task<List<Timeslot>> GetByDoctor(Guid id)
         {
             var entities = await _context.Timeslots
-                                                 .Where(item => item.DoctorId == id)
-                                                 .ToListAsync();
-            //ArgumentNullException.ThrowIfNull(entity);
-            return entities!;
+                                     .Where(item => item.DoctorId == id)
+                                     .ToListAsync();
+            return entities;
         }
-
 
 
         public async Task<List<Timeslot>> GetByDoctorAndDay(Guid id, DateTime day)
@@ -78,7 +78,7 @@ namespace MedicalBookingProject.DataAccess.Repo
             await _context.Timeslots
                 .Where(item => item.Id == slotId)
                 .ExecuteUpdateAsync(s => s
-                .SetProperty(s => s.PatientId, s => patientId)
+                //.SetProperty(s => s.PatientId, s => Guid.Empty)   //patientId
                 .SetProperty(s => s.IsBooked, s => isBooked)
                 );
             return slotId;

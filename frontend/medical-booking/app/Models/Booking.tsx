@@ -5,4 +5,6 @@
     timeslotId: string;
     doctorSpeciality: string;
     doctorUserName: string;
+    timeslotDatetimeStart: string;
+    timeslotDatetimeStop: string;
 }

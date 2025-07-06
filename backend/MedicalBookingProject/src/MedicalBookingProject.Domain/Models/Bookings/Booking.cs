@@ -27,13 +27,13 @@ namespace MedicalBookingProject.Domain.Models.Bookings
         [Column("isbooked")]
         public Boolean IsBooked { get; set; }
 
-        public Patient? Patient { get; set; }
+        public Patient? Patient { get; set; } 
 
-        public Doctor Doctor { get; set; }
+        public Doctor? Doctor { get; set; }
 
         public Appointment? Appointment { get; set; }
 
-        public Timeslot Timeslot { get; set; }
+        public Timeslot? Timeslot { get; set; } //= null!;
 
     }
 }

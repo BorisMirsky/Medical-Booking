@@ -15,7 +15,7 @@ namespace MedicalBookingProject.Domain.Abstractions
         //Guid? cancelledby, DateTime? cancelledat);
 
         //Task<Booking> GetOneBooking(Guid id); 
-        Task<IEnumerable<BookingDTO>> GetByPatient(Guid patientId);
+        Task<List<BookingDTO>> GetByPatient(Guid patientId);
         Task<List<Booking>> GetByDoctor(Guid doctorId);
     }
 }

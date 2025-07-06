@@ -23,6 +23,12 @@ const items: CollapseProps['items'] = [
     }
 ];
 
-const CollapseElement: React.FC = () => <Collapse accordion items={items} />;
+//const CollapseElement: React.FC = () => <Collapse accordion items={items} />;
+const CollapseElement: React.FC = () =>
+{  
+    return (
+        <Collapse accordion items={items} />
+    );
+}
 
 export default CollapseElement;

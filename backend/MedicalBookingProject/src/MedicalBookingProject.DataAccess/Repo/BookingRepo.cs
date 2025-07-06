@@ -7,7 +7,7 @@ using System.Diagnostics;
 using MedicalBookingProject.Domain.Models.Users;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.Linq;
-
+//using System.Data.Entity; 
 
 
 namespace MedicalBookingProject.DataAccess.Repo
@@ -42,16 +42,17 @@ namespace MedicalBookingProject.DataAccess.Repo
         }
 
 
-        public async Task<IEnumerable<BookingDTO>> GetByPatient(Guid patientId)
+        public async Task<List<BookingDTO>> GetByPatient(Guid patientId)
         {
             var entities = await _context.Bookings
+               .Include(item => item.Doctor)
+               .Include(item => item.Timeslot)
                .Where(item => item.PatientId == patientId && item.IsBooked == true)
                .OrderByDescending(s => s.TimeslotId)
                //.LastOrDefaultAsync()
-               //.Include(item => item.Doctor)
                .ToListAsync();
 
-            if (entities.Count() == 0)
+            if (entities.Equals(0))
             {
                 Debug.WriteLine("there are not shit bookings for that patient");
                 //throw new Exception($"Doctors with speciality {speciality} not found");
@@ -59,12 +60,15 @@ namespace MedicalBookingProject.DataAccess.Repo
 
             var Dtos = entities
                 .Select(b => new BookingDTO(b.Id, b.DoctorId, b.PatientId,
-                                            b.TimeslotId, b.Doctor.UserName,
-                                            b.Doctor.Speciality));
-                                            //b.Timeslot.DatetimeStart,
-                                            //b.Timeslot.DatetimeStop));
+                                            b.TimeslotId, b.IsBooked,
+                                            b.Doctor.UserName,
+                                            b.Doctor.Speciality,
+                                            b.Timeslot.DatetimeStart,
+                                            b.Timeslot.DatetimeStop))
+                .ToList();
 
-            return Dtos;
+
+            return Dtos;   // entities;    //(List<BookingDTO>)          Dtos
         }
 
 

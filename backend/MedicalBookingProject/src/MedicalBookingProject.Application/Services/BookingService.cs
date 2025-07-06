@@ -22,7 +22,7 @@ namespace MedicalBookingProject.Application.Services
             return await _bookingRepo.Create(slotid, patientid, doctorid, isbooked);
         }
 
-        public async Task<IEnumerable<BookingDTO>> GetByPatient(Guid patientId)
+        public async Task<List<BookingDTO>> GetByPatient(Guid patientId)
         {
             return await _bookingRepo.GetByPatient(patientId);
         }

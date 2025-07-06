@@ -23,8 +23,8 @@ namespace MedicalBookingProject.DataAccess.Configuration
                 .IsRequired();
 
             builder.HasOne(b => b.Timeslot)
-                .WithOne(d => d.Booking)
-                //.HasForeignKey(static b => b.)
+                .WithMany(d => d.Bookings)
+                .HasForeignKey(b => b.TimeslotId)
                 .IsRequired();
 
             builder.Property(b => b.DoctorId)

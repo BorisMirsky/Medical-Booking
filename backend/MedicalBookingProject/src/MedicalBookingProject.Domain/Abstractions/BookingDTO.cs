@@ -6,9 +6,10 @@
         Guid DoctorId,
         Guid PatientId,
         Guid TimeslotId,
-        string DoctorSpeciality,
-        string DoctorUserName
-        //string TimeslotDatetimeStart,
-        //string TimeslotDatetimeStop
+        Boolean IsBooked,
+        string? DoctorSpeciality,
+        string? DoctorUserName,
+        string? TimeslotDatetimeStart,
+        string? TimeslotDatetimeStop
     );
 }

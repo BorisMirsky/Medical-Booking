@@ -1,4 +1,4 @@
-﻿/* eslint-disable @typescript-eslint/no-explicit-any */
+﻿///* eslint-disable @typescript-eslint/no-explicit-any */
 ///* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 
@@ -6,11 +6,11 @@ import React from 'react';
 import {
     getBookingsByPatient,
     updateTimeslot, TimeSlotUpdateRequest,
-    createBooking, BookingCreateRequest
+    BookingCreateRequest, createBooking
 } from "@/app/Services/service";
 import { Booking } from "@/app/Models/Booking";
 import { Table, Button } from "antd";
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useState } from "react";     //useReducer
 import "../globals.css";
 //import Title from "antd/es/typography/Title";
 //import moment from 'moment';
@@ -18,11 +18,10 @@ import "../globals.css";
 
 
 
-// profilepatient  --- Мои записи к врачам (возможность отмены)
+
 export default function PatientBookings() {
     //const [currentRole, setCurrentRole] = useState("");
     const [bookings, setBookings] = useState<Booking[]>([]);
-    const [, forceUpdate] = useReducer(x => x + 1, 0)
 
     const columns = [
         {
@@ -67,11 +66,9 @@ export default function PatientBookings() {
         //const role = localStorage.getItem("role") || "";
         //setCurrentRole(role);
         //localStorage.clear();
-        //
         setBookings([]);
         const getBookings = async () => {        
             const responce = await getBookingsByPatient("192A59D9-43DF-43EC-943A-8E4290386B1E");
-            //console.log("responce ", responce);
             setBookings(responce);
         }
         getBookings();
@@ -107,8 +104,6 @@ export default function PatientBookings() {
 
 
     const cancelBooking = (key: number) => {
-        //console.log("bookings ", bookings[key], key); 
-        //if (value.isBooked) {
         timeslotRequest.slotid = bookings[key].timeslotId;
         timeslotRequest.patientid = "192A59D9-43DF-43EC-943A-8E4290386B1E";
         timeslotRequest.isbooked = false;
@@ -118,10 +113,8 @@ export default function PatientBookings() {
         bookingRequest.doctorid = bookings[key].doctorId;
         bookingRequest.doctorusername = bookings[key].doctorUserName;
         bookingRequest.isbooked = false;
-        updateTimeslot(timeslotRequest);
-        //createBooking(bookingRequest);
-        //forceUpdate();
-        //}
+        updateTimeslot(timeslotRequest); 
+        createBooking(bookingRequest);
     }  
 
 
@@ -143,4 +136,6 @@ export default function PatientBookings() {
         </div>
     );
 }
+
+
 

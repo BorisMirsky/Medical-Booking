@@ -19,7 +19,6 @@ import { useReducer } from "react";         //useState
 export default function TimeslotsButtons(slots: Array<Slot>) {
     const [, forceUpdate] = useReducer(x => x + 1, 0)
 
-
     const data = Object.keys(slots).map((slot, index) => ({
         key: index,
         id: slots[index].id,
@@ -38,9 +37,7 @@ export default function TimeslotsButtons(slots: Array<Slot>) {
         patientid: "",
         doctorid: "",
         doctorusername: "",
-        isbooked: false,
-        //cancelledby: undefined,
-        //bookingorcanceldatetime: undefined
+        isbooked: false
     };
 
 

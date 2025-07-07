@@ -3,19 +3,23 @@ import type { CollapseProps } from 'antd';
 import { Collapse } from 'antd';
 import DoctorShedule from '../Components/doctorSheduleComponent';
 import PatientBookings from '../Components/patientMyBookingsComponent';
+//import { useState, useCallback } from "react";
+
+
 
 
 const items: CollapseProps['items'] = [
     {
         key: '1',
         label: 'Запись к врачу',
-        children: <DoctorShedule></DoctorShedule>
+        children: <DoctorShedule />
+
     },
     {
         key: '2',
         label: 'Мои записи к врачам (возможность  отмены)',
-        children: <PatientBookings></PatientBookings>
-    },
+        children: <PatientBookings />
+    }, 
     {
         key: '3',
         label: 'Мои посещения врачей',
@@ -23,9 +27,10 @@ const items: CollapseProps['items'] = [
     }
 ];
 
-//const CollapseElement: React.FC = () => <Collapse accordion items={items} />;
+
 const CollapseElement: React.FC = () =>
-{  
+{
+
     return (
         <Collapse accordion items={items} />
     );

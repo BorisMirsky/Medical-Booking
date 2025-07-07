@@ -60,7 +60,7 @@
               "RelativeDocumentMoniker": "src\\MedicalBookingProject.DataAccess\\Repo\\BookingRepo.cs",
               "ToolTip": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.DataAccess\\Repo\\BookingRepo.cs",
               "RelativeToolTip": "src\\MedicalBookingProject.DataAccess\\Repo\\BookingRepo.cs",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAswDwAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADwAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-06T14:49:02.33Z",
               "EditorCaption": ""
@@ -75,8 +75,7 @@
               "RelativeToolTip": "src\\MedicalBookingProject.Domain\\Models\\Shedules\\Timeslot.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAA7wCAAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-06T14:42:17.251Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-06T14:42:17.251Z"
             },
             {
               "$type": "Document",
@@ -88,8 +87,7 @@
               "RelativeToolTip": "src\\MedicalBookingProject.DataAccess\\Repo\\TimeslotRepo.cs",
               "ViewState": "AgIAADgAAAAAAAAAAADwv1AAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-06T14:28:36.625Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-06T14:28:36.625Z"
             },
             {
               "$type": "Document",
@@ -101,8 +99,7 @@
               "RelativeToolTip": "src\\MedicalBookingProject.Web\\Controllers\\TimeslotsController.cs",
               "ViewState": "AgIAADkAAAAAAAAAAAAuwEYAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-06T14:28:09.542Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-06T14:28:09.542Z"
             }
           ]
         }

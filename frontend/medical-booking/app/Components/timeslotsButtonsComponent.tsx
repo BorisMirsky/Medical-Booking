@@ -10,14 +10,16 @@ import {
     createBooking, BookingCreateRequest
 } from "@/app/Services/service";
 //import moment from 'moment';
-import { useReducer } from "react";         //useState
+//import { useState } from "react";         //useState, useReducer
 
 
 
 
 
 export default function TimeslotsButtons(slots: Array<Slot>) {
-    const [, forceUpdate] = useReducer(x => x + 1, 0)
+    //const [, forceUpdate] = useReducer(x => x + 1, 0)
+    //const [childCounter, setChildCounter] = useState(0);
+    //const prevCounter = 0;
 
     const data = Object.keys(slots).map((slot, index) => ({
         key: index,
@@ -55,7 +57,8 @@ export default function TimeslotsButtons(slots: Array<Slot>) {
             bookingRequest.isbooked = true;
             updateTimeslot(timeslotRequest);
             createBooking(bookingRequest);
-            forceUpdate();
+            //setChildCounter((prevCounter) => prevCounter + 1);
+            //forceUpdate();
         }
     };
 

@@ -7,6 +7,7 @@
         Guid PatientId,
         Guid TimeslotId,
         Boolean IsBooked,
+        DateTime CreatedAt,
         string? DoctorSpeciality,
         string? DoctorUserName,
         string? TimeslotDatetimeStart,

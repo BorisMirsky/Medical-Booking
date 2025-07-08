@@ -10,7 +10,7 @@ import {
 } from "@/app/Services/service";
 import { Booking } from "@/app/Models/Booking";
 import { Table, Button } from "antd";
-import { useEffect, useState } from "react";     //useReducer
+import { useEffect, useState } from "react";  
 import "../globals.css";
 //import Title from "antd/es/typography/Title";
 //import moment from 'moment';
@@ -22,6 +22,7 @@ import "../globals.css";
 export default function PatientBookings() {
     //const [currentRole, setCurrentRole] = useState("");
     const [bookings, setBookings] = useState<Booking[]>([]);
+
 
     const columns = [
         {
@@ -39,6 +40,16 @@ export default function PatientBookings() {
             dataIndex: 'speciality',
             key: 'speciality',
         },
+        //{
+        //    title: 'Slot Id',
+        //    dataIndex: 'timeslotId',
+        //    key: 'timeslotId',
+        //},
+        {
+            title: 'Статус',
+            dataIndex: 'isBooked',
+            key: 'isBooked',
+        },
         {
             title: 'Начало приёма',
             dataIndex: 'timeslotStart',
@@ -54,8 +65,11 @@ export default function PatientBookings() {
             dataIndex: 'cancel',
             key: 'cancel',
             render: (text: string, record: object) => (
-                <Button onClick={() => cancelBooking(record['key' as keyof typeof record])}>
-                    {"Отмена"}
+                <Button
+                    onClick={() => cancelBooking(record['key' as keyof typeof record])}
+                    disabled={!bookings[record['key' as keyof typeof record]].isBooked} 
+                >
+                      {"Отмена"}
                 </Button>
             ),
         }
@@ -74,13 +88,13 @@ export default function PatientBookings() {
         getBookings();
     }, []);
 
-
     const data = bookings.map((booking: Booking, index: number) => ({
         key: index,
         n: (index + 1),
         username: booking.doctorUserName,
         speciality: booking.doctorSpeciality,
         timeslotId: booking.timeslotId,
+        isBooked: ((booking.isBooked.toString() == "true") ? "Вы записаны" : "Запись отменена"), //booking.isBooked.toString(),
         timeslotStart: booking.timeslotDatetimeStart,
         timeslotStop: booking.timeslotDatetimeStop,
         cancel: ""  
@@ -113,7 +127,7 @@ export default function PatientBookings() {
         bookingRequest.doctorid = bookings[key].doctorId;
         bookingRequest.doctorusername = bookings[key].doctorUserName;
         bookingRequest.isbooked = false;
-        updateTimeslot(timeslotRequest); 
+        updateTimeslot(timeslotRequest);
         createBooking(bookingRequest);
     }  
 

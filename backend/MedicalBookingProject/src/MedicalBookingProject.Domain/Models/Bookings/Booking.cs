@@ -27,6 +27,9 @@ namespace MedicalBookingProject.Domain.Models.Bookings
         [Column("isbooked")]
         public Boolean IsBooked { get; set; }
 
+        [Column("createdat")]
+        public DateTime CreatedAt { get; set; }
+
         public Patient? Patient { get; set; } 
 
         public Doctor? Doctor { get; set; }

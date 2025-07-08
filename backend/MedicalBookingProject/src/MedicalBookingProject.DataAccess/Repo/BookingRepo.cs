@@ -7,7 +7,7 @@ using System.Diagnostics;
 using MedicalBookingProject.Domain.Models.Users;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.Linq;
-//using System.Data.Entity; 
+
 
 
 namespace MedicalBookingProject.DataAccess.Repo
@@ -34,6 +34,8 @@ namespace MedicalBookingProject.DataAccess.Repo
             booking.DoctorId = doctorId; // slot.DoctorId;
             booking.PatientId = patientId;  // slot.PatientId;
             booking.IsBooked = isBooked; // slot.IsBooked;
+            DateTime created = DateTime.Now;
+            booking.CreatedAt = created;
 
             booking.Id = bookingId;
             await _context.Bookings.AddAsync(booking);
@@ -47,10 +49,14 @@ namespace MedicalBookingProject.DataAccess.Repo
             var entities = await _context.Bookings
                .Include(item => item.Doctor)
                .Include(item => item.Timeslot)
-               .Where(item => item.PatientId == patientId && item.IsBooked == true)
-               .OrderByDescending(s => s.TimeslotId)
-               //.LastOrDefaultAsync()
+               .Where(item => item.PatientId == patientId) // && item.IsBooked == true)
+               .GroupBy(item => item.TimeslotId)
+               .Select(g => g.OrderByDescending(item => item.CreatedAt).FirstOrDefault())
                .ToListAsync();
+
+            //Debug.WriteLine("");
+            //Debug.WriteLine(entities);
+            //Debug.WriteLine("");
 
             if (entities.Equals(0))
             {
@@ -58,17 +64,18 @@ namespace MedicalBookingProject.DataAccess.Repo
                 //throw new Exception($"Doctors with speciality {speciality} not found");
             }
 
+            
             var Dtos = entities
                 .Select(b => new BookingDTO(b.Id, b.DoctorId, b.PatientId,
                                             b.TimeslotId, b.IsBooked,
+                                            b.CreatedAt,
                                             b.Doctor.UserName,
                                             b.Doctor.Speciality,
                                             b.Timeslot.DatetimeStart,
                                             b.Timeslot.DatetimeStop))
                 .ToList();
 
-
-            return Dtos;   // entities;    //(List<BookingDTO>)          Dtos
+            return Dtos;  
         }
 
 

@@ -19,6 +19,7 @@ import moment from "moment";
 
 export default function DoctorShedule() {
     //const [currentRole, setCurrentRole] = useState("");
+    //const [state, setState] = useState(0);
     const [doctors, setDoctors] = useState<Doctor[]>([]);
     const [slots, setSlots] = useState<Slot[]>([]);
     const [slots1, setSlots1] = useState<Slot[]>([]);
@@ -203,7 +204,7 @@ export default function DoctorShedule() {
             <div>
                 {
                     (buttonsFlag === 0) ? (
-                        <div></div>
+                        <div> </div>
                     ) : (
                             <div>
                                 <TimeslotsButtons {...slots1} />

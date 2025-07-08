@@ -77,11 +77,11 @@ const items: CollapseProps['items'] = [
 ];
 
 
-const TestCollapseElement: React.FC = () => {
+const CollapseComponent: React.FC = () => {
     return (
         <Collapse accordion items={items} />
     );
 }
 
 
-export default TestCollapseElement;
+export default CollapseComponent;

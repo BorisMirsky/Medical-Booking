@@ -10,10 +10,9 @@ import { Doctor } from "@/app/Models/Doctor";
 import { Slot } from "@/app/Models/Slot";         
 import TimeslotsButtons from "../Components/timeslotsButtonsComponent"; 
 import { Select, Space, DatePicker, Button, Form, FormProps } from 'antd';
-import { useState, useEffect } from "react";  
+import { useState, useEffect} from "react";  
 import dayjs, { Dayjs } from 'dayjs'; 
 import moment from "moment";   
-
 
 
 
@@ -24,6 +23,7 @@ export default function DoctorShedule() {
     const [slots, setSlots] = useState<Slot[]>([]);
     const [slots1, setSlots1] = useState<Slot[]>([]);
     const [buttonsFlag, setButtonsFlag] = useState<number>(0);
+    //const [count, setCount] = useState(0);
 
 
     useEffect(() => {
@@ -207,7 +207,9 @@ export default function DoctorShedule() {
                         <div> </div>
                     ) : (
                             <div>
-                                <TimeslotsButtons {...slots1} />
+                                <TimeslotsButtons
+                                    {...slots1}
+                                />
                             </div>
                     )
                 }

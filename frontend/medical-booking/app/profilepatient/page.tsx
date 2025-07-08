@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 //import ModalComponent from '../Components/ModalComponent';
 //general practitioner - GP
 import CollapseElement from '../Components/patientCollapseComponent';
-import TestCollapseElement from '../Components/testCollapseComponent';
+//import TestCollapseElement from '../Components/testCollapseComponent';
 
 
 export default function profilePatient() {
@@ -66,7 +66,6 @@ export default function profilePatient() {
             <h2>Профиль пациента</h2>
             <br></br>
             <br></br>
-            <TestCollapseElement />
             <br></br>
             {
                 <div >

@@ -196,6 +196,37 @@ export const getBookingsByPatient = async (id: string) => {
 };
 
 
+//bookings by patientId
+export const getBookingsByDoctor = async (id: string) => {
+    //const token = localStorage.getItem('token');
+    const url = "http://localhost:5032/bookings/GetByDoctor?id=" + id;
+    const response = await fetch(url, {
+        headers: {
+            //'Content-type': 'application/json'
+            'Content-Type': 'application/x-www-form-urlencoded'
+            //'Authorization': `Bearer ${token}`,
+        },
+        method: 'GET',
+        mode: 'cors'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Not response", { cause: response });
+            }
+            else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            console.log('getBookingsByDoctor data: ', data);
+            return data;
+        })
+        .catch(function (err) {
+            console.log('Error: ', err);
+        });
+    return response;
+};
+
 
 export const getDoctorById = async (id: string) => {
     const response = await fetch("http://localhost:5032/doctors/" + id, {

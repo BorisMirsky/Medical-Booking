@@ -66,11 +66,6 @@ namespace MedicalBookingProject.DataAccess.Repo
                 .SetProperty(s => s.PatientCame, s => PatientCame)
                 .SetProperty(s => s.PatientIsLate, s => PatientIsLate)
                 .SetProperty(s => s.PatientUnacceptableBehavior, s => PatientUnacceptableBehavior)
-                .SetProperty(s => s.Treatment, s => Treatment)
-                .SetProperty(s => s.MakingDiagnosis, s => MakingDiagnosis)
-                .SetProperty(s => s.ReferralTests, s => ReferralTests)
-                .SetProperty(s => s.VisualExamination, s => VisualExamination)
-                .SetProperty(s => s.FinalCost, s => FinalCost)
                 );
             return Id;
         }

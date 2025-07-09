@@ -2,7 +2,7 @@
 using MedicalBookingProject.Domain.Models.Users;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using MedicalBookingProject.Domain.Models.Appointments;
 
 
 
@@ -37,6 +37,8 @@ namespace MedicalBookingProject.Domain.Models.Shedules
         public Patient? Patient { get; set; } 
 
         public Doctor? Doctor { get; set; } 
+
+        public Appointment? Appointment { get; set; } 
     }
 }
 

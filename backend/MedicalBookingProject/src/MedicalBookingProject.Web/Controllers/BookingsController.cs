@@ -54,8 +54,7 @@ namespace MedicalBookingProject.Web.Controllers
 
 
 
-        [Route("GetByPatient")]      //[Route("GetByPatient{id}")] 
-        //[HttpGet]            //[HttpGet("{id:int}")]
+        [Route("GetByPatient")]     
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
         public async Task<ActionResult<List<BookingDTO>>> GetByPatient([FromQuery] Guid id)
         {
@@ -66,24 +65,23 @@ namespace MedicalBookingProject.Web.Controllers
                 return Ok(bookings);
             }
 
-            return BadRequest(new { message = "there'are not that patient" });
+            return BadRequest(new { message = "there'are not such patient" });
         }
 
 
 
-        //[Route("GetByDoctor")]
-        //[HttpGet("{doctorId}")]
-        ////[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
-        //public async Task<IActionResult> GetByDoctor(Guid doctorId)
-        //{
-        //    List<Booking> bookings = await _bookingService.GetByDoctor(doctorId);
+        [Route("GetByDoctor")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        public async Task<ActionResult<List<BookingDTO>>> GetByDoctor([FromQuery] Guid id)
+        {
+            List<BookingDTO> bookings = await _bookingService.GetByDoctor(id);
 
-        //    if (bookings != null)
-        //    {
-        //        return Ok(bookings);
-        //    }
+            if (bookings != null)
+            {
+                return Ok(bookings);
+            }
 
-        //    return BadRequest(new { message = "there'are not bookings for that doctor" });
-        //}
+            return BadRequest(new { message = "there'are not such doctor" });
+        }
     }
 }

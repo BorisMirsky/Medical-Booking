@@ -11,6 +11,7 @@ namespace MedicalBookingProject.Domain.Models.Bookings
     [Table("bookings")]
     public class Booking
     {
+
         [Key]
         [Column("id")]
         public Guid Id { get; set; }
@@ -36,7 +37,7 @@ namespace MedicalBookingProject.Domain.Models.Bookings
 
         public Appointment? Appointment { get; set; }
 
-        public Timeslot? Timeslot { get; set; } //= null!;
+        public Timeslot? Timeslot { get; set; } 
 
     }
 }

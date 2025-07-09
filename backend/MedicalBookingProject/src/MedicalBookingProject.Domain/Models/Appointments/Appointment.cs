@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 using MedicalBookingProject.Domain.Models.Bookings;
 using MedicalBookingProject.Domain.Models.Shedules;
 using MedicalBookingProject.Domain.Models.Users;
+using MedicalBookingProject.Domain.Models.MedicalRecords;
+
 
 
 
@@ -15,8 +17,6 @@ namespace MedicalBookingProject.Domain.Models.Appointments
         [Key]
         [Column("id")]
         public Guid Id { get; set; }
-
-        public Booking Booking { get; set; }          // ?
 
         [Column("bookingid")]
         public Guid BookingId { get; set; }
@@ -35,34 +35,23 @@ namespace MedicalBookingProject.Domain.Models.Appointments
 
         // behavior of patient
         [Column("patientcame")]
-        public Boolean? PatientCame { get; set; }
+        public Boolean PatientCame { get; set; } = false;
 
         [Column("patientislate")]
-        public Boolean? PatientIsLate { get; set; }
+        public Boolean PatientIsLate { get; set; } = false;
 
         [Column("patientunacceptablebehavior")]
         public String PatientUnacceptableBehavior { get; set; } = String.Empty;
 
-        // services rendered
-        [Column("visualexamination")]
-        public Boolean? VisualExamination { get; set; }
+        // binded enities
+        public Patient? Patient { get; set; }
 
-        [Column("referraltests")]
-        public Boolean? ReferralTests { get; set; }
+        public Doctor? Doctor { get; set; }
 
-        [Column("makingdiagnosis")]
-        public Boolean? MakingDiagnosis { get; set; }
+        public Timeslot? Timeslot { get; set; }
 
-        [Column("treatment")]
-        public Boolean? Treatment { get; set; }
+        public Booking? Booking { get; set; }
 
-        [Column("finalcost")]
-        public int FinalCost { get; set; } = 0;
-
-        public Patient Patient { get; set; }
-
-        public Doctor Doctor { get; set; }
-
-        public Timeslot Timeslot { get; set; }
+        public MedicalRecord? MedicalRecord { get; set; }
     }
 }

@@ -1,13 +1,9 @@
 ﻿import React from 'react';
 import type { CollapseProps } from 'antd';
 import { Collapse } from 'antd';
-//import DoctorRegistration from '../Components/RegistrationComponent';
-//import SelectSlot from '../Components/patientSelectSlotComponent';
+import DoctorCreateAppointment from '../Components/doctorCreateAppointmentComponent';
 import DoctorSheduleWatchOnly from '../Components/doctorSheduleWatchOnlyComponent';
 
-//  Выбрать специальность - выбрать врача - выбрать слот
-//  Все мои записи
-//  Все мои посещения
 
 
 const items: CollapseProps['items'] = [
@@ -18,21 +14,38 @@ const items: CollapseProps['items'] = [
     },
     {
         key: '2',
+        label: 'Мои бронирования. Создать "Приём пациента"',
+        children: <DoctorCreateAppointment></DoctorCreateAppointment>,
+    },
+    {
+        key: '3',
         label: 'Приём пациента',
         children: <p>лылылылы</p>,
     },
     {
-        key: '3',
+        key: '4',
         label: 'Отработанные посещения',
         children: <p>лылылылы</p>,
     },
     {
-        key: '4',
+        key: '5',
         label: 'Статистика врача',
         children: <p>ups...</p>,
     }
 ];
 
-const CollapseElement: React.FC = () => <Collapse accordion items={items} />;
+const CollapseElement: React.FC = () => {
+    //const [activeKey, setActiveKey] = useState(1);
+    //function handleClick(key) {
+    //    setActiveKey(key);
+    //}
+
+
+    return (
+        <Collapse
+            accordion
+            items={items} />
+    );
+};
 
 export default CollapseElement;

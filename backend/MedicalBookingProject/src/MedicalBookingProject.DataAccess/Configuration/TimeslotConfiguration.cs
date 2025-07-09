@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MedicalBookingProject.Domain.Models.Shedules;
 using Microsoft.EntityFrameworkCore;
+using MedicalBookingProject.Domain.Models.Appointments;
 
 
 
@@ -25,6 +26,10 @@ namespace MedicalBookingProject.DataAccess.Configuration
             builder
                .HasMany(d => d.Bookings)
                .WithOne(b => b.Timeslot);
+
+            builder.HasOne(b => b.Appointment)
+                .WithOne(d => d.Timeslot)
+                .HasForeignKey<Appointment>(b => b.TimeslotId);
 
             builder.Property(s => s.DatetimeStart)
                 .IsRequired();

@@ -46,8 +46,13 @@ namespace MedicalBookingProject.DataAccess.Repo
             medRec.PatientId = app.PatientId;
             medRec.DoctorId = app.DoctorId; 
             Timeslot slot = await slotRepo.Get(app.TimeslotId);
-            medRec.SlotStart = slot.DatetimeStart;
-            medRec.SlotStop = slot.DatetimeStop;
+            //medRec.  Treatment = "";
+            //medRec.MakingDiagnosis = "";
+            medRec.ReferralTests = "";
+            medRec.VisualExamination = "";
+            medRec.FinalCost = 0;
+            //medRec.SlotStart = slot.Bookings.   DatetimeStart;
+            //medRec.SlotStop = slot.DatetimeStop;
             await _context.MedicalRecords.AddAsync(medRec);
             await _context.SaveChangesAsync();
             return id;

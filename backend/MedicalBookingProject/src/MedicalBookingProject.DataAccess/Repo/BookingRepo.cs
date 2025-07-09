@@ -54,16 +54,11 @@ namespace MedicalBookingProject.DataAccess.Repo
                .Select(g => g.OrderByDescending(item => item.CreatedAt).FirstOrDefault())
                .ToListAsync();
 
-            //Debug.WriteLine("");
-            //Debug.WriteLine(entities);
-            //Debug.WriteLine("");
-
             if (entities.Equals(0))
             {
                 Debug.WriteLine("there are not shit bookings for that patient");
                 //throw new Exception($"Doctors with speciality {speciality} not found");
             }
-
             
             var Dtos = entities
                 .Select(b => new BookingDTO(b.Id, b.DoctorId, b.PatientId,
@@ -71,6 +66,7 @@ namespace MedicalBookingProject.DataAccess.Repo
                                             b.CreatedAt,
                                             b.Doctor.UserName,
                                             b.Doctor.Speciality,
+                                            //b.Patient.UserName,
                                             b.Timeslot.DatetimeStart,
                                             b.Timeslot.DatetimeStop))
                 .ToList();
@@ -79,17 +75,34 @@ namespace MedicalBookingProject.DataAccess.Repo
         }
 
 
-        public async Task<List<Booking>> GetByDoctor(Guid doctortId)
+        public async Task<List<BookingDTO>> GetByDoctor(Guid doctorId)
         {
             var entities = await _context.Bookings
-               .Where(item => item.DoctorId == doctortId && item.IsBooked == true)
+               .Include(item => item.Doctor)
+               .Include(item => item.Timeslot)
+               .Where(item => item.DoctorId == doctorId) // && item.IsBooked == true)
+               .GroupBy(item => item.TimeslotId)
+               .Select(g => g.OrderByDescending(item => item.CreatedAt).FirstOrDefault())
                .ToListAsync();
-            if (entities.Count() == 0)
+
+            if (entities.Equals(0))
             {
-                Debug.WriteLine("there'are not bookings for that doctor");
+                Debug.WriteLine("there are not shit bookings for that patient");
                 //throw new Exception($"Doctors with speciality {speciality} not found");
             }
-            return entities;
+
+            var Dtos = entities
+                .Select(b => new BookingDTO(b.Id, b.DoctorId, b.PatientId,
+                                            b.TimeslotId, b.IsBooked,
+                                            b.CreatedAt,
+                                            b.Doctor.UserName,
+                                            b.Doctor.Speciality,
+                                            //b.Patient.UserName,
+                                            b.Timeslot.DatetimeStart,
+                                            b.Timeslot.DatetimeStop))
+                .ToList();
+
+            return Dtos;
         }
     }
 }

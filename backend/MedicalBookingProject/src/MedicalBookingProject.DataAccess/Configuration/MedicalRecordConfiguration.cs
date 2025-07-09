@@ -1,45 +1,46 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MedicalBookingProject.Domain.Models.Bookings;
 using Microsoft.EntityFrameworkCore;
-using MedicalBookingProject.Domain.Models.MedicalRecords;
 using MedicalBookingProject.Domain.Models.Appointments;
+using MedicalBookingProject.Domain.Models.MedicalRecords;
+using MedicalBookingProject.Domain.Models.Shedules;
+
+
 
 
 
 namespace MedicalBookingProject.DataAccess.Configuration
 {
-    public class BookingConfiguration : IEntityTypeConfiguration<Booking>
+    public class MedicalRecordConfiguration : IEntityTypeConfiguration<MedicalRecord>
     {
-        public void Configure(EntityTypeBuilder<Booking> builder)
+        public void Configure(EntityTypeBuilder<MedicalRecord> builder)
         {
             builder.HasKey(b => b.Id);
 
             builder.HasOne(b => b.Doctor)
-                .WithMany(d => d.Bookings)
+                .WithMany(d => d.MedicalRecords)
                 .HasForeignKey(b => b.DoctorId)
                 .IsRequired();
 
             builder.HasOne(b => b.Patient)
-                .WithMany(d => d.Bookings)
+                .WithMany(d => d.MedicalRecords)
                 .HasForeignKey(b => b.PatientId)
                 .IsRequired();
 
-            builder.HasOne(b => b.Timeslot)
-                .WithMany(d => d.Bookings)
-                .HasForeignKey(b => b.TimeslotId)
-                .IsRequired();
-
             builder.HasOne(b => b.Appointment)
-                .WithOne(d => d.Booking)
-                .HasForeignKey<Appointment>(b => b.BookingId);
+                .WithOne(d => d.MedicalRecord)
+                .HasForeignKey<Appointment>(b => b.MedicalCardId);
+
+            //builder.HasOne(b => b.Timeslot)
+                //.WithOne(d => d.Appointment.MedicalCardId)
+                //.HasForeignKey<Timeslot>(b => b.MedicalCardId);
 
             builder.Property(b => b.DoctorId)
                 .IsRequired();
             builder.Property(b => b.PatientId)
                 .IsRequired();
-            builder.Property(b => b.TimeslotId)
-                .IsRequired();
-            builder.Property(b => b.IsBooked);
+            builder.Property(b => b.TimeslotId);
+                //.IsRequired();
         }
     }
 }

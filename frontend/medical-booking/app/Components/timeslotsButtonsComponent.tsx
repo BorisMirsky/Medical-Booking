@@ -47,11 +47,11 @@ export default function TimeslotsButtons(slots: Array<Slot>) {
         if (!value.isBooked)
         {
             timeslotRequest.slotid = value.id;
-            timeslotRequest.patientid = "192A59D9-43DF-43EC-943A-8E4290386B1E";
+            timeslotRequest.patientid = "A157E16F-26EA-44FB-B01E-FD26A4ACDDCD";
             timeslotRequest.isbooked = true;
             //
             bookingRequest.slotid = value.id;
-            bookingRequest.patientid = "192A59D9-43DF-43EC-943A-8E4290386B1E";
+            bookingRequest.patientid = "A157E16F-26EA-44FB-B01E-FD26A4ACDDCD";
             bookingRequest.doctorid = value.doctorId;
             //bookingRequest.doctorusername = value.doctorId;
             bookingRequest.isbooked = true;

@@ -3,6 +3,7 @@ using MedicalBookingProject.Domain.Models.Bookings;
 using Microsoft.EntityFrameworkCore;
 using MedicalBookingProject.Domain.Models.Appointments;
 using MedicalBookingProject.Domain.Models.MedicalRecords;
+using MedicalBookingProject.Domain.Models.Shedules;
 
 
 
@@ -29,12 +30,13 @@ namespace MedicalBookingProject.DataAccess.Configuration
             //.HasForeignKey<Booking>(b => b.Appointment.Id);      // ?
 
             builder.HasOne(b => b.Timeslot)
-                .WithOne(d => d.Appointment);
+                .WithOne(d => d.Appointment)
+                .HasForeignKey<Timeslot>(b => b.AppointmentId);
 
             builder.HasOne(b => b.MedicalRecord)
                 .WithOne(d => d.Appointment)
-                .HasForeignKey<MedicalRecord>(b => b.AppointmentId)
-                .IsRequired();
+                .HasForeignKey<MedicalRecord>(b => b.AppointmentId);
+                //.IsRequired();
 
             builder.Property(a => a.DoctorId)
                 .IsRequired();
@@ -42,7 +44,7 @@ namespace MedicalBookingProject.DataAccess.Configuration
                 .IsRequired();
             builder.Property(a => a.TimeslotId)
                 .IsRequired();
-            builder.Property(a => a.MedicalCardId);
+            builder.Property(a => a.MedicalRecordId);
             builder.Property(a => a.PatientCame);
             builder.Property(a => a.PatientIsLate);
             builder.Property(a => a.PatientUnacceptableBehavior);

@@ -30,18 +30,18 @@ namespace MedicalBookingProject.Domain.Models.Appointments
         [Column("slotid")]
         public Guid TimeslotId { get; set; }
 
-        [Column("medicalcardid")]
-        public Guid MedicalCardId { get; set; }
+        [Column("medicalrecordid")]
+        public Guid? MedicalRecordId { get; set; }
 
         // behavior of patient
         [Column("patientcame")]
-        public Boolean PatientCame { get; set; } = false;
+        public string? PatientCame { get; set; } = String.Empty;
 
         [Column("patientislate")]
-        public Boolean PatientIsLate { get; set; } = false;
+        public string? PatientIsLate { get; set; } = String.Empty;
 
         [Column("patientunacceptablebehavior")]
-        public String PatientUnacceptableBehavior { get; set; } = String.Empty;
+        public String? PatientUnacceptableBehavior { get; set; } = String.Empty;
 
         // binded enities
         public Patient? Patient { get; set; }

@@ -13,8 +13,7 @@ namespace MedicalBookingProject.Domain.Models.Users
     public class Patient
     {
         public Patient()
-        {
-        }
+        { }
 
         public Patient(string email, string password, 
                        string rolename, string gender, 

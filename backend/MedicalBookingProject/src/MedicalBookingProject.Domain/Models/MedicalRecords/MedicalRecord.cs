@@ -25,13 +25,13 @@ namespace MedicalBookingProject.Domain.Models.MedicalRecords
         public Guid DoctorId { get; set; }
 
         [Column("appointmentid")]
-        public Guid AppointmentId { get; set; }
+        public Guid? AppointmentId { get; set; }
 
         //[Column("bookingid")]
         //public Guid BookingId { get; set; }
 
         [Column("slotid")]
-        public Guid TimeslotId { get; set; } = Guid.Empty;
+        public Guid TimeslotId { get; set; } //= Guid.Empty;
 
         // to fill form of med. cart
         [Column("symptoms")]
@@ -57,7 +57,7 @@ namespace MedicalBookingProject.Domain.Models.MedicalRecords
 
         public Doctor? Doctor { get; set; }
 
-        //public Timeslot? Timeslot { get; set; }
+        public Timeslot? Timeslot { get; set; }
 
         public Appointment? Appointment { get; set; }
 

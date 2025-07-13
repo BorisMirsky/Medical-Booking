@@ -17,11 +17,16 @@ import "../globals.css";
 
 
 
+interface DoctorCreateAppointmentProps {
+    onNext: (booking: Booking) => void;
+}
 
-
-export default function DoctorCreateAppointment() {
+//const Element1: React.FC<Element1Props> = ({ onNext }) => {
+//export default function DoctorCreateAppointment() {
+const DoctorCreateAppointment: React.FC<DoctorCreateAppointmentProps> = ({ onNext }) => {
     //const [currentRole, setCurrentRole] = useState("");
     const [bookings, setBookings] = useState<Booking[]>([]);
+    //const [dataAppointment, setdataAppointment] = useState<Booking>(); // undefined);
 
 
     const columns = [
@@ -51,6 +56,7 @@ export default function DoctorCreateAppointment() {
             key: 'cancel',
             render: (text: string, record: object) => (
                 <Button
+                    //onClick={() => onNext(record['key' as keyof typeof record])}
                     onClick={() => createAppointment(record['key' as keyof typeof record])}
                     //disabled={!bookings[record['key' as keyof typeof record]].isBooked}
                 >
@@ -76,7 +82,7 @@ export default function DoctorCreateAppointment() {
     const data = bookings.map((booking: Booking, index: number) => ({
         key: index,
         n: (index + 1),
-        username: booking.patientId,
+        username: booking.patientUserName,
         timeslotStart: booking.timeslotDatetimeStart,
         timeslotStop: booking.timeslotDatetimeStop,
         create: ""
@@ -101,6 +107,8 @@ export default function DoctorCreateAppointment() {
 
     const createAppointment = (key: number) => {
         console.log('createAppointment ', bookings[key]);
+        //setdataAppointment(bookings[key]);
+        onNext(bookings[key]);
     }
 
 
@@ -125,3 +133,4 @@ export default function DoctorCreateAppointment() {
 
 
 
+export default DoctorCreateAppointment;

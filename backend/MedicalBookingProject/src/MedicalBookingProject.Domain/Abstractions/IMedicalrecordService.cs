@@ -5,14 +5,18 @@ using MedicalBookingProject.Domain.Models.MedicalRecords;
 
 namespace MedicalBookingProject.Domain.Abstractions
 {
-    public interface IMedicalrecordService
+    public interface IMedicalRecordService
     {
-        Task<Guid> CreateMedicalRecord(string Diagnosis,
+        Task<Guid> CreateMedicalRecord(Guid PatientId,
+                                       Guid TimeslotId,
+                                       Guid DoctorId,
+                                       Guid? AppointmentId,
+                                       string Diagnosis,
                                        string Symptoms,
                                        string PrescribedTreatment,
-                                       Guid AppointmentId);
-                                       //Guid PatientId,
-                                       //Guid DoctorId);
+                                       string ReferralTests,
+                                       string VisualExamination,
+                                       int FinalCost);
 
         Task<MedicalRecord> GetMedicalRecord(Guid id);
 

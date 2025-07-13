@@ -6,7 +6,7 @@
     timeslotId: string;
     doctorSpeciality: string;
     doctorUserName: string;
-    //patientUserName: string;
+    patientUserName: string;
     timeslotDatetimeStart: string;
     timeslotDatetimeStop: string;
 }

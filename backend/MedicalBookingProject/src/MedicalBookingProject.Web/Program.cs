@@ -30,8 +30,8 @@ builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<IBookingRepo, BookingRepo>();
 builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 builder.Services.AddScoped<IAppointmentRepo, AppointmentRepo>();
-builder.Services.AddScoped<IMedicalrecordService, MedicalrecordService>();
-builder.Services.AddScoped<IMedicalreportRepo, MedicalreportRepo>();
+builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
+builder.Services.AddScoped<IMedicalReportRepo, MedicalReportRepo>();
 
 builder.Services.AddAuthentication(opt =>
 {

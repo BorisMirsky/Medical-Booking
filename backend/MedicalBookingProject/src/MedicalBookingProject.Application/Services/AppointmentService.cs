@@ -19,29 +19,26 @@ namespace MedicalBookingProject.Application.Services
         }
 
 
-        public async Task<Guid> CreateAppointment(Guid bookingId)
+        public async Task<Guid> CreateAppointment(Guid doctorId, Guid patientId,
+                                    Guid timeslotId, Guid bookingId,
+                                     string? patientCame, string? patientIsLate,
+                                     string? patientUnacceptableBehavior)
         {
-            return await _appointmentRepo.Create(bookingId);
+            return await _appointmentRepo.Create(doctorId, patientId,
+                                    timeslotId, bookingId,
+                                     patientCame, patientIsLate,
+                                      patientUnacceptableBehavior);
         }       
 
-         public async Task<Appointment> GetAppointment(Guid id)
-        {
-            return await _appointmentRepo.Get(id);
-        }
+        // public async Task<Appointment> GetAppointment(Guid id)
+        //{
+        //    return await _appointmentRepo.Get(id);
+        //}
         
-        public async Task<Guid> UpdateAppointment(Guid Id, Boolean? PatientCame, 
-                                     Boolean? PatientIsLate,
-                                     string? PatientUnacceptableBehavior,
-                                     Boolean? Treatment, Boolean? MakingDiagnosis,
-                                     Boolean? ReferralTests, Boolean? VisualExaminationPatient,
-                                     int FinalCost)
-        {
-            await _appointmentRepo.Update(Id, PatientCame, PatientIsLate,
-                                     PatientUnacceptableBehavior,
-                                     Treatment, MakingDiagnosis,
-                                     ReferralTests, VisualExaminationPatient,
-                                     FinalCost);
-            return Id;
-        }
+        //public async Task<Guid> UpdateAppointment(Guid Id)
+        //{
+        //    await _appointmentRepo.Update(Id);
+        //    return Id;
+        //}
     }
 }

@@ -3,14 +3,18 @@
 
 namespace MedicalBookingProject.Domain.Abstractions
 {
-    public interface IMedicalreportRepo
+    public interface IMedicalReportRepo
     {
-        Task<Guid> Create(string Diagnosis,
-                            string Symptoms,
-                            string PrescribedTreatment,
-                            Guid AppointmentId);
-                            //Guid DoctorId,
-                            //Guid PatientId);
+        Task<Guid> Create(Guid PatientId,
+                                       Guid TimeslotId,
+                                       Guid DoctorId,
+                                       Guid? AppointmentId,
+                                       string Diagnosis,
+                                       string Symptoms,
+                                       string PrescribedTreatment,
+                                       string ReferralTests,
+                                       string VisualExamination,
+                                       int FinalCost);
 
         Task<MedicalRecord> Get(Guid id);
 

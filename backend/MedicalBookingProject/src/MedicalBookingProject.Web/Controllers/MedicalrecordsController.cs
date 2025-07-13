@@ -14,27 +14,34 @@ using MedicalBookingProject.Domain.Models.Shedules;
 
 namespace MedicalBookingProject.Web.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class MedicalrecordsController : ControllerBase
+    [Route("[controller]")]
+    public class MedicalRecordsController : ControllerBase
     {
 
-        private readonly IMedicalrecordService _medicalrecordService;
+        private readonly IMedicalRecordService _medicalRecordService;
 
-        public MedicalrecordsController(IMedicalrecordService medicalrecordService)
+        public MedicalRecordsController(IMedicalRecordService medicalRecordService)
         {
-            _medicalrecordService = medicalrecordService;
+            _medicalRecordService = medicalRecordService;
         }
 
 
-        [HttpPost]   //Task<ActionResult<MedicalRecordResponse>> 
+        [HttpPost] 
+        [Route("CreateMedicalRecord")]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "doctor")]
-        public async void CreateMedicalrecord([FromBody] MedicalRecordRequest request)
+        public async void CreateMedicalRecord([FromBody] MedicalRecordRequest request)
         {
-            await _medicalrecordService.CreateMedicalRecord(request.Diagnosis, 
+            await _medicalRecordService.CreateMedicalRecord(request.PatientId, 
+                                                            request.TimeslotId, 
+                                                            request.DoctorId, 
+                                                            request.AppointmentId, 
+                                                            request.Diagnosis, 
                                                             request.Symptoms,
                                                             request.PrescribedTreatment,
-                                                            request.AppointmentId
+                                                            request.ReferralTests,
+                                                            request.VisualExamination,
+                                                            request.FinalCost
                                                             );
         }
 
@@ -42,7 +49,7 @@ namespace MedicalBookingProject.Web.Controllers
         [HttpGet]
         public async Task<ActionResult<MedicalRecord>> GetById(Guid id)
         {
-            MedicalRecord medRec = await _medicalrecordService.GetMedicalRecord(id);
+            MedicalRecord medRec = await _medicalRecordService.GetMedicalRecord(id);
             return Ok(medRec);
         }
 
@@ -50,7 +57,7 @@ namespace MedicalBookingProject.Web.Controllers
         [HttpPut]
         public async Task<ActionResult<Guid>> UpdateMedicalRecord([FromBody] MedicalRecordRequest request)
         {
-            await _medicalrecordService.UpdateMedicalRecord(request.Id, request.Symptoms,
+            await _medicalRecordService.UpdateMedicalRecord(request.Id, request.Symptoms,
                                                             request.Diagnosis, request.PrescribedTreatment);
             return Ok(request.Id);
         }

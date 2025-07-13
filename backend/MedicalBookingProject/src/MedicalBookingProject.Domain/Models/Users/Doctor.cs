@@ -12,9 +12,9 @@ namespace MedicalBookingProject.Domain.Models.Users
     [Table("users_doctor")]
     public class Doctor
     {
+
         public Doctor()
-        {
-        }
+        { }
 
         public Doctor(string email, string password, string rolename,
                   string speciality, string username, string gender)

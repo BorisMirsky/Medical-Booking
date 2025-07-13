@@ -15,12 +15,12 @@ namespace MedicalBookingProject.DataAccess.Repo
     public class BookingRepo : IBookingRepo
     {
         private readonly MedicalBookingDbContext _context;
-        public TimeslotRepo slotRepo;
+        //public TimeslotRepo slotRepo;
 
         public BookingRepo(MedicalBookingDbContext context)
         {
             _context = context;
-            slotRepo = new TimeslotRepo(_context);
+            //slotRepo = new TimeslotRepo(_context);
         }
 
 
@@ -49,6 +49,7 @@ namespace MedicalBookingProject.DataAccess.Repo
             var entities = await _context.Bookings
                .Include(item => item.Doctor)
                .Include(item => item.Timeslot)
+               .Include(item => item.Patient)
                .Where(item => item.PatientId == patientId) // && item.IsBooked == true)
                .GroupBy(item => item.TimeslotId)
                .Select(g => g.OrderByDescending(item => item.CreatedAt).FirstOrDefault())
@@ -64,11 +65,11 @@ namespace MedicalBookingProject.DataAccess.Repo
                 .Select(b => new BookingDTO(b.Id, b.DoctorId, b.PatientId,
                                             b.TimeslotId, b.IsBooked,
                                             b.CreatedAt,
-                                            b.Doctor.UserName,
-                                            b.Doctor.Speciality,
-                                            //b.Patient.UserName,
-                                            b.Timeslot.DatetimeStart,
-                                            b.Timeslot.DatetimeStop))
+                                            b.Doctor?.UserName,
+                                            b.Doctor?.Speciality,
+                                            b.Patient?.UserName,
+                                            b.Timeslot?.DatetimeStart,
+                                            b.Timeslot?.DatetimeStop))
                 .ToList();
 
             return Dtos;  
@@ -80,6 +81,7 @@ namespace MedicalBookingProject.DataAccess.Repo
             var entities = await _context.Bookings
                .Include(item => item.Doctor)
                .Include(item => item.Timeslot)
+               .Include(item => item.Patient)
                .Where(item => item.DoctorId == doctorId) // && item.IsBooked == true)
                .GroupBy(item => item.TimeslotId)
                .Select(g => g.OrderByDescending(item => item.CreatedAt).FirstOrDefault())
@@ -95,11 +97,11 @@ namespace MedicalBookingProject.DataAccess.Repo
                 .Select(b => new BookingDTO(b.Id, b.DoctorId, b.PatientId,
                                             b.TimeslotId, b.IsBooked,
                                             b.CreatedAt,
-                                            b.Doctor.UserName,
-                                            b.Doctor.Speciality,
-                                            //b.Patient.UserName,
-                                            b.Timeslot.DatetimeStart,
-                                            b.Timeslot.DatetimeStop))
+                                            b.Doctor?.UserName,
+                                            b.Doctor?.Speciality,
+                                            b.Patient?.UserName,
+                                            b.Timeslot?.DatetimeStart,
+                                            b.Timeslot?.DatetimeStop))
                 .ToList();
 
             return Dtos;

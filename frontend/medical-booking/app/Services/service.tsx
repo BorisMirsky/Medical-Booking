@@ -72,7 +72,17 @@ export interface BookingCreateRequest {
     //bookingorcanceldatetime?: string;
 }
 
-
+export interface AppointmentRequest {
+    //id: string;
+    bookingid: string;
+    doctorid: string;
+    patientid: string;
+    timeslotid: string;
+    medicalrecordid: string;
+    patientcame?: string;
+    patientislate?: string;
+    patientunacceptablebehavior?: string;
+}
 
 // doctors by speciality
 export const getDoctorsBySpeciality = async (speciality: string) => {
@@ -423,6 +433,31 @@ export const createBooking = async (request: BookingCreateRequest) => {
     }); 
 }
 
+
+export const createAppointment = async (request: AppointmentRequest) => {
+    //const token = localStorage.getItem('token');
+    let alertText: string = "";
+    await fetch("http://localhost:5032/appointments/createappointment", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            //'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(request)
+    }).then(response => {
+        if (!response.ok) {
+            alert("Ошибка создания 'Посещения пациента'");
+            const err = new Error("HTTP status code: " + response.status);
+            throw err
+        }
+        else {
+            alertText = "'Посещениe пациента' создано";
+            alert(alertText);
+        }
+    }).catch(function (err) {
+        console.log('Error: ', err);
+    });
+}
 
 
 // need ?

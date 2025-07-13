@@ -15,8 +15,8 @@ using MedicalBookingProject.Domain.Models.Shedules;
 
 namespace MedicalBookingProject.Web.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class AppointmentsController : ControllerBase
     {
 
@@ -28,32 +28,31 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
+        [Route("CreateAppointment")]
         [HttpPost]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "doctor")]
-        public async Task<ActionResult<AppointmentResponse>> CreateAppointment([FromBody] AppointmentRequest request)
+        public async Task<ActionResult> CreateAppointment([FromBody] AppointmentRequest request)
         {
-            var app = await _appointmentService.CreateAppointment(request.BookingId);
-            return Ok(app);
+            await _appointmentService.CreateAppointment(request.BookingId, request.DoctorId,
+                                                  request.PatientId, request.TimeslotId, request.PatientCame,
+                                                  request.PatientIsLate, request.PatientUnacceptableBehavior);
+            return Ok();
         }
 
 
-        [HttpGet]
-        public async Task<ActionResult<Appointment>> GetById(Guid id)
-        {
-            Appointment app = await _appointmentService.GetAppointment(id);
-            return Ok(app);
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<Appointment>> GetById(Guid id)
+        //{
+        //    Appointment app = await _appointmentService.GetAppointment(id);
+        //    return Ok(app);
+        //}
 
 
-        [HttpPut]
-        public async Task<ActionResult<Guid>> PatientUnacceptableBehavior([FromBody] AppointmentRequest request)
-        {
-            await _appointmentService.UpdateAppointment(request.Id, request.PatientCame, request.PatientIsLate,
-                                                        request.PatientUnacceptableBehavior,
-                                                        request.Treatment, request.MakingDiagnosis,
-                                                        request.ReferralTests, request.VisualExaminationPatient,
-                                                        request.FinalCost);
-            return Ok(request.Id);
-        }
+        //[HttpPut]
+        //public async Task<ActionResult<Guid>> PatientUnacceptableBehavior([FromBody] AppointmentRequest request)
+        //{
+        //    await _appointmentService.UpdateAppointment(request.Id);
+        //    return Ok(request.Id);
+        //}
     }
 }

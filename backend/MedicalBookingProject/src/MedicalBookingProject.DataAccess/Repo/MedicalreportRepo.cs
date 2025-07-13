@@ -13,44 +13,47 @@ using System.Globalization;
 
 namespace MedicalBookingProject.DataAccess.Repo
 {
-    public class MedicalreportRepo : IMedicalreportRepo
+    public class MedicalReportRepo : IMedicalReportRepo
     {
         private readonly MedicalBookingDbContext _context;
-        public TimeslotRepo slotRepo;
-        public BookingRepo bookingRepo;
-        public AppointmentRepo appointmentRepo;
+        //public TimeslotRepo slotRepo;
+        //public BookingRepo bookingRepo;
+        //public AppointmentRepo appointmentRepo;
 
-        public MedicalreportRepo(MedicalBookingDbContext context)
+        public MedicalReportRepo(MedicalBookingDbContext context)
         {
             _context = context;
-            slotRepo = new TimeslotRepo(_context);
-            bookingRepo = new BookingRepo(_context);
-            appointmentRepo = new AppointmentRepo(_context);
+            //slotRepo = new TimeslotRepo(_context);
+            //bookingRepo = new BookingRepo(_context);
+            //appointmentRepo = new AppointmentRepo(_context);
         }
 
-        public async Task<Guid> Create(string? Diagnosis,
-                                       string? Symptoms,
-                                       string? PrescribedTreatment,
-                                       Guid AppointmentId)
+        public async Task<Guid> Create(Guid PatientId,
+                                       Guid TimeslotId,
+                                       Guid DoctorId,
+                                       Guid? AppointmentId,
+                                       string Diagnosis,
+                                       string Symptoms,
+                                       string PrescribedTreatment,
+                                       string ReferralTests,
+                                       string VisualExamination,
+                                       int FinalCost)
         {
-            //ArgumentNullException.ThrowIfNull(bookingId);
             Guid id = Guid.NewGuid();
-            //Booking booking = await bookingRepo.GetOneBooking(bookingId);
             MedicalRecord medRec = new();
             medRec.Id = id;
             medRec.PrescribedTreatment = PrescribedTreatment;
             medRec.Diagnosis = Diagnosis;
             medRec.Symptoms = Symptoms;
             medRec.AppointmentId = AppointmentId;
-            Appointment app = await appointmentRepo.Get(AppointmentId);
-            medRec.PatientId = app.PatientId;
-            medRec.DoctorId = app.DoctorId; 
-            Timeslot slot = await slotRepo.Get(app.TimeslotId);
-            //medRec.  Treatment = "";
-            //medRec.MakingDiagnosis = "";
-            medRec.ReferralTests = "";
-            medRec.VisualExamination = "";
-            medRec.FinalCost = 0;
+            medRec.PatientId = PatientId;
+            medRec.DoctorId = DoctorId; 
+            medRec.ReferralTests = ReferralTests;
+            medRec.VisualExamination = VisualExamination;
+            medRec.FinalCost = FinalCost;
+            medRec.Diagnosis = Diagnosis;
+            medRec.Symptoms = Symptoms;
+            medRec.PrescribedTreatment = PrescribedTreatment;
             //medRec.SlotStart = slot.Bookings.   DatetimeStart;
             //medRec.SlotStop = slot.DatetimeStop;
             await _context.MedicalRecords.AddAsync(medRec);

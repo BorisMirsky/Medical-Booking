@@ -10,7 +10,7 @@
         DateTime CreatedAt,
         string? DoctorSpeciality,
         string? DoctorUserName,
-        //string? PatientUserName,
+        string? PatientUserName,
         string? TimeslotDatetimeStart,
         string? TimeslotDatetimeStop
     );

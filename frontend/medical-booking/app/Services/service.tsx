@@ -84,6 +84,21 @@ export interface AppointmentRequest {
     patientunacceptablebehavior?: string;
 }
 
+export interface MedicalCardRequest {
+    //id: string;
+    bookingid: string;
+    doctorid: string;
+    patientid: string;
+    timeslotid: string;
+    appointmentid: string;
+    symptoms: string;
+    diagnosis: string;
+    prescribedtreatment: string;
+    visualexamination: string;
+    referraltests: string;
+    finalcost: string;
+}
+
 // doctors by speciality
 export const getDoctorsBySpeciality = async (speciality: string) => {
     //const token = localStorage.getItem('token');

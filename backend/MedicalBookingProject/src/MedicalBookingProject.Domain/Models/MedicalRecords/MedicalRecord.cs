@@ -27,8 +27,8 @@ namespace MedicalBookingProject.Domain.Models.MedicalRecords
         [Column("appointmentid")]
         public Guid? AppointmentId { get; set; }
 
-        //[Column("bookingid")]
-        //public Guid BookingId { get; set; }
+        [Column("bookingid")]
+        public Guid BookingId { get; set; }
 
         [Column("slotid")]
         public Guid TimeslotId { get; set; } //= Guid.Empty;
@@ -61,6 +61,6 @@ namespace MedicalBookingProject.Domain.Models.MedicalRecords
 
         public Appointment? Appointment { get; set; }
 
-        //public Booking? Booking { get; set; }
+        public Booking? Booking { get; set; }
     }
 }

@@ -4,13 +4,11 @@
 
 import React from 'react';
 import {
-    createAppointment
-    //getBookingsByDoctor
-    //updateTimeslot, TimeSlotUpdateRequest,
-    //BookingCreateRequest, createBooking
+    createAppointment, AppointmentRequest, MedicalCardRequest
 } from "@/app/Services/service";
 import { Booking } from "@/app/Models/Booking";
 import { Card, FormProps, Button, Form, Input, Space } from "antd";
+import FormAppointment from "../Components/formCreateAppointmentComponent"; 
 //const { Option } = Select;
 //import { useEffect, useState } from "react";
 import "../globals.css";
@@ -23,18 +21,17 @@ interface DoctorAppointmentProps {
 }
 
 
-export interface AppointmentRequest {
-    //id: string;
-    bookingid: string;
-    doctorid: string;
-    patientid: string;
-    timeslotid: string;
-    medicalcardid: string;
-    patientcame?: string;
-    patientislate?: string;
-    patientunacceptablebehavior?: string;
-}
-
+//export interface AppointmentRequest {
+//    //id: string;
+//    bookingid: string;
+//    doctorid: string;
+//    patientid: string;
+//    timeslotid: string;
+//    medicalcardid: string;
+//    patientcame?: string;
+//    patientislate?: string;
+//    patientunacceptablebehavior?: string;
+//}
 
 
 const DoctorAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
@@ -58,7 +55,6 @@ const DoctorAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
         console.log('initialValues ', initialValues)
     }
 
-    const label = "My Long Special,<br />Very Special String";
 
     if (!booking) {
         return <div>Выберите бронирование в предыдущей панели</div>;
@@ -140,7 +136,7 @@ const DoctorAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
                                 </Form.Item>
 
                                 <Form.Item<AppointmentRequest>
-                                    label={label}
+                                    label={<p style = {{ fontSize: "13px" }}> Неподобающее <br /> поведение </p>}
                                     name="patientunacceptablebehavior"
                                 >
                                     <Input placeholder="Нет" />
@@ -167,13 +163,127 @@ const DoctorAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
 
                         </div>
                     </Card>
+                    
                     <Card
                         title="Медицинская карта пациента"
-                        //extra={<a href="#">More</a>}
-                        style={{ width: 300 }}
+                        style={{ width: 500 }}
                     >
-                        <div></div>
+                        <div>
+                            <Form
+                                name="basic"
+                                labelCol={{ span: 8 }}
+                                wrapperCol={{ span: 16 }}
+                                style={{ maxWidth: 800 }}
+                                initialValues={initialValues}
+                                onFinish={onFinish}
+                                onFinishFailed={onFinishFailed}
+                                autoComplete="off"
+                                form={form}
+                            >
+                                <Form.Item<MedicalCardRequest>
+                                    label="BookingId"
+                                    name="bookingid"
+                                >
+                                    <Input disabled={true} />
+                                </Form.Item>
+
+                                <Form.Item<MedicalCardRequest>
+                                    label="DoctorId"
+                                    name="doctorid"
+                                >
+                                    <Input disabled={true} />
+                                </Form.Item>
+
+                                <Form.Item<MedicalCardRequest>
+                                    label="PatientId"
+                                    name="patientid"
+                                >
+                                    <Input disabled={true} />
+                                </Form.Item>
+
+                                <Form.Item<MedicalCardRequest>
+                                    label="TimeslotId"
+                                    name="timeslotid"
+                                >
+                                    <Input disabled={true} />
+                                </Form.Item>
+
+                                <Form.Item<MedicalCardRequest>
+                                    label="Симптомы"
+                                    name="symptoms"
+
+                                >
+                                    <Input />
+                                </Form.Item>
+
+                                <Form.Item<MedicalCardRequest>
+                                    label="Диагноз"
+                                    name="diagnosis"
+                                >
+                                    <Input />
+                                </Form.Item>
+
+                                <Form.Item<MedicalCardRequest>
+                                    label="Назначенное лечение"
+                                    name="prescribedtreatment"
+                                >
+                                    <Input placeholder="Да" />
+                                </Form.Item>
+
+                                <Form.Item<MedicalCardRequest>
+                                    label="Осмотр"
+                                    name="visualexamination"
+                                >
+                                    <Input placeholder="Да" />
+                                </Form.Item>
+
+                                <Form.Item<MedicalCardRequest>
+                                    label="Дополнительные анализы"
+                                    name="referraltests"
+                                >
+                                    <Input placeholder="Да" />
+                                </Form.Item>
+
+                                <Form.Item<MedicalCardRequest>
+                                    label="Стоимость приёма"
+                                    name="finalcost"
+                                >
+                                    <Input placeholder="00000.00" />
+                                </Form.Item>
+
+                                <br></br>
+                                <br></br>
+
+                                <Form.Item label={null}>
+                                    <Space size='large'>
+                                        <Button
+                                            type="primary"
+                                            htmlType="submit"
+                                        >
+                                            Создать Запись в мед. карту
+                                        </Button>
+
+                                        <Button htmlType="reset">
+                                            Сбросить
+                                        </Button>
+                                    </Space>
+                                </Form.Item>
+                            </Form>
+
+                        </div>
                     </Card>
+                    {/*<div>*/}
+
+                    {/*    <Card*/}
+                    {/*        title="Визит к врачу"*/}
+                    {/*        //extra={<a href="#">More</a>}*/}
+                    {/*        style={{ width: 500 }}*/}
+                    {/*    >*/}
+                    {/*        <div>*/}
+                             
+                    {/*        </div>*/}
+                    {/*    </Card>*/}
+                    {/*</div>*/}
                 </Space>
             </div>
         </div>

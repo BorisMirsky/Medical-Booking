@@ -25,18 +25,13 @@ namespace MedicalBookingProject.DataAccess.Configuration
                 .HasForeignKey(b => b.PatientId)
                 .IsRequired();
 
-            builder.HasOne(b => b.Booking)
-                .WithOne(d => d.Appointment);
-            //.HasForeignKey<Booking>(b => b.Appointment.Id);      // ?
+            builder.HasKey(d => d.BookingId);
 
-            builder.HasOne(b => b.Timeslot)
-                .WithOne(d => d.Appointment)
-                .HasForeignKey<Timeslot>(b => b.AppointmentId);
+            builder.HasKey(d => d.TimeslotId);
 
             builder.HasOne(b => b.MedicalRecord)
                 .WithOne(d => d.Appointment)
                 .HasForeignKey<MedicalRecord>(b => b.AppointmentId);
-                //.IsRequired();
 
             builder.Property(a => a.DoctorId)
                 .IsRequired();
@@ -44,7 +39,6 @@ namespace MedicalBookingProject.DataAccess.Configuration
                 .IsRequired();
             builder.Property(a => a.TimeslotId)
                 .IsRequired();
-            builder.Property(a => a.MedicalRecordId);
             builder.Property(a => a.PatientCame);
             builder.Property(a => a.PatientIsLate);
             builder.Property(a => a.PatientUnacceptableBehavior);

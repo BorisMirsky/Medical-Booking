@@ -29,12 +29,12 @@ namespace MedicalBookingProject.DataAccess.Configuration
                .WithOne(b => b.Timeslot);
 
             builder.HasOne(b => b.Appointment)
-                .WithOne(d => d.Timeslot);
-                //.HasForeignKey<Appointment>(b => b.TimeslotId);
+                .WithOne(d => d.Timeslot)
+                .HasForeignKey<Appointment>(b => b.TimeslotId);
 
             builder.HasOne(b => b.MedicalRecord)
-                .WithOne(d => d.Timeslot);
-                //.HasForeignKey<MedicalRecord>(b => b.TimeslotId);
+                .WithOne(d => d.Timeslot)
+                .HasForeignKey<MedicalRecord>(b => b.TimeslotId);
 
             builder.Property(s => s.DatetimeStart)
                 .IsRequired();

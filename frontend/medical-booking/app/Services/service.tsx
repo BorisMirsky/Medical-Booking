@@ -78,7 +78,7 @@ export interface AppointmentRequest {
     doctorid: string;
     patientid: string;
     timeslotid: string;
-    medicalrecordid: string;
+    //medicalrecordid: string;
     patientcame?: string;
     patientislate?: string;
     patientunacceptablebehavior?: string;

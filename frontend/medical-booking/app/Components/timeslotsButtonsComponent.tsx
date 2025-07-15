@@ -9,7 +9,6 @@ import {
     updateTimeslot, TimeSlotUpdateRequest,
     createBooking, BookingCreateRequest
 } from "@/app/Services/service";
-//import moment from 'moment';
 //import { useState } from "react";         //useState, useReducer
 
 
@@ -17,9 +16,6 @@ import {
 
 
 export default function TimeslotsButtons(slots: Array<Slot>) {
-    //const [, forceUpdate] = useReducer(x => x + 1, 0)
-    //const [childCounter, setChildCounter] = useState(0);
-    //const prevCounter = 0;
 
     const data = Object.keys(slots).map((slot, index) => ({
         key: index,
@@ -32,7 +28,11 @@ export default function TimeslotsButtons(slots: Array<Slot>) {
         patientId: slots[index].patientId
     }));
 
-    const timeslotRequest: TimeSlotUpdateRequest = { patientid: '', slotid: '', isbooked: false };
+    const timeslotRequest: TimeSlotUpdateRequest = {
+        patientid: '',
+        slotid: '',
+        isbooked: false
+    };
 
     const bookingRequest: BookingCreateRequest = {
         slotid: "",
@@ -49,16 +49,12 @@ export default function TimeslotsButtons(slots: Array<Slot>) {
             timeslotRequest.slotid = value.id;
             timeslotRequest.patientid = "A157E16F-26EA-44FB-B01E-FD26A4ACDDCD";
             timeslotRequest.isbooked = true;
-            //
             bookingRequest.slotid = value.id;
             bookingRequest.patientid = "A157E16F-26EA-44FB-B01E-FD26A4ACDDCD";
             bookingRequest.doctorid = value.doctorId;
-            //bookingRequest.doctorusername = value.doctorId;
             bookingRequest.isbooked = true;
             updateTimeslot(timeslotRequest);
             createBooking(bookingRequest);
-            //setChildCounter((prevCounter) => prevCounter + 1);
-            //forceUpdate();
         }
     };
 

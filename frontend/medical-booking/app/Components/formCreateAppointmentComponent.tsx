@@ -2,126 +2,75 @@
 
 import React from 'react';
 import {
-    createAppointment
+    createAppointment, AppointmentRequest, DoctorAppointmentProps
 } from "@/app/Services/service";
-import { Booking } from "@/app/Models/Booking";
+//import { Booking } from "@/app/Models/Booking";
 import { FormProps, Button, Form, Input, Space } from "antd";
 import "../globals.css";
+import { useState } from "react";      //useEffect
 
-
-interface DoctorAppointmentProps {
-    booking: Booking;
-}
-
-
-export interface AppointmentRequest {
-    //id: string;
-    bookingid: string;
-    doctorid: string;
-    patientid: string;
-    timeslotid: string;
-    medicalcardid: string;
-    patientcame?: string;
-    patientislate?: string;
-    patientunacceptablebehavior?: string;
-}
 
 
 const FormAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
-
+    const [componentDisabled, setComponentDisabled] = useState<boolean>(false);
     const [form] = Form.useForm();
 
     const onFinishFailed: FormProps<AppointmentRequest>['onFinishFailed'] = (errorInfo) => {
         console.log('onFinishFailed:', errorInfo);
     }
 
-    const initialValues = {
-        bookingid: booking.id, doctorid: booking.doctorId, patientid: booking.patientId,
-        timeslotid: booking.timeslotId, medicalcardid: booking.timeslotId
-    };
-
-
     const onFinish: FormProps<AppointmentRequest>['onFinish'] = (values) => {
-        createAppointment(values);
+        const result: AppointmentRequest = {
+            bookingid: booking.id,
+            doctorid: booking.doctorId,
+            patientid: booking.patientId,
+            timeslotid: booking.timeslotId,
+            patientcame: values.patientcame,
+            patientislate: values.patientislate,
+            patientunacceptablebehavior: values.patientunacceptablebehavior
+        };
+        createAppointment(result);
+        //console.log("FormAppointment ", result);
         form.resetFields();
-        console.log('values ', values)
-        console.log('initialValues ', initialValues)
-    }
-
-
-    if (!booking) {
-        return <div>Выберите бронирование в предыдущей панели</div>;
+        setComponentDisabled(true);
     }
 
     return (
         <div>
+
             <Form
                 name="basic"
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
                 style={{ maxWidth: 800 }}
-                initialValues={initialValues}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
                 form={form}
+                disabled={componentDisabled}
             >
-                <Form.Item<AppointmentRequest>
-                    label="BookingId"
-                    name="bookingid"
-                >
-                    <Input disabled={true} />
-                </Form.Item>
-
-                <Form.Item<AppointmentRequest>
-                    label="DoctorId"
-                    name="doctorid"
-                >
-                    <Input disabled={true} />
-                </Form.Item>
-
-                <Form.Item<AppointmentRequest>
-                    label="PatientId"
-                    name="patientid"
-                >
-                    <Input disabled={true} />
-                </Form.Item>
-
-                <Form.Item<AppointmentRequest>
-                    label="TimeslotId"
-                    name="timeslotid"
-                >
-                    <Input disabled={true} />
-                </Form.Item>
-
-                <Form.Item<AppointmentRequest>
-                    label="MedicalCardId"
-                    name="medicalcardid"
-                >
-                    <Input disabled={true} />
-                </Form.Item>
-
                 <Form.Item<AppointmentRequest>
                     label="Пациент пришёл"
                     name="patientcame"
-
+                    rules={[{ required: true, message: 'Надо заполнить' }]}
                 >
-                    <Input placeholder="Да" />
+                    <Input />
                 </Form.Item>
 
                 <Form.Item<AppointmentRequest>
                     label="Пациент опоздал"
                     name="patientislate"
-
+                    rules={[{ required: true, message: 'Надо заполнить' }]}
                 >
-                    <Input placeholder="Нет" />
+                    <Input/>
                 </Form.Item>
 
                 <Form.Item<AppointmentRequest>
                     label={<p style={{ fontSize: "13px" }}> Неподобающее <br /> поведение </p>}
                     name="patientunacceptablebehavior"
+                    rules={[{ required: true, message: 'Надо заполнить' }]}
                 >
-                    <Input placeholder="Нет" />
+                    <Input />
                 </Form.Item>
 
                 <br></br>

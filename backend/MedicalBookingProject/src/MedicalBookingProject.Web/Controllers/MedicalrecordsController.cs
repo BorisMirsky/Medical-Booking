@@ -27,14 +27,15 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
-        [HttpPost] 
         [Route("CreateMedicalRecord")]
+        [HttpPost] 
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "doctor")]
-        public async void CreateMedicalRecord([FromBody] MedicalRecordRequest request)
+        public async Task<ActionResult> CreateMedicalRecord([FromBody] MedicalRecordRequest request)
         {
             await _medicalRecordService.CreateMedicalRecord(request.PatientId, 
                                                             request.TimeslotId, 
                                                             request.DoctorId, 
+                                                            request.BookingId,
                                                             request.AppointmentId, 
                                                             request.Diagnosis, 
                                                             request.Symptoms,
@@ -43,6 +44,8 @@ namespace MedicalBookingProject.Web.Controllers
                                                             request.VisualExamination,
                                                             request.FinalCost
                                                             );
+
+            return Ok();
         }
 
 

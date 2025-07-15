@@ -37,8 +37,8 @@ namespace MedicalBookingProject.DataAccess.Configuration
                 .IsRequired();
             builder.Property(b => b.PatientId)
                 .IsRequired();
-            builder.Property(b => b.TimeslotId);
-                //.IsRequired();
+            builder.Property(b => b.TimeslotId)
+                .IsRequired();
         }
     }
 }

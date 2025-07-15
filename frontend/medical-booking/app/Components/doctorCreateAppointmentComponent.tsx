@@ -1,19 +1,12 @@
-﻿///* eslint-disable @typescript-eslint/no-explicit-any */
-///* eslint-disable react-hooks/rules-of-hooks */
+﻿
 "use client"
 
 import React from 'react';
-import {
-    getBookingsByDoctor
-    //updateTimeslot, TimeSlotUpdateRequest,
-    //BookingCreateRequest, createBooking
-} from "@/app/Services/service";
+import { getBookingsByDoctor } from "@/app/Services/service";
 import { Booking } from "@/app/Models/Booking";
 import { Table, Button } from "antd";
 import { useEffect, useState } from "react";
 import "../globals.css";
-//import Title from "antd/es/typography/Title";
-//import moment from 'moment';
 
 
 
@@ -21,12 +14,10 @@ interface DoctorCreateAppointmentProps {
     onNext: (booking: Booking) => void;
 }
 
-//const Element1: React.FC<Element1Props> = ({ onNext }) => {
-//export default function DoctorCreateAppointment() {
+
 const DoctorCreateAppointment: React.FC<DoctorCreateAppointmentProps> = ({ onNext }) => {
     //const [currentRole, setCurrentRole] = useState("");
     const [bookings, setBookings] = useState<Booking[]>([]);
-    //const [dataAppointment, setdataAppointment] = useState<Booking>(); // undefined);
 
 
     const columns = [
@@ -89,28 +80,9 @@ const DoctorCreateAppointment: React.FC<DoctorCreateAppointmentProps> = ({ onNex
     }));
 
 
-    //const timeslotRequest: TimeSlotUpdateRequest = {
-    //    patientid: '',
-    //    slotid: '',
-    //    isbooked: false
-    //};
-
-
-    //const bookingRequest: BookingCreateRequest = {
-    //    slotid: "",
-    //    patientid: "",
-    //    doctorid: "",
-    //    doctorusername: "",
-    //    isbooked: false,
-    //};
-
-
     const createAppointment = (key: number) => {
-        console.log('createAppointment ', bookings[key]);
-        //setdataAppointment(bookings[key]);
         onNext(bookings[key]);
     }
-
 
 
     return (

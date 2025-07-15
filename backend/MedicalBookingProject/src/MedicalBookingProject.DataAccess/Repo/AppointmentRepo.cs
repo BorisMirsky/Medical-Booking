@@ -16,14 +16,14 @@ namespace MedicalBookingProject.DataAccess.Repo
     {
 
         private readonly MedicalBookingDbContext _context;
-        public TimeslotRepo slotRepo;
-        public BookingRepo bookingRepo;
+        //public TimeslotRepo slotRepo;
+        //public BookingRepo bookingRepo;
 
         public AppointmentRepo(MedicalBookingDbContext context)
         {
             _context = context;
-            slotRepo = new TimeslotRepo(_context);
-            bookingRepo = new BookingRepo(_context);
+            //slotRepo = new TimeslotRepo(_context);
+            //bookingRepo = new BookingRepo(_context);
         }
 
 
@@ -32,9 +32,7 @@ namespace MedicalBookingProject.DataAccess.Repo
                                      string? patientCame, string? patientIsLate,
                                      string? patientUnacceptableBehavior)
         {
-            Guid id = Guid.NewGuid();
-            //Booking booking = await bookingRepo.GetOneBooking(bookingId);
-            //Booking booking = new Booking();              
+            Guid id = Guid.NewGuid();            
             Appointment app = new Appointment();
             app.Id = id;
             app.PatientId = patientId;
@@ -48,31 +46,5 @@ namespace MedicalBookingProject.DataAccess.Repo
             await _context.SaveChangesAsync();
             return id;
         }
-
-
-        //public async Task<Appointment> Get(Guid id)
-        //{
-        //    Appointment? entity = await _context.Appointments
-        //                            .AsNoTracking()
-        //                            .FirstOrDefaultAsync(a => a.Id == id);
-        //    return entity!;
-        //}
-
-
-        //public async Task<Guid> Update(Guid Id, Boolean? PatientCame, Boolean? PatientIsLate,
-        //                             string? PatientUnacceptableBehavior,
-        //                             Boolean? Treatment, Boolean? MakingDiagnosis,
-        //                             Boolean? ReferralTests, Boolean? VisualExamination,
-        //                             int FinalCost)
-        //{
-        //    await _context.Appointments
-        //        .Where(item => item.Id == Id)
-        //        .ExecuteUpdateAsync(s => s
-        //        .SetProperty(s => s.PatientCame, s => PatientCame)
-        //        .SetProperty(s => s.PatientIsLate, s => PatientIsLate)
-        //        .SetProperty(s => s.PatientUnacceptableBehavior, s => PatientUnacceptableBehavior)
-        //        );
-        //    return Id;
-        //}
     }
 }

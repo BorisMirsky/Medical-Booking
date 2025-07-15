@@ -1,4 +1,8 @@
-﻿
+﻿import { Booking } from "@/app/Models/Booking";
+import { MedicalRecord } from "@/app/Models/MedicalRecord";
+
+
+//////////////////////////////////   interfaces   //////////////////////////////////////////////
 
 export interface UserRegistrationRequest {
     email: string;
@@ -84,7 +88,7 @@ export interface AppointmentRequest {
     patientunacceptablebehavior?: string;
 }
 
-export interface MedicalCardRequest {
+export interface MedicalRecordRequest {
     //id: string;
     bookingid: string;
     doctorid: string;
@@ -96,10 +100,19 @@ export interface MedicalCardRequest {
     prescribedtreatment: string;
     visualexamination: string;
     referraltests: string;
-    finalcost: string;
+    finalcost: number;
 }
 
-// doctors by speciality
+export interface DoctorAppointmentProps {
+    booking: Booking;
+}
+
+export interface DoctorMedicalRecordProps {
+    medicalrecord: MedicalRecord;
+}
+
+////////////////////////////////   fetch functions   /////////////////////////////////////////
+
 export const getDoctorsBySpeciality = async (speciality: string) => {
     //const token = localStorage.getItem('token');
     const response = await fetch("http://localhost:5032/doctors/" + speciality, {
@@ -129,7 +142,6 @@ export const getDoctorsBySpeciality = async (speciality: string) => {
 };
 
 
-// all doctors
 export const getDoctorsFetch = async () => {
     //const token = localStorage.getItem('token');
     const response = await fetch("http://localhost:5032/doctors/GetDoctors", {
@@ -159,7 +171,6 @@ export const getDoctorsFetch = async () => {
 };
 
 
-// all patients
 export const getPatientsFetch = async () => {
     //const token = localStorage.getItem('token');
     const response = await fetch("http://localhost:5032/patients/GetPatients", {
@@ -189,7 +200,6 @@ export const getPatientsFetch = async () => {
 };
 
 
-//bookings by patientId
 export const getBookingsByPatient = async (id: string) => {
     //const token = localStorage.getItem('token');
     const url = "http://localhost:5032/bookings/GetByPatient?id=" + id;
@@ -221,7 +231,6 @@ export const getBookingsByPatient = async (id: string) => {
 };
 
 
-//bookings by patientId
 export const getBookingsByDoctor = async (id: string) => {
     //const token = localStorage.getItem('token');
     const url = "http://localhost:5032/bookings/GetByDoctor?id=" + id;
@@ -243,7 +252,7 @@ export const getBookingsByDoctor = async (id: string) => {
             }
         })
         .then(data => {
-            console.log('getBookingsByDoctor data: ', data);
+            //console.log('getBookingsByDoctor data: ', data);
             return data;
         })
         .catch(function (err) {
@@ -277,7 +286,6 @@ export const getDoctorById = async (id: string) => {
 };
 
 
-
 export const registerDoctor = async (request: DoctorRegisterRequest) => {
     //const token = localStorage.getItem('token');
     await fetch("http://localhost:5032/doctors/register", {
@@ -302,7 +310,6 @@ export const registerDoctor = async (request: DoctorRegisterRequest) => {
         console.log('registerError: ', err);
     });
 }
-
 
 
 export const registerPatient = async (request: PatientRegisterRequest) => {
@@ -331,7 +338,6 @@ export const registerPatient = async (request: PatientRegisterRequest) => {
 }
 
 
-
 export const createShedule = async (request: SheduleCreateRequest) => {
     //const token = localStorage.getItem('token');
     await fetch("http://localhost:5032/timeslots/createtimeslot", {      
@@ -357,7 +363,6 @@ export const createShedule = async (request: SheduleCreateRequest) => {
         console.log('Error: ', err);
     });
 }
-
 
 
 export const getSlotsByDoctorId = async (id: string) => {
@@ -391,7 +396,6 @@ export const getSlotsByDoctorId = async (id: string) => {
 };
 
 
-
 export const updateTimeslot = async (request: TimeSlotUpdateRequest) => {
     //const token = localStorage.getItem('token');`
     let alertText: string = "";
@@ -418,7 +422,6 @@ export const updateTimeslot = async (request: TimeSlotUpdateRequest) => {
         console.log('Error: ', err);
     });
 };
-
 
 
 export const createBooking = async (request: BookingCreateRequest) => {
@@ -475,14 +478,27 @@ export const createAppointment = async (request: AppointmentRequest) => {
 }
 
 
-// need ?
-export function uniqueDays(mySlots: object) {
-    console.log('mySlots ', mySlots);
-    const doctorWorkingDays = new Set(); 
-    for (const variable in mySlots) {
-        const day = mySlots[variable as keyof typeof mySlots]["datetimeStart"]; //   .split(" ")[0];
-        console.log('variable ', variable);
-        doctorWorkingDays.add(day);
-    }
-    return doctorWorkingDays;
-};
+export const createMedicalRecord = async (request: MedicalRecordRequest) => {
+    //const token = localStorage.getItem('token');
+    let alertText: string = "";
+    await fetch("http://localhost:5032/MedicalRecords/CreateMedicalRecord", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            //'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(request)
+    }).then(response => {
+        if (!response.ok) {
+            alert("Ошибка создания \n'Записи в мед. карту пациента'");
+            const err = new Error("HTTP status code: " + response.status);
+            throw err
+        }
+        else {
+            alertText = "'Запись в мед карту пациента' \nсоздана";
+            alert(alertText);
+        }
+    }).catch(function (err) {
+        console.log('Error: ', err);
+    });
+}

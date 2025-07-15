@@ -13,24 +13,20 @@ using System.Globalization;
 
 namespace MedicalBookingProject.DataAccess.Repo
 {
-    public class MedicalReportRepo : IMedicalReportRepo
+    public class MedicalRecordRepo : IMedicalReportRepo
     {
-        private readonly MedicalBookingDbContext _context;
-        //public TimeslotRepo slotRepo;
-        //public BookingRepo bookingRepo;
-        //public AppointmentRepo appointmentRepo;
 
-        public MedicalReportRepo(MedicalBookingDbContext context)
+        private readonly MedicalBookingDbContext _context;
+
+        public MedicalRecordRepo(MedicalBookingDbContext context)
         {
             _context = context;
-            //slotRepo = new TimeslotRepo(_context);
-            //bookingRepo = new BookingRepo(_context);
-            //appointmentRepo = new AppointmentRepo(_context);
         }
 
         public async Task<Guid> Create(Guid PatientId,
                                        Guid TimeslotId,
                                        Guid DoctorId,
+                                       Guid BookingId,
                                        Guid? AppointmentId,
                                        string Diagnosis,
                                        string Symptoms,
@@ -42,26 +38,24 @@ namespace MedicalBookingProject.DataAccess.Repo
             Guid id = Guid.NewGuid();
             MedicalRecord medRec = new();
             medRec.Id = id;
+            medRec.PatientId = PatientId;
+            medRec.DoctorId = DoctorId;
+            medRec.TimeslotId = TimeslotId;
+            medRec.BookingId = BookingId;                           // !
             medRec.PrescribedTreatment = PrescribedTreatment;
             medRec.Diagnosis = Diagnosis;
             medRec.Symptoms = Symptoms;
-            medRec.AppointmentId = AppointmentId;
-            medRec.PatientId = PatientId;
-            medRec.DoctorId = DoctorId; 
+            medRec.AppointmentId = Guid.NewGuid();
             medRec.ReferralTests = ReferralTests;
             medRec.VisualExamination = VisualExamination;
             medRec.FinalCost = FinalCost;
-            medRec.Diagnosis = Diagnosis;
-            medRec.Symptoms = Symptoms;
-            medRec.PrescribedTreatment = PrescribedTreatment;
-            //medRec.SlotStart = slot.Bookings.   DatetimeStart;
-            //medRec.SlotStop = slot.DatetimeStop;
             await _context.MedicalRecords.AddAsync(medRec);
             await _context.SaveChangesAsync();
             return id;
         }
 
 
+        // --> getByPatient
         public async Task<MedicalRecord> Get(Guid id)
         {
             MedicalRecord? entity = await _context.MedicalRecords

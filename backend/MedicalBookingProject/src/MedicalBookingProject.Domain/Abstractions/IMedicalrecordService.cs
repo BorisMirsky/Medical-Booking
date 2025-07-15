@@ -10,6 +10,7 @@ namespace MedicalBookingProject.Domain.Abstractions
         Task<Guid> CreateMedicalRecord(Guid PatientId,
                                        Guid TimeslotId,
                                        Guid DoctorId,
+                                       Guid BookingId,
                                        Guid? AppointmentId,
                                        string Diagnosis,
                                        string Symptoms,

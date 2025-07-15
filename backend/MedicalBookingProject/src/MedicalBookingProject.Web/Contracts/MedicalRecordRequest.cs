@@ -16,16 +16,18 @@ namespace MedicalBookingProject.Web.Contracts
 
         public Guid TimeslotId { get; set; }
 
-        public string? Symptoms { get; set; }
+        public Guid BookingId { get; set; }
 
-        public string? Diagnosis { get; set; }
+        public string Symptoms { get; set; } = String.Empty;
 
-        public string? PrescribedTreatment { get; set; }
+        public string Diagnosis { get; set; } = String.Empty;
 
-        public string? VisualExamination { get; set; }
+        public string PrescribedTreatment { get; set; } = String.Empty;
 
-        public string? ReferralTests { get; set; }
+        public string VisualExamination { get; set; } = String.Empty;
 
-        public int FinalCost { get; set; } 
+        public string ReferralTests { get; set; } = String.Empty;
+
+        public int FinalCost { get; set; } = 0;
     }
 }

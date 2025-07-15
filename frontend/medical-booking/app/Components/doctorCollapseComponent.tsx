@@ -35,7 +35,7 @@ const CollapseElement: React.FC = () => {
         },
         {
             key: '4',
-            label: 'Отработанные посещения',
+            label: 'Медицинская карта пациента',
             children: <p>лылылылы</p>,
         },
         {

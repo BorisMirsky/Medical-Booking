@@ -27,11 +27,8 @@ namespace MedicalBookingProject.Domain.Models.Appointments
         [Column("patientid")]
         public Guid PatientId { get; set; }
 
-        [Column("slotid")]
+        [Column("timeslotid")]
         public Guid TimeslotId { get; set; }
-
-        //[Column("medicalrecordid")]
-        //public Guid? MedicalRecordId { get; set; }
 
         // behavior of patient
         [Column("patientcame")]

@@ -30,8 +30,8 @@ namespace MedicalBookingProject.Domain.Models.MedicalRecords
         [Column("bookingid")]
         public Guid BookingId { get; set; }
 
-        [Column("slotid")]
-        public Guid TimeslotId { get; set; } //= Guid.Empty;
+        [Column("timeslotid")]
+        public Guid TimeslotId { get; set; } 
 
         // to fill form of med. cart
         [Column("symptoms")]
@@ -50,7 +50,7 @@ namespace MedicalBookingProject.Domain.Models.MedicalRecords
         public string? ReferralTests { get; set; }
 
         [Column("finalcost")]
-        public int FinalCost { get; set; } = 0;
+        public int? FinalCost { get; set; } = 0;
 
         // binded enities
         public Patient? Patient { get; set; }

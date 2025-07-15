@@ -1,4 +1,4 @@
-﻿export interface Appointment {
+﻿export interface MedicalRecord {
     id: string;
     patientId: string;
     doctorId: string;

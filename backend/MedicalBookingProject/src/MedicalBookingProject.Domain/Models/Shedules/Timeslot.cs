@@ -33,9 +33,6 @@ namespace MedicalBookingProject.Domain.Models.Shedules
         [Column("patientid")]
         public Guid? PatientId { get; set; }
 
-        //[Column("medicalrecordid")]
-        //public Guid? MedicalRecordId { get; set; }
-
         public List<Booking>? Bookings { get; set; }
 
         public Patient? Patient { get; set; } 

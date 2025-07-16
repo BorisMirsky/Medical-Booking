@@ -23,7 +23,7 @@ namespace MedicalBookingProject.Domain.Models.Bookings
         [Column("patientid")]
         public Guid PatientId { get; set; }
 
-        [Column("slotid")]
+        [Column("timeslotid")]
         public Guid TimeslotId { get; set; }
 
         [Column("isbooked")]
@@ -31,6 +31,9 @@ namespace MedicalBookingProject.Domain.Models.Bookings
 
         [Column("createdat")]
         public DateTime CreatedAt { get; set; }
+
+        [Column("isclosed")]
+        public Boolean IsClosed { get; set; } = false;
 
         public Patient? Patient { get; set; } 
 

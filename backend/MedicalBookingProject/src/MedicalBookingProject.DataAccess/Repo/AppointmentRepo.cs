@@ -16,19 +16,15 @@ namespace MedicalBookingProject.DataAccess.Repo
     {
 
         private readonly MedicalBookingDbContext _context;
-        //public TimeslotRepo slotRepo;
-        //public BookingRepo bookingRepo;
 
         public AppointmentRepo(MedicalBookingDbContext context)
         {
             _context = context;
-            //slotRepo = new TimeslotRepo(_context);
-            //bookingRepo = new BookingRepo(_context);
         }
 
 
-        public async Task<Guid> Create(Guid doctorId, Guid patientId,
-                                    Guid timeslotId, Guid bookingId,
+        public async Task<Guid> Create(Guid bookingId, Guid doctorId,
+                                    Guid patientId, Guid timeslotId, 
                                      string? patientCame, string? patientIsLate,
                                      string? patientUnacceptableBehavior)
         {
@@ -42,6 +38,18 @@ namespace MedicalBookingProject.DataAccess.Repo
             app.PatientCame = patientCame;
             app.PatientIsLate = patientIsLate;
             app.PatientUnacceptableBehavior = patientUnacceptableBehavior;
+            //Debug.WriteLine("");
+            //Debug.WriteLine("");
+            //Debug.WriteLine(app.Id);
+            //Debug.WriteLine(app.BookingId);
+            //Debug.WriteLine(app.DoctorId);
+            //Debug.WriteLine(app.PatientId);
+            //Debug.WriteLine(app.TimeslotId);
+            //Debug.WriteLine(app.PatientCame);
+            //Debug.WriteLine(app.PatientIsLate);
+            //Debug.WriteLine(app.PatientUnacceptableBehavior);
+            //Debug.WriteLine("");
+            //Debug.WriteLine("");
             await _context.Appointments.AddAsync(app);
             await _context.SaveChangesAsync();
             return id;

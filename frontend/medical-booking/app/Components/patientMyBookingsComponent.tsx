@@ -82,7 +82,7 @@ export default function PatientBookings() {
         //localStorage.clear();
         setBookings([]);
         const getBookings = async () => {        
-            const responce = await getBookingsByPatient("192A59D9-43DF-43EC-943A-8E4290386B1E");
+            const responce = await getBookingsByPatient("A157E16F-26EA-44FB-B01E-FD26A4ACDDCD");
             setBookings(responce);
         }
         getBookings();
@@ -119,11 +119,11 @@ export default function PatientBookings() {
 
     const cancelBooking = (key: number) => {
         timeslotRequest.slotid = bookings[key].timeslotId;
-        timeslotRequest.patientid = "192A59D9-43DF-43EC-943A-8E4290386B1E";
+        timeslotRequest.patientid = "A157E16F-26EA-44FB-B01E-FD26A4ACDDCD";
         timeslotRequest.isbooked = false;
         //
         bookingRequest.slotid = bookings[key].timeslotId;
-        bookingRequest.patientid = "192A59D9-43DF-43EC-943A-8E4290386B1E";
+        bookingRequest.patientid = "A157E16F-26EA-44FB-B01E-FD26A4ACDDCD";
         bookingRequest.doctorid = bookings[key].doctorId;
         bookingRequest.doctorusername = bookings[key].doctorUserName;
         bookingRequest.isbooked = false;

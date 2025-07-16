@@ -15,12 +15,10 @@ namespace MedicalBookingProject.DataAccess.Repo
     public class BookingRepo : IBookingRepo
     {
         private readonly MedicalBookingDbContext _context;
-        //public TimeslotRepo slotRepo;
 
         public BookingRepo(MedicalBookingDbContext context)
         {
             _context = context;
-            //slotRepo = new TimeslotRepo(_context);
         }
 
 
@@ -29,14 +27,12 @@ namespace MedicalBookingProject.DataAccess.Repo
         {
             var bookingId = Guid.NewGuid();
             var booking = new Booking();
-            //Timeslot slot = await slotRepo.Get(slotId);
             booking.TimeslotId = slotId;
-            booking.DoctorId = doctorId; // slot.DoctorId;
-            booking.PatientId = patientId;  // slot.PatientId;
-            booking.IsBooked = isBooked; // slot.IsBooked;
+            booking.DoctorId = doctorId; 
+            booking.PatientId = patientId;  
+            booking.IsBooked = isBooked; 
             DateTime created = DateTime.Now;
             booking.CreatedAt = created;
-
             booking.Id = bookingId;
             await _context.Bookings.AddAsync(booking);
             await _context.SaveChangesAsync();

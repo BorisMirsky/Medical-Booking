@@ -25,23 +25,31 @@ namespace MedicalBookingProject.DataAccess.Configuration
                 .HasForeignKey(b => b.PatientId)
                 .IsRequired();
 
-            builder.HasKey(d => d.BookingId);
-
-            builder.HasKey(d => d.TimeslotId);
-
-            builder.HasOne(b => b.MedicalRecord)
+            // ?
+            builder.HasOne(b => b.Booking)
                 .WithOne(d => d.Appointment)
-                .HasForeignKey<MedicalRecord>(b => b.AppointmentId);
+                .HasForeignKey<Appointment>("BookingId")
+                .IsRequired();
 
-            builder.Property(a => a.DoctorId)
+            // ?
+            builder.HasOne(b => b.Timeslot)
+                .WithOne(d => d.Appointment)
+                .HasForeignKey<Appointment>("TimeslotId")
                 .IsRequired();
-            builder.Property(a => a.PatientId)
+
+            //builder.HasOne(b => b.MedicalRecord)
+            //    .WithOne(d => d.Appointment)
+            //    .HasForeignKey<MedicalRecord>("AppointmentId");
+
+            builder.Property(b => b.DoctorId)
                 .IsRequired();
-            builder.Property(a => a.TimeslotId)
+            builder.Property(b => b.PatientId)
                 .IsRequired();
-            builder.Property(a => a.PatientCame);
-            builder.Property(a => a.PatientIsLate);
-            builder.Property(a => a.PatientUnacceptableBehavior);
+            builder.Property(b => b.TimeslotId)
+                .IsRequired();
+            builder.Property(b => b.PatientCame);
+            builder.Property(b => b.PatientIsLate);
+            builder.Property(b => b.PatientUnacceptableBehavior);
         }
     }
 }

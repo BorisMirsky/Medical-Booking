@@ -25,7 +25,7 @@ namespace MedicalBookingProject.Domain.Models.MedicalRecords
         public Guid DoctorId { get; set; }
 
         [Column("appointmentid")]
-        public Guid? AppointmentId { get; set; }
+        public Guid AppointmentId { get; set; }
 
         [Column("bookingid")]
         public Guid BookingId { get; set; }
@@ -50,7 +50,7 @@ namespace MedicalBookingProject.Domain.Models.MedicalRecords
         public string? ReferralTests { get; set; }
 
         [Column("finalcost")]
-        public int? FinalCost { get; set; } = 0;
+        public int? FinalCost { get; set; } 
 
         // binded enities
         public Patient? Patient { get; set; }

@@ -64,7 +64,7 @@ const DoctorCreateAppointment: React.FC<DoctorCreateAppointmentProps> = ({ onNex
         //localStorage.clear();
         setBookings([]);
         const getBookings = async () => {
-            const responce = await getBookingsByDoctor("835A9D1F-9A58-487B-A419-8D33556B20FA");
+            const responce = await getBookingsByDoctor("FE8398B3-2C83-45BC-A01A-EE4FEE19BFAC");
             setBookings(responce);
         }
         getBookings();

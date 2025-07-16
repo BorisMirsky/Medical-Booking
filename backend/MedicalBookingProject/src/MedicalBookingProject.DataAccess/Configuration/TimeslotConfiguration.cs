@@ -13,6 +13,7 @@ namespace MedicalBookingProject.DataAccess.Configuration
     {
         public void Configure(EntityTypeBuilder<Timeslot> builder)
         {
+
             builder.HasKey(s => s.Id);
 
             builder.HasOne(s => s.Doctor)
@@ -24,17 +25,8 @@ namespace MedicalBookingProject.DataAccess.Configuration
                 .WithMany(d => d.Timeslots)
                 .HasForeignKey(s => s.PatientId);
 
-            builder
-               .HasMany(d => d.Bookings)
+            builder.HasMany(d => d.Bookings)
                .WithOne(b => b.Timeslot);
-
-            builder.HasOne(b => b.Appointment)
-                .WithOne(d => d.Timeslot)
-                .HasForeignKey<Appointment>(b => b.TimeslotId);
-
-            builder.HasOne(b => b.MedicalRecord)
-                .WithOne(d => d.Timeslot)
-                .HasForeignKey<MedicalRecord>(b => b.TimeslotId);
 
             builder.Property(s => s.DatetimeStart)
                 .IsRequired();

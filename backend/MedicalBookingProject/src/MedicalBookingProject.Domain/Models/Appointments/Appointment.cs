@@ -32,13 +32,13 @@ namespace MedicalBookingProject.Domain.Models.Appointments
 
         // behavior of patient
         [Column("patientcame")]
-        public string? PatientCame { get; set; } = String.Empty;
+        public string? PatientCame { get; set; } 
 
         [Column("patientislate")]
-        public string? PatientIsLate { get; set; } = String.Empty;
+        public string? PatientIsLate { get; set; } 
 
         [Column("patientunacceptablebehavior")]
-        public String? PatientUnacceptableBehavior { get; set; } = String.Empty;
+        public string? PatientUnacceptableBehavior { get; set; } 
 
         // binded enities
         public Patient? Patient { get; set; }

@@ -72,29 +72,24 @@ export interface BookingCreateRequest {
     doctorid: string;
     doctorusername: string;
     isbooked: boolean;
-    //cancelledby?: string; 
-    //bookingorcanceldatetime?: string;
 }
 
 export interface AppointmentRequest {
-    //id: string;
     bookingid: string;
     doctorid: string;
     patientid: string;
     timeslotid: string;
-    //medicalrecordid: string;
     patientcame?: string;
     patientislate?: string;
     patientunacceptablebehavior?: string;
 }
 
 export interface MedicalRecordRequest {
-    //id: string;
     bookingid: string;
     doctorid: string;
     patientid: string;
     timeslotid: string;
-    appointmentid: string;
+    appointmentid?: string;
     symptoms: string;
     diagnosis: string;
     prescribedtreatment: string;
@@ -110,6 +105,8 @@ export interface DoctorAppointmentProps {
 export interface DoctorMedicalRecordProps {
     medicalrecord: MedicalRecord;
 }
+
+
 
 ////////////////////////////////   fetch functions   /////////////////////////////////////////
 

@@ -8,7 +8,7 @@ namespace MedicalBookingProject.Web.Contracts
     {
         public Guid Id { get; set; }
 
-        public Guid? AppointmentId { get; set; }
+        public Guid AppointmentId { get; set; }
 
         public Guid DoctorId { get; set; }
 
@@ -18,16 +18,16 @@ namespace MedicalBookingProject.Web.Contracts
 
         public Guid BookingId { get; set; }
 
-        public string Symptoms { get; set; } = String.Empty;
+        public string? Symptoms { get; set; } 
 
-        public string Diagnosis { get; set; } = String.Empty;
+        public string? Diagnosis { get; set; } 
 
-        public string PrescribedTreatment { get; set; } = String.Empty;
+        public string? PrescribedTreatment { get; set; } 
 
-        public string VisualExamination { get; set; } = String.Empty;
+        public string? VisualExamination { get; set; } 
 
-        public string ReferralTests { get; set; } = String.Empty;
+        public string? ReferralTests { get; set; } 
 
-        public int FinalCost { get; set; } = 0;
+        public uint? FinalCost { get; set; } 
     }
 }

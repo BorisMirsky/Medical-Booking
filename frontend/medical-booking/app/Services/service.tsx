@@ -89,13 +89,13 @@ export interface MedicalRecordRequest {
     doctorid: string;
     patientid: string;
     timeslotid: string;
-    appointmentid?: string;
-    symptoms: string;
-    diagnosis: string;
-    prescribedtreatment: string;
-    visualexamination: string;
-    referraltests: string;
-    finalcost: number;
+    appointmentid: string;
+    diagnosis?: string;
+    symptoms?: string;
+    prescribedtreatment?: string;
+    referraltests?: string;
+    visualexamination?: string;
+    finalcost?: number;
 }
 
 export interface DoctorAppointmentProps {
@@ -451,6 +451,7 @@ export const createBooking = async (request: BookingCreateRequest) => {
 
 export const createAppointment = async (request: AppointmentRequest) => {
     //const token = localStorage.getItem('token');
+    console.log("createAppointment ", request);
     let alertText: string = "";
     await fetch("http://localhost:5032/appointments/createappointment", {
         method: 'POST',
@@ -477,6 +478,7 @@ export const createAppointment = async (request: AppointmentRequest) => {
 
 export const createMedicalRecord = async (request: MedicalRecordRequest) => {
     //const token = localStorage.getItem('token');
+    console.log("createMedicalRecord ", request);
     let alertText: string = "";
     await fetch("http://localhost:5032/MedicalRecords/CreateMedicalRecord", {
         method: 'POST',

@@ -24,32 +24,22 @@ namespace MedicalBookingProject.DataAccess.Repo
 
 
         public async Task<Guid> Create(Guid bookingId, Guid doctorId,
-                                    Guid patientId, Guid timeslotId, 
+                                     Guid patientId, Guid timeslotId, 
                                      string? patientCame, string? patientIsLate,
                                      string? patientUnacceptableBehavior)
         {
-            Guid id = Guid.NewGuid();            
-            Appointment app = new Appointment();
-            app.Id = id;
-            app.PatientId = patientId;
-            app.DoctorId = doctorId;
-            app.TimeslotId = timeslotId;
-            app.BookingId = bookingId;
-            app.PatientCame = patientCame;
-            app.PatientIsLate = patientIsLate;
-            app.PatientUnacceptableBehavior = patientUnacceptableBehavior;
-            //Debug.WriteLine("");
-            //Debug.WriteLine("");
-            //Debug.WriteLine(app.Id);
-            //Debug.WriteLine(app.BookingId);
-            //Debug.WriteLine(app.DoctorId);
-            //Debug.WriteLine(app.PatientId);
-            //Debug.WriteLine(app.TimeslotId);
-            //Debug.WriteLine(app.PatientCame);
-            //Debug.WriteLine(app.PatientIsLate);
-            //Debug.WriteLine(app.PatientUnacceptableBehavior);
-            //Debug.WriteLine("");
-            //Debug.WriteLine("");
+            Guid id = Guid.NewGuid();
+            Appointment app = new()
+            {
+                Id = id,
+                PatientId = patientId,
+                DoctorId = doctorId,
+                TimeslotId = timeslotId,
+                BookingId = bookingId,
+                PatientCame = patientCame,
+                PatientIsLate = patientIsLate,
+                PatientUnacceptableBehavior = patientUnacceptableBehavior
+            };
             await _context.Appointments.AddAsync(app);
             await _context.SaveChangesAsync();
             return id;

@@ -13,7 +13,7 @@ using System.Globalization;
 
 namespace MedicalBookingProject.DataAccess.Repo
 {
-    public class MedicalRecordRepo : IMedicalReportRepo
+    public class MedicalRecordRepo : IMedicalRecordRepo
     {
 
         private readonly MedicalBookingDbContext _context;
@@ -23,39 +23,41 @@ namespace MedicalBookingProject.DataAccess.Repo
             _context = context;
         }
 
-        public async Task<Guid> Create(Guid PatientId,
-                                       Guid TimeslotId,
-                                       Guid DoctorId,
-                                       Guid BookingId,
-                                       Guid? AppointmentId,
-                                       string Diagnosis,
-                                       string Symptoms,
-                                       string PrescribedTreatment,
-                                       string ReferralTests,
-                                       string VisualExamination,
-                                       int FinalCost)
+        public async Task<Guid> Create(Guid bookingId,
+                                                   Guid doctorId,
+                                                   Guid patientId,
+                                                   Guid timeslotId,
+                                                   Guid appointmentId,
+                                                   string? diagnosis,
+                                                   string? symptoms,
+                                                   string? prescribedTreatment,
+                                                   string? referralTests,
+                                                   string? visualExamination,
+                                                   uint? finalCost)
         {
             Guid id = Guid.NewGuid();
-            MedicalRecord medRec = new();
-            medRec.Id = id;
-            medRec.PatientId = PatientId;
-            medRec.DoctorId = DoctorId;
-            medRec.TimeslotId = TimeslotId;
-            medRec.BookingId = BookingId;                           // !
-            medRec.PrescribedTreatment = PrescribedTreatment;
-            medRec.Diagnosis = Diagnosis;
-            medRec.Symptoms = Symptoms;
-            medRec.AppointmentId = Guid.NewGuid();
-            medRec.ReferralTests = ReferralTests;
-            medRec.VisualExamination = VisualExamination;
-            medRec.FinalCost = FinalCost;
+            MedicalRecord medRec = new()
+            {
+                Id = id,
+                BookingId = bookingId,
+                DoctorId = doctorId,
+                PatientId = patientId,
+                TimeslotId = timeslotId,
+                AppointmentId = Guid.NewGuid(),
+                Diagnosis = diagnosis,
+                Symptoms = symptoms,
+                PrescribedTreatment = prescribedTreatment,
+                ReferralTests = referralTests,
+                VisualExamination = visualExamination,
+                FinalCost = finalCost
+            };
             await _context.MedicalRecords.AddAsync(medRec);
             await _context.SaveChangesAsync();
             return id;
         }
 
 
-        // --> getByPatient
+        // getByPatient
         public async Task<MedicalRecord> Get(Guid id)
         {
             MedicalRecord? entity = await _context.MedicalRecords

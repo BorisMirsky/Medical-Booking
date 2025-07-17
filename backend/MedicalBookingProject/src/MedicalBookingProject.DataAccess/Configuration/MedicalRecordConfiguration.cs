@@ -15,6 +15,7 @@ namespace MedicalBookingProject.DataAccess.Configuration
     {
         public void Configure(EntityTypeBuilder<MedicalRecord> builder)
         {
+
             builder.HasKey(b => b.Id);
 
             builder.HasOne(b => b.Doctor)

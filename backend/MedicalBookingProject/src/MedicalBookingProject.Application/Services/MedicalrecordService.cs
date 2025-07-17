@@ -10,35 +10,35 @@ namespace MedicalBookingProject.Application.Services
     public class MedicalRecordService : IMedicalRecordService
     {
 
-        private readonly IMedicalReportRepo _medicalReportRepo;
-        public MedicalRecordService(IMedicalReportRepo medicalreportRepo)
+        private readonly IMedicalRecordRepo _medicalReportRepo;
+        public MedicalRecordService(IMedicalRecordRepo medicalreportRepo)
         {
             _medicalReportRepo = medicalreportRepo;
         }
 
-        public async Task<Guid> CreateMedicalRecord(Guid PatientId,
-                                                   Guid TimeslotId,
+        public async Task<Guid> CreateMedicalRecord(Guid BookingId,
                                                    Guid DoctorId,
-                                                   Guid BookingId,
-                                                   Guid? AppointmentId,
-                                                   string Diagnosis,
-                                                   string Symptoms,
-                                                   string PrescribedTreatment,
-                                                   string ReferralTests,
-                                                   string VisualExamination,
-                                                   int FinalCost)
+                                                   Guid PatientId,
+                                                   Guid TimeslotId,
+                                                   Guid AppointmentId,
+                                                   string? Diagnosis,
+                                                   string? Symptoms,
+                                                   string? PrescribedTreatment,
+                                                   string? ReferralTests,
+                                                   string? VisualExamination,
+                                                   uint? FinalCost)
         {
-            return await _medicalReportRepo.Create(PatientId,
-                                       TimeslotId,
-                                       DoctorId,
-                                       BookingId,
-                                       AppointmentId,
-                                       Diagnosis,
-                                       Symptoms,
-                                       PrescribedTreatment,
-                                       ReferralTests,
-                                       VisualExamination,
-                                       FinalCost); 
+            return await _medicalReportRepo.Create(BookingId,
+                                                   DoctorId,
+                                                   PatientId,
+                                                   TimeslotId,
+                                                   AppointmentId,
+                                                   Diagnosis,
+                                                   Symptoms,
+                                                   PrescribedTreatment,
+                                                   ReferralTests,
+                                                   VisualExamination,
+                                                   FinalCost); 
         }
 
         public async Task<MedicalRecord> GetMedicalRecord(Guid id)

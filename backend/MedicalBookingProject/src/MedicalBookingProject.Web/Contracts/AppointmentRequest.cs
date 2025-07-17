@@ -10,10 +10,5 @@
         public String? PatientUnacceptableBehavior { get; set; }
         public String? PatientCame { get; set; }
         public String? PatientIsLate { get; set; }
-        //public Boolean? VisualExaminationPatient { get; set; }
-        //public Boolean? ReferralTests { get; set; }
-        //public Boolean? MakingDiagnosis { get; set; }
-        //public Boolean? Treatment { get; set; }
-        //public int FinalCost { get; set; }
     }
 }

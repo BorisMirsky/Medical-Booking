@@ -13,6 +13,7 @@ namespace MedicalBookingProject.DataAccess.Configuration
     {
         public void Configure(EntityTypeBuilder<Appointment> builder)
         {
+
             builder.HasKey(a => a.Id);
 
             builder.HasOne(b => b.Doctor)
@@ -25,21 +26,15 @@ namespace MedicalBookingProject.DataAccess.Configuration
                 .HasForeignKey(b => b.PatientId)
                 .IsRequired();
 
-            // ?
             builder.HasOne(b => b.Booking)
                 .WithOne(d => d.Appointment)
                 .HasForeignKey<Appointment>("BookingId")
                 .IsRequired();
 
-            // ?
             builder.HasOne(b => b.Timeslot)
                 .WithOne(d => d.Appointment)
                 .HasForeignKey<Appointment>("TimeslotId")
                 .IsRequired();
-
-            //builder.HasOne(b => b.MedicalRecord)
-            //    .WithOne(d => d.Appointment)
-            //    .HasForeignKey<MedicalRecord>("AppointmentId");
 
             builder.Property(b => b.DoctorId)
                 .IsRequired();

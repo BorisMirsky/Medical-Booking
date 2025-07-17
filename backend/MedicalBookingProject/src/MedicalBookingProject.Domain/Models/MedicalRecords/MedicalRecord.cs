@@ -50,7 +50,7 @@ namespace MedicalBookingProject.Domain.Models.MedicalRecords
         public string? ReferralTests { get; set; }
 
         [Column("finalcost")]
-        public int? FinalCost { get; set; } 
+        public uint? FinalCost { get; set; }     //System.UInt32
 
         // binded enities
         public Patient? Patient { get; set; }

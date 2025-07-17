@@ -7,17 +7,17 @@ namespace MedicalBookingProject.Domain.Abstractions
 {
     public interface IMedicalRecordService
     {
-        Task<Guid> CreateMedicalRecord(Guid PatientId,
-                                       Guid TimeslotId,
+        Task<Guid> CreateMedicalRecord(Guid BookingId, 
                                        Guid DoctorId,
-                                       Guid BookingId,
-                                       Guid? AppointmentId,
-                                       string Diagnosis,
-                                       string Symptoms,
-                                       string PrescribedTreatment,
-                                       string ReferralTests,
-                                       string VisualExamination,
-                                       int FinalCost);
+                                       Guid PatientId,
+                                       Guid TimeslotId,
+                                       Guid AppointmentId,
+                                       string? Diagnosis,
+                                       string? Symptoms,
+                                       string? PrescribedTreatment,
+                                       string? ReferralTests,
+                                       string? VisualExamination,
+                                       uint? FinalCost);
 
         Task<MedicalRecord> GetMedicalRecord(Guid id);
 

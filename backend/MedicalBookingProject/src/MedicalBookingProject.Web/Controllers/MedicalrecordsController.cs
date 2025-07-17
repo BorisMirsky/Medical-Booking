@@ -32,10 +32,10 @@ namespace MedicalBookingProject.Web.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "doctor")]
         public async Task<ActionResult> CreateMedicalRecord([FromBody] MedicalRecordRequest request)
         {
-            await _medicalRecordService.CreateMedicalRecord(request.PatientId,
-                                                            request.TimeslotId,
+            await _medicalRecordService.CreateMedicalRecord(request.BookingId,
                                                             request.DoctorId,
-                                                            request.BookingId,
+                                                            request.PatientId,
+                                                            request.TimeslotId,
                                                             request.AppointmentId,
                                                             request.Diagnosis,
                                                             request.Symptoms,

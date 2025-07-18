@@ -9,7 +9,7 @@ namespace MedicalBookingProject.Domain.Abstractions
         Task<Guid> Create(Guid slotid, Guid patientid, Guid doctorid, Boolean isbooked);
         //Boolean isbooked, Guid? cancelledby, DateTime? cancelledat);
 
-        //Task<Booking> GetOneBooking(Guid id);
+        Task<Guid> PatchIsCLosed(Guid id);
         Task<List<BookingDTO>> GetByPatient(Guid id);
         Task<List<BookingDTO>> GetByDoctor(Guid id);
     }

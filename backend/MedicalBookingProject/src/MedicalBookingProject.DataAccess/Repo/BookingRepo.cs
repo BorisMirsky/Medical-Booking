@@ -59,7 +59,7 @@ namespace MedicalBookingProject.DataAccess.Repo
             
             var Dtos = entities
                 .Select(b => new BookingDTO(b.Id, b.DoctorId, b.PatientId,
-                                            b.TimeslotId, b.IsBooked,
+                                            b.TimeslotId, b.IsBooked, b.IsClosed,
                                             b.CreatedAt,
                                             b.Doctor?.UserName,
                                             b.Doctor?.Speciality,
@@ -78,20 +78,20 @@ namespace MedicalBookingProject.DataAccess.Repo
                .Include(item => item.Doctor)
                .Include(item => item.Timeslot)
                .Include(item => item.Patient)
-               .Where(item => item.DoctorId == doctorId) // && item.IsBooked == true)
+               .Where(item => item.DoctorId == doctorId && item.IsClosed == false)
                .GroupBy(item => item.TimeslotId)
                .Select(g => g.OrderByDescending(item => item.CreatedAt).FirstOrDefault())
                .ToListAsync();
 
             if (entities.Equals(0))
             {
-                Debug.WriteLine("there are not shit bookings for that patient");
+                Debug.WriteLine("there are not any bookings for that patient");
                 //throw new Exception($"Doctors with speciality {speciality} not found");
             }
 
             var Dtos = entities
                 .Select(b => new BookingDTO(b.Id, b.DoctorId, b.PatientId,
-                                            b.TimeslotId, b.IsBooked,
+                                            b.TimeslotId, b.IsBooked, b.IsClosed,
                                             b.CreatedAt,
                                             b.Doctor?.UserName,
                                             b.Doctor?.Speciality,
@@ -102,6 +102,27 @@ namespace MedicalBookingProject.DataAccess.Repo
 
             return Dtos;
         }
+
+
+        public async Task<Guid> PatchIsCLosed(Guid id)
+        {
+            var entity = await _context.Bookings
+               .Where(item => item.Id == id)
+               .FirstOrDefaultAsync();
+
+            if (entity == null)
+            {
+                Debug.WriteLine("there are not such shit Booking");
+            }
+
+            entity!.IsClosed = true;
+            await _context.Bookings.AddAsync(entity);
+            await _context.SaveChangesAsync();
+            return entity.Id;
+        }
     }
+
+
+
 }
 

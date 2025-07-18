@@ -17,10 +17,13 @@ namespace MedicalBookingProject.Domain.Abstractions
                             string? VisualExamination,
                             uint? FinalCost);
 
-        Task<MedicalRecord> Get(Guid id);
+        //Task<MedicalRecord> Get(Guid id);
 
-        Task<Guid> Update(Guid Id, string Symptoms,
-                                       string Diagnosis,
-                                       string PrescribedTreatment);
+        //Task<Guid> Update(Guid Id, string Symptoms,
+        //                               string Diagnosis,
+        //                               string PrescribedTreatment);
+
+        Task<List<MedicalRecordDTO>> GetByPatient(Guid patientId);
+        //Task<List<MedicalRecord>> GetByPatientId(Guid id);
     }
 }

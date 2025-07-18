@@ -60,17 +60,6 @@ namespace MedicalBookingProject.DataAccess.Repo
                 VisualExamination = visualExamination,
                 FinalCost = finalCost
             };
-            Debug.WriteLine("");
-            Debug.WriteLine("");
-            Debug.WriteLine("MedicalRecord");
-            Debug.WriteLine(id);
-            Debug.WriteLine(AppointmentId);
-            Debug.WriteLine(bookingId);
-            Debug.WriteLine(doctorId);
-            Debug.WriteLine(patientId);
-            Debug.WriteLine(timeslotId);
-            Debug.WriteLine("");
-            Debug.WriteLine("");
             await _context.MedicalRecords.AddAsync(medRec);
             await _context.SaveChangesAsync();
             return id;
@@ -78,28 +67,39 @@ namespace MedicalBookingProject.DataAccess.Repo
 
 
         // getByPatient
-        public async Task<MedicalRecord> Get(Guid id)
+        public async Task<List<MedicalRecordDTO>> GetByPatient(Guid patientId)
         {
-            MedicalRecord? entity = await _context.MedicalRecords
-                                    .AsNoTracking()
-                                    .FirstOrDefaultAsync(a => a.Id == id);
-            return entity!;
+            var entities = await _context.MedicalRecords
+               .Include(item => item.Doctor)
+               .Include(item => item.Timeslot)
+               .Include(item => item.Patient)
+               .Include(item => item.Booking)
+               .Include(item => item.Appointment)
+               .Where(item => item.PatientId == patientId) // && item.IsBooked == true)
+               .ToListAsync();
+
+            if (entities.Equals(0))
+            {
+                Debug.WriteLine("there are not shit bookings for that patient");
+                //throw new Exception($"Doctors with speciality {speciality} not found");
+            }
+
+            var Dtos = entities
+                .Select(b => new MedicalRecordDTO(b.Id,
+                                            b.Doctor?.Speciality,
+                                            b.Doctor?.UserName,
+                                            b.Patient?.UserName,
+                                            b.Timeslot?.DatetimeStart,
+                                            b.Timeslot?.DatetimeStop,
+                                            b.Appointment?.PatientCame,
+                                            b.Appointment?.PatientIsLate,
+                                            b.Appointment?.PatientUnacceptableBehavior,
+                                            b.Symptoms, b.Diagnosis, b.PrescribedTreatment,
+                                            b.VisualExamination, b.ReferralTests, b.FinalCost))
+
+                .ToList();
+
+            return Dtos;
         }
-
-
-        public async Task<Guid> Update(Guid Id, string? Symptoms,
-                                       string? Diagnosis,
-                                       string? PrescribedTreatment)
-        {
-            await _context.MedicalRecords
-                .Where(item => item.Id == Id)
-                .ExecuteUpdateAsync(s => s
-                .SetProperty(s => s.Symptoms, s => Symptoms)
-                .SetProperty(s => s.Diagnosis, s => Diagnosis)
-                .SetProperty(s => s.PrescribedTreatment, s => PrescribedTreatment)
-                );
-            return Id;
-        }
-
     }
 }

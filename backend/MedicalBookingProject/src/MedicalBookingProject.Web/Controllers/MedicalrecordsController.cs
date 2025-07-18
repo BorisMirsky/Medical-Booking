@@ -50,19 +50,28 @@ namespace MedicalBookingProject.Web.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<MedicalRecord>> GetById(Guid id)
+        public async Task<ActionResult<List<MedicalRecordDTO>>> GetByPatientId(Guid id)
         {
-            MedicalRecord medRec = await _medicalRecordService.GetMedicalRecord(id);
-            return Ok(medRec);
+            //List<BookingDTO> bookings
+            List<MedicalRecordDTO> medRecs = await _medicalRecordService.GetByPatientId(id);
+            return Ok(medRecs);
         }
 
 
-        [HttpPut]
-        public async Task<ActionResult<Guid>> UpdateMedicalRecord([FromBody] MedicalRecordRequest request)
-        {
-            await _medicalRecordService.UpdateMedicalRecord(request.Id, request.Symptoms,
-                                                            request.Diagnosis, request.PrescribedTreatment);
-            return Ok(request.Id);
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<MedicalRecord>> GetById(Guid id)
+        //{
+        //    MedicalRecord medRec = await _medicalRecordService.GetMedicalRecord(id);
+        //    return Ok(medRec);
+        //}
+
+
+        //[HttpPut]
+        //public async Task<ActionResult<Guid>> UpdateMedicalRecord([FromBody] MedicalRecordRequest request)
+        //{
+        //    await _medicalRecordService.UpdateMedicalRecord(request.Id, request.Symptoms,
+        //                                                    request.Diagnosis, request.PrescribedTreatment);
+        //    return Ok(request.Id);
+        //}
     }
 }

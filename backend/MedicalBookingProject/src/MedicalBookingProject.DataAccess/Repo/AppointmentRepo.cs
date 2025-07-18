@@ -16,11 +16,14 @@ namespace MedicalBookingProject.DataAccess.Repo
     public class AppointmentRepo : IAppointmentRepo
     {
 
+        public BookingRepo bookingRepo;
+
         private readonly MedicalBookingDbContext _context;
 
         public AppointmentRepo(MedicalBookingDbContext context)
         {
             _context = context;
+            bookingRepo = new BookingRepo(context);
         }
 
 
@@ -29,6 +32,12 @@ namespace MedicalBookingProject.DataAccess.Repo
                                      string? patientCame, string? patientIsLate,
                                      string? patientUnacceptableBehavior)
         {
+            //var booking = await _context.Bookings
+            //                       .Where(item => item.Id == bookingId)
+            //                       .FirstOrDefaultAsync();
+            //booking!.IsClosed = true;
+            //await _context.Bookings.AddAsync(booking);
+            //
             Guid id = Guid.NewGuid();
             Appointment app = new()
             {
@@ -41,18 +50,10 @@ namespace MedicalBookingProject.DataAccess.Repo
                 PatientIsLate = patientIsLate,
                 PatientUnacceptableBehavior = patientUnacceptableBehavior
             };
-            Debug.WriteLine("");
-            Debug.WriteLine("");
-            Debug.WriteLine("Appointment");
-            Debug.WriteLine(id);
-            Debug.WriteLine(bookingId);
-            Debug.WriteLine(doctorId);
-            Debug.WriteLine(patientId);
-            Debug.WriteLine(timeslotId);
-            Debug.WriteLine("");
-            Debug.WriteLine("");
             await _context.Appointments.AddAsync(app);
+            //
             await _context.SaveChangesAsync();
+            //await bookingRepo.PatchIsCLosed(bookingId);      //
             return id;
         }
 

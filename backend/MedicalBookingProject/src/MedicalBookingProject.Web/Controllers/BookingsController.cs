@@ -36,24 +36,6 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
-
-        //[Route("GetOneBooking")]
-        //[HttpGet]
-        ////[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
-        //public async Task<IActionResult> GetOneBooking(Guid id)
-        //{
-        //    Booking booking = await _bookingService.GetOneBooking(id);
-
-        //    if (booking != null)
-        //    {
-        //        return Ok(booking);
-        //    }
-
-        //    return BadRequest(new { message = "booking is not recognized" });
-        //}
-
-
-
         [Route("GetByPatient")]     
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
         public async Task<ActionResult<List<BookingDTO>>> GetByPatient([FromQuery] Guid id)

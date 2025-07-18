@@ -41,18 +41,24 @@ namespace MedicalBookingProject.Application.Services
                                                    FinalCost); 
         }
 
-        public async Task<MedicalRecord> GetMedicalRecord(Guid id)
+        public async Task<List<MedicalRecordDTO>> GetByPatientId(Guid id)
         {
-            return await _medicalReportRepo.Get(id);
+            return await _medicalReportRepo.GetByPatient(id);
         }
 
-        public async Task<Guid> UpdateMedicalRecord(Guid Id, string Symptoms,
-                                       string Diagnosis,
-                                       string PrescribedTreatment)
-        {
-            await _medicalReportRepo.Update(Id, Symptoms,
-                                            Diagnosis, PrescribedTreatment);
-            return Id;
-        }
+
+        //public async Task<MedicalRecord> GetMedicalRecord(Guid id)
+        //{
+        //    return await _medicalReportRepo.Get(id);
+        //}
+
+        //public async Task<Guid> UpdateMedicalRecord(Guid Id, string Symptoms,
+        //                               string Diagnosis,
+        //                               string PrescribedTreatment)
+        //{
+        //    await _medicalReportRepo.Update(Id, Symptoms,
+        //                                    Diagnosis, PrescribedTreatment);
+        //    return Id;
+        //}
     }
 }

@@ -9,7 +9,10 @@ namespace MedicalBookingProject.Domain.Abstractions
                                     Guid timeslotId, Guid bookingId,
                                      string? patientCame, string? patientIsLate,
                                      string? patientUnacceptableBehavior);
-        //Task<Appointment> Get(Guid id);
+
+        Task<Guid> GetByBookingId(Guid id);
+
         //Task<Guid> Update(Guid Id);
+
     }
 }

@@ -11,7 +11,7 @@ namespace MedicalBookingProject.Domain.Abstractions
                                      string? patientCame, string? patientIsLate,
                                      string? patientUnacceptableBehavior);
         
-        //Task<Appointment> GetAppointment(Guid id);
+        Task<Guid> GetByBookingId(Guid id);
         
         //Task<Guid> UpdateAppointment(Guid Id);
 

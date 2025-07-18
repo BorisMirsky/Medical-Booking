@@ -7,6 +7,7 @@ using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using MedicalBookingProject.Domain.Models.Bookings;
+using MedicalBookingProject.Domain.Models.Users;
 
 
 
@@ -40,9 +41,35 @@ namespace MedicalBookingProject.DataAccess.Repo
                 PatientIsLate = patientIsLate,
                 PatientUnacceptableBehavior = patientUnacceptableBehavior
             };
+            Debug.WriteLine("");
+            Debug.WriteLine("");
+            Debug.WriteLine("Appointment");
+            Debug.WriteLine(id);
+            Debug.WriteLine(bookingId);
+            Debug.WriteLine(doctorId);
+            Debug.WriteLine(patientId);
+            Debug.WriteLine(timeslotId);
+            Debug.WriteLine("");
+            Debug.WriteLine("");
             await _context.Appointments.AddAsync(app);
             await _context.SaveChangesAsync();
             return id;
+        }
+
+
+        public async Task<Guid> GetByBookingId(Guid id)
+        {
+
+            Appointment? entity = await _context.Appointments
+                .FirstOrDefaultAsync(a => a.BookingId == id);
+
+            if (entity == null)
+            {
+                Debug.WriteLine("there are not such shit Appointments");
+            }
+
+            Guid appId = entity!.Id;
+            return appId;
         }
     }
 }

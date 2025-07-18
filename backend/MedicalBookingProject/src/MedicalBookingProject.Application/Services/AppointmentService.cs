@@ -28,13 +28,13 @@ namespace MedicalBookingProject.Application.Services
                                     timeslotId, bookingId,
                                      patientCame, patientIsLate,
                                       patientUnacceptableBehavior);
-        }       
+        }
 
-        // public async Task<Appointment> GetAppointment(Guid id)
-        //{
-        //    return await _appointmentRepo.Get(id);
-        //}
-        
+        public async Task<Guid> GetByBookingId(Guid id)
+        {
+            return await _appointmentRepo.GetByBookingId(id);
+        }
+
         //public async Task<Guid> UpdateAppointment(Guid Id)
         //{
         //    await _appointmentRepo.Update(Id);

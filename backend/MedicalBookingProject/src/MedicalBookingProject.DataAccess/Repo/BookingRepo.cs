@@ -105,16 +105,3 @@ namespace MedicalBookingProject.DataAccess.Repo
     }
 }
 
-
-
-
-
-
-
-//public async Task<Booking> GetOneBooking(Guid id)
-//{
-//    Booking? booking = await _context.Bookings
-//                            .AsNoTracking()
-//                            .FirstOrDefaultAsync(s => s.Id == id);
-//    return booking!;
-//}

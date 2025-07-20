@@ -7,6 +7,7 @@ using System.Diagnostics;
 using MedicalBookingProject.Domain.Models.Users;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 
 
 
@@ -103,8 +104,8 @@ namespace MedicalBookingProject.DataAccess.Repo
             return Dtos;
         }
 
-
-        public async Task<Guid> PatchIsCLosed(Guid id)
+       
+        public async Task<Guid> SetBookingClosed(Guid id)
         {
             var entity = await _context.Bookings
                .Where(item => item.Id == id)
@@ -117,6 +118,7 @@ namespace MedicalBookingProject.DataAccess.Repo
 
             entity!.IsClosed = true;
             await _context.Bookings.AddAsync(entity);
+            //await _context.Bookings.
             await _context.SaveChangesAsync();
             return entity.Id;
         }

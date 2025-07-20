@@ -19,13 +19,6 @@ namespace MedicalBookingProject.Domain.Abstractions
                                        string? VisualExamination,
                                        uint? FinalCost);
 
-        Task<List<MedicalRecordDTO>> GetByPatientId(Guid id);
-
-
-        //Task<MedicalRecord> GetMedicalRecord(Guid id);
-
-        //Task<Guid> UpdateMedicalRecord(Guid Id, string Symptoms,
-        //                               string Diagnosis,
-        //                               string PrescribedTreatment);
+        Task<List<MedicalRecordDTO>> GetByPatient(Guid id);
     }
 }

@@ -59,6 +59,10 @@ export interface TimeSlotUpdateRequest {
     isbooked: boolean;
 }
 
+export interface SetBookingClosedRequest {
+    bookingid: string;
+}
+
 export interface DoctorSheduleRequest {
     id: string;
     speciality: string;
@@ -100,6 +104,7 @@ export interface MedicalRecordRequest {
 
 export interface DoctorAppointmentProps {
     booking: Booking;
+    //bookingStatus: boolean;
 }
 
 export interface DoctorMedicalRecordProps {
@@ -403,7 +408,7 @@ export const updateTimeslot = async (request: TimeSlotUpdateRequest) => {
         headers: {
             'Content-Type': 'application/json',
             //'Authorization': `Bearer ${token}`
-        },
+        } ,
         body: JSON.stringify(request)
     })
     .then(response => {
@@ -501,3 +506,62 @@ export const createMedicalRecord = async (request: MedicalRecordRequest) => {
         console.log('Error: ', err);
     });
 }
+
+
+//export const setBookingClosed = async (request: SetBookingClosedRequest) => {
+export const setBookingClosed = async (id: string) => {
+    //const token = localStorage.getItem('token');
+    let alertText: string = "";
+    await fetch("http://localhost:5032/bookings/SetBookingClosed?id=" + id, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            //'Authorization': `Bearer ${token}`
+        }//,
+        //body: JSON.stringify(request)
+    }).then(response => {
+        if (!response.ok) {
+            alert("Ошибка закрытия бронирования");
+            const err = new Error("HTTP status code: " + response.status);
+            throw err
+        }
+        else {
+            alertText = "Бронирование закрыто";
+            alert(alertText);
+        }
+    }).catch(function (err) {
+        console.log('Error: ', err);
+    });
+}
+
+
+
+export const getMedicalRecordsByPatient = async (id: string) => {
+    const url = 'http://localhost:5032/MedicalRecords/';    
+    //const token = localStorage.getItem('token');
+    const response = await fetch(url + id, {
+        headers: {
+            'Content-type': 'application/json'
+            //'Authorization': `Bearer ${token}`,
+        },
+        method: 'GET',
+        mode: 'cors'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Not response", { cause: response });
+                //window.location.href = 'noauthorized';
+            }
+            else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            console.log('getMedicalRecordsByPatient data ', data);
+            return data;
+        })
+        .catch(function (err) {
+            console.log('Error: ', err);
+        });
+    return response;
+};

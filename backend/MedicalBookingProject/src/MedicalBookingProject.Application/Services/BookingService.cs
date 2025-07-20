@@ -33,9 +33,9 @@ namespace MedicalBookingProject.Application.Services
             return await _bookingRepo.GetByDoctor(id);
         }
 
-        //public async Task<Booking> GetOneBooking(Guid id)
-        //{
-        //    return await _bookingRepo.GetOneBooking(id);
-        //}
+        public async Task<Guid> SetBookingClosed(Guid id)
+        {
+            return await _bookingRepo.SetBookingClosed(id);
+        }
     }
 }

@@ -43,16 +43,6 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
-        //// По id слота
-        //[Route("GetById")]
-        //[HttpGet]  //("{slotId:int}")]
-        //public async Task<ActionResult<Timeslot>> GetById(Guid slotId)
-        //{
-        //    Timeslot timeslot = await _timeslotService.GetTimeslot(slotId);
-        //    return Ok(timeslot);
-        //}
-
-
 
         // По id доктора
         [Route("ByDoctorId")]

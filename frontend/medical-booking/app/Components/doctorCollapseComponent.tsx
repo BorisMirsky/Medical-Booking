@@ -32,22 +32,11 @@ const CollapseElement: React.FC = () => {
             key: '3',
             label: 'Приём пациента',
             children: <DoctorAppointment booking={sharedBooking} />,
-        },
-        {
-            key: '4',
-            label: 'Медицинская карта пациента',
-            children: <p>лылылылы</p>,
-        },
-        {
-            key: '5',
-            label: 'Статистика врача',
-            children: <p>ups...</p>,
         }
     ];
 
     const handleChange = (key: string | string[]) => {
         setActiveKey(key);
-        // Optional: clear car data if user manually opens panel 2
         if (key !== '2') {
             setSharedBooking(undefined);
         }

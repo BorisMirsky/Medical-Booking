@@ -6,13 +6,19 @@ import { DoctorAppointmentProps } from "@/app/Services/service";
 import { Card, Space } from "antd"; 
 import FormAppointment from "../Components/formCreateAppointmentComponent";
 import FormMedicalRecord from "../Components/formCreateMedicalRecordComponent"; 
-//import { useEffect, useState } from "react";
+import PatientAllMedicalRecords from '../Components/patientAllMedicalRecordsComponent';
+//import { useState, useEffect } from "react";       // useEffect
 import "../globals.css";
 
 
 
 
 const DoctorAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
+    //const [bookingClosed, setBookingClosed] = useState(false);
+    //bookingStatus={bookingClosed}
+    const patientusername: string = !booking ? "" : booking.patientUserName;
+
+    const _title = `Медицинская карта пациента ${patientusername}`;
 
     if (!booking) {
         return <div>Выберите бронирование в предыдущей панели</div>;
@@ -38,16 +44,25 @@ const DoctorAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
                         style={{ width: 500 }}
                     >
                         <div>
-                            <FormAppointment booking={booking} />
+                            <FormAppointment   booking={booking} />
                         </div>
                     </Card>
                     
                     <Card
-                        title="Медицинская карта пациента"
+                        title="Запись в медицинскую карту пациента"
                         style={{ width: 600 }}
                     >
                         <div>
                             <FormMedicalRecord booking={booking} />
+                        </div>
+                    </Card>
+
+                    <Card
+                        title={_title}
+                        style={{ width: 1000 }}
+                    >
+                        <div>
+                            <PatientAllMedicalRecords booking={booking} />
                         </div>
                     </Card>
 

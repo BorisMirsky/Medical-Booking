@@ -36,6 +36,16 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
+        [Route("SetBookingClosed")]
+        [HttpPatch]
+        //public async Task<ActionResult<Guid>> SetBookingClosed([FromBody] BookingCloseRequest request)
+        public async Task<ActionResult<Guid>> SetBookingClosed([FromQuery] Guid id)
+        {
+            var result = await _bookingService.SetBookingClosed(id);
+            return Ok(result);
+        }
+
+
         [Route("GetByPatient")]     
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
         public async Task<ActionResult<List<BookingDTO>>> GetByPatient([FromQuery] Guid id)

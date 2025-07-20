@@ -86,6 +86,7 @@ namespace MedicalBookingProject.DataAccess.Repo
 
             var Dtos = entities
                 .Select(b => new MedicalRecordDTO(b.Id,
+                                            b.PatientId,
                                             b.Doctor?.Speciality,
                                             b.Doctor?.UserName,
                                             b.Patient?.UserName,

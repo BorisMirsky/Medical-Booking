@@ -8,7 +8,7 @@ namespace MedicalBookingProject.Domain.Abstractions
         //Guid AppointmentId,
         //Guid BookingId,
         //Guid DoctorId,
-        //Guid PatientId,
+        Guid PatientId,
         //Guid TimeslotId,
         //Boolean IsBooked,
         //Boolean IsClosed,

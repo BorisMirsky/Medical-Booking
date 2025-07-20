@@ -30,7 +30,6 @@ const FormAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
             patientunacceptablebehavior: values.patientunacceptablebehavior
         };
         createAppointment(result);
-        //console.log("FormAppointment ", result);
         form.resetFields();
         setComponentDisabled(true);
     }

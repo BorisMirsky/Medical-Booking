@@ -32,12 +32,6 @@ namespace MedicalBookingProject.DataAccess.Repo
                                      string? patientCame, string? patientIsLate,
                                      string? patientUnacceptableBehavior)
         {
-            //var booking = await _context.Bookings
-            //                       .Where(item => item.Id == bookingId)
-            //                       .FirstOrDefaultAsync();
-            //booking!.IsClosed = true;
-            //await _context.Bookings.AddAsync(booking);
-            //
             Guid id = Guid.NewGuid();
             Appointment app = new()
             {
@@ -51,9 +45,7 @@ namespace MedicalBookingProject.DataAccess.Repo
                 PatientUnacceptableBehavior = patientUnacceptableBehavior
             };
             await _context.Appointments.AddAsync(app);
-            //
             await _context.SaveChangesAsync();
-            //await bookingRepo.PatchIsCLosed(bookingId);      //
             return id;
         }
 

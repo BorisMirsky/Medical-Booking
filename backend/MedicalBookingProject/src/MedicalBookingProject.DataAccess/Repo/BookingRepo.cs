@@ -107,20 +107,12 @@ namespace MedicalBookingProject.DataAccess.Repo
        
         public async Task<Guid> SetBookingClosed(Guid id)
         {
-            var entity = await _context.Bookings
-               .Where(item => item.Id == id)
-               .FirstOrDefaultAsync();
-
-            if (entity == null)
-            {
-                Debug.WriteLine("there are not such shit Booking");
-            }
-
-            entity!.IsClosed = true;
-            await _context.Bookings.AddAsync(entity);
-            //await _context.Bookings.
-            await _context.SaveChangesAsync();
-            return entity.Id;
+            await _context.Bookings
+                .Where(item => item.Id == id)
+                .ExecuteUpdateAsync(s => s
+                .SetProperty(s => s.IsClosed, s => true)
+                );
+            return id;
         }
     }
 

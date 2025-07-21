@@ -1,5 +1,4 @@
-﻿///* eslint-disable @typescript-eslint/no-explicit-any */
-///* eslint-disable react-hooks/rules-of-hooks */
+﻿
 "use client"
 
 import React from 'react';
@@ -12,10 +11,6 @@ import { Booking } from "@/app/Models/Booking";
 import { Table, Button } from "antd";
 import { useEffect, useState } from "react";  
 import "../globals.css";
-//import Title from "antd/es/typography/Title";
-//import moment from 'moment';
-
-
 
 
 
@@ -40,11 +35,6 @@ export default function PatientBookings() {
             dataIndex: 'speciality',
             key: 'speciality',
         },
-        //{
-        //    title: 'Slot Id',
-        //    dataIndex: 'timeslotId',
-        //    key: 'timeslotId',
-        //},
         {
             title: 'Статус',
             dataIndex: 'isBooked',

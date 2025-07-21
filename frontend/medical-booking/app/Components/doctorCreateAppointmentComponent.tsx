@@ -53,7 +53,7 @@ const DoctorCreateAppointment: React.FC<DoctorCreateAppointmentProps> = ({ onNex
                 >
                     {"Создать"}
                 </Button>
-            ),
+            )
         }
     ]
 

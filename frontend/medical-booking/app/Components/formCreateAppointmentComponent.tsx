@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {
-    createAppointment, AppointmentRequest, DoctorAppointmentProps
+    createAppointment, AppointmentRequest, DoctorAppointmentProps, setBookingClosed
 } from "@/app/Services/service";
 //import { Booking } from "@/app/Models/Booking";
 import { FormProps, Button, Form, Input, Space } from "antd";
@@ -31,6 +31,7 @@ const FormAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
         };
         createAppointment(result);
         form.resetFields();
+        setBookingClosed(booking.id);
         setComponentDisabled(true);
     }
 

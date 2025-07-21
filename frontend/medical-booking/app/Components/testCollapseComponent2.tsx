@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import type { CollapseProps } from 'antd';
-import { Collapse, Button, Space } from 'antd';  
+import { Collapse, Button, Space } from 'antd';
 import { useState } from "react";
 
 
@@ -16,21 +16,6 @@ interface Element2Props {
 }
 
 
-const Element1Parent = ({ buttonStates, onButtonClick }: Element1Props) => {
-    return (
-        <div>
-            <p>value1 <b>{buttonStates.btn1.toString()}</b></p>
-            <p>value2 <b>{buttonStates.btn2.toString()}</b></p>
-            <p>value3 <b>{buttonStates.btn3.toString()}</b></p>
-        <div>
-            <Element1
-                buttonStates={buttonStates}
-                onButtonClick={onButtonClick} />
-        </div>
-        </div>
-
-    );
-};
 
 
 // Child component for buttons
@@ -98,7 +83,7 @@ const CollapseComponent: React.FC = () => {
         {
             key: '1',
             label: 'Element1 (Click Buttons Here)',
-            children: <Element1Parent
+            children: <Element1
                 buttonStates={buttonStates}
                 onButtonClick={handleButtonClick} />,
         },

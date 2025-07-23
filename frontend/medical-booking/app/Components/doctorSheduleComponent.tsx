@@ -4,7 +4,8 @@
 import React from 'react';
 import "../globals.css";
 import {
-    getDoctorsBySpeciality, DoctorSheduleRequest, getSlotsByDoctorId 
+    getDoctorsBySpeciality, DoctorSheduleRequest,
+    getSlotsByDoctorId, DoctorSheduleProps1 
 } from "@/app/Services/service";   
 import { Doctor } from "@/app/Models/Doctor";
 import { Slot } from "@/app/Models/Slot";         
@@ -16,23 +17,24 @@ import moment from "moment";
 
 
 
-export default function DoctorShedule() {
+
+//export default function DoctorShedule({ numbers, setNumbers, }: DoctorSheduleProps) {
+export default function DoctorShedule({ count, setCount, }: DoctorSheduleProps1) {
     //const [currentRole, setCurrentRole] = useState("");
-    //const [state, setState] = useState(0);
     const [doctors, setDoctors] = useState<Doctor[]>([]);
-    const [slots, setSlots] = useState<Slot[]>([]);
+    const [slots_, setSlots] = useState<Slot[]>([]);
     const [slots1, setSlots1] = useState<Slot[]>([]);
     const [buttonsFlag, setButtonsFlag] = useState<number>(0);
-    //const [count, setCount] = useState(0);
 
 
     useEffect(() => {
         //const role = localStorage.getItem("role") || "";
         //setCurrentRole(role);
         //localStorage.clear();
-        processSlots(slots);
+        processSlots(slots_);
+        //  СТРОКУ НИЖЕ НЕ УБИРАТЬ
         // eslint-disable-next-line react-hooks/exhaustive-deps   
-    }, [slots]);
+    }, [slots_]);
 
 
     const [form] = Form.useForm();
@@ -80,13 +82,14 @@ export default function DoctorShedule() {
         setSlots([]);
         const getSlots = async () => {
             const responce = await getSlotsByDoctorId(id);
+            //console.log("responce slots", responce);
             setSlots(responce);  
         }
         getSlots();
     }; 
 
     // даты приёма врача
-    const uniquePrefixes = new Set(slots.map(item => item.datetimeStart.split(' ')[0]));
+    const uniquePrefixes = new Set(slots_.map(item => item.datetimeStart.split(' ')[0]));
 
     interface MyResult {
         [key: string]: Array<Slot>;
@@ -114,7 +117,7 @@ export default function DoctorShedule() {
     let selectedDay: string = "";
 
     const selectDate = (value: string) => {
-        // Обработка удаления даты через 'x'
+        // Если удалили поле 'датa'
         try {
             selectedDay = moment(value.toString()).format('YYYY-DD-MM');
         } catch (e) {
@@ -124,6 +127,19 @@ export default function DoctorShedule() {
 
     const forceRerender = () => {
         setSlots1([]);
+    }
+
+
+    //const props: DoctorSheduleProps = {
+    //    numbers: numbers,
+    //    setNumbers: setNumbers,
+    //    slots: slots1
+    //}
+
+    const props1: DoctorSheduleProps1 = {
+        count: count,
+        setCount: setCount,
+        slots: slots1
     }
 
     return (
@@ -208,7 +224,7 @@ export default function DoctorShedule() {
                     ) : (
                             <div>
                                 <TimeslotsButtons
-                                    {...slots1}
+                                    {...props1}
                                 />
                             </div>
                     )

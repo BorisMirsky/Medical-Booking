@@ -12,12 +12,9 @@ namespace MedicalBookingProject.Domain.Abstractions
                                      string? patientUnacceptableBehavior);
         
         Task<Guid> GetByBookingId(Guid id);
-        
-        //Task<Guid> UpdateAppointment(Guid Id);
 
+        Task<List<AppointmentDTO>> GetByPatient(Guid id);
 
-        //                             //Boolean? Treatment, Boolean? MakingDiagnosis,
-        //                             //Boolean? ReferralTests, Boolean? VisualExaminationPatient,
-        //                             //int FinalCost);
+        Task<List<AppointmentDTO>> GetByDoctor(Guid id);
     }
 }

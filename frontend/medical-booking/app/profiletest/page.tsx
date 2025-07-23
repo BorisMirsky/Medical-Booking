@@ -2,7 +2,7 @@
 "use client"
 
 import React from 'react';
-import CollapseElement from '../Components/testCollapseComponent';
+import CollapseElement from '../Components/testCollapseComponent1';
 
 
 

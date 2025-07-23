@@ -7,15 +7,14 @@ import { Slot } from "@/app/Models/Slot";
 import { Button, Space } from 'antd';
 import {
     updateTimeslot, TimeSlotUpdateRequest,
-    createBooking, BookingCreateRequest
+    createBooking, BookingCreateRequest, DoctorSheduleProps1
 } from "@/app/Services/service";
 //import { useState } from "react";         //useState, useReducer
 
 
 
-
-
-export default function TimeslotsButtons(slots: Array<Slot>) {
+//export default function TimeslotsButtons({ numbers, setNumbers, slots }: DoctorSheduleProps) {
+export default function TimeslotsButtons({ count, setCount, slots }: DoctorSheduleProps1) {
 
     const data = Object.keys(slots).map((slot, index) => ({
         key: index,
@@ -55,6 +54,8 @@ export default function TimeslotsButtons(slots: Array<Slot>) {
             bookingRequest.isbooked = true;
             updateTimeslot(timeslotRequest);
             createBooking(bookingRequest);
+            setCount(count++);
+            //setNumbers(oldNumbers => [...oldNumbers, 4]);
         }
     };
 

@@ -14,6 +14,13 @@ import "../globals.css";
 
 
 
+//type ButtonStates = { [key: string]: boolean };
+
+//interface Element2Props {
+//    buttonStates: ButtonStates;
+//}
+
+
 export default function PatientBookings() {
     //const [currentRole, setCurrentRole] = useState("");
     const [bookings, setBookings] = useState<Booking[]>([]);

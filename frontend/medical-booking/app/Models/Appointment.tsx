@@ -4,8 +4,13 @@
     doctorId: string;
     timeslotId: string;
     bookingid: string;
-    patientcame: string;
-    patientislate: string;
-    patientunacceptablebehavior: string;
+    patientusername: string;
+    doctorusername: string,
+    doctorspeciality: string,
+    timeslotdatetimestart: string;
+    timeslotatetimestop: string;
+    //patientcame: string;
+    //patientislate: string;
+    //patientunacceptablebehavior: string;
 }
 

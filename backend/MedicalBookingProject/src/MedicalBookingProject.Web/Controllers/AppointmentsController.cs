@@ -40,19 +40,34 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
-        //[HttpGet]
-        //public async Task<ActionResult<Appointment>> GetById(Guid id)
-        //{
-        //    Appointment app = await _appointmentService.GetAppointment(id);
-        //    return Ok(app);
-        //}
+        [Route("GetByPatient")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        public async Task<ActionResult<List<AppointmentDTO>>> GetByPatient([FromQuery] Guid id)
+        {
+            List<AppointmentDTO> apps = await _appointmentService.GetByPatient(id);
+
+            if (apps != null)
+            {
+                return Ok(apps);
+            }
+
+            return BadRequest(new { message = "there'are not such patient" });
+        }
 
 
-        //[HttpPut]
-        //public async Task<ActionResult<Guid>> PatientUnacceptableBehavior([FromBody] AppointmentRequest request)
-        //{
-        //    await _appointmentService.UpdateAppointment(request.Id);
-        //    return Ok(request.Id);
-        //}
+
+        [Route("GetByDoctor")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        public async Task<ActionResult<List<AppointmentDTO>>> GetByDoctor([FromQuery] Guid id)
+        {
+            List<AppointmentDTO> apps = await _appointmentService.GetByDoctor(id);
+
+            if (apps != null)
+            {
+                return Ok(apps);
+            }
+
+            return BadRequest(new { message = "there'are not such doctor" });
+        }
     }
 }

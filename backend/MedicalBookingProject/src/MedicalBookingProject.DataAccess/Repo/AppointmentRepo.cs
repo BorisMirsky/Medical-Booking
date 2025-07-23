@@ -64,5 +64,69 @@ namespace MedicalBookingProject.DataAccess.Repo
             Guid appId = entity!.Id;
             return appId;
         }
+
+
+
+        public async Task<List<AppointmentDTO>> GetByPatient(Guid patientId)
+        {
+            var entities = await _context.Appointments
+               .Include(item => item.Doctor)
+               .Include(item => item.Timeslot)
+               .Include(item => item.Patient)
+               .Include(item => item.Booking)
+               .Where(item => item.PatientId == patientId) 
+               .GroupBy(item => item.TimeslotId)
+               .Select(g => g.OrderByDescending(item => item.Booking!.CreatedAt).FirstOrDefault())
+               .ToListAsync();
+
+            if (entities.Equals(0))
+            {
+                Debug.WriteLine("there are not shit bookings for that patient");
+            }
+
+            var Dtos = entities
+                .Select(b => new AppointmentDTO(b.Id, b.BookingId, b.DoctorId, 
+                                            b.PatientId, b.TimeslotId, 
+                                            b.Doctor.Speciality, b.Doctor.UserName,
+                                            b.Patient?.UserName,
+                                            b.Timeslot?.DatetimeStart,
+                                            b.Timeslot?.DatetimeStop))
+                                            //b.PatientCame, b.PatientIsLate,
+                                            //b.PatientUnacceptableBehavior))
+                .ToList();
+
+            return Dtos;
+        }
+
+
+        public async Task<List<AppointmentDTO>> GetByDoctor(Guid doctorId)
+        {
+            var entities = await _context.Appointments
+               .Include(item => item.Doctor)
+               .Include(item => item.Timeslot)
+               .Include(item => item.Patient)
+               .Include(item => item.Booking)
+               .Where(item => item.DoctorId == doctorId) // && item.IsClosed == false)
+               .GroupBy(item => item.TimeslotId)
+               .Select(g => g.OrderByDescending(item => item.Booking!.CreatedAt).FirstOrDefault())
+               .ToListAsync();
+
+            if (entities.Equals(0))
+            {
+                Debug.WriteLine("there are not any bookings for that patient");
+                //throw new Exception($"Doctors with speciality {speciality} not found");
+            }
+
+            var Dtos = entities
+                .Select(b => new AppointmentDTO(b.Id, b.BookingId, b.DoctorId,
+                                            b.PatientId, b.TimeslotId,
+                                            b.Doctor.Speciality, b.Doctor.UserName,
+                                            b.Patient?.UserName,
+                                            b.Timeslot?.DatetimeStart,
+                                            b.Timeslot?.DatetimeStop))
+                .ToList();
+
+            return Dtos;
+        }
     }
 }

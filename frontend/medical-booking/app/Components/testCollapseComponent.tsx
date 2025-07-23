@@ -16,12 +16,16 @@ interface Element2Props {
 }
 
 
+// DoctorShedule 
 const Element1Parent = ({ buttonStates, onButtonClick }: Element1Props) => {
     return (
         <div>
             <p>value1 <b>{buttonStates.btn1.toString()}</b></p>
             <p>value2 <b>{buttonStates.btn2.toString()}</b></p>
             <p>value3 <b>{buttonStates.btn3.toString()}</b></p>
+            <br/>
+            <br/>
+            <br/>
         <div>
             <Element1
                 buttonStates={buttonStates}
@@ -33,7 +37,8 @@ const Element1Parent = ({ buttonStates, onButtonClick }: Element1Props) => {
 };
 
 
-// Child component for buttons
+
+// DoctorShedule/TimeslotsButtons
 const Element1 = ({ buttonStates, onButtonClick }: Element1Props) => {
     return (
         <Space>
@@ -64,7 +69,7 @@ const Element1 = ({ buttonStates, onButtonClick }: Element1Props) => {
 
 
 
-// Child component to display values
+// PatientBookings
 const Element2 = ({ buttonStates }: Element2Props) => {
     return (
         <div>
@@ -77,7 +82,7 @@ const Element2 = ({ buttonStates }: Element2Props) => {
 
 
 
-// Parent component that holds the state
+// patientCollapseComponent
 const CollapseComponent: React.FC = () => {
     // State is "lifted up" to the parent component
     const [buttonStates, setButtonStates] = useState<ButtonStates>({

@@ -35,10 +35,15 @@ namespace MedicalBookingProject.Application.Services
             return await _appointmentRepo.GetByBookingId(id);
         }
 
-        //public async Task<Guid> UpdateAppointment(Guid Id)
-        //{
-        //    await _appointmentRepo.Update(Id);
-        //    return Id;
-        //}
+        public async Task<List<AppointmentDTO>> GetByPatient(Guid patientId)
+        {
+            return await _appointmentRepo.GetByPatient(patientId);
+        }
+
+
+        public async Task<List<AppointmentDTO>> GetByDoctor(Guid id)
+        {
+            return await _appointmentRepo.GetByDoctor(id);
+        }
     }
 }

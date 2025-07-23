@@ -12,7 +12,9 @@ namespace MedicalBookingProject.Domain.Abstractions
 
         Task<Guid> GetByBookingId(Guid id);
 
-        //Task<Guid> Update(Guid Id);
+        Task<List<AppointmentDTO>> GetByPatient(Guid id);
+
+        Task<List<AppointmentDTO>> GetByDoctor(Guid id);
 
     }
 }

@@ -20,7 +20,7 @@ const CollapseElement: React.FC = () => {
     const items: CollapseProps['items'] = [
         {
             key: '1',
-            label: 'Расписание врача',
+            label: 'Моё расписание',
             children: <DoctorSheduleWatchOnly></DoctorSheduleWatchOnly>,
         },
         {

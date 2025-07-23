@@ -1,8 +1,20 @@
 ﻿import { Booking } from "@/app/Models/Booking";
 import { MedicalRecord } from "@/app/Models/MedicalRecord";
-
+import { Slot } from "@/app/Models/Slot";   
 
 //////////////////////////////////   interfaces   //////////////////////////////////////////////
+
+export type DoctorSheduleProps = {
+    numbers: number[];
+    setNumbers(numbers: number[]): void;
+    slots: Array<Slot>;
+}
+
+export type DoctorSheduleProps1 = {
+    count: number;
+    setCount(count1: number): void;
+    slots: Array<Slot>;
+}
 
 export interface UserRegistrationRequest {
     email: string;
@@ -508,7 +520,6 @@ export const createMedicalRecord = async (request: MedicalRecordRequest) => {
 }
 
 
-//export const setBookingClosed = async (request: SetBookingClosedRequest) => {
 export const setBookingClosed = async (id: string) => {
     //const token = localStorage.getItem('token');
     let alertText: string = "";
@@ -533,7 +544,6 @@ export const setBookingClosed = async (id: string) => {
         console.log('Error: ', err);
     });
 }
-
 
 
 export const getMedicalRecordsByPatient = async (id: string) => {
@@ -565,3 +575,50 @@ export const getMedicalRecordsByPatient = async (id: string) => {
         });
     return response;
 };
+
+
+export const getAppointmentsByPatientId = async (id: string) => {
+    const response = await fetch("http://localhost:5032/Appointments/GetByPatient?id=" + id, {
+        headers: {
+            'Content-type': 'application/json'
+        },
+        method: 'GET'
+    })
+        .then((response) => {
+            if (!response.ok) {
+                console.log('!response.ok ');
+            }
+            else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            return data;
+        })
+        .catch(e => console.log('error', e));
+    return response;
+};
+
+
+//export const getAppointmentsByDoctorId = async (id: string) => {
+//    const response = await fetch("http://localhost:5032/Appointments/GetByDoctor?id=" + id, {
+//        headers: {
+//            'Content-type': 'application/json'
+//        },
+//        method: 'GET'
+//    })
+//        .then((response) => {
+//            if (!response.ok) {
+//                console.log('!response.ok ');
+//            }
+//            else {
+//                return response.json();
+//            }
+//        })
+//        .then(data => {
+//            return data;
+//        })
+//        //.catch(err => { console.log('Error: ', err); });
+//        .catch(e => console.log('Connection error', e));
+//    return response;
+//};

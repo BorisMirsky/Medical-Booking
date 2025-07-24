@@ -17,6 +17,7 @@ namespace MedicalBookingProject.Web.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class MedicalRecordsController : ControllerBase
     {
 
@@ -30,7 +31,7 @@ namespace MedicalBookingProject.Web.Controllers
 
         [Route("CreateMedicalRecord")]
         [HttpPost] 
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "doctor")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "doctor")]
         public async Task<ActionResult> CreateMedicalRecord([FromBody] MedicalRecordRequest request)
         {
             await _medicalRecordService.CreateMedicalRecord(request.BookingId,
@@ -52,17 +53,12 @@ namespace MedicalBookingProject.Web.Controllers
 
         [Route("GetByPatientId")]
         [HttpGet("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "doctor")]
         public async Task<ActionResult<List<MedicalRecordDTO>>> GetByPatientId(Guid id)
         {
             List<MedicalRecordDTO> medRecs = await _medicalRecordService.GetByPatient(id);
-            Debug.WriteLine("");
-            Debug.WriteLine("");
-            Debug.WriteLine(medRecs);
-            Debug.WriteLine("");
-            Debug.WriteLine("");
             return Ok(medRecs);
         }
-
 
     }
 }

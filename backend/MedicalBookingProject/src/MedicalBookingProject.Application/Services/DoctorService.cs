@@ -53,5 +53,10 @@ namespace MedicalBookingProject.Application.Services
             return await _doctorRepo.GetDoctorBySpecialityAndName(speciality, username);
         }
 
+        public async Task<Doctor?> LoginAccount(string email, string password)
+        {
+            return await _doctorRepo.Login(email, password);
+        }
+
     }
 }

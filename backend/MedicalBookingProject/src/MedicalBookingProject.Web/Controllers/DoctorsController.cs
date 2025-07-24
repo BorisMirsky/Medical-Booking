@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Identity.Data;
-//using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 //  + LoginDoctor + RegisterPatient + LoginPatient + LoginAdmin (все POST)
 // + возможность редактирования Doctor           (UPDATE)
 // + возможность блокировки Doctor & Patient     (как это сделать? добавит флажок)
@@ -17,6 +17,7 @@ namespace MedicalBookingProject.Web.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class DoctorsController : ControllerBase
     {
         private readonly IDoctorService _doctorService;
@@ -29,7 +30,7 @@ namespace MedicalBookingProject.Web.Controllers
 
         [Route("Register")]
         [HttpPost]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
         public async Task<IActionResult> Register([FromBody] RegisterDoctorRequest request)
         {
             if (String.IsNullOrEmpty(request.Email))
@@ -57,7 +58,7 @@ namespace MedicalBookingProject.Web.Controllers
 
         [Route("GetDoctors")]
         [HttpGet] 
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
         public async Task<ActionResult<DoctorResponse>> GetDoctors()
         {
             List<Doctor> users = await _doctorService.GetAllDoctors();
@@ -74,7 +75,7 @@ namespace MedicalBookingProject.Web.Controllers
 
         [Route("GetDoctor")]
         [HttpGet("{id:int}")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin, patient, manager")]
         public async Task<ActionResult<DoctorResponse>> GetDoctor(Guid id)
         {
             Doctor user = await _doctorService.Get(id);
@@ -91,7 +92,7 @@ namespace MedicalBookingProject.Web.Controllers
 
         [Route("GetDoctorsBySpeciality")]
         [HttpGet("{speciality}")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin, patient")]
         public async Task<ActionResult<List<DoctorResponse>>> GetDoctorsBySpeciality(string speciality)
         {
             List<Doctor> doctors = await _doctorService.GetDoctorsBySpeciality(speciality);
@@ -103,6 +104,45 @@ namespace MedicalBookingProject.Web.Controllers
 
             return BadRequest(new { message = "User Doctor is not recognized" });
         }
+
+
+
+        [Route("Login")]
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        {
+            if (String.IsNullOrEmpty(request.Email))
+            {
+                return BadRequest(new { message = "Email address needs to entered" });
+            }
+            else if (String.IsNullOrEmpty(request.Password))
+            {
+                return BadRequest(new { message = "Password needs to entered" });
+            }
+
+            Doctor? loggedInUser = await _doctorService.LoginAccount(request.Email, request.Password);
+
+            if (loggedInUser != null)
+            {
+                return Ok(loggedInUser);
+            }
+
+            return BadRequest(new { message = "User login unsuccessful" });
+        }
+
+
+
+        [Route("Logout")]
+        [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            Response.Headers.Remove("Authorization");
+            return Ok();
+        }
+
     }
 }
 

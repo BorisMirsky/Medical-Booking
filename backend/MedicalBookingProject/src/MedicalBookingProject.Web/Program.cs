@@ -1,14 +1,13 @@
 using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.DataAccess;
 using MedicalBookingProject.DataAccess.Repo;
-//using MedicalBookingProject.DataAccess.Repo;
 using MedicalBookingProject.Application.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-//using Microsoft.OpenApi.Models;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
+using MedicalBookingProject.Application.Scripts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +31,8 @@ builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 builder.Services.AddScoped<IAppointmentRepo, AppointmentRepo>();
 builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
 builder.Services.AddScoped<IMedicalRecordRepo, MedicalRecordRepo>();
+builder.Services.AddScoped<IJwtGenerator, JwtGenerator>();
+
 
 builder.Services.AddAuthentication(opt =>
 {
@@ -43,6 +44,7 @@ builder.Services.AddAuthentication(opt =>
 {                          
     opt.RequireHttpsMetadata = false;
     opt.SaveToken = true;
+    opt.IncludeErrorDetails = true;
     opt.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,

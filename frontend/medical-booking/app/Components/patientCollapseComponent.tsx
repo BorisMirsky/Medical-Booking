@@ -4,41 +4,21 @@ import { Collapse } from 'antd';
 import DoctorShedule from '../Components/doctorSheduleComponent';
 import PatientBookings from '../Components/patientMyBookingsComponent';
 import PatientMyAppointments from '../Components/patientMyAppointmentsComponent';
-import { useState, useEffect } from "react";            //useEffect
-import { DoctorSheduleProps1  } from "@/app/Services/service";
-
+import { useState } from "react";            //useEffect
+//import { DoctorSheduleProps  } from "@/app/Services/service";
+import { Slot } from "@/app/Models/Slot";   
 
 
 const CollapseElement: React.FC = () => {
-    //const [numbers, setNumbers] = useState([]);
-    const [count, setCount] = useState<number>(0);
-    //console.log("CollapseElement counter", counter);
-
-    const numbers: number[] = []; 
-    useEffect(() => {
-        numbers.push(count);
-        console.log(numbers); 
-    }, [count]);
-
-    //const props: DoctorSheduleProps = {
-    //    numbers: numbers,
-    //    setNumbers: setNumbers,
-    //    slots: []
-    //}
-
-    const props1: DoctorSheduleProps1 = {
-        count: count,
-        setCount: setCount,
-        slots: []
-    }
+    const [numbers, setNumbers] = useState<number[]>([]);
+    //console.log("CollapseComponent numbers ", numbers);
+    const slots: Array<Slot> = [];
 
     const items: CollapseProps['items'] = [
         {
             key: '1',
             label: 'Запись к врачу',
-            children: <DoctorShedule
-                {...props1}
-            />
+            children: <DoctorShedule numbers={numbers} setNumbers={setNumbers} slots={slots} />
         },
         {
             key: '2',
@@ -53,7 +33,11 @@ const CollapseElement: React.FC = () => {
     ];
 
     return (
+        <div>
+            <p>{numbers}</p>
+            <br></br><br></br>
             <Collapse accordion items={items} />
+        </div>
         );
     }
 

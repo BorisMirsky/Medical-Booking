@@ -4,17 +4,6 @@ import { Slot } from "@/app/Models/Slot";
 
 //////////////////////////////////   interfaces   //////////////////////////////////////////////
 
-export type DoctorSheduleProps = {
-    numbers: number[];
-    setNumbers(numbers: number[]): void;
-    slots: Array<Slot>;
-}
-
-export type DoctorSheduleProps1 = {
-    count: number;
-    setCount(count1: number): void;
-    slots: Array<Slot>;
-}
 
 export interface UserRegistrationRequest {
     email: string;
@@ -52,6 +41,14 @@ export interface PatientRegisterRequest {
     username: string;
     role: string;
     gender: string;
+}
+
+/////////////////////////////////////////////////////
+
+export type DoctorSheduleProps = {
+    numbers: number[];
+    setNumbers(values: number[]): void;
+    slots: Array<Slot>;
 }
 
 export interface SheduleCreateRequest {
@@ -126,6 +123,42 @@ export interface DoctorMedicalRecordProps {
 
 
 ////////////////////////////////   fetch functions   /////////////////////////////////////////
+
+export const loginDoctor = async (request: UserLoginRequest) => {
+    let username: string = "";
+    let token: string = ""
+    //let role: string = "doctor";
+
+    await fetch("http://localhost:5032/doctors/login", {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(request)
+    })
+        .then((response) => {
+            if (!response.ok) {
+                alert("Неверные логин или пароль")
+            }
+            else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            username = data['userName'];
+            //role = data['rolename'];
+            token = data['token'];
+            localStorage.setItem('username', username);
+            //localStorage.setItem('role', role);
+            localStorage.setItem('token', token);
+            window.location.href = '/';
+        })
+        .catch(err => {
+            console.log('Error: ', err);
+        });
+}
+
 
 export const getDoctorsBySpeciality = async (speciality: string) => {
     //const token = localStorage.getItem('token');

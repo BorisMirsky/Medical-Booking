@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Identity.Data;
 using MedicalBookingProject.Application.Services;
-//using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 //  + LoginDoctor + RegisterPatient + LoginPatient + LoginAdmin (все POST)
 // + возможность редактирования Doctor           (UPDATE)
 // + возможность блокировки Doctor & Patient     (как это сделать? добавит флажок)
@@ -18,6 +18,7 @@ namespace MedicalBookingProject.Web.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class PatientsController : ControllerBase
     {
         private readonly IPatientService _patientService;
@@ -30,7 +31,7 @@ namespace MedicalBookingProject.Web.Controllers
 
         [Route("RegisterPatient")]
         [HttpPost]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        [AllowAnonymous]
         public async Task<IActionResult> RegisterPatient([FromBody] RegisterPatientRequest request)
         {
             if (String.IsNullOrEmpty(request.Email))
@@ -59,7 +60,7 @@ namespace MedicalBookingProject.Web.Controllers
 
         [Route("GetPatient")]
         [HttpGet]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin, doctor, patient")]
         public async Task<IActionResult> GetPatient(Guid id)
         {
             Patient user = await _patientService.Get(id);
@@ -76,7 +77,7 @@ namespace MedicalBookingProject.Web.Controllers
 
         [Route("GetPatients")]
         [HttpGet]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin, doctor")]
         public async Task<ActionResult> GetPatients()
         {
             List<Patient> users = await _patientService.GetAll();

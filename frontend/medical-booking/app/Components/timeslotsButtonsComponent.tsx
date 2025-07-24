@@ -7,14 +7,18 @@ import { Slot } from "@/app/Models/Slot";
 import { Button, Space } from 'antd';
 import {
     updateTimeslot, TimeSlotUpdateRequest,
-    createBooking, BookingCreateRequest, DoctorSheduleProps1
+    createBooking, BookingCreateRequest, DoctorSheduleProps
 } from "@/app/Services/service";
 //import { useState } from "react";         //useState, useReducer
 
 
 
-//export default function TimeslotsButtons({ numbers, setNumbers, slots }: DoctorSheduleProps) {
-export default function TimeslotsButtons({ count, setCount, slots }: DoctorSheduleProps1) {
+export default function TimeslotsButtons({ numbers, setNumbers, slots }: DoctorSheduleProps) {
+
+    //const data1 = Object.keys(slots).map((slot, index) => ({
+    //    isBooked: slots[index].isBooked,
+    //}));
+
 
     const data = Object.keys(slots).map((slot, index) => ({
         key: index,
@@ -54,14 +58,14 @@ export default function TimeslotsButtons({ count, setCount, slots }: DoctorShedu
             bookingRequest.isbooked = true;
             updateTimeslot(timeslotRequest);
             createBooking(bookingRequest);
-            setCount(count++);
-            //setNumbers(oldNumbers => [...oldNumbers, 4]);
+            setNumbers(oldNumbers => [...oldNumbers, 1]);
+            //console.log("handleClick numbers ", numbers);
         }
     };
 
 
     return (
-        <div>
+        <div><p>{numbers}</p><br></br><br></br>
             <Space size='large'>
                     {data.map((s) => (
                         <Button
@@ -69,8 +73,8 @@ export default function TimeslotsButtons({ count, setCount, slots }: DoctorShedu
                             onClick={() => handleClick(s)}
                             color={(!s.isBooked) ? "primary" : "danger"}
                             variant="solid"
-                         >
-                    {s.label}
+                        >
+                            {s.label}
                 </Button>
                     ))}
             </Space>

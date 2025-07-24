@@ -17,6 +17,7 @@ namespace MedicalBookingProject.Web.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class AppointmentsController : ControllerBase
     {
 
@@ -30,7 +31,7 @@ namespace MedicalBookingProject.Web.Controllers
 
         [Route("CreateAppointment")]
         [HttpPost]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "doctor")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "doctor")]
         public async Task<ActionResult> CreateAppointment([FromBody] AppointmentRequest request)
         {
             await _appointmentService.CreateAppointment(request.BookingId, request.DoctorId,
@@ -41,7 +42,7 @@ namespace MedicalBookingProject.Web.Controllers
 
 
         [Route("GetByPatient")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin, doctor, patient")]
         public async Task<ActionResult<List<AppointmentDTO>>> GetByPatient([FromQuery] Guid id)
         {
             List<AppointmentDTO> apps = await _appointmentService.GetByPatient(id);
@@ -57,7 +58,7 @@ namespace MedicalBookingProject.Web.Controllers
 
 
         [Route("GetByDoctor")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin, doctor")]
         public async Task<ActionResult<List<AppointmentDTO>>> GetByDoctor([FromQuery] Guid id)
         {
             List<AppointmentDTO> apps = await _appointmentService.GetByDoctor(id);

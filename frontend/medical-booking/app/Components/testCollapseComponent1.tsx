@@ -9,14 +9,13 @@ let value2 = false;
 let value3 = false;
 
 
-
 interface Props {
-    counter: number;
-    setCounter: (key: number) => void;
+    numbers: number[];
+    setNumbers: (values: number[]) => void;
 }
 
 
-const Element1 = ({ counter, setCounter }: Props) => {
+const Element1 = ({ numbers, setNumbers }: Props) => {
 
     const handleClick = (key: number) => {
         if (key == 1) {
@@ -31,9 +30,10 @@ const Element1 = ({ counter, setCounter }: Props) => {
             value3 = true
             console.log('value3 ', value3.toString())
         }
-        counter++;
-        setCounter(counter)
+        setNumbers(oldNumbers => [...oldNumbers, 1]);
+        //console.log("handleClick numbers ", numbers);
     }
+
 
     return (
         <div>
@@ -63,6 +63,7 @@ const Element1 = ({ counter, setCounter }: Props) => {
     );
 }
 
+
 const Element2 = () => {
     return (
         <div>
@@ -76,15 +77,14 @@ const Element2 = () => {
 }
 
 
-
 const CollapseComponent: React.FC = () => {
-    const [counter, setCounter] = useState<number>(0);
-
+    const [numbers, setNumbers] = useState<number[]>([]);
+    //console.log("CollapseComponent numbers ", numbers);
     const items: CollapseProps['items'] = [
         {
             key: '1',
             label: 'Element1',
-            children: <Element1 counter={counter} setCounter={setCounter} />
+            children: <Element1 numbers={numbers} setNumbers={setNumbers} />
         },
         {
             key: '2',
@@ -100,6 +100,5 @@ const CollapseComponent: React.FC = () => {
     );
 };
 
+
 export default CollapseComponent;
-
-

@@ -2,22 +2,23 @@
 "use client"
 
 import React from 'react';
-import { UserLoginRequest } from "@/app/Services/service";   //loginResponse  loginUser, 
+//import { UserLoginRequest } from "@/app/Services/service";   //loginResponse  loginUser, 
 import { FormProps, Button, Form, Input, Space } from 'antd';
 import Title from "antd/es/typography/Title";
 import { useEffect, useState } from "react";
+import { loginDoctor, UserLoginRequest } from "@/app/Services/service"; 
 //import Link from "next/link";
 //import ModalComponent from '../Components/ModalComponent';
 
 
 export default function entranceDoctor() {
-    //const [currentRole, setCurrentRole] = useState("");
+    const [currentRole, setCurrentRole] = useState("");
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        //const role = localStorage.getItem("role") || "";
-        //setCurrentRole(role);
-        //localStorage.clear();
+        const role = localStorage.getItem("role") || "";
+        setCurrentRole(role);
+        localStorage.clear();
         setLoading(false);
     }, []);
 
@@ -27,11 +28,15 @@ export default function entranceDoctor() {
 
     const onFinish: FormProps<UserLoginRequest>['onFinish'] = (values) => {
         console.log('values ', values)
-        //loginUser(values);
+        loginDoctor(values);
         window.location.href = 'profiledoctor';
     }
 
     return (
+        <div>
+            {
+                (!currentRole) ? (
+
         <div>
             <br></br>
             <br></br>
@@ -89,6 +94,12 @@ export default function entranceDoctor() {
                     <br></br>
                     <br></br>
                 </div >
+            }
+                    </div>
+                )
+                    : (
+                        <div></div>
+                    )
             }
         </div>
     );

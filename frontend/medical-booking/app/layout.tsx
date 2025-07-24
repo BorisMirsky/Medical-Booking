@@ -6,6 +6,10 @@ import "./globals.css";
 import Layout, { Header, Content, Footer } from "antd/es/layout/layout";
 import { Menu } from "antd";
 import Link from "next/link";
+import CurrentUserComponent from './Components/NavbarCurrentUserComponent';
+import LogoutComponent from './Components/NavbarLogoutComponent';
+
+
 
 
 export const metadata: Metadata = {
@@ -18,10 +22,8 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
 {
     const items = [
         { key: "home", label: <Link href="/">Home</Link> },
-        { key: "allorders" },
-        { key: "neworder" },
-        { key: "currentuser" },
-        { key: "logout" }
+        { key: "currentuser", label: <CurrentUserComponent /> },
+        { key: "logout", label: <LogoutComponent /> }
     ]
   return (
       <html lang="en">

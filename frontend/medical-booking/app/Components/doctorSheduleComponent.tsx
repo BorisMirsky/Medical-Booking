@@ -5,7 +5,7 @@ import React from 'react';
 import "../globals.css";
 import {
     getDoctorsBySpeciality, DoctorSheduleRequest,
-    getSlotsByDoctorId, DoctorSheduleProps1 
+    getSlotsByDoctorId, DoctorSheduleProps
 } from "@/app/Services/service";   
 import { Doctor } from "@/app/Models/Doctor";
 import { Slot } from "@/app/Models/Slot";         
@@ -18,8 +18,7 @@ import moment from "moment";
 
 
 
-//export default function DoctorShedule({ numbers, setNumbers, }: DoctorSheduleProps) {
-export default function DoctorShedule({ count, setCount, }: DoctorSheduleProps1) {
+export default function DoctorShedule({ numbers, setNumbers, }: DoctorSheduleProps) {
     //const [currentRole, setCurrentRole] = useState("");
     const [doctors, setDoctors] = useState<Doctor[]>([]);
     const [slots_, setSlots] = useState<Slot[]>([]);
@@ -125,22 +124,18 @@ export default function DoctorShedule({ count, setCount, }: DoctorSheduleProps1)
         }
     };
 
-    const forceRerender = () => {
+
+    const cleanData = () => {
         setSlots1([]);
     }
 
 
-    //const props: DoctorSheduleProps = {
-    //    numbers: numbers,
-    //    setNumbers: setNumbers,
-    //    slots: slots1
-    //}
-
-    const props1: DoctorSheduleProps1 = {
-        count: count,
-        setCount: setCount,
+    const props: DoctorSheduleProps = {
+        numbers: numbers,
+        setNumbers: setNumbers,
         slots: slots1
     }
+
 
     return (
             <div>
@@ -207,7 +202,7 @@ export default function DoctorShedule({ count, setCount, }: DoctorSheduleProps1)
 
                     <Button
                         htmlType="reset"
-                        onClick={forceRerender}
+                        onClick={cleanData}
                     >
                         Сбросить
                     </Button>
@@ -224,7 +219,7 @@ export default function DoctorShedule({ count, setCount, }: DoctorSheduleProps1)
                     ) : (
                             <div>
                                 <TimeslotsButtons
-                                    {...props1}
+                                    {...props}
                                 />
                             </div>
                     )

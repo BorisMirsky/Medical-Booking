@@ -9,12 +9,14 @@ using System.Web;
 using BCrypt.Net;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-
+//using MedicalBookingProject.DataAccess.Scripts;
+//using MedicalBookingProject.Application.Scripts;
 
 
 namespace MedicalBookingProject.DataAccess.Repo
 {
     using BCrypt.Net;
+    using MedicalBookingProject.Application.Scripts;
     using MedicalBookingProject.DataAccess;
     using MedicalBookingProject.Domain.Models.Shedules;
     using Microsoft.AspNetCore.Authorization;
@@ -22,9 +24,14 @@ namespace MedicalBookingProject.DataAccess.Repo
 
     public class DoctorRepo : IDoctorRepo
     {
+
         private readonly MedicalBookingDbContext _dbContext;
-        public DoctorRepo(MedicalBookingDbContext dbContext) {
+
+        private readonly IConfiguration _configuration;
+
+        public DoctorRepo(MedicalBookingDbContext dbContext, IConfiguration configuration) {
             _dbContext = dbContext;
+            _configuration = configuration;
         }
 
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
@@ -41,8 +48,6 @@ namespace MedicalBookingProject.DataAccess.Repo
             await _dbContext.SaveChangesAsync();
             return doctor;
         }
-
-
 
         public async Task<Doctor> Get(Guid id)
         {
@@ -88,8 +93,30 @@ namespace MedicalBookingProject.DataAccess.Repo
                 //throw new Exception($"Doctor not found");
             }
 
-            return entity;
+            return entity!;
         }
 
+
+        public async Task<Doctor?> Login(string email, string password)
+        {
+            Doctor? userEntity = await _dbContext.Doctors.FirstOrDefaultAsync(u => u.Email == email);
+            // if login is wrong                                                                                   
+            if (userEntity == null)
+            {
+                return null;
+            }
+            // if password is wrong
+            if (userEntity == null || BCrypt.Verify(password, userEntity.Password) == false)
+            {
+                return null;
+            }
+            JwtGenerator tokenInstance = new(_configuration);
+            string token = tokenInstance.CreateTokenDescriptor(email,
+                                                userEntity.UserName!,
+                                                userEntity.Rolename!);
+            userEntity.Token = token;
+            userEntity.IsActive = true;
+            return userEntity;
+        }
     }
 }

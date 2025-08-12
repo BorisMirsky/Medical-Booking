@@ -9,8 +9,7 @@ using System.Web;
 using BCrypt.Net;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-//using MedicalBookingProject.DataAccess.Scripts;
-//using MedicalBookingProject.Application.Scripts;
+
 
 
 namespace MedicalBookingProject.DataAccess.Repo
@@ -34,7 +33,7 @@ namespace MedicalBookingProject.DataAccess.Repo
             _configuration = configuration;
         }
 
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+
         public async Task<Doctor> Register(string email, string password,
                                                string username, string role,
                                                string speciality, string gender)

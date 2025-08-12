@@ -2,7 +2,7 @@
 "use client"
 
 import React from 'react';
-import { UserLoginRequest } from "@/app/Services/service";   //loginResponse  loginUser, 
+import { UserLoginRequest, loginPatient } from "@/app/Services/service";   //loginResponse  loginUser, 
 import { FormProps, Button, Form, Input, Space } from 'antd';
 import Title from "antd/es/typography/Title";
 import { useEffect, useState } from "react";
@@ -29,9 +29,9 @@ export default function entrancePatient() {
     }
 
     const onFinish: FormProps<UserLoginRequest>['onFinish'] = (values) => {
-        console.log('values ', values)
-        window.location.href = 'profilepatient';
-        //loginUser(values);
+        console.log('entrancePatient values ', values)
+        //window.location.href = 'profilepatient';
+        loginPatient(values);
     }
 
     return (

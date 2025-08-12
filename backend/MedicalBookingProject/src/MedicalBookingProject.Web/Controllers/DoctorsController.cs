@@ -20,6 +20,7 @@ namespace MedicalBookingProject.Web.Controllers
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class DoctorsController : ControllerBase
     {
+
         private readonly IDoctorService _doctorService;
 
         public DoctorsController(IDoctorService doctorService)
@@ -92,7 +93,7 @@ namespace MedicalBookingProject.Web.Controllers
 
         [Route("GetDoctorsBySpeciality")]
         [HttpGet("{speciality}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin, patient")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin, doctor, patient")]
         public async Task<ActionResult<List<DoctorResponse>>> GetDoctorsBySpeciality(string speciality)
         {
             List<Doctor> doctors = await _doctorService.GetDoctorsBySpeciality(speciality);

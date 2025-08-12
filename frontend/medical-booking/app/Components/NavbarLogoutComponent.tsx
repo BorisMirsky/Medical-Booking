@@ -1,9 +1,8 @@
 ﻿'use client'
 
-
 import React from 'react';
 import { useEffect, useState } from "react";
-//import { logOut } from "@/app/Services/service";            // ?
+
 
 
 export default function LogoutComponent() {

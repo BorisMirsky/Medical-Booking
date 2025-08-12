@@ -23,6 +23,8 @@ builder.Services.AddScoped<IDoctorService, DoctorService>();
 builder.Services.AddScoped<IDoctorRepo, DoctorRepo>();
 builder.Services.AddScoped<IPatientService, PatientService>();
 builder.Services.AddScoped<IPatientRepo, PatientRepo>();
+builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IAdminRepo, AdminRepo>();
 builder.Services.AddScoped<ITimeslotService, TimeslotService>();
 builder.Services.AddScoped<ITimeslotRepo, TimeslotRepo>();
 builder.Services.AddScoped<IBookingService, BookingService>();
@@ -71,7 +73,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseCors(x =>
 {

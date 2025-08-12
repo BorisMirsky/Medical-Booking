@@ -5,22 +5,28 @@ import { useEffect, useState } from "react";
 
 
 export default function CurrentUserComponent() {
-    const [currentUser, setCurrentUser] = useState("");
+    const [currentUserName, setCurrentUserName] = useState("");
+    const [currentUserRole, setCurrentUserRole] = useState("");
 
     useEffect(() => {
         const getUser = async () => {
-            const result = localStorage.getItem("username") || "";
-            if (result != undefined) {
-                setCurrentUser(result);
+            const name = localStorage.getItem("username") || "";
+            const role = localStorage.getItem("role") || "";
+            if (name != undefined) {
+                setCurrentUserName(name);
             }
+            if (role != undefined) {
+                setCurrentUserRole(role);
+            }
+            //console.log("CurrentUserComponent  Navbar ", name, role);
         }
         getUser();
     }, []);
 
     return (
         <div >
-            {currentUser ? (
-                <div>Вы вошли как <b>{currentUser}</b></div>
+            {currentUserName ? (
+                <div>Вы вошли как: <b>{currentUserRole}</b> <b>{currentUserName}</b></div>
             ) : (
                 <div></div>
             )}

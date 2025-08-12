@@ -2,7 +2,7 @@
 "use client"
 
 import React from 'react';
-import { UserLoginRequest } from "@/app/Services/service";   //loginResponse  loginUser, 
+import { UserLoginRequest, registerAdmin, loginAdmin } from "@/app/Services/service";   
 import { FormProps, Button, Form, Input, Space } from 'antd';
 import Title from "antd/es/typography/Title";
 import { useEffect, useState } from "react";
@@ -21,23 +21,86 @@ export default function entranceAdmin() {
         setLoading(false);
     }, []);
 
-    const onFinishFailed: FormProps<UserLoginRequest>['onFinishFailed'] = (errorInfo) => {
+
+
+    /// Register
+    const onFinishFailedRegister: FormProps<UserLoginRequest>['onFinishFailed'] = (errorInfo) => {
         console.log('onFinishFailed:', errorInfo);
     }
 
-    const onFinish: FormProps<UserLoginRequest>['onFinish'] = (values) => {
+    const onFinishRegister: FormProps<UserLoginRequest>['onFinish'] = (values) => {
+        console.log('values ', values)
+        //window.location.href = 'profileadmin';
+        registerAdmin(values);
+    }
+
+
+
+    /////// LogIn
+    const onFinishFailedLogin: FormProps<UserLoginRequest>['onFinishFailed'] = (errorInfo) => {
+        console.log('onFinishFailed:', errorInfo);
+    }
+
+    const onFinishLogin: FormProps<UserLoginRequest>['onFinish'] = (values) => {
         console.log('values ', values)
         window.location.href = 'profileadmin';
-        //loginUser(values);
+        loginAdmin(values);
     }
 
     return (
         <div>
             <br></br>
             <br></br>
-            <br></br>   
             <h2>Вход для админа</h2>
             <br></br>
+            <br></br>
+            <h2>Зарегиться (только один раз)</h2>
+            <br></br>
+            <br></br>
+            <Form
+                name="basic"
+                labelCol={{ span: 8 }}
+                wrapperCol={{ span: 16 }}
+                style={{ maxWidth: 600 }}
+                initialValues={{ remember: true }}
+                onFinish={onFinishRegister}
+                onFinishFailed={onFinishFailedRegister}
+                autoComplete="off"
+            >
+                <Form.Item<UserLoginRequest>
+                    label="Email"
+                    name="email"
+                    rules={[{ required: true, message: 'Please input login!' }]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item<UserLoginRequest>
+                    label="Password"
+                    name="password"
+                    rules={[{ required: true, message: 'Please input password!' }]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item label={null}>
+                    <Space size='large'>
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                        >
+                            Регистрация
+                        </Button>
+                        <Button htmlType="reset">
+                            Сбросить
+                        </Button>
+                    </Space>
+                </Form.Item>
+            </Form>
+            <br></br>
+            <br></br>
+            <br></br>
+            <h2>Залогиниться</h2>
             <br></br>
             <br></br>
             {
@@ -46,13 +109,13 @@ export default function entranceAdmin() {
                             <Title>Loading ...</Title>
                         ) : (
                             <Form
-                                name="basic"
+                                name="basic1"
                                 labelCol={{ span: 8 }}
                                 wrapperCol={{ span: 16 }}
                                 style={{ maxWidth: 600 }}
                                 initialValues={{ remember: true }}
-                                onFinish={onFinish}
-                                onFinishFailed={onFinishFailed}
+                                onFinish={onFinishLogin}
+                                onFinishFailed={onFinishFailedLogin}
                                 autoComplete="off"
                             >
                                 <Form.Item<UserLoginRequest>

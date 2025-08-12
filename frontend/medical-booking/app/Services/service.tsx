@@ -43,6 +43,12 @@ export interface PatientRegisterRequest {
     gender: string;
 }
 
+export interface AdminRegisterRequest {
+    email: string;
+    password: string;
+    //username: string;
+    //role: string;
+}
 /////////////////////////////////////////////////////
 
 export type DoctorSheduleProps = {
@@ -127,7 +133,9 @@ export interface DoctorMedicalRecordProps {
 export const loginDoctor = async (request: UserLoginRequest) => {
     let username: string = "";
     let token: string = ""
-    //let role: string = "doctor";
+    let role: string = "";
+    let doctorId: string = "";
+    let speciality: string = "";
 
     await fetch("http://localhost:5032/doctors/login", {
         method: 'POST',
@@ -146,13 +154,95 @@ export const loginDoctor = async (request: UserLoginRequest) => {
             }
         })
         .then(data => {
+            //console.log('DATA token: ', data['token']);
             username = data['userName'];
-            //role = data['rolename'];
+            role = data['rolename'];
             token = data['token'];
+            doctorId = data['id'];
+            speciality = data['speciality'];
             localStorage.setItem('username', username);
-            //localStorage.setItem('role', role);
+            localStorage.setItem('role', role);
             localStorage.setItem('token', token);
-            window.location.href = '/';
+            localStorage.setItem('id', doctorId);
+            localStorage.setItem('token', speciality);
+            window.location.href = 'profiledoctor';
+        })
+        .catch(err => {
+            console.log('Error: ', err);
+        });
+}
+
+
+export const loginPatient = async (request: UserLoginRequest) => {
+    let username: string = "";
+    let token: string = ""
+    let role: string = "";
+    let patientId: string = "";
+    console.log("loginPatient ");
+
+    await fetch("http://localhost:5032/patients/login", {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(request)
+    })
+        .then((response) => {
+            if (!response.ok) {
+                alert("Неверные логин или пароль")
+            }
+            else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            //console.log('DATA token: ', data['token']);
+            console.log('DATA: ', data);
+            username = data['userName'];
+            role = data['rolename'];
+            token = data['token'];
+            patientId = data['id'];
+            localStorage.setItem('username', username);
+            localStorage.setItem('role', role);
+            localStorage.setItem('token', token);
+            localStorage.setItem('id', patientId);
+            window.location.href = 'profilepatient';
+        })
+        .catch(err => {
+            console.log('Error: ', err);
+        });
+}
+
+
+export const loginAdmin = async (request: UserLoginRequest) => {
+    let username: string = "";
+    let role: string = "";
+
+    await fetch("http://localhost:5032/admins/login", {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(request)
+    })
+        .then((response) => {
+            if (!response.ok) {
+                alert("Неверные логин или пароль")
+            }
+            else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            if (data) {
+                username = data['userName'];
+                role = data['rolename'];
+                localStorage.setItem('username', username);
+                localStorage.setItem('role', role);
+                window.location.href = 'profileadmin';
+            }
         })
         .catch(err => {
             console.log('Error: ', err);
@@ -161,11 +251,12 @@ export const loginDoctor = async (request: UserLoginRequest) => {
 
 
 export const getDoctorsBySpeciality = async (speciality: string) => {
-    //const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
+    //console.log("getDoctorsBySpeciality token", token);
     const response = await fetch("http://localhost:5032/doctors/" + speciality, {
         headers: {
-            'Content-type': 'application/json'
-            //'Authorization': `Bearer ${token}`,
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         method: 'GET',
         mode: 'cors'
@@ -190,11 +281,11 @@ export const getDoctorsBySpeciality = async (speciality: string) => {
 
 
 export const getDoctorsFetch = async () => {
-    //const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     const response = await fetch("http://localhost:5032/doctors/GetDoctors", {
         headers: {
-            'Content-type': 'application/json'
-            //'Authorization': `Bearer ${token}`,
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`,
         },
         method: 'GET',
         mode: 'cors'
@@ -202,6 +293,7 @@ export const getDoctorsFetch = async () => {
         .then(response => {
             if (!response.ok) {
                 throw new Error("Not response", { cause: response });
+                window.location.href = 'noauthorized';
             }
             else {
                 return response.json();
@@ -219,11 +311,11 @@ export const getDoctorsFetch = async () => {
 
 
 export const getPatientsFetch = async () => {
-    //const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     const response = await fetch("http://localhost:5032/patients/GetPatients", {
         headers: {
-            'Content-type': 'application/json'
-            //'Authorization': `Bearer ${token}`,
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`,
         },
         method: 'GET',
         mode: 'cors'
@@ -248,13 +340,13 @@ export const getPatientsFetch = async () => {
 
 
 export const getBookingsByPatient = async (id: string) => {
-    //const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     const url = "http://localhost:5032/bookings/GetByPatient?id=" + id;
     const response = await fetch(url, {
         headers: {
-            //'Content-type': 'application/json'
-            'Content-Type': 'application/x-www-form-urlencoded'
-            //'Authorization': `Bearer ${token}`,
+            'Content-type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': `Bearer ${token}`,
         },
         method: 'GET',
         mode: 'cors'
@@ -279,13 +371,13 @@ export const getBookingsByPatient = async (id: string) => {
 
 
 export const getBookingsByDoctor = async (id: string) => {
-    //const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     const url = "http://localhost:5032/bookings/GetByDoctor?id=" + id;
     const response = await fetch(url, {
         headers: {
-            //'Content-type': 'application/json'
-            'Content-Type': 'application/x-www-form-urlencoded'
-            //'Authorization': `Bearer ${token}`,
+            'Content-type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': `Bearer ${token}`
         },
         method: 'GET',
         mode: 'cors'
@@ -310,9 +402,11 @@ export const getBookingsByDoctor = async (id: string) => {
 
 
 export const getDoctorById = async (id: string) => {
+    const token = localStorage.getItem('token');
     const response = await fetch("http://localhost:5032/doctors/" + id, {
         headers: {
-            'Content-type': 'application/json'
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         method: 'GET'
     })
@@ -334,14 +428,14 @@ export const getDoctorById = async (id: string) => {
 
 
 export const registerDoctor = async (request: DoctorRegisterRequest) => {
-    //const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     await fetch("http://localhost:5032/doctors/register", {
         method: 'POST',
         mode: 'cors',
         //credentials: true,
         headers: {
             'Content-Type': 'application/json',
-            //'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(request)
     }).then(response => {
@@ -350,8 +444,8 @@ export const registerDoctor = async (request: DoctorRegisterRequest) => {
             console.log("Ошибка регистрации");
         }
         else {
-            alert("Регистрация прошла успешно")
-            //window.location.href = 'login';
+            alert("Регистрация прошла успешно");
+            window.location.href = 'login';
         }
     }).catch(err => {
         console.log('registerError: ', err);
@@ -360,14 +454,12 @@ export const registerDoctor = async (request: DoctorRegisterRequest) => {
 
 
 export const registerPatient = async (request: PatientRegisterRequest) => {
-    //const token = localStorage.getItem('token');
     await fetch("http://localhost:5032/patients/registerpatient", {
         method: 'POST',
         mode: 'cors',
         //credentials: true,
         headers: {
-            'Content-Type': 'application/json',
-            //'Authorization': `Bearer ${token}`
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(request)
     }).then(response => {
@@ -385,15 +477,39 @@ export const registerPatient = async (request: PatientRegisterRequest) => {
 }
 
 
+export const registerAdmin = async (request: AdminRegisterRequest) => {
+    await fetch("http://localhost:5032/admins/register", {
+        method: 'POST',
+        mode: 'cors',
+        //credentials: true,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(request)
+    }).then(response => {
+        if (!response.ok) {
+            alert("Ошибка регистрации. \n Возможно Админ уже зареген.");
+            //console.log("Ошибка регистрации. Админ уже зареген.");
+        }
+        else {
+            alert("Регистрация прошла успешно")
+            //window.location.href = 'entranceadmin';
+        }
+    }).catch(err => {
+        console.log('registerError: ', err);
+    });
+}
+
+
 export const createShedule = async (request: SheduleCreateRequest) => {
-    //const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     await fetch("http://localhost:5032/timeslots/createtimeslot", {      
         method: 'POST',
-        //mode: 'cors',
+        mode: 'cors',
         //credentials: true,
         headers: {
             'Content-Type': 'application/json',
-            //'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(request)
     }).then(response => {
@@ -413,12 +529,14 @@ export const createShedule = async (request: SheduleCreateRequest) => {
 
 
 export const getSlotsByDoctorId = async (id: string) => {
-    const url = 'http://localhost:5032/timeslots/';      //ByDoctorId 
-    //const token = localStorage.getItem('token');
+    const url = 'http://localhost:5032/timeslots/';     
+    const token = localStorage.getItem('token');
+    const name = localStorage.getItem('username');
+    console.log("getSlotsByDoctorId token ", token, name);
     const response = await fetch(url + id, {
         headers: {
-            'Content-type': 'application/json'
-            //'Authorization': `Bearer ${token}`,
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`,
         },
         method: 'GET',
         mode: 'cors'
@@ -444,15 +562,15 @@ export const getSlotsByDoctorId = async (id: string) => {
 
 
 export const updateTimeslot = async (request: TimeSlotUpdateRequest) => {
-    //const token = localStorage.getItem('token');`
+    const token = localStorage.getItem('token');
     let alertText: string = "";
     await fetch("http://localhost:5032/timeslots/updatetimeslot", {
         method: 'PATCH',  
-        //mode: 'cors',
+        mode: 'cors',
         //credentials: true,
         headers: {
             'Content-Type': 'application/json',
-            //'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`
         } ,
         body: JSON.stringify(request)
     })
@@ -472,13 +590,13 @@ export const updateTimeslot = async (request: TimeSlotUpdateRequest) => {
 
 
 export const createBooking = async (request: BookingCreateRequest) => {
-    //const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     let alertText: string = "";
     await fetch("http://localhost:5032/bookings/createbooking", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
-            //'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(request)
     }).then(response => {
@@ -490,8 +608,6 @@ export const createBooking = async (request: BookingCreateRequest) => {
         else {
             alertText = request.isbooked ? "Бронирование создано" : "Бронирование отменено";
             alert(alertText);
-            //alert("Бронирование создано")
-            //window.location.href = 'login';
         }
     }).catch(function (err) {
         console.log('Error: ', err);
@@ -500,14 +616,14 @@ export const createBooking = async (request: BookingCreateRequest) => {
 
 
 export const createAppointment = async (request: AppointmentRequest) => {
-    //const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     console.log("createAppointment ", request);
     let alertText: string = "";
     await fetch("http://localhost:5032/appointments/createappointment", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
-            //'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(request)
     }).then(response => {
@@ -527,14 +643,14 @@ export const createAppointment = async (request: AppointmentRequest) => {
 
 
 export const createMedicalRecord = async (request: MedicalRecordRequest) => {
-    //const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     console.log("createMedicalRecord ", request);
     let alertText: string = "";
     await fetch("http://localhost:5032/MedicalRecords/CreateMedicalRecord", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
-            //'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(request)
     }).then(response => {
@@ -554,13 +670,13 @@ export const createMedicalRecord = async (request: MedicalRecordRequest) => {
 
 
 export const setBookingClosed = async (id: string) => {
-    //const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     let alertText: string = "";
     await fetch("http://localhost:5032/bookings/SetBookingClosed?id=" + id, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
-            //'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`
         }//,
         //body: JSON.stringify(request)
     }).then(response => {
@@ -581,11 +697,11 @@ export const setBookingClosed = async (id: string) => {
 
 export const getMedicalRecordsByPatient = async (id: string) => {
     const url = 'http://localhost:5032/MedicalRecords/';    
-    //const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     const response = await fetch(url + id, {
         headers: {
-            'Content-type': 'application/json'
-            //'Authorization': `Bearer ${token}`,
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`,
         },
         method: 'GET',
         mode: 'cors'
@@ -611,11 +727,14 @@ export const getMedicalRecordsByPatient = async (id: string) => {
 
 
 export const getAppointmentsByPatientId = async (id: string) => {
+    const token = localStorage.getItem('token');
     const response = await fetch("http://localhost:5032/Appointments/GetByPatient?id=" + id, {
         headers: {
-            'Content-type': 'application/json'
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
-        method: 'GET'
+        method: 'GET',
+        mode: 'cors'
     })
         .then((response) => {
             if (!response.ok) {
@@ -632,26 +751,3 @@ export const getAppointmentsByPatientId = async (id: string) => {
     return response;
 };
 
-
-//export const getAppointmentsByDoctorId = async (id: string) => {
-//    const response = await fetch("http://localhost:5032/Appointments/GetByDoctor?id=" + id, {
-//        headers: {
-//            'Content-type': 'application/json'
-//        },
-//        method: 'GET'
-//    })
-//        .then((response) => {
-//            if (!response.ok) {
-//                console.log('!response.ok ');
-//            }
-//            else {
-//                return response.json();
-//            }
-//        })
-//        .then(data => {
-//            return data;
-//        })
-//        //.catch(err => { console.log('Error: ', err); });
-//        .catch(e => console.log('Connection error', e));
-//    return response;
-//};

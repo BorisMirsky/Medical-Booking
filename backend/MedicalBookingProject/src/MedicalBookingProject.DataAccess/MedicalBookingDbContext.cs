@@ -12,6 +12,8 @@ using MedicalBookingProject.Domain.Models.Messages;
 
 namespace MedicalBookingProject.DataAccess
 {
+
+    using BCrypt.Net;
     public class MedicalBookingDbContext : DbContext
     {
 
@@ -22,6 +24,7 @@ namespace MedicalBookingProject.DataAccess
 
         public DbSet<Doctor> Doctors { get; set; } = null!;
         public DbSet<Patient> Patients { get; set; } = null!;
+        public DbSet<Admin> Admins { get; set; } = null!;
         public DbSet<Role> Roles { get; set; } = null!;
         public DbSet<Timeslot> Timeslots { get; set; } = null!;
         public DbSet<Booking> Bookings { get; set; } = null!;
@@ -31,13 +34,14 @@ namespace MedicalBookingProject.DataAccess
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {}
-           
+        { }
+
         // Fluent API
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Configuration.DoctorConfiguration());
             modelBuilder.ApplyConfiguration(new Configuration.PatientConfiguration());
+            modelBuilder.ApplyConfiguration(new Configuration.AdminConfiguration());
             modelBuilder.ApplyConfiguration(new Configuration.RoleConfiguration());
             modelBuilder.ApplyConfiguration(new Configuration.TimeslotConfiguration());
             modelBuilder.ApplyConfiguration(new Configuration.AppointmentConfiguration());
@@ -45,6 +49,12 @@ namespace MedicalBookingProject.DataAccess
             modelBuilder.ApplyConfiguration(new Configuration.MessageConfiguration());
             modelBuilder.ApplyConfiguration(new Configuration.MedicalRecordConfiguration());
             base.OnModelCreating(modelBuilder);
+            //modelBuilder.Entity<Admin>().HasData(new Admin()
+            //    {
+            //        Id = Guid.NewGuid(),
+            //        Email = "admin@gmail.com",
+            //        Password = BCrypt.HashPassword("adminpassword"),
+            //    });
         }
     }
 }

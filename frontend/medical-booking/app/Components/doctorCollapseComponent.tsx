@@ -8,6 +8,8 @@ import { useState } from "react";
 import { Booking } from "@/app/Models/Booking";
 
 
+
+
 const CollapseElement: React.FC = () => {
     const [activeKey, setActiveKey] = useState<string | string[]>();
     const [sharedBooking, setSharedBooking] = useState<Booking | undefined>(undefined);

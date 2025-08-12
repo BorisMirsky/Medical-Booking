@@ -18,7 +18,7 @@ namespace MedicalBookingProject.Web.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class PatientsController : ControllerBase
     {
         private readonly IPatientService _patientService;
@@ -56,6 +56,33 @@ namespace MedicalBookingProject.Web.Controllers
 
             return BadRequest(new { message = "User Doctor registration unsuccessful" });
         }
+
+
+
+        [Route("Login")]
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        {
+            if (String.IsNullOrEmpty(request.Email))
+            {
+                return BadRequest(new { message = "Email address needs to entered" });
+            }
+            else if (String.IsNullOrEmpty(request.Password))
+            {
+                return BadRequest(new { message = "Password needs to entered" });
+            }
+
+            Patient? loggedInUser = await _patientService.Login(request.Email, request.Password);
+
+            if (loggedInUser != null)
+            {
+                return Ok(loggedInUser);
+            }
+
+            return BadRequest(new { message = "User login unsuccessful" });
+        }
+
 
 
         [Route("GetPatient")]

@@ -3,10 +3,24 @@
 import React from 'react';
 import styles from "./page.module.css";
 import { Button, Space }  from "antd";
-
+import { useEffect } from "react";
 
 
 export default function Home() {
+    useEffect(() => {
+        const role = localStorage.getItem("role") || "";
+        // эта страница для незалогинившегося юзера
+        if (role == "doctor") {
+            window.location.href = 'profiledoctor';
+        }
+        else if(role == "admin") {
+            window.location.href = 'profileadmin';
+        }
+        else if (role == "patient") {
+            window.location.href = 'profilepatient';
+        }
+    }, []);
+
 
     const loginAdminPage = async () => {
         console.log("loginAdminPage");

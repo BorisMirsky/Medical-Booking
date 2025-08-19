@@ -29,7 +29,6 @@ export default function DoctorShedule({ numbers, setNumbers, }: DoctorShedulePro
     useEffect(() => {
         //const role = localStorage.getItem("role") || "";
         //setCurrentRole(role);
-        //localStorage.clear();
         processSlots(slots_);
         //  СТРОКУ НИЖЕ НЕ УБИРАТЬ
         // eslint-disable-next-line react-hooks/exhaustive-deps   
@@ -81,7 +80,6 @@ export default function DoctorShedule({ numbers, setNumbers, }: DoctorShedulePro
         setSlots([]);
         const getSlots = async () => {
             const responce = await getSlotsByDoctorId(id);
-            //console.log("responce slots", responce);
             setSlots(responce);  
         }
         getSlots();

@@ -11,7 +11,7 @@ import "../globals.css";
 
 
 export default function PatientMyAppointments() {
-    //const [currentRole, setCurrentRole] = useState("");
+    //const [currentUserId, setCurrentUserId] = useState("");
     const [apps, setApps] = useState<Appointment[]>([]);
 
 
@@ -41,13 +41,11 @@ export default function PatientMyAppointments() {
 
 
     useEffect(() => {
-        //const role = localStorage.getItem("role") || "";
-        //setCurrentRole(role);
-        //localStorage.clear();
-        //
+        const id = localStorage.getItem("id") || "";
+        //setCurrentUserId(id);
         setApps([]);
         const getApps = async () => {
-            const responce = await getAppointmentsByPatientId("BA29102B-AA29-475F-BEC5-F57F173947CD");
+            const responce = await getAppointmentsByPatientId(id); 
             setApps(responce);
         }
         getApps();

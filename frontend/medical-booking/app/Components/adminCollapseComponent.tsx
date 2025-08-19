@@ -9,42 +9,54 @@ import DoctorShedule from '../Components/doctorSheduleComponent';
 import AllDoctors from '../Components/adminAllDoctorsComponent';
 import AllPatients from '../Components/adminAllPatientsComponent';
 //import DisabledComponent from '../Components/disabledDateComponent';
+import { Slot } from "@/app/Models/Slot";  
+import { useState } from "react"; 
 
 
+const CollapseElement: React.FC = () => {
+    const [numbers, setNumbers] = useState<number[]>([]);
+    const slots: Array<Slot> = [];
 
-const items: CollapseProps['items'] = [
-    {
-        key: '1',
-        label: 'Регистрация врача',
-        children: <DoctorRegistration></DoctorRegistration>,
-    },
-    {
-        key: '2',
-        label: 'Создать расписание для врача',
-        children: <CreateShedule></CreateShedule>,
-    },
-    {
-        key: '3',
-        label: 'Просмотр расписания врача',
-        children: <DoctorShedule></DoctorShedule>
-    },
-    {
-        key: '4',
-        label: 'Пациенты с нарушениями дисциплины (need?) ',
-        children: <p>тобi пiзда, тiкай с городу</p>
-    },
-    {
-        key: '5',
-        label: 'Все пациенты',
-        children: <AllPatients></AllPatients> 
-    },
-    {
-        key: '6',
-        label: 'Все врачи',
-        children: <AllDoctors></AllDoctors>
-    }
-];
 
-const CollapseElement: React.FC = () => <Collapse accordion items={items} />;
+    const items: CollapseProps['items'] = [
+        {
+            key: '1',
+            label: 'Регистрация врача',
+            children: <DoctorRegistration></DoctorRegistration>,
+        },
+        {
+            key: '2',
+            label: 'Создать расписание для врача',
+            children: <CreateShedule></CreateShedule>,
+        },
+        {
+            key: '3',
+            label: 'Просмотр расписания врача',
+            children: <DoctorShedule numbers={numbers} setNumbers={setNumbers} slots={slots} ></DoctorShedule>
+        },
+        {
+            key: '4',
+            label: 'Пациенты с нарушениями дисциплины',
+            children: <p>тобi пiзда, тiкай с городу</p>
+        },
+        {
+            key: '5',
+            label: 'Все пациенты',
+            children: <AllPatients></AllPatients>
+        },
+        {
+            key: '6',
+            label: 'Все врачи',
+            children: <AllDoctors></AllDoctors>
+        }
+    ];
+    return (
+        <div>
+            <p>{numbers}</p>
+            <br></br><br></br>
+            <Collapse accordion items={items} />
+        </div>
+    );
+}
 
 export default CollapseElement;

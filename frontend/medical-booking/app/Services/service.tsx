@@ -69,8 +69,8 @@ export interface SheduleCreateRequest {
 }
 
 export interface TimeSlotUpdateRequest {
-    patientid: string;
     slotid: string;
+    patientid: string;
     isbooked: boolean;
 }
 
@@ -350,8 +350,11 @@ export const getBookingsByPatient = async (id: string) => {
     const response = await fetch(url, {
         headers: {
             'Content-type': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': `Bearer ${token}`,
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Credentials": 'true',
+            "Access-Control-Allow-Methods": 'GET',
+            'Authorization': `Bearer ${token}`
         },
         method: 'GET',
         mode: 'cors'
@@ -365,7 +368,6 @@ export const getBookingsByPatient = async (id: string) => {
             }
         })
         .then(data => {
-            //console.log('data: ', data);
             return data;
         })
         .catch(function (err) {
@@ -530,9 +532,9 @@ export const createShedule = async (request: SheduleCreateRequest) => {
     });
 }
 
-// ByDoctorId
+
 export const getSlotsByDoctorId = async (id: string) => {
-    const url = 'http://localhost:5032/timeslots/';     
+    const url = 'http://localhost:5032/timeslots/';    
     const token = localStorage.getItem('token');
     const response = await fetch(url + id, {
         headers: {
@@ -549,7 +551,6 @@ export const getSlotsByDoctorId = async (id: string) => {
         .then(response => {
             if (!response.ok) {
                 throw new Error("Not response", { cause: response });
-                //window.location.href = 'noauthorized';
             }
             else {
                 return response.json();

@@ -36,7 +36,7 @@ export default function ProfileDoctor() {
                     (currentUserRole === 'doctor') ? (
                 <div >
                     <br></br>
-                    <h3>Профиль врача {currentUserName}</h3>
+                    <h2>Профиль врача {currentUserName}</h2>
                     <br></br>
                     <br></br>
                     {loading ? (

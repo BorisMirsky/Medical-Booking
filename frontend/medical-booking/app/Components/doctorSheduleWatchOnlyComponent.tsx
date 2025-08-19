@@ -3,14 +3,14 @@
 
 import React from 'react';
 import "../globals.css";
-import { Doctor } from "@/app/Models/Doctor";
+//import { Doctor } from "@/app/Models/Doctor";
 import {
-    DoctorSheduleRequest, getSlotsByDoctorId, getDoctorsBySpeciality
+    DoctorSheduleRequest, getSlotsByDoctorId   //getDoctorsBySpeciality
 } from "@/app/Services/service";
 //import { Doctor } from "@/app/Models/Doctor";
 import { Slot } from "@/app/Models/Slot";
 import TimeslotsButtonsWatchOnly from "../Components/timeslotsButtonsWatchOnlyComponent";
-import { Select, Space, DatePicker, Button, Form, FormProps } from 'antd';         
+import { Space, DatePicker, Button, Form, FormProps } from 'antd';         
 import { useState, useEffect } from "react";
 import dayjs, { Dayjs } from 'dayjs';
 import moment from "moment";
@@ -19,34 +19,19 @@ import moment from "moment";
 
 
 export default function DoctorSheduleWatchOnly() {
-    //const [currentRole, setCurrentRole] = useState("");
-    //const [currentDoctorId, setCurrentDoctorId] = useState("");
-    //const [currentSpeciality, setCurrentSpeciality] = useState("");
-    //const [currentUsername, setCurrentUsername] = useState("");
-    const [doctors, setDoctors] = useState<Doctor[]>([]);
-    const [slots, setSlots] = useState<Slot[]>([]);            // all slots all days
+    const [slots_, setSlots] = useState<Slot[]>([]);            // all slots all days
     const [slots1, setSlots1] = useState<Slot[]>([]);          // slots one day
     const [buttonsFlag, setButtonsFlag] = useState<number>(0);
 
 
     useEffect(() => {
-        //const role = localStorage.getItem("role") || "";
-        //const id = localStorage.getItem("id") || "";
-        //const speciality = localStorage.getItem("speciality") || "";
-        //const username = localStorage.getItem("username") || "";
-        //setCurrentRole(role);
-        //setCurrentDoctorId(id);
-        //getAllSlots(id);
-        //getSlotsByDoctorId(id);
-        //setSlots(allSlots);
-        //setCurrentSpeciality(speciality);
-        //setCurrentUsername(username);
-        //console.log("DoctorSheduleWatchOnly ", role, id, speciality, username);
-        //localStorage.clear();
-        processSlots(slots);
+        const id = localStorage.getItem("id") || "";
+        //console.log("DoctorSheduleWatchOnly ", id);
+        getAllSlots(id);
+        processSlots(slots_);
         // СТРОКУ НИЖЕ НЕ ТРОГАТЬ!
         // eslint-disable-next-line react-hooks/exhaustive-deps        
-    }, [slots]);
+    }, [slots_]);
 
 
     const [form] = Form.useForm();
@@ -62,47 +47,10 @@ export default function DoctorSheduleWatchOnly() {
     }
 
 
-    //                      поле 'выбор специальности'
-    const handleSelectSpeciality = (value: string) => {
-        setDoctors([]);
-        const getDoctors = async () => {
-            const responce = await getDoctorsBySpeciality(value);
-            setDoctors(responce);
-        }
-        getDoctors();
-    }
-
-
-    //                        поле 'имя врача'
-    const doctorsData = doctors.map((doctor: Doctor, index: number) => ({
-        key: index,
-        value: doctor.userName,
-        label: doctor.userName
-    }));
-
-
-
-    //const getAllSlots = (id:string) => {
-    //    setSlots([]);
-    //    const getSlots = async () => {
-    //        const responce = await getSlotsByDoctorId(id);
-    //        setSlots(responce);
-    //    }
-    //    getSlots();
-    //};
-
-
-    const handleSelectDoctor = (value: string) => {
-        let id: string = '';
-        for (const variable in doctors) {
-            if (doctors[variable].userName == value) {
-                {
-                    id = doctors[variable].id;
-                }
-            }
-        }
+    const getAllSlots = (id:string) => {
         setSlots([]);
         const getSlots = async () => {
+            //console.log("DoctorSheduleWatchOnly ", id);
             const responce = await getSlotsByDoctorId(id);
             setSlots(responce);
         }
@@ -111,11 +59,8 @@ export default function DoctorSheduleWatchOnly() {
 
 
 
-
-
-
     // даты приёма врача
-    const uniquePrefixes = new Set(slots.map(item => item.datetimeStart.split(' ')[0]));
+    const uniquePrefixes = new Set(slots_.map(item => item.datetimeStart.split(' ')[0]));
 
 
     interface MyResult {
@@ -130,8 +75,6 @@ export default function DoctorSheduleWatchOnly() {
             processedSlots[prefix] = data.filter(item => item.datetimeStart.startsWith(prefix));
         })
     };
-
-
 
 
     // даты для календаря
@@ -167,35 +110,6 @@ export default function DoctorSheduleWatchOnly() {
                 autoComplete="off"
                 form={form}
             >
-
-                {/*<Form.Item<DoctorSheduleRequest>*/}
-                {/*    label="Специализация врача"*/}
-                {/*    name="speciality"*/}
-                {/*    rules={[{ required: true, message: 'Please input speciality!' }]}*/}
-                {/*>*/}
-                {/*    <Select*/}
-                {/*        style={{ width: 200 }}*/}
-                {/*        onChange={handleSelectSpeciality}*/}
-                {/*        options={[*/}
-                {/*            { value: 'Neurologist', label: 'Невролог' },*/}
-                {/*            { value: 'Surgeon', label: 'Хирург' },*/}
-                {/*            { value: 'Oncologist', label: 'Онколог' },*/}
-                {/*            { value: 'Dentist', label: 'Дантист' }*/}
-                {/*        ]}*/}
-                {/*    />*/}
-                {/*</Form.Item>*/}
-
-                {/*<Form.Item<DoctorSheduleRequest>*/}
-                {/*    label="Имя врача"*/}
-                {/*    name="username"*/}
-                {/*    rules={[{ required: true, message: 'Please input username!' }]}*/}
-                {/*>*/}
-                {/*    <Select*/}
-                {/*        style={{ width: 200 }}*/}
-                {/*        options={doctorsData}*/}
-                {/*        onChange={handleSelectDoctor}*/}
-                {/*    />*/}
-                {/*</Form.Item>*/}
 
                 <Form.Item<DoctorSheduleRequest>
                     label="Выбрать день"

@@ -11,7 +11,6 @@ import { Slot } from "@/app/Models/Slot";
 
 const CollapseElement: React.FC = () => {
     const [numbers, setNumbers] = useState<number[]>([]);
-    //console.log("CollapseComponent numbers ", numbers);
     const slots: Array<Slot> = [];
 
     const items: CollapseProps['items'] = [
@@ -34,7 +33,6 @@ const CollapseElement: React.FC = () => {
 
     return (
         <div>
-            <p>{numbers}</p>
             <br></br><br></br>
             <Collapse accordion items={items} />
         </div>

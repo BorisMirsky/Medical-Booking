@@ -25,8 +25,11 @@ export default function profileAdmin() {
 
 
     return (
+
         <div>
-        <div>
+            <br></br>
+            <br></br>
+            <br></br>
             <br></br>
             <br></br>
             {
@@ -45,9 +48,8 @@ export default function profileAdmin() {
 
                 </div >
                     ) : (
-                            <div> Только для залогинившегося Админа</div>
+                        <div><h2> Только для залогинившегося Админа</h2></div>
             )}
-        </div>
         </div>
     );
 }

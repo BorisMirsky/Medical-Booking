@@ -14,6 +14,7 @@ import { useState, useEffect } from "react";
 
 export default function TimeslotsButtons({ numbers, setNumbers, slots }: DoctorSheduleProps) {
     const [currentUserRole, setCurrentUserRole] = useState("");
+    const [currentUserId, setCurrentUserId] = useState("");
     //const data1 = Object.keys(slots).map((slot, index) => ({
     //    isBooked: slots[index].isBooked,
     //}));
@@ -21,6 +22,8 @@ export default function TimeslotsButtons({ numbers, setNumbers, slots }: DoctorS
     useEffect(() => {
         const role = localStorage.getItem("role") || "";
         setCurrentUserRole(role);
+        const id = localStorage.getItem("id") || "";
+        setCurrentUserId(id);
     }, []);
 
 
@@ -54,23 +57,23 @@ export default function TimeslotsButtons({ numbers, setNumbers, slots }: DoctorS
         if (currentUserRole == 'patient') {
             if (!value.isBooked) {
                 timeslotRequest.slotid = value.id;
-                timeslotRequest.patientid = "98C2849A-B6DC-453D-8426-50307F46DD22";
+                timeslotRequest.patientid = currentUserId; 
                 timeslotRequest.isbooked = true;
                 bookingRequest.slotid = value.id;
-                bookingRequest.patientid = "98C2849A-B6DC-453D-8426-50307F46DD22";
+                bookingRequest.patientid = currentUserId; 
                 bookingRequest.doctorid = value.doctorId;
                 bookingRequest.isbooked = true;
                 updateTimeslot(timeslotRequest);
                 createBooking(bookingRequest);
                 setNumbers(oldNumbers => [...oldNumbers, 1]);
-                //console.log("handleClick numbers ", numbers);
             }
         }
     };
 
 
     return (
-        <div><p>{numbers}</p><br></br><br></br>
+        <div>
+            <br></br><br></br>
             <Space size='large'>
                     {data.map((s) => (
                         <Button

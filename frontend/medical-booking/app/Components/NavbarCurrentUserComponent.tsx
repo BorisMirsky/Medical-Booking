@@ -21,7 +21,7 @@ export default function CurrentUserComponent() {
     return (
         <div >
             {currentUserName ? (
-                <div>Вы вошли как: роль: <b>{currentUserRole}</b> имя: <b>{currentUserName}</b></div>
+                <div>Вы вошли как: <b>{currentUserRole}</b>  <b>{currentUserName}</b></div>
             ) : (
                 <div></div>
             )}

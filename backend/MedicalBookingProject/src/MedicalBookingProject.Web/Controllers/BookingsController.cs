@@ -48,7 +48,8 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
-        [Route("GetByPatient")]     
+        [Route("GetByPatient")]
+        [HttpGet]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin, doctor, patient")]
         public async Task<ActionResult<List<BookingDTO>>> GetByPatient([FromQuery] Guid id)
         {

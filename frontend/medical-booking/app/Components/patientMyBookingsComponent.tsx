@@ -14,15 +14,9 @@ import "../globals.css";
 
 
 
-//type ButtonStates = { [key: string]: boolean };
-
-//interface Element2Props {
-//    buttonStates: ButtonStates;
-//}
-
 
 export default function PatientBookings() {
-    //const [currentRole, setCurrentRole] = useState("");
+    const [currentUserId, setCurrentUserId] = useState("");
     const [bookings, setBookings] = useState<Booking[]>([]);
 
 
@@ -74,12 +68,11 @@ export default function PatientBookings() {
 
 
     useEffect(() => {
-        //const role = localStorage.getItem("role") || "";
-        //setCurrentRole(role);
-        //localStorage.clear();
+        const id = localStorage.getItem("id") || "";
+        setCurrentUserId(id);
         setBookings([]);
-        const getBookings = async () => {        
-            const responce = await getBookingsByPatient("A157E16F-26EA-44FB-B01E-FD26A4ACDDCD");
+        const getBookings = async () => {    
+            const responce = await getBookingsByPatient(id);
             setBookings(responce);
         }
         getBookings();
@@ -116,11 +109,11 @@ export default function PatientBookings() {
 
     const cancelBooking = (key: number) => {
         timeslotRequest.slotid = bookings[key].timeslotId;
-        timeslotRequest.patientid = "A157E16F-26EA-44FB-B01E-FD26A4ACDDCD";
+        timeslotRequest.patientid = currentUserId; 
         timeslotRequest.isbooked = false;
         //
         bookingRequest.slotid = bookings[key].timeslotId;
-        bookingRequest.patientid = "A157E16F-26EA-44FB-B01E-FD26A4ACDDCD";
+        bookingRequest.patientid = currentUserId; 
         bookingRequest.doctorid = bookings[key].doctorId;
         bookingRequest.doctorusername = bookings[key].doctorUserName;
         bookingRequest.isbooked = false;

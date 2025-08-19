@@ -2,48 +2,29 @@
 "use client"
 
 import React from 'react';
-import { UserLoginRequest, registerAdmin, loginAdmin } from "@/app/Services/service";   
+import { UserLoginRequest, loginAdmin } from "@/app/Services/service";     //registerAdmin
 import { FormProps, Button, Form, Input, Space } from 'antd';
 import Title from "antd/es/typography/Title";
 import { useEffect, useState } from "react";
-//import Link from "next/link";
-//import ModalComponent from '../Components/ModalComponent';
+
 
 
 export default function entranceAdmin() {
-    //const [currentRole, setCurrentRole] = useState("");
     const [loading, setLoading] = useState(true);
+    const [currentRole, setCurrentRole] = useState("");
 
     useEffect(() => {
-        //const role = localStorage.getItem("role") || "";
-        //setCurrentRole(role);
-        //localStorage.clear();
         setLoading(false);
+        const role = localStorage.getItem("role") || "";
+        setCurrentRole(role);
     }, []);
 
 
-
-    /// Register
-    const onFinishFailedRegister: FormProps<UserLoginRequest>['onFinishFailed'] = (errorInfo) => {
-        console.log('onFinishFailed:', errorInfo);
-    }
-
-    const onFinishRegister: FormProps<UserLoginRequest>['onFinish'] = (values) => {
-        console.log('values ', values)
-        //window.location.href = 'profileadmin';
-        registerAdmin(values);
-    }
-
-
-
-    /////// LogIn
     const onFinishFailedLogin: FormProps<UserLoginRequest>['onFinishFailed'] = (errorInfo) => {
         console.log('onFinishFailed:', errorInfo);
     }
 
     const onFinishLogin: FormProps<UserLoginRequest>['onFinish'] = (values) => {
-        console.log('values ', values)
-        window.location.href = 'profileadmin';
         loginAdmin(values);
     }
 
@@ -54,56 +35,12 @@ export default function entranceAdmin() {
             <h2>Вход для админа</h2>
             <br></br>
             <br></br>
-            <h2>Зарегиться (только один раз)</h2>
-            <br></br>
-            <br></br>
-            <Form
-                name="basic"
-                labelCol={{ span: 8 }}
-                wrapperCol={{ span: 16 }}
-                style={{ maxWidth: 600 }}
-                initialValues={{ remember: true }}
-                onFinish={onFinishRegister}
-                onFinishFailed={onFinishFailedRegister}
-                autoComplete="off"
-            >
-                <Form.Item<UserLoginRequest>
-                    label="Email"
-                    name="email"
-                    rules={[{ required: true, message: 'Please input login!' }]}
-                >
-                    <Input />
-                </Form.Item>
-
-                <Form.Item<UserLoginRequest>
-                    label="Password"
-                    name="password"
-                    rules={[{ required: true, message: 'Please input password!' }]}
-                >
-                    <Input />
-                </Form.Item>
-
-                <Form.Item label={null}>
-                    <Space size='large'>
-                        <Button
-                            type="primary"
-                            htmlType="submit"
-                        >
-                            Регистрация
-                        </Button>
-                        <Button htmlType="reset">
-                            Сбросить
-                        </Button>
-                    </Space>
-                </Form.Item>
-            </Form>
-            <br></br>
-            <br></br>
             <br></br>
             <h2>Залогиниться</h2>
             <br></br>
             <br></br>
             {
+                (currentRole === '') ? (
                     <div >
                         {loading ? (
                             <Title>Loading ...</Title>
@@ -152,7 +89,62 @@ export default function entranceAdmin() {
                         <br></br>
                         <br></br>
                     </div >
+                ) : (
+                    <div> Только для незалогинившегося юзера (надеюсь что Админа)</div>
+                )
             }
         </div>
     );
 }
+
+
+
+
+
+///                              Register admin
+//const onFinishFailedRegister: FormProps<UserLoginRequest>['onFinishFailed'] = (errorInfo) => {
+//    console.log('onFinishFailed:', errorInfo);
+//}
+//const onFinishRegister: FormProps<UserLoginRequest>['onFinish'] = (values) => {
+//    registerAdmin(values);
+//}
+//<Form
+//    name="basic"
+//    labelCol={{ span: 8 }}
+//    wrapperCol={{ span: 16 }}
+//    style={{ maxWidth: 600 }}
+//    initialValues={{ remember: true }}
+//    onFinish={onFinishRegister}
+//    onFinishFailed={onFinishFailedRegister}
+//    autoComplete="off"
+//>
+//    <Form.Item<UserLoginRequest>
+//        label="Email"
+//        name="email"
+//        rules={[{ required: true, message: 'Please input login!' }]}
+//    >
+//        <Input />
+//    </Form.Item>
+
+//    <Form.Item<UserLoginRequest>
+//        label="Password"
+//        name="password"
+//        rules={[{ required: true, message: 'Please input password!' }]}
+//    >
+//        <Input />
+//    </Form.Item>
+
+//    <Form.Item label={null}>
+//        <Space size='large'>
+//            <Button
+//                type="primary"
+//                htmlType="submit"
+//            >
+//                Регистрация
+//            </Button>
+//            <Button htmlType="reset">
+//                Сбросить
+//            </Button>
+//        </Space>
+//    </Form.Item>
+//</Form>

@@ -19,13 +19,14 @@ import dayjs from 'dayjs';
 
 
 export default function CreateShedule() {
-    //const [currentRole, setCurrentRole] = useState("");
+    const [currentRole, setCurrentRole] = useState("");
     const [doctors, setDoctors] = useState<Doctor[]>([]);
 
 
     useEffect(() => {
-        //const role = localStorage.getItem("role") || "";
-        //setCurrentRole(role);
+        const role = localStorage.getItem("role") || "";
+        setCurrentRole(role);
+        console.log("CreateShedule currentRole ", currentRole, role);
         //localStorage.clear();
     }, []);
 

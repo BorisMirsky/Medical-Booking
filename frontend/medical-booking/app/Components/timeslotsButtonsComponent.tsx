@@ -9,15 +9,19 @@ import {
     updateTimeslot, TimeSlotUpdateRequest,
     createBooking, BookingCreateRequest, DoctorSheduleProps
 } from "@/app/Services/service";
-//import { useState } from "react";         //useState, useReducer
-
+import { useState, useEffect } from "react";  
 
 
 export default function TimeslotsButtons({ numbers, setNumbers, slots }: DoctorSheduleProps) {
-
+    const [currentUserRole, setCurrentUserRole] = useState("");
     //const data1 = Object.keys(slots).map((slot, index) => ({
     //    isBooked: slots[index].isBooked,
     //}));
+
+    useEffect(() => {
+        const role = localStorage.getItem("role") || "";
+        setCurrentUserRole(role);
+    }, []);
 
 
     const data = Object.keys(slots).map((slot, index) => ({
@@ -47,19 +51,20 @@ export default function TimeslotsButtons({ numbers, setNumbers, slots }: DoctorS
 
 
     const handleClick = (value: Slot) => {
-        if (!value.isBooked)
-        {
-            timeslotRequest.slotid = value.id;
-            timeslotRequest.patientid = "98C2849A-B6DC-453D-8426-50307F46DD22";
-            timeslotRequest.isbooked = true;
-            bookingRequest.slotid = value.id;
-            bookingRequest.patientid = "98C2849A-B6DC-453D-8426-50307F46DD22";
-            bookingRequest.doctorid = value.doctorId;
-            bookingRequest.isbooked = true;
-            updateTimeslot(timeslotRequest);
-            createBooking(bookingRequest);
-            setNumbers(oldNumbers => [...oldNumbers, 1]);
-            //console.log("handleClick numbers ", numbers);
+        if (currentUserRole == 'patient') {
+            if (!value.isBooked) {
+                timeslotRequest.slotid = value.id;
+                timeslotRequest.patientid = "98C2849A-B6DC-453D-8426-50307F46DD22";
+                timeslotRequest.isbooked = true;
+                bookingRequest.slotid = value.id;
+                bookingRequest.patientid = "98C2849A-B6DC-453D-8426-50307F46DD22";
+                bookingRequest.doctorid = value.doctorId;
+                bookingRequest.isbooked = true;
+                updateTimeslot(timeslotRequest);
+                createBooking(bookingRequest);
+                setNumbers(oldNumbers => [...oldNumbers, 1]);
+                //console.log("handleClick numbers ", numbers);
+            }
         }
     };
 

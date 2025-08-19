@@ -35,7 +35,7 @@ namespace MedicalBookingProject.Web.Controllers
         // CreateShedule
         [Route("CreateTimeslot")]
         [HttpPost]  
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin, Admin")]
         public async Task<ActionResult> CreateTimeslot([FromBody] TimeslotCreateRequest request)
         {
             await _timeslotService.CreateTimeslot(request.DoctorId, 
@@ -49,7 +49,7 @@ namespace MedicalBookingProject.Web.Controllers
 
         [Route("ByDoctorId")]
         [HttpGet("{id}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin, doctor, patient")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin, Admin, doctor, patient")]
         public async Task<ActionResult<List<Timeslot>>> ByDoctorId(Guid id)
         {
             var timeslots = await _timeslotService.GetTimeslotsByDoctor(id);

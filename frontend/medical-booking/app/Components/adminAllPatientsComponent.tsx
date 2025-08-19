@@ -19,7 +19,7 @@ import "../globals.css";
 
 
 export default function AllPatients() {
-    //const [currentRole, setCurrentRole] = useState("");
+    const [currentRole, setCurrentRole] = useState("");
     const [patients, setPatients] = useState<Patient[]>([]);
 
 
@@ -63,10 +63,8 @@ export default function AllPatients() {
 
 
     useEffect(() => {
-        //const role = localStorage.getItem("role") || "";
-        //setCurrentRole(role);
-        //localStorage.clear();
-        //
+        const role = localStorage.getItem("role") || "";
+        setCurrentRole(role);
         setPatients([]);
         const getPatients = async () => {
             const responce = await getPatientsFetch();

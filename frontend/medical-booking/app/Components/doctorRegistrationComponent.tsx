@@ -26,7 +26,6 @@ export default function DoctorRegistration() {
     const onFinish: FormProps<DoctorRegisterRequest>['onFinish'] = (values) => {
         registerDoctor(values);
         form.resetFields();
-        //console.log('values ', values)
     }
 
 

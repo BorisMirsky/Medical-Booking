@@ -18,7 +18,6 @@ export default function ProfileDoctor() {
         const getUser = async () => {
             const name = localStorage.getItem("username") || "";
             const role = localStorage.getItem("role") || "";
-            //console.log("ProfileDoctor name role ", name, role)
             if (name != undefined) {
                 setCurrentUserName(name);
                 setCurrentUserRole(role);
@@ -29,7 +28,6 @@ export default function ProfileDoctor() {
 
     return (
         <div>
-
             <div>
                     <br></br>
                     <br></br>
@@ -49,10 +47,8 @@ export default function ProfileDoctor() {
                         </div >
                     ) : (
                         <div> Только для залогинившегося врача</div>
-                    )
-                    }
+                    )}
             </div>
             </div>
-
         );
 }

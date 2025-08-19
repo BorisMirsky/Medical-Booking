@@ -12,13 +12,8 @@ export default function CurrentUserComponent() {
         const getUser = async () => {
             const name = localStorage.getItem("username") || "";
             const role = localStorage.getItem("role") || "";
-            if (name != undefined) {
-                setCurrentUserName(name);
-            }
-            if (role != undefined) {
-                setCurrentUserRole(role);
-            }
-            //console.log("CurrentUserComponent  Navbar ", name, role);
+            setCurrentUserName(name);
+            setCurrentUserRole(role);
         }
         getUser();
     }, []);
@@ -26,7 +21,7 @@ export default function CurrentUserComponent() {
     return (
         <div >
             {currentUserName ? (
-                <div>Вы вошли как: <b>{currentUserRole}</b> <b>{currentUserName}</b></div>
+                <div>Вы вошли как: роль: <b>{currentUserRole}</b> имя: <b>{currentUserName}</b></div>
             ) : (
                 <div></div>
             )}

@@ -104,7 +104,7 @@ namespace MedicalBookingProject.Web.Controllers
 
         [Route("GetPatients")]
         [HttpGet]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin, doctor")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin, Admin, doctor")]
         public async Task<ActionResult> GetPatients()
         {
             List<Patient> users = await _patientService.GetAll();

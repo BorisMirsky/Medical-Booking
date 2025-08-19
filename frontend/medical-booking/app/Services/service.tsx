@@ -178,7 +178,6 @@ export const loginPatient = async (request: UserLoginRequest) => {
     let token: string = ""
     let role: string = "";
     let patientId: string = "";
-    console.log("loginPatient ");
 
     await fetch("http://localhost:5032/patients/login", {
         method: 'POST',
@@ -197,8 +196,6 @@ export const loginPatient = async (request: UserLoginRequest) => {
             }
         })
         .then(data => {
-            //console.log('DATA token: ', data['token']);
-            console.log('DATA: ', data);
             username = data['userName'];
             role = data['rolename'];
             token = data['token'];
@@ -218,6 +215,7 @@ export const loginPatient = async (request: UserLoginRequest) => {
 export const loginAdmin = async (request: UserLoginRequest) => {
     let username: string = "";
     let role: string = "";
+    let token: string = ""
 
     await fetch("http://localhost:5032/admins/login", {
         method: 'POST',
@@ -236,13 +234,13 @@ export const loginAdmin = async (request: UserLoginRequest) => {
             }
         })
         .then(data => {
-            if (data) {
-                username = data['userName'];
-                role = data['rolename'];
-                localStorage.setItem('username', username);
-                localStorage.setItem('role', role);
-                window.location.href = 'profileadmin';
-            }
+            username = data['userName'];
+            role = data['role'];
+            token = data['token'];
+            localStorage.setItem('username', username);
+            localStorage.setItem('role', role);
+            localStorage.setItem('token', token);
+            window.location.href = 'profileadmin';
         })
         .catch(err => {
             console.log('Error: ', err);
@@ -285,6 +283,10 @@ export const getDoctorsFetch = async () => {
     const response = await fetch("http://localhost:5032/doctors/GetDoctors", {
         headers: {
             'Content-type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Credentials": 'true',
+            "Access-Control-Allow-Methods": 'GET',
             'Authorization': `Bearer ${token}`,
         },
         method: 'GET',
@@ -293,14 +295,13 @@ export const getDoctorsFetch = async () => {
         .then(response => {
             if (!response.ok) {
                 throw new Error("Not response", { cause: response });
-                window.location.href = 'noauthorized';
+                //window.location.href = 'noauthorized';
             }
             else {
                 return response.json();
             }
         })
         .then(data => {
-            //console.log('data: ', data);
             return data;
         })
         .catch(function (err) {
@@ -315,6 +316,10 @@ export const getPatientsFetch = async () => {
     const response = await fetch("http://localhost:5032/patients/GetPatients", {
         headers: {
             'Content-type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Credentials": 'true',
+            "Access-Control-Allow-Methods": 'GET',
             'Authorization': `Bearer ${token}`,
         },
         method: 'GET',
@@ -445,7 +450,6 @@ export const registerDoctor = async (request: DoctorRegisterRequest) => {
         }
         else {
             alert("Регистрация прошла успешно");
-            window.location.href = 'login';
         }
     }).catch(err => {
         console.log('registerError: ', err);
@@ -489,7 +493,6 @@ export const registerAdmin = async (request: AdminRegisterRequest) => {
     }).then(response => {
         if (!response.ok) {
             alert("Ошибка регистрации. \n Возможно Админ уже зареген.");
-            //console.log("Ошибка регистрации. Админ уже зареген.");
         }
         else {
             alert("Регистрация прошла успешно")
@@ -527,15 +530,17 @@ export const createShedule = async (request: SheduleCreateRequest) => {
     });
 }
 
-
+// ByDoctorId
 export const getSlotsByDoctorId = async (id: string) => {
     const url = 'http://localhost:5032/timeslots/';     
     const token = localStorage.getItem('token');
-    const name = localStorage.getItem('username');
-    console.log("getSlotsByDoctorId token ", token, name);
     const response = await fetch(url + id, {
         headers: {
             'Content-type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Credentials": 'true',
+            "Access-Control-Allow-Methods": 'GET',
             'Authorization': `Bearer ${token}`,
         },
         method: 'GET',
@@ -551,7 +556,6 @@ export const getSlotsByDoctorId = async (id: string) => {
             }
         })
         .then(data => {
-            //console.log('data ', data);
             return data;
         })
         .catch(function (err) {

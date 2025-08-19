@@ -31,7 +31,7 @@ namespace MedicalBookingProject.Web.Controllers
 
         [Route("Register")]
         [HttpPost]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<IActionResult> Register([FromBody] RegisterDoctorRequest request)
         {
             if (String.IsNullOrEmpty(request.Email))
@@ -59,7 +59,7 @@ namespace MedicalBookingProject.Web.Controllers
 
         [Route("GetDoctors")]
         [HttpGet] 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin, admin")]
         public async Task<ActionResult<DoctorResponse>> GetDoctors()
         {
             List<Doctor> users = await _doctorService.GetAllDoctors();
@@ -93,7 +93,7 @@ namespace MedicalBookingProject.Web.Controllers
 
         [Route("GetDoctorsBySpeciality")]
         [HttpGet("{speciality}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin, doctor, patient")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin, doctor, patient")]
         public async Task<ActionResult<List<DoctorResponse>>> GetDoctorsBySpeciality(string speciality)
         {
             List<Doctor> doctors = await _doctorService.GetDoctorsBySpeciality(speciality);

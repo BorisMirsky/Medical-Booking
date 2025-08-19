@@ -4,8 +4,8 @@ import type { CollapseProps } from 'antd';
 import { Collapse } from 'antd';
 import DoctorRegistration from '../Components/doctorRegistrationComponent';
 import CreateShedule from '../Components/adminCreateSheduleComponent';
-//import DoctorShedule from '../Components/doctorSheduleComponent';
-import DoctorSheduleWatchOnly from '../Components/doctorSheduleWatchOnlyComponent';
+import DoctorShedule from '../Components/doctorSheduleComponent';
+//import DoctorSheduleWatchOnly from '../Components/doctorSheduleWatchOnlyComponent';
 import AllDoctors from '../Components/adminAllDoctorsComponent';
 import AllPatients from '../Components/adminAllPatientsComponent';
 //import DisabledComponent from '../Components/disabledDateComponent';
@@ -26,7 +26,7 @@ const items: CollapseProps['items'] = [
     {
         key: '3',
         label: 'Просмотр расписания врача',
-        children: <DoctorSheduleWatchOnly></DoctorSheduleWatchOnly>
+        children: <DoctorShedule></DoctorShedule>
     },
     {
         key: '4',

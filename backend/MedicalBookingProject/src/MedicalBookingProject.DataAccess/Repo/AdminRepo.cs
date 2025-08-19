@@ -34,9 +34,10 @@ namespace MedicalBookingProject.DataAccess.Repo
         }
 
 
+
         public async Task<Admin?> Register(string email, string password)
         {
-            if (_dbContext.Admins.Count() == 0)              // or !_dbContext.Admins.Any() 
+            if (_dbContext.Admins.Count() == 0)              // !_dbContext.Admins.Any() 
             {
                 var hashedPassword = BCrypt.HashPassword(password);
                 Admin admin = new();

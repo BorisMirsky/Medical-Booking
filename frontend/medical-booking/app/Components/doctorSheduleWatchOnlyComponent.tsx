@@ -10,7 +10,7 @@ import {
 //import { Doctor } from "@/app/Models/Doctor";
 import { Slot } from "@/app/Models/Slot";
 import TimeslotsButtonsWatchOnly from "../Components/timeslotsButtonsWatchOnlyComponent";
-import { Select, Space, DatePicker, Button, Form, FormProps } from 'antd';         //Select
+import { Select, Space, DatePicker, Button, Form, FormProps } from 'antd';         
 import { useState, useEffect } from "react";
 import dayjs, { Dayjs } from 'dayjs';
 import moment from "moment";

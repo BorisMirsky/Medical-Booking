@@ -9,14 +9,15 @@ import CollapseElement from '../Components/adminCollapseComponent';
 
 
 export default function profileAdmin() {
-    //let specialitySelected = undefined;
-    //const [currentRole, setCurrentRole] = useState("");
+    const [currentRole, setCurrentRole] = useState("");
+    const [currentName, setCurrentName] = useState("");
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        //const role = localStorage.getItem("role") || "";
-        //setCurrentRole(role);
-        //localStorage.clear();
+        const role = localStorage.getItem("role") || "";
+        const name = localStorage.getItem("username") || "";
+        setCurrentRole(role);
+        setCurrentName(name);
         setLoading(false);
     }, []);
 
@@ -25,15 +26,15 @@ export default function profileAdmin() {
 
     return (
         <div>
-            <br></br>
-            <br></br>
-            <br></br>
-            <h2>Профиль админа</h2>
-            <br></br>
+        <div>
             <br></br>
             <br></br>
             {
-                <div >
+                    (currentRole === 'Admin') ? (
+            <div>
+            <br></br>
+            <h2>Профиль админа {currentName}</h2>
+            <br></br>
             <br></br>
             <br></br>
                     {loading ? (
@@ -41,10 +42,12 @@ export default function profileAdmin() {
                     ) : (
                             <CollapseElement />
                     )}
-                    <br></br>
-                    <br></br>
+
                 </div >
-            }
+                    ) : (
+                            <div> Только для залогинившегося Админа</div>
+            )}
+        </div>
         </div>
     );
 }

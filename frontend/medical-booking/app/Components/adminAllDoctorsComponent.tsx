@@ -4,19 +4,15 @@
 import React from 'react';
 import { getDoctorsFetch } from "@/app/Services/service";
 import { Doctor } from "@/app/Models/Doctor";
-//import { Slot } from "@/app/Models/Slot";
-//import { Select, Space, DatePicker, Button, Form, FormProps } from 'antd';
 import { Table } from "antd";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import "../globals.css";
-//import Title from "antd/es/typography/Title";
-//import moment from 'moment';
 
 
 
 export default function AllDoctors() {
-    //const [currentRole, setCurrentRole] = useState("");
+    const [currentRole, setCurrentRole] = useState("");
     const [doctors, setDoctors] = useState<Doctor[]>([]);
 
     const columns = [
@@ -64,10 +60,8 @@ export default function AllDoctors() {
 
 
     useEffect(() => {
-        //const role = localStorage.getItem("role") || "";
-        //setCurrentRole(role);
-        //localStorage.clear();
-        //
+        const role = localStorage.getItem("role") || "";
+        setCurrentRole(role);
         setDoctors([]);
         const getDoctors = async () => {
             const responce = await getDoctorsFetch();

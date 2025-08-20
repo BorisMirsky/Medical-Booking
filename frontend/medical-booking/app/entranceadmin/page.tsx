@@ -30,15 +30,15 @@ export default function entranceAdmin() {
 
     return (
         <div>
-            <br></br>
-            <br></br>
+            <br />
+            <br />
             <h2>Вход для админа</h2>
-            <br></br>
-            <br></br>
-            <br></br>
+            <br />
+            <br />
+            <br />
             <h2>Залогиниться</h2>
-            <br></br>
-            <br></br>
+            <br />
+            <br />
             {
                 (currentRole === '') ? (
                     <div >
@@ -86,8 +86,8 @@ export default function entranceAdmin() {
                                 </Form.Item>
                             </Form>
                         )}
-                        <br></br>
-                        <br></br>
+                        <br />
+                        <br />
                     </div >
                 ) : (
                     <div> Только для незалогинившегося юзера (надеюсь что Админа)</div>

@@ -11,8 +11,20 @@ import "../globals.css";
 
 
 export default function PatientMyAppointments() {
-    //const [currentUserId, setCurrentUserId] = useState("");
+    const [currentUserId, setCurrentUserId] = useState("");
     const [apps, setApps] = useState<Appointment[]>([]);
+    //console.log('PatientMyAppointments ', apps);
+
+    useEffect(() => {
+        const id = localStorage.getItem("id") || "";
+        setCurrentUserId(id);
+        setApps([]);
+        const getApps = async () => {
+            const responce = await getAppointmentsByPatientId(id);           
+            setApps(responce);
+        }
+        getApps();
+    }, []);
 
 
     const columns = [
@@ -32,44 +44,29 @@ export default function PatientMyAppointments() {
             key: 'doctorspeciality',
         },
         {
-            title: 'Дата',
+            title: 'Дата. Начало приёмa',
             dataIndex: 'date',
             key: 'date',
         },
-
     ]
-
-
-    useEffect(() => {
-        const id = localStorage.getItem("id") || "";
-        //setCurrentUserId(id);
-        setApps([]);
-        const getApps = async () => {
-            const responce = await getAppointmentsByPatientId(id); 
-            setApps(responce);
-        }
-        getApps();
-    }, []);
 
 
     const data = apps.map((app: Appointment, index: number) => ({
         key: index,
         n: (index + 1),
-        uniqueid: app.id,
-        doctorusername: app.doctorusername,
-        doctorspeciality: app.doctorspeciality,
-        date: app.timeslotdatetimestart
+        doctorusername:  app.doctorUserName,
+        doctorspeciality: app.patientUserName,    
+        date: app.timeslotDatetimeStart
     }));
-
 
 
     return (
         <div>
-            <br></br><br></br>
+            <br/><br/>
             <h1>Мои посещения врачей</h1>
-            <br></br><br></br>
+            <br/><br/>
             <div>
-                <br></br><br></br><br></br>
+                <br/><br/><br/>
                 <Table
                     dataSource={data}
                     columns={columns}

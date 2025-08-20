@@ -10,15 +10,14 @@ import "../globals.css";
 
 
 
-interface DoctorCreateAppointmentProps {
+interface IDoctorCreateAppointmentProps {
     onNext: (booking: Booking) => void;
 }
 
 
-const DoctorCreateAppointment: React.FC<DoctorCreateAppointmentProps> = ({ onNext }) => {
-    //const [currentRole, setCurrentRole] = useState("");
+const DoctorCreateAppointment: React.FC<IDoctorCreateAppointmentProps> = ({ onNext }) => {
+    const [currentId, setCurrentId] = useState("");
     const [bookings, setBookings] = useState<Booking[]>([]);
-
 
     const columns = [
         {
@@ -57,14 +56,12 @@ const DoctorCreateAppointment: React.FC<DoctorCreateAppointmentProps> = ({ onNex
         }
     ]
 
-
     useEffect(() => {
-        //const role = localStorage.getItem("role") || "";
-        //setCurrentRole(role);
-        //localStorage.clear();
+        const id = localStorage.getItem("id") || "";
+        setCurrentId(id);
         setBookings([]);
         const getBookings = async () => {
-            const responce = await getBookingsByDoctor("FE8398B3-2C83-45BC-A01A-EE4FEE19BFAC");
+            const responce = await getBookingsByDoctor(id);
             setBookings(responce);
         }
         getBookings();
@@ -87,10 +84,10 @@ const DoctorCreateAppointment: React.FC<DoctorCreateAppointmentProps> = ({ onNex
 
     return (
         <div>
-            <br></br>
+            <br />
             <h2>Мои бронирования</h2>
             <div>
-                <br></br><br></br>
+                <br /><br />
                 <Table
                     dataSource={data}
                     columns={columns}

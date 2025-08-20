@@ -29,26 +29,26 @@ export default function AllPatients() {
             dataIndex: 'n',
             key: 'n',
         },
-        {
-            title: 'UniqueId',
-            dataIndex: 'uniqueid',
-            key: 'uniqueid',
-            render: (id: string) => (
-                <Link
-                    href={{
-                        pathname: "profilepatient",
-                        query: {
-                            id: id
-                        }
-                    }}
-                    //legacyBehavior={true}
-                >
-                    {/*<a className="tableLink" >*/}
-                        {id}
-                    {/*</a>*/}
-                </Link>
-            )
-        },
+        //{
+        //    title: 'UniqueId',
+        //    dataIndex: 'uniqueid',
+        //    key: 'uniqueid',
+        //    render: (id: string) => (
+        //        <Link
+        //            href={{
+        //                pathname: "profilepatient",
+        //                query: {
+        //                    id: id
+        //                }
+        //            }}
+        //            //legacyBehavior={true}
+        //        >
+        //            {/*<a className="tableLink" >*/}
+        //                {id}
+        //            {/*</a>*/}
+        //        </Link>
+        //    )
+        //},
         {
             title: 'Имя',
             dataIndex: 'username',
@@ -77,7 +77,7 @@ export default function AllPatients() {
     const data = patients.map((patient: Patient, index: number) => ({
         key: index,
         n: (index + 1),
-        uniqueid: patient.id,
+        //uniqueid: patient.id,
         username: patient.userName,
         gender: patient.gender
         //date: moment(order.date).format("DD/MM/YYYY")
@@ -87,11 +87,11 @@ export default function AllPatients() {
 
     return (
         <div>
-            <br></br><br></br>
+            <br /><br />
             <h1>Все пациенты клиники</h1>
-            <br></br><br></br>
+            <br /><br />
             <div>
-                <br></br><br></br><br></br>
+                <br /><br /><br />
                 <Table
                     dataSource={data}
                     columns={columns}

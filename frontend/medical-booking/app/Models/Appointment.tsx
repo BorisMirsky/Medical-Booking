@@ -3,12 +3,12 @@
     patientId: string;
     doctorId: string;
     timeslotId: string;
-    bookingid: string;
-    patientusername: string;
-    doctorusername: string,
-    doctorspeciality: string,
-    timeslotdatetimestart: string;
-    timeslotatetimestop: string;
+    bookingId: string;
+    patientUserName: string;
+    doctorUserName: string,
+    doctorSpeciality: string,
+    timeslotDatetimeStart: string;
+    timeslotDatetimeStop: string;
     //patientcame: string;
     //patientislate: string;
     //patientunacceptablebehavior: string;

@@ -23,19 +23,16 @@ export default function Home() {
 
 
     const loginAdminPage = async () => {
-        console.log("loginAdminPage");
         window.location.href = 'entranceadmin';
         //router.push("/updateorder?id=" + id);
     };
 
     const loginPatientPage = async () => {
-        console.log("loginPatientPage");
         window.location.href = 'entrancepatient';
         //router.push("/updateorder?id=" + id);
     };
 
     const loginDoctorPage = async () => {
-        console.log("loginDoctorPage");
         window.location.href = 'entrancedoctor';
         //router.push("/updateorder?id=" + id);
     };
@@ -56,7 +53,6 @@ export default function Home() {
                       style={{ flex: 1 }}
                   >
                       Вход для пациента</Button>
-
                   <Button
                       onClick={() => loginDoctorPage()}
                       style={{ flex: 1 }}

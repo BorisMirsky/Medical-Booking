@@ -28,11 +28,11 @@ export default function entrancePatient() {
 
     return (
         <div>
-            <br></br>
-            <br></br>
-            <br></br>
+            <br/>
+            <br />
+            <br />
             <h2>Регистрация пациента</h2>
-            <br></br>
+            <br />
 
                 <div >
                 <PatientRegistration></PatientRegistration>

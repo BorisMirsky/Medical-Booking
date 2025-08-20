@@ -23,19 +23,19 @@ export default function profilePatient() {
 
     return (
         <div>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             {
                 (currentRole === 'patient') ? (
                     <div>
-                        <br></br>
+                        <br />
                         <h2>Профиль пациента {currentName}</h2>
-                        <br></br>
-                        <br></br>
-                        <br></br>
+                        <br />
+                        <br />
+                        <br />
                         {loading ? (
                             <Title>Loading ...</Title>
                         ) : (

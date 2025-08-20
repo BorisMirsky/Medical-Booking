@@ -73,7 +73,7 @@ export default function TimeslotsButtons({ numbers, setNumbers, slots }: DoctorS
 
     return (
         <div>
-            <br></br><br></br>
+            <br /><br />
             <Space size='large'>
                     {data.map((s) => (
                         <Button

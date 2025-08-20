@@ -26,14 +26,14 @@ const CollapseElement: React.FC = () => {
         },
         {
             key: '3',
-            label: 'Мои посещения врачей',
+            label: 'Мои прошедшие посещения врачей',
             children: <PatientMyAppointments />,
         }
     ];
 
     return (
         <div>
-            <br></br><br></br>
+            <br/><br/>
             <Collapse accordion items={items} />
         </div>
         );

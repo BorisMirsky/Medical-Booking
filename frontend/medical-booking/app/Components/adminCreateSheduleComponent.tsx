@@ -9,12 +9,9 @@ import {
 import { Doctor } from "@/app/Models/Doctor";
 import { Select, Space, DatePicker, Button, Form, FormProps } from 'antd';
 import { useEffect, useState } from "react";
-//import type { InputNumberProps } from 'antd';
 import { InputNumber } from 'antd';
 import { TimePicker } from 'antd';
 import dayjs from 'dayjs';
-//import moment from 'moment';
-
 
 
 
@@ -27,7 +24,6 @@ export default function CreateShedule() {
         const role = localStorage.getItem("role") || "";
         setCurrentRole(role);
         console.log("CreateShedule currentRole ", currentRole, role);
-        //localStorage.clear();
     }, []);
 
     const [form] = Form.useForm();
@@ -54,7 +50,6 @@ export default function CreateShedule() {
     }
 
 
-
     function handleSelectSpeciality(value: string) {
         setDoctors([]);
         const getDoctors = async () => {
@@ -70,14 +65,6 @@ export default function CreateShedule() {
         label: doctor.userName
     }));
 
-    //const handleSelectName = (value: string) => {
-    //    //console.log(`handleSelectName ${value}`);
-    //    for (const variable in doctors) {
-    //        if (doctors[variable].userName == value) {
-    //            console.log(`!!!!!!!!!!!!1 `, doctors[variable].id);
-    //        }
-    //    }
-    //};
 
     const timeFormat = 'HH';
     const timeFormat1 = 'mm';
@@ -86,14 +73,7 @@ export default function CreateShedule() {
     for (let i = 1; i <= 50; i++) {
         myOptions.push(i);
     }
-    
-    //const handleTimeStart = (value: string) => {
-    //    console.log(`handleTimeStart ${value}`);
-    //}
 
-    //const handleTimeStop = (value: dayjs) => {
-    //    console.log(`handleTimeStop ${value.toString()}`);
-    //}
 
 
     return (

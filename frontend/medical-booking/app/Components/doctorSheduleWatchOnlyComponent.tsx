@@ -16,8 +16,8 @@ import moment from "moment";
 
 export default function DoctorSheduleWatchOnly( ) {
     const [loaded, setLoaded] = useState(false)
-    const [slots_, setSlots] = useState<Slot[]>([]);            // slots all days
-    const [slots1, setSlots1] = useState<Slot[]>([]);           //  slots one day
+    const [slots_, setSlots] = useState<Slot[]>([]);            // slots of all days
+    const [slots1, setSlots1] = useState<Slot[]>([]);           //  slots of one day
     const [buttonsFlag, setButtonsFlag] = useState<number>(0);
 
 
@@ -58,14 +58,11 @@ export default function DoctorSheduleWatchOnly( ) {
     // даты приёма врача
     const uniquePrefixes = new Set(slots_.map(item => item.datetimeStart.split(' ')[0]));
 
-
     interface IProcessedSlots {
         [key: string]: Array<Slot>;
     }
 
-
     const processedSlots: IProcessedSlots = {};
-
 
     // преобразование массива слотов в вид {дата: [...слоты]}
     const processSlots = (data: Array<Slot>) => {
@@ -73,7 +70,6 @@ export default function DoctorSheduleWatchOnly( ) {
             processedSlots[prefix] = data.filter(item => item.datetimeStart.startsWith(prefix));
         })
     };
-
 
     // даты для календаря
     const allowedDates = Array.from(uniquePrefixes.values())
@@ -99,7 +95,6 @@ export default function DoctorSheduleWatchOnly( ) {
     const cleanData = () => {
         setSlots1([]);
     }
-
 
 
     return (
@@ -146,7 +141,7 @@ export default function DoctorSheduleWatchOnly( ) {
 
             </Form>
 
-            <br/><br/><br/>
+            <br /><br />
             <div>
                 {
                     (buttonsFlag === 0) ? (

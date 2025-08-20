@@ -29,16 +29,16 @@ export default function ProfileDoctor() {
     return (
         <div>
             <div>
-                    <br></br>
-                    <br></br>
-                    <br></br>
+                <br />
+                <br />
+                <br />
                 {
                     (currentUserRole === 'doctor') ? (
                 <div >
-                    <br></br>
+                            <br />
                     <h2>Профиль врача {currentUserName}</h2>
-                    <br></br>
-                    <br></br>
+                            <br />
+                            <br />
                     {loading ? (
                         <Title>Loading ...</Title>
                     ) : (

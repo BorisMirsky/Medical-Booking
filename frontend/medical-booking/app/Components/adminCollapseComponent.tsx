@@ -8,6 +8,7 @@ import DoctorShedule from '../Components/doctorSheduleComponent';
 //import DoctorSheduleWatchOnly from '../Components/doctorSheduleWatchOnlyComponent';
 import AllDoctors from '../Components/adminAllDoctorsComponent';
 import AllPatients from '../Components/adminAllPatientsComponent';
+import PatientsWithViolationsOfDiscipline from '../Components/patientViolationsOfDisciplineComponent
 //import DisabledComponent from '../Components/disabledDateComponent';
 import { Slot } from "@/app/Models/Slot";  
 import { useState } from "react"; 
@@ -37,7 +38,7 @@ const CollapseElement: React.FC = () => {
         {
             key: '4',
             label: 'Пациенты с нарушениями дисциплины',
-            children: <p>тобi пiзда, тiкай с городу</p>
+            children: <PatientsWithViolationsOfDiscipline></PatientsWithViolationsOfDiscipline>
         },
         {
             key: '5',
@@ -53,7 +54,7 @@ const CollapseElement: React.FC = () => {
     return (
         <div>
             <p>{numbers}</p>
-            <br></br><br></br>
+            <br /><br />
             <Collapse accordion items={items} />
         </div>
     );

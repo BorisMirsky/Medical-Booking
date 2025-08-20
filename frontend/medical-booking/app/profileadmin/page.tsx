@@ -27,19 +27,19 @@ export default function profileAdmin() {
     return (
 
         <div>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             {
                     (currentRole === 'Admin') ? (
             <div>
-            <br></br>
+                        <br />
             <h2>Профиль админа {currentName}</h2>
-            <br></br>
-            <br></br>
-            <br></br>
+                        <br />
+                        <br />
+                        <br />
                     {loading ? (
                         <Title>Loading ...</Title>
                     ) : (

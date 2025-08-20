@@ -1,6 +1,7 @@
 ﻿export interface Booking {
     id: string;
     isBooked: boolean;
+    isClosed: boolean;
     patientId: string;
     doctorId: string;
     timeslotId: string;

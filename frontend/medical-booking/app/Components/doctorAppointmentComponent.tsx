@@ -7,16 +7,22 @@ import { Card, Space } from "antd";
 import FormAppointment from "../Components/formCreateAppointmentComponent";
 import FormMedicalRecord from "../Components/formCreateMedicalRecordComponent"; 
 import PatientAllMedicalRecords from '../Components/patientAllMedicalRecordsComponent';
-//import { useState, useEffect } from "react";       // useEffect
+import { useState, useEffect } from "react";       
 import "../globals.css";
 
 
 
 
 const DoctorAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
+    const [currentId, setCurrentId] = useState("");
     //const [bookingClosed, setBookingClosed] = useState(false);
     //bookingStatus={bookingClosed}
     const patientusername: string = !booking ? "" : booking.patientUserName;
+
+    useEffect(() => {
+        const id = localStorage.getItem("id") || "";
+        setCurrentId(id);
+    }, []);
 
     const _title = `Медицинская карта пациента ${patientusername}`;
 

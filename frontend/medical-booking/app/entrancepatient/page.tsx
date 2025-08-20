@@ -36,13 +36,13 @@ export default function entrancePatient() {
 
     return (
         <div>
-            <br></br>
-            <br></br>
-            <br></br>   
+            <br />
+            <br />
+            <br />  
             <h2>Вход для пациента</h2>
-            <br></br>
-            <br></br>
-            <br></br>
+            <br />
+            <br />
+            <br />
             {
                     <div >
                         {loading ? (
@@ -89,8 +89,8 @@ export default function entrancePatient() {
                                 </Form.Item>
                             </Form>
                         )}
-                    <br></br>
-                    <br></br>
+                    <br />
+                    <br />
                     <p>Если у вас нет аккаунта, вы можете зарегистрироваться</p>
                     <Link
                         href={{
@@ -99,9 +99,9 @@ export default function entrancePatient() {
                     >
                             <h3>Регистрация</h3>
                     </Link>
-                    <br></br>
-                    <br></br>
-                    <br></br>
+                    <br />
+                    <br />
+                    <br />
                     </div >
             }
         </div>

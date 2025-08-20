@@ -38,13 +38,13 @@ export default function entranceDoctor() {
                 (!currentRole) ? (
 
         <div>
-            <br></br>
-            <br></br>
-            <br></br>
+                        <br />
+                        <br />
+                        <br />
             <h2>Вход для врача</h2>
-            <br></br>
-            <br></br>
-            <br></br>
+                        <br />
+                        <br />
+                        <br />
             {
                 <div >
                     {loading ? (
@@ -91,8 +91,8 @@ export default function entranceDoctor() {
                             </Form.Item>
                         </Form>
                     )}
-                    <br></br>
-                    <br></br>
+                                <br />
+                                <br />
                 </div >
             }
                     </div>

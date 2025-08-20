@@ -18,6 +18,7 @@ import "../globals.css";
 export default function PatientBookings() {
     const [currentUserId, setCurrentUserId] = useState("");
     const [bookings, setBookings] = useState<Booking[]>([]);
+    //console.log('PatientBookings ', bookings);
 
 
     const columns = [
@@ -58,7 +59,8 @@ export default function PatientBookings() {
             render: (text: string, record: object) => (
                 <Button
                     onClick={() => cancelBooking(record['key' as keyof typeof record])}
-                    disabled={!bookings[record['key' as keyof typeof record]].isBooked} 
+                    disabled={!bookings[record['key' as keyof typeof record]].isBooked || 
+                                 bookings[record['key' as keyof typeof record]].isClosed} 
                 >
                       {"Отмена"}
                 </Button>
@@ -84,7 +86,9 @@ export default function PatientBookings() {
         username: booking.doctorUserName,
         speciality: booking.doctorSpeciality,
         timeslotId: booking.timeslotId,
-        isBooked: ((booking.isBooked.toString() == "true") ? "Вы записаны" : "Запись отменена"), //booking.isBooked.toString(),
+        isBooked: ((booking.isClosed.toString() == "true") ? "Приём состоялся" :
+                  ((booking.isBooked.toString() == "true") ? "Вы записаны" :
+                  "Запись отменена")),
         timeslotStart: booking.timeslotDatetimeStart,
         timeslotStop: booking.timeslotDatetimeStop,
         cancel: ""  
@@ -120,7 +124,6 @@ export default function PatientBookings() {
         updateTimeslot(timeslotRequest);
         createBooking(bookingRequest);
     }  
-
 
 
     return (

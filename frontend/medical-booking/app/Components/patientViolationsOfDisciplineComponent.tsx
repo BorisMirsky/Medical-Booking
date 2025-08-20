@@ -11,9 +11,9 @@ import "../globals.css";
 
 
 
-export default function AllDoctors() {
+export default function PatientsWithViolationsOfDiscipline() {
     const [currentRole, setCurrentRole] = useState("");
-    const [doctors, setDoctors] = useState<Doctor[]>([]);
+    const [patients, setPatients] = useState<Doctor[]>([]);
 
     const columns = [
         {
@@ -47,11 +47,6 @@ export default function AllDoctors() {
             key: 'username',
         },
         {
-            title: 'Специализация',
-            dataIndex: 'speciality',
-            key: 'speciality',
-        },
-        {
             title: 'Гендер',
             dataIndex: 'gender',
             key: 'gender',
@@ -61,17 +56,17 @@ export default function AllDoctors() {
 
     useEffect(() => {
         const role = localStorage.getItem("role") || "";
-        setCurrentRole(role);
-        setDoctors([]);
-        const getDoctors = async () => {
-            const responce = await getDoctorsFetch();
-            setDoctors(responce);
-        }
-        getDoctors();
+        //setCurrentRole(role);
+        //setDoctors([]);
+        //const getDoctors = async () => {
+        //    const responce = await getDoctorsFetch();
+        //    setDoctors(responce);
+        //}
+        //getDoctors();
     }, []);
 
 
-    const data = doctors.map((doctor: Doctor, index: number) => ({
+    const data = patients.map((doctor: Doctor, index: number) => ({
         key: index,
         n: (index + 1),
         //uniqueid: doctor.id,
@@ -79,26 +74,26 @@ export default function AllDoctors() {
         speciality: doctor.speciality,
         gender: doctor.gender
         //date: moment(order.date).format("DD/MM/YYYY")
-    })); 
+    }));
 
 
 
     return (
+        <div>
+            <br /><br />
+            <h1>Все врачи клиники</h1>
+            <br /><br />
             <div>
-            <br /><br />
-                <h1>Все врачи клиники</h1>
-            <br /><br />
-                    <div>
                 <br /><br /><br />
-                        <Table
-                            dataSource={data}
-                            columns={columns}
-                            pagination={false}
-                            footer={() => ""}
-                            bordered
-                        />
-                    </div>
+                <Table
+                    dataSource={data}
+                    columns={columns}
+                    pagination={false}
+                    footer={() => ""}
+                    bordered
+                />
+            </div>
         </div>
-    );    
+    );
 }
 

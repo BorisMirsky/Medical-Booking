@@ -87,7 +87,7 @@ namespace MedicalBookingProject.Web.Controllers
 
         [Route("GetPatient")]
         [HttpGet]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin, doctor, patient")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin, admin, doctor, patient")]
         public async Task<IActionResult> GetPatient(Guid id)
         {
             Patient user = await _patientService.Get(id);

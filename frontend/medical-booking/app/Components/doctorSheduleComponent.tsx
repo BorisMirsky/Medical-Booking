@@ -19,18 +19,15 @@ import moment from "moment";
 
 
 export default function DoctorShedule({ numbers, setNumbers, }: DoctorSheduleProps) {
-    //const [currentRole, setCurrentRole] = useState("");
     const [doctors, setDoctors] = useState<Doctor[]>([]);
-    const [slots_, setSlots] = useState<Slot[]>([]);
-    const [slots1, setSlots1] = useState<Slot[]>([]);
+    const [slots_, setSlots] = useState<Slot[]>([]);            // slots all days
+    const [slots1, setSlots1] = useState<Slot[]>([]);           // slots one days
     const [buttonsFlag, setButtonsFlag] = useState<number>(0);
 
 
     useEffect(() => {
-        //const role = localStorage.getItem("role") || "";
-        //setCurrentRole(role);
         processSlots(slots_);
-        //  СТРОКУ НИЖЕ НЕ УБИРАТЬ
+        //  СТРОКУ НИЖЕ НЕ УБИРАТЬ !
         // eslint-disable-next-line react-hooks/exhaustive-deps   
     }, [slots_]);
 
@@ -68,6 +65,7 @@ export default function DoctorShedule({ numbers, setNumbers, }: DoctorShedulePro
     }));
 
 
+    // имя доктора ---> id доктора ---> все слоты доктора
     const handleSelectDoctor = (value: string) => {
         let id: string = '';
         for (const variable in doctors) {
@@ -209,7 +207,7 @@ export default function DoctorShedule({ numbers, setNumbers, }: DoctorShedulePro
 
             </Form>
 
-            <br></br><br></br><br></br>
+            <br/><br/><br/>
             <div>
                 {
                     (buttonsFlag === 0) ? (

@@ -1,5 +1,4 @@
-﻿
-"use client"
+﻿"use client"
 
 import React from 'react';
 import "../globals.css";
@@ -20,8 +19,6 @@ export default function TimeslotsButtonsWatchOnly(slots: Array<Slot>) {
         patientId: slots[index].patientId
     }));
 
-
-
     return (
         <div>
             <Space size='large'>
@@ -40,5 +37,3 @@ export default function TimeslotsButtonsWatchOnly(slots: Array<Slot>) {
     );
 }
 
-
-//   type={"primary" ? {s.isBooked == false } : "danger"}

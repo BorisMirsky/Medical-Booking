@@ -164,7 +164,7 @@ export const loginDoctor = async (request: UserLoginRequest) => {
             localStorage.setItem('role', role);
             localStorage.setItem('token', token);
             localStorage.setItem('id', doctorId);
-            localStorage.setItem('token', speciality);
+            localStorage.setItem('speciality', speciality);
             window.location.href = 'profiledoctor';
         })
         .catch(err => {
@@ -534,7 +534,7 @@ export const createShedule = async (request: SheduleCreateRequest) => {
 
 
 export const getSlotsByDoctorId = async (id: string) => {
-    const url = 'http://localhost:5032/timeslots/';    
+    const url = 'http://localhost:5032/timeslots/';   
     const token = localStorage.getItem('token');
     const response = await fetch(url + id, {
         headers: {

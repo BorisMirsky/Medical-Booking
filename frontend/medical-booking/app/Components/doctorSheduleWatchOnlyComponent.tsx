@@ -1,13 +1,10 @@
-﻿
-"use client"
+﻿"use client"
 
 import React from 'react';
 import "../globals.css";
-//import { Doctor } from "@/app/Models/Doctor";
 import {
-    DoctorSheduleRequest, getSlotsByDoctorId   //getDoctorsBySpeciality
+    DoctorSheduleRequest, getSlotsByDoctorId
 } from "@/app/Services/service";
-//import { Doctor } from "@/app/Models/Doctor";
 import { Slot } from "@/app/Models/Slot";
 import TimeslotsButtonsWatchOnly from "../Components/timeslotsButtonsWatchOnlyComponent";
 import { Space, DatePicker, Button, Form, FormProps } from 'antd';         
@@ -17,21 +14,21 @@ import moment from "moment";
 
 
 
-
-export default function DoctorSheduleWatchOnly() {
-    const [slots_, setSlots] = useState<Slot[]>([]);            // all slots all days
-    const [slots1, setSlots1] = useState<Slot[]>([]);          // slots one day
+export default function DoctorSheduleWatchOnly( ) {
+    const [loaded, setLoaded] = useState(false)
+    const [slots_, setSlots] = useState<Slot[]>([]);            // slots all days
+    const [slots1, setSlots1] = useState<Slot[]>([]);           //  slots one day
     const [buttonsFlag, setButtonsFlag] = useState<number>(0);
 
 
     useEffect(() => {
         const id = localStorage.getItem("id") || "";
-        //console.log("DoctorSheduleWatchOnly ", id);
+        if (loaded) return;
         getAllSlots(id);
-        processSlots(slots_);
-        // СТРОКУ НИЖЕ НЕ ТРОГАТЬ!
-        // eslint-disable-next-line react-hooks/exhaustive-deps        
-    }, [slots_]);
+        setLoaded(true)
+        // СТРОКУ НИЖЕ НЕ ТРОГАТЬ !
+        // eslint-disable-next-line react-hooks/exhaustive-deps     
+    }, [loaded]);
 
 
     const [form] = Form.useForm();
@@ -42,6 +39,7 @@ export default function DoctorSheduleWatchOnly() {
 
     const onFinish: FormProps<DoctorSheduleRequest>['onFinish'] = (values: DoctorSheduleRequest) => {
         console.log('onFinish ', values);
+        processSlots(slots_);
         setSlots1(processedSlots[selectedDay]);
         setButtonsFlag(1);
     }
@@ -50,7 +48,6 @@ export default function DoctorSheduleWatchOnly() {
     const getAllSlots = (id:string) => {
         setSlots([]);
         const getSlots = async () => {
-            //console.log("DoctorSheduleWatchOnly ", id);
             const responce = await getSlotsByDoctorId(id);
             setSlots(responce);
         }
@@ -58,18 +55,19 @@ export default function DoctorSheduleWatchOnly() {
     };
 
 
-
     // даты приёма врача
     const uniquePrefixes = new Set(slots_.map(item => item.datetimeStart.split(' ')[0]));
 
 
-    interface MyResult {
+    interface IProcessedSlots {
         [key: string]: Array<Slot>;
     }
 
-    const processedSlots: MyResult = {};
 
-    // преобразование массива слотов
+    const processedSlots: IProcessedSlots = {};
+
+
+    // преобразование массива слотов в вид {дата: [...слоты]}
     const processSlots = (data: Array<Slot>) => {
         uniquePrefixes.forEach(prefix => {
             processedSlots[prefix] = data.filter(item => item.datetimeStart.startsWith(prefix));
@@ -97,6 +95,11 @@ export default function DoctorSheduleWatchOnly() {
             console.log(e);
         }
     };
+
+    const cleanData = () => {
+        setSlots1([]);
+    }
+
 
 
     return (
@@ -133,7 +136,9 @@ export default function DoctorSheduleWatchOnly() {
                         Получить расписание
                     </Button>
 
-                    <Button htmlType="reset">
+                    <Button
+                        htmlType="reset"
+                        onClick={cleanData}>
                         Сбросить
                     </Button>
 
@@ -141,7 +146,7 @@ export default function DoctorSheduleWatchOnly() {
 
             </Form>
 
-            <br></br><br></br><br></br>
+            <br/><br/><br/>
             <div>
                 {
                     (buttonsFlag === 0) ? (

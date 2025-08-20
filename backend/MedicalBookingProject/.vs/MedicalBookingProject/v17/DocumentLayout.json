@@ -58,8 +58,7 @@
               "RelativeToolTip": "src\\MedicalBookingProject.Web\\Controllers\\BookingsController.cs",
               "ViewState": "AgIAAC0AAAAAAAAAAAAswDcAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-19T07:05:01.925Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-19T07:05:01.925Z"
             },
             {
               "$type": "Document",
@@ -69,7 +68,7 @@
               "RelativeDocumentMoniker": "src\\MedicalBookingProject.Web\\Controllers\\TimeslotsController.cs",
               "ToolTip": "C:\\Users\\Alexander\\source\\Medical-Booking\\backend\\MedicalBookingProject\\src\\MedicalBookingProject.Web\\Controllers\\TimeslotsController.cs",
               "RelativeToolTip": "src\\MedicalBookingProject.Web\\Controllers\\TimeslotsController.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAcwD4AAABdAAAAAAAAAA==",
+              "ViewState": "AgIAABoAAAAAAAAAAAA0wCEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-18T14:42:20.516Z",
               "EditorCaption": ""
@@ -84,8 +83,7 @@
               "RelativeToolTip": "src\\MedicalBookingProject.Web\\Controllers\\DoctorsController.cs",
               "ViewState": "AgIAAEwAAAAAAAAAAAAswDoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-18T08:57:16.474Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-18T08:57:16.474Z"
             }
           ]
         }

@@ -1,15 +1,18 @@
 ﻿export interface MedicalRecord {
     id: string;
     patientId: string;
-    doctorId: string;
-    timeslotId: string;
-    bookingid: string;
-    appointmentid: string;
+    //doctorId: string;
+    doctorUserName: string;
+    //timeslotId: string;
+    //bookingid: string;
+    //appointmentid: string;
     symptoms: string;
     diagnosis: string;
-    prescribedtreatment: string;
-    visualexamination: string;
-    referraltests: string;
-    finalcost: string;
+    prescribedTreatment: string;
+    visualExamination: string;
+    referralTests: string;
+    finalCost: string;
+    timeslotDatetimeStart: string;
 }
+
 

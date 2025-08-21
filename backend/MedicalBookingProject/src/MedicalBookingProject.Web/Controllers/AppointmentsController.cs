@@ -56,7 +56,6 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
-
         [Route("GetByDoctor")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin, doctor")]
         public async Task<ActionResult<List<AppointmentDTO>>> GetByDoctor([FromQuery] Guid id)
@@ -69,6 +68,21 @@ namespace MedicalBookingProject.Web.Controllers
             }
 
             return BadRequest(new { message = "there'are not such doctor" });
+        }
+
+
+        [Route("GetAll")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin, Admin")]
+        public async Task<ActionResult<List<AppointmentDTO>>> GetAll()
+        {
+            List<AppointmentDTO> apps = await _appointmentService.GetAll();
+
+            if (apps != null)
+            {
+                return Ok(apps);
+            }
+
+            return BadRequest(new { message = "all patients are ok" });
         }
     }
 }

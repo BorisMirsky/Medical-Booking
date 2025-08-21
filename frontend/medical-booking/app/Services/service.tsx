@@ -756,3 +756,31 @@ export const getAppointmentsByPatientId = async (id: string) => {
     return response;
 };
 
+
+
+export const getAllAppointments = async () => {
+    const token = localStorage.getItem('token');
+    const response = await fetch("http://localhost:5032/Appointments/GetAll", {
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        method: 'GET',
+        mode: 'cors'
+    })
+        .then((response) => {
+            if (!response.ok) {
+                console.log('!response.ok ');
+            }
+            else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            console.log('getAllAppointments data ', data)
+            return data;
+        })
+        .catch(e => console.log('error', e));
+    return response;
+};
+

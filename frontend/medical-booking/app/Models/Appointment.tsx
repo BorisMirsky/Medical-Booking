@@ -9,8 +9,8 @@
     doctorSpeciality: string,
     timeslotDatetimeStart: string;
     timeslotDatetimeStop: string;
-    //patientcame: string;
-    //patientislate: string;
-    //patientunacceptablebehavior: string;
+    patientCame: string;
+    patientIsLate: string;
+    patientUnacceptableBehavior: string;
 }
 

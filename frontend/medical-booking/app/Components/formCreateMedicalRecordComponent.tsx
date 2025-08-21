@@ -34,7 +34,6 @@ const FormMedicalRecord: React.FC<DoctorAppointmentProps> = ({ booking }) => {
             finalcost: values.finalcost
         };
         createMedicalRecord(result);
-        //console.log("FormMedicalRecord ", result);
         form.resetFields();
         setComponentDisabled(true);
     }

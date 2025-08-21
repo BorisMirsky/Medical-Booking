@@ -8,6 +8,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Identity.Data;
 using MedicalBookingProject.Application.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+//                     is possible to do:        
 //  + LoginDoctor + RegisterPatient + LoginPatient + LoginAdmin (все POST)
 // + возможность редактирования Doctor           (UPDATE)
 // + возможность блокировки Doctor & Patient     (как это сделать? добавит флажок)

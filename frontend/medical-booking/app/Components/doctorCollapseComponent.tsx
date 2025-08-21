@@ -13,6 +13,7 @@ import { Booking } from "@/app/Models/Booking";
 const CollapseElement: React.FC = () => {
     const [activeKey, setActiveKey] = useState<string | string[]>();
     const [sharedBooking, setSharedBooking] = useState<Booking | undefined>(undefined);
+    //const [sharedBooking, setSharedBooking] = useState<Booking | undefined>();
 
     const handleNext = (booking: Booking) => {
         setSharedBooking(booking);

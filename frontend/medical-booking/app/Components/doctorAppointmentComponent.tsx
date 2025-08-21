@@ -14,7 +14,7 @@ import "../globals.css";
 
 
 const DoctorAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
-    const [currentId, setCurrentId] = useState("");
+    const [, setCurrentId] = useState("");
     //const [bookingClosed, setBookingClosed] = useState(false);
     //bookingStatus={bookingClosed}
     const patientusername: string = !booking ? "" : booking.patientUserName;

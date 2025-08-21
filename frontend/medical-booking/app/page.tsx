@@ -13,7 +13,7 @@ export default function Home() {
         if (role == "doctor") {
             window.location.href = 'profiledoctor';
         }
-        else if(role == "admin") {
+        else if(role == "Admin") {
             window.location.href = 'profileadmin';
         }
         else if (role == "patient") {

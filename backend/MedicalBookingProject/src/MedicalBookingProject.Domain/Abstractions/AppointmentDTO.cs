@@ -13,10 +13,10 @@ namespace MedicalBookingProject.Domain.Abstractions
         string? DoctorUserName,
         string? DoctorSpeciality,
         string? TimeslotDatetimeStart,
-        string? TimeslotDatetimeStop
-        //string? PatientCame,
-        //string? PatientIsLate,
-        //string? PatientUnacceptableBehavior
+        string? TimeslotDatetimeStop,
+        string? PatientCame,
+        string? PatientIsLate,
+        string? PatientUnacceptableBehavior
     );
 }
 

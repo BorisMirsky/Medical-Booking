@@ -16,5 +16,7 @@ namespace MedicalBookingProject.Domain.Abstractions
 
         Task<List<AppointmentDTO>> GetByDoctor(Guid id);
 
+        Task<List<AppointmentDTO>> GetAll();
+
     }
 }

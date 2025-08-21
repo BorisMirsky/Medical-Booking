@@ -90,9 +90,9 @@ namespace MedicalBookingProject.DataAccess.Repo
                                             b.Doctor.Speciality, b.Doctor.UserName,
                                             b.Patient?.UserName,
                                             b.Timeslot?.DatetimeStart,
-                                            b.Timeslot?.DatetimeStop))
-                                            //b.PatientCame, b.PatientIsLate,
-                                            //b.PatientUnacceptableBehavior))
+                                            b.Timeslot?.DatetimeStop,
+                                            b.PatientCame, b.PatientIsLate,
+                                            b.PatientUnacceptableBehavior))
                 .ToList();
 
             return Dtos;
@@ -123,10 +123,48 @@ namespace MedicalBookingProject.DataAccess.Repo
                                             b.Doctor.Speciality, b.Doctor.UserName,
                                             b.Patient?.UserName,
                                             b.Timeslot?.DatetimeStart,
-                                            b.Timeslot?.DatetimeStop))
+                                            b.Timeslot?.DatetimeStop,
+                                            b.PatientCame, b.PatientIsLate,
+                                            b.PatientUnacceptableBehavior))
                 .ToList();
 
             return Dtos;
         }
+
+
+
+        public async Task<List<AppointmentDTO>> GetAll()
+        {
+            var entities = await _context.Appointments
+               .Include(item => item.Doctor)
+               .Include(item => item.Timeslot)
+               .Include(item => item.Patient)
+               .Include(item => item.Booking)
+               .Where(item => item.PatientCame == "no" || item.PatientIsLate == "yes" || item.PatientUnacceptableBehavior != " ") 
+               .GroupBy(item => item.TimeslotId)
+               .Select(g => g.OrderByDescending(item => item.Booking!.CreatedAt).FirstOrDefault())
+               .ToListAsync();
+
+            if (entities.Equals(0))
+            {
+                Debug.WriteLine("all patients are ok");
+            }
+
+            var Dtos = entities
+                .Select(b => new AppointmentDTO(b.Id, b.BookingId, b.DoctorId,
+                                            b.PatientId, b.TimeslotId,
+                                            b.Doctor.Speciality, b.Doctor.UserName,
+                                            b.Patient?.UserName,
+                                            b.Timeslot?.DatetimeStart,
+                                            b.Timeslot?.DatetimeStop,
+                                            b.PatientCame, b.PatientIsLate,
+                                            b.PatientUnacceptableBehavior))
+                .ToList();
+
+            return Dtos;
+        }
+
+
+
     }
 }

@@ -5,7 +5,7 @@ import {
     createAppointment, AppointmentRequest, DoctorAppointmentProps, setBookingClosed
 } from "@/app/Services/service";
 //import { Booking } from "@/app/Models/Booking";
-import { FormProps, Button, Form, Input, Space } from "antd";
+import { Select, FormProps, Button, Form, Input, Space } from "antd";
 import "../globals.css";
 import { useState } from "react";      //useEffect
 
@@ -54,7 +54,14 @@ const FormAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
                     name="patientcame"
                     rules={[{ required: true, message: 'Надо заполнить' }]}
                 >
-                    <Input />
+                    <Select
+                        //defaultValue=" "
+                        style={{ width: 120 }}
+                        options={[
+                            { value: 'да', label: 'Да' },
+                            { value: 'нет', label: 'Нет' },
+                        ]}
+                    />
                 </Form.Item>
 
                 <Form.Item<AppointmentRequest>
@@ -62,13 +69,20 @@ const FormAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
                     name="patientislate"
                     rules={[{ required: true, message: 'Надо заполнить' }]}
                 >
-                    <Input/>
+                    <Select
+                        //defaultValue=" "
+                        style={{ width: 120 }}
+                        options={[
+                            { value: 'да', label: 'Да' },
+                            { value: 'нет', label: 'Нет' },
+                        ]}
+                    />
                 </Form.Item>
 
                 <Form.Item<AppointmentRequest>
                     label={<p style={{ fontSize: "13px" }}> Неподобающее <br /> поведение </p>}
                     name="patientunacceptablebehavior"
-                    rules={[{ required: true, message: 'Надо заполнить' }]}
+                    rules={[{ required: false}]}
                 >
                     <Input />
                 </Form.Item>

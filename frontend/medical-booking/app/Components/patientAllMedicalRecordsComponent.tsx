@@ -15,7 +15,6 @@ import "../globals.css";
 
 
 const PatientAllMedicalRecords: React.FC<DoctorAppointmentProps> = ({booking }) => {
-    //const [currentRole, setCurrentRole] = useState("");
     const [medrecords, setMedrecords] = useState<MedicalRecord[]>([]);
 
 
@@ -27,8 +26,13 @@ const PatientAllMedicalRecords: React.FC<DoctorAppointmentProps> = ({booking }) 
         },
         {
             title: 'Пациент',
-            dataIndex: 'username',
-            key: 'username',
+            dataIndex: 'patient',
+            key: 'patient',
+        },
+        {
+            title: 'Врач',
+            dataIndex: 'doctor',
+            key: 'doctor',
         },
         {
             title: 'Когда был приём',
@@ -64,9 +68,6 @@ const PatientAllMedicalRecords: React.FC<DoctorAppointmentProps> = ({booking }) 
 
 
     useEffect(() => {
-        //const role = localStorage.getItem("role") || "";
-        //setCurrentRole(role);
-        //localStorage.clear();
         setMedrecords([]);
         const getMedrecords = async () => {
             const responce = await getMedicalRecordsByPatient(booking.patientId);
@@ -81,25 +82,25 @@ const PatientAllMedicalRecords: React.FC<DoctorAppointmentProps> = ({booking }) 
     const data = medrecords.map((medicalrecord: MedicalRecord, index: number) => ({
         key: index,
         n: (index + 1),
-        username: booking.patientUserName,
+        patient: booking.patientUserName,
+        doctor: booking.doctorUserName,
         appointment: booking.timeslotDatetimeStart.split(" ")[0] + "   " +
                             booking.timeslotDatetimeStart.split(" ")[1] +
                             " - " + booking.timeslotDatetimeStop.split(" ")[1],
         symptoms: medicalrecord.symptoms,
-        visualExamination: medicalrecord.visualexamination,
-        referralTests: medicalrecord.referraltests,
+        visualExamination: medicalrecord.visualExamination,
+        referralTests: medicalrecord.referralTests,
         diagnosis: medicalrecord.diagnosis,
-        prescribedTreatment: medicalrecord.prescribedtreatment
+        prescribedTreatment: medicalrecord.prescribedTreatment
     }));
 
 
 
     return (
         <div>
-            <br></br>
-            <h2>Медицинская карта пациента</h2>
+            <br/>
             <div>
-                <br></br><br></br>
+                <br/><br/>
                 <Table
                     dataSource={data}
                     columns={columns}

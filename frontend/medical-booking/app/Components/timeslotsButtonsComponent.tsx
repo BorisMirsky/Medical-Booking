@@ -12,6 +12,8 @@ import {
 import { useState, useEffect } from "react";  
 
 
+
+
 export default function TimeslotsButtons({ numbers, setNumbers, slots }: DoctorSheduleProps) {
     const [currentUserRole, setCurrentUserRole] = useState("");
     const [currentUserId, setCurrentUserId] = useState("");

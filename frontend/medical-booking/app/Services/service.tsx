@@ -2,6 +2,8 @@
 import { MedicalRecord } from "@/app/Models/MedicalRecord";
 import { Slot } from "@/app/Models/Slot";   
 
+
+
 //////////////////////////////////   interfaces   //////////////////////////////////////////////
 
 
@@ -49,7 +51,6 @@ export interface AdminRegisterRequest {
     //username: string;
     //role: string;
 }
-/////////////////////////////////////////////////////
 
 export type DoctorSheduleProps = {
     numbers: number[];
@@ -622,7 +623,6 @@ export const createBooking = async (request: BookingCreateRequest) => {
 
 export const createAppointment = async (request: AppointmentRequest) => {
     const token = localStorage.getItem('token');
-    console.log("createAppointment ", request);
     let alertText: string = "";
     await fetch("http://localhost:5032/appointments/createappointment", {
         method: 'POST',
@@ -649,7 +649,6 @@ export const createAppointment = async (request: AppointmentRequest) => {
 
 export const createMedicalRecord = async (request: MedicalRecordRequest) => {
     const token = localStorage.getItem('token');
-    console.log("createMedicalRecord ", request);
     let alertText: string = "";
     await fetch("http://localhost:5032/MedicalRecords/CreateMedicalRecord", {
         method: 'POST',
@@ -682,8 +681,7 @@ export const setBookingClosed = async (id: string) => {
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
             'Authorization': `Bearer ${token}`
-        }//,
-        //body: JSON.stringify(request)
+        }
     }).then(response => {
         if (!response.ok) {
             alert("Ошибка закрытия бронирования");
@@ -721,7 +719,6 @@ export const getMedicalRecordsByPatient = async (id: string) => {
             }
         })
         .then(data => {
-            console.log('getMedicalRecordsByPatient data ', data);
             return data;
         })
         .catch(function (err) {

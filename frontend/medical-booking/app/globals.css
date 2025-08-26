@@ -1,10 +1,19 @@
 
 
-.custom-datepicker
-    .ant-picker-cell-in-view.custom-datepicker
-    .ant-picker-cell-inner {
-        background-color: #27c456 !important;
-    }
+
+.ant-picker-cell-disabled {
+    background-color: #f0f0f0; 
+    color: #ccc; 
+    cursor: not-allowed;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell:not(.ant-picker-cell-disabled) {
+    background-color: lightblue; 
+}
+
+/*.ant-picker-cell-disabled .ant-picker-cell-inner {
+    text-decoration: line-through; /
+}*/
 
 
 

@@ -20,6 +20,7 @@ namespace MedicalBookingProject.DataAccess
         public MedicalBookingDbContext(DbContextOptions<MedicalBookingDbContext> options)
                 : base(options)
         {
+            //Database.EnsureCreated();
         }
 
         public DbSet<Doctor> Doctors { get; set; } = null!;
@@ -49,12 +50,12 @@ namespace MedicalBookingProject.DataAccess
             modelBuilder.ApplyConfiguration(new Configuration.MessageConfiguration());
             modelBuilder.ApplyConfiguration(new Configuration.MedicalRecordConfiguration());
             base.OnModelCreating(modelBuilder);
-            //modelBuilder.Entity<Admin>().HasData(new Admin()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Email = "admin@gmail.com",
-            //        Password = BCrypt.HashPassword("adminpassword"),
-            //    });
+            modelBuilder.Entity<Admin>().HasData(new Admin()
+            {
+                Id = Guid.NewGuid(),
+                Email = "admin@gmail.com",
+                Password = BCrypt.HashPassword("adminpassword")
+            });
         }
     }
 }

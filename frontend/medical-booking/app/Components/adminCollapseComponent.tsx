@@ -3,13 +3,12 @@ import React from 'react';
 import type { CollapseProps } from 'antd';
 import { Collapse } from 'antd';
 import DoctorRegistration from '../Components/doctorRegistrationComponent';
+//import DoctorRegistration from '../Components/Admin/doctorRegistrationComponent';
 import CreateShedule from '../Components/adminCreateSheduleComponent';
 import DoctorShedule from '../Components/doctorSheduleComponent';
-//import DoctorSheduleWatchOnly from '../Components/doctorSheduleWatchOnlyComponent';
 import AllDoctors from '../Components/adminAllDoctorsComponent';
 import AllPatients from '../Components/adminAllPatientsComponent';
 import PatientsMisbehavior from '../Components/patientMisbehaviorComponent';
-//import DisabledComponent from '../Components/disabledDateComponent';
 import { Slot } from "@/app/Models/Slot";  
 import { useState } from "react"; 
 

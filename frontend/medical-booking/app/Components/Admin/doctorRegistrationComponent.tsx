@@ -1,23 +1,22 @@
 ﻿
 import { Select, FormProps, Button, Form, Input, Space } from 'antd';
 const { Option } = Select;
-import { registerPatient } from '../Services/service';
-import { PatientRegisterRequest } from "@/app/Services/service";
+import { registerDoctor, DoctorRegisterRequest } from '@/../Components/Services/ervice';
+//import Card from '@/components/Card'; 
 
 
 
 
-
-export default function PatientRegistration() {
+export default function DoctorRegistration() {
 
     const [form] = Form.useForm();
 
-    const onFinishFailed: FormProps<PatientRegisterRequest>['onFinishFailed'] = (errorInfo) => {
+    const onFinishFailed: FormProps<DoctorRegisterRequest>['onFinishFailed'] = (errorInfo) => {
         console.log('onFinishFailed:', errorInfo);
     }
 
-    const onFinish: FormProps<PatientRegisterRequest>['onFinish'] = (values) => {
-        registerPatient(values);
+    const onFinish: FormProps<DoctorRegisterRequest>['onFinish'] = (values) => {
+        registerDoctor(values);
         form.resetFields();
     }
 
@@ -28,21 +27,21 @@ export default function PatientRegistration() {
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
             style={{ maxWidth: 600 }}
-            initialValues={{ role: "patient" }}
+            initialValues={{ role: "doctor" }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
             form={form}
         >
-            <Form.Item<PatientRegisterRequest>
+            <Form.Item<DoctorRegisterRequest>
                 label="Email"
                 name="email"
-                rules={[{ type: 'email', required: true, message: 'Please input email aslogin!' }]}
+                rules={[{type: 'email', required: true, message: 'Please input email as login!' }]}
             >
                 <Input />
             </Form.Item>
 
-            <Form.Item<PatientRegisterRequest>
+            <Form.Item<DoctorRegisterRequest>
                 label="Password"
                 name="password"
                 rules={[{ required: true, message: 'Please input password!' }]}
@@ -50,7 +49,7 @@ export default function PatientRegistration() {
                 <Input />
             </Form.Item>
 
-            <Form.Item<PatientRegisterRequest>
+            <Form.Item<DoctorRegisterRequest>
                 label="UserName"
                 name="username"
                 rules={[{ required: true, message: 'Please input username!' }]}
@@ -58,7 +57,7 @@ export default function PatientRegistration() {
                 <Input />
             </Form.Item>
 
-            <Form.Item<PatientRegisterRequest>
+            <Form.Item<DoctorRegisterRequest>
                 label="Role"
                 name="role"
                 rules={[{ required: true, message: 'Please input role!' }]}
@@ -68,7 +67,22 @@ export default function PatientRegistration() {
                 />
             </Form.Item>
 
-            <Form.Item<PatientRegisterRequest>
+            <Form.Item<DoctorRegisterRequest>
+                label="Speciality"
+                name="speciality"
+                rules={[{ required: true, message: 'Please input speciality!' }]}
+            >
+                <Select
+                    placeholder="Select a speciality"
+                >
+                    <Option value="Oncologist">Oncologist</Option>
+                    <Option value="Neurologist">Neurologist</Option>
+                    <Option value="Surgeon">Surgeon</Option>
+                    <Option value="Dentist">Dentist</Option>
+                </Select>
+            </Form.Item>
+
+            <Form.Item<DoctorRegisterRequest>
                 label="Gender"
                 name="gender"
                 rules={[{ required: true, message: 'Please input gender!' }]}

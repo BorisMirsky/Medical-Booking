@@ -25,6 +25,7 @@ _UpgradeReport_Files/
 bin/
 obj/
 TestResults/
+profiletest/
 ###################
 # Web publish log #
 ###################
@@ -79,6 +80,7 @@ _[Ss]cripts
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
+test*
 ######################
 ##### PYTHON #####
 ######################

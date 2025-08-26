@@ -7,12 +7,42 @@ import { useState } from "react";
 type ButtonStates = { [key: string]: boolean };
 
 interface Element1Props {
-    buttonStates: ButtonStates;
+    buttonStates: { [key: string]: boolean };   // ButtonStates;
     onButtonClick: (key: string) => void;
 }
 
 
-// doctorSheduleComponent    parent
+
+const Element1 = ({ buttonStates, onButtonClick }: Element1Props) => {    
+    return (
+        <Space>
+            <Button
+                type="primary"
+                danger={buttonStates.btn1}
+                onClick={() => onButtonClick('btn1')}
+            >
+                Button1
+            </Button>
+            <Button
+                type="primary"
+                danger={buttonStates.btn2}
+                onClick={() => onButtonClick('btn2')}
+            >
+                Button2
+            </Button>
+            <Button
+                type="primary"
+                danger={buttonStates.btn3}
+                onClick={() => onButtonClick('btn3')}
+            >
+                Button3
+            </Button>
+        </Space>
+    );
+};
+
+
+
 const Element1Parent = ({ buttonStates, onButtonClick }: Element1Props) => {   
     return (
         <div>
@@ -25,46 +55,11 @@ const Element1Parent = ({ buttonStates, onButtonClick }: Element1Props) => {
                     onButtonClick={onButtonClick} />
             </div>
         </div>
-
-    );
-};
-
-
-// TimeslotsButtonsComponent       child
-const Element1 = ({ buttonStates, onButtonClick }: Element1Props) => {      //buttonStates
-    return (
-        <Space>
-            <Button
-                type="primary"
-                //ghost={buttonStates.btn1}
-                color={buttonStates.btn1 ? "danger" : "default"}
-                onClick={() => onButtonClick('btn1')}
-            >
-                Button1
-            </Button>
-            <Button
-                type="primary"
-                danger={buttonStates.btn2}
-                //color={(!buttonStates.btn2) ? "primary" : "danger"}
-                onClick={() => onButtonClick('btn2')}
-            >
-                Button2
-            </Button>
-            <Button
-                type="primary"
-                danger={buttonStates.btn3}
-                //color={(!buttonStates.btn3) ? "primary" : "danger"}
-                onClick={() => onButtonClick('btn3')}
-            >
-                Button3
-            </Button>
-        </Space>
     );
 };
 
 
 
-// patientCollapseComponent
 const CollapseComponent: React.FC = () => {
     const [buttonStates, setButtonStates] = useState<ButtonStates>({
         btn1: false,

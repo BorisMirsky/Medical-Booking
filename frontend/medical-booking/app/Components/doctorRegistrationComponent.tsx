@@ -1,17 +1,8 @@
-﻿//import '../App.css';
+﻿
 import { Select, FormProps, Button, Form, Input, Space } from 'antd';
 const { Option } = Select;
-import { registerDoctor } from '../Services/service';
+import { registerDoctor, DoctorRegisterRequest } from '../Services/service';
 
-
-export interface DoctorRegisterRequest {
-    email: string;
-    password: string;
-    username: string;
-    role: string;
-    speciality: string;
-    gender: string;
-}
 
 
 
@@ -44,7 +35,7 @@ export default function DoctorRegistration() {
             <Form.Item<DoctorRegisterRequest>
                 label="Email"
                 name="email"
-                rules={[{ required: true, message: 'Please input login!' }]}
+                rules={[{type: 'email', required: true, message: 'Please input email as login!' }]}
             >
                 <Input />
             </Form.Item>

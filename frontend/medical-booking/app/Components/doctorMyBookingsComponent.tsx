@@ -1,28 +1,21 @@
-﻿///* eslint-disable @typescript-eslint/no-explicit-any */
-///* eslint-disable react-hooks/rules-of-hooks */
+﻿/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 
 import React from 'react';
 import {
     getBookingsByDoctor
-    //updateTimeslot, TimeSlotUpdateRequest,
-    //BookingCreateRequest, createBooking
 } from "@/app/Services/service";
 import { Booking } from "@/app/Models/Booking";
 import { Table, Button } from "antd";
 import { useEffect, useState } from "react";
 import "../globals.css";
-//import Title from "antd/es/typography/Title";
-//import moment from 'moment';
-
 
 
 
 
 export default function PatientBookings() {
-    //const [currentRole, setCurrentRole] = useState("");
     const [bookings, setBookings] = useState<Booking[]>([]);
-
 
     const columns = [
         {
@@ -40,11 +33,6 @@ export default function PatientBookings() {
             dataIndex: 'speciality',
             key: 'speciality',
         },
-        //{
-        //    title: 'Slot Id',
-        //    dataIndex: 'timeslotId',
-        //    key: 'timeslotId',
-        //},
         {
             title: 'Статус',
             dataIndex: 'isBooked',
@@ -77,9 +65,6 @@ export default function PatientBookings() {
 
 
     useEffect(() => {
-        //const role = localStorage.getItem("role") || "";
-        //setCurrentRole(role);
-        //localStorage.clear();
         setBookings([]);
         const getBookings = async () => {
             const responce = await getBookingsByDoctor("192A59D9-43DF-43EC-943A-8E4290386B1E");
@@ -99,38 +84,6 @@ export default function PatientBookings() {
         timeslotStop: booking.timeslotDatetimeStop,
         cancel: ""
     }));
-
-
-    //const timeslotRequest: TimeSlotUpdateRequest = {
-    //    patientid: '',
-    //    slotid: '',
-    //    isbooked: false
-    //};
-
-
-    //const bookingRequest: BookingCreateRequest = {
-    //    slotid: "",
-    //    patientid: "",
-    //    doctorid: "",
-    //    doctorusername: "",
-    //    isbooked: false,
-    //};
-
-
-    const cancelBooking = (key: number) => {
-        console.log(key);
-        //timeslotRequest.slotid = bookings[key].timeslotId;
-        //timeslotRequest.patientid = "192A59D9-43DF-43EC-943A-8E4290386B1E";
-        //timeslotRequest.isbooked = false;
-        ////
-        //bookingRequest.slotid = bookings[key].timeslotId;
-        //bookingRequest.patientid = "192A59D9-43DF-43EC-943A-8E4290386B1E";
-        //bookingRequest.doctorid = bookings[key].doctorId;
-        //bookingRequest.doctorusername = bookings[key].doctorUserName;
-        //bookingRequest.isbooked = false;
-        //updateTimeslot(timeslotRequest);
-        //createBooking(bookingRequest);
-    }
 
 
 

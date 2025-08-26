@@ -13,11 +13,16 @@ const CollapseElement: React.FC = () => {
     const [numbers, setNumbers] = useState<number[]>([]);
     const slots: Array<Slot> = [];
 
+
     const items: CollapseProps['items'] = [
         {
             key: '1',
             label: 'Запись к врачу',
-            children: <DoctorShedule numbers={numbers} setNumbers={setNumbers} slots={slots} />
+            children: <DoctorShedule
+                numbers={numbers}
+                setNumbers={setNumbers}
+                slots={slots}
+            />
         },
         {
             key: '2',

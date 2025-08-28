@@ -7,11 +7,14 @@
 #################################################################################
 
 Стек технологий.
-.Net Framework, Web API, Entity Framework, SQLite.
-NextJS, React, Typescript, antd.
 
+
+.Net Framework, Web API, Entity Framework, SQLite, NextJS, React, Typescript, antd.
+
+Чистая архитектура.
 
 Авторизация с JWT. Токен хранится в localStorage.
+
 Как локальная БД используется SQLite. Хранится в Medical-Booking\backend\MedicalBookingProject\src\MedicalBookingProject.DataAccess\Database\
 Позже переделаю в создание по команде EnsureCreated, но пока в БД лежат готовые юзеры
 с разными ролями, и ими можно сразу начинать пользоваться (логины и пароли ниже).
@@ -21,7 +24,8 @@ NextJS, React, Typescript, antd.
 
 
 
-                  Как пользоваться:
+Как пользоваться:
+
 1. Склонировать
 
 2. Поставить пакеты и зависимости:
@@ -36,24 +40,21 @@ NextJS, React, Typescript, antd.
 Выйти.
 
 3.2 Зарегистрироваться как пациенту либо зайти под готовым. 
-Забронировать приём у врача. Можно попробовать отменить бронирование.
+Забронировать приём у врача. Можно отменить бронирование.
 Выйти.
 
 3.3 Зайти как врач. 
 Открыть своё расписание. Выбрать забронированный (красный) слот. 
 Создать приём у врача. Заполнить все формы.
-Выйти
 
 
-                              Готовые пары логин-пароль
-   Админ
-Admin@gmail.com, AdminPassword
-   Пациенты
-Nina@mail.de, NinaPassword                    
-Alla@mail.uk, AllaPassword
-basil@mail.uk, basilpassword
-   Врачи
-EmilieBlunt@mail.ru, EmilieBluntPassword
-JamesBond@mail.ru, JamesBondPassword
+
+Готовые пары логин-пароль
+
+Админ (Admin@gmail.com, AdminPassword)
+
+Пациенты (Nina@mail.de, NinaPassword), (Alla@mail.uk, AllaPassword), (basil@mail.uk, basilpassword)
+
+Врачи (EmilieBlunt@mail.ru, EmilieBluntPassword), (JamesBond@mail.ru, JamesBondPassword)
 
 

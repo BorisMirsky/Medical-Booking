@@ -37,11 +37,14 @@
 - Войти в папку 'Medical-Booking\frontend\medical-booking\node_modules' и выполнить 'npm install'.
 
 
+
 ## Запустить
 - Перейти в папку 'Medical-Booking\backend', щёлкнуть по файлу решения (открыть VS с проектом). Запустить бекенд (F5\зелёный треугольник).
 - Перейти в Medical-Booking\frontend. Правой клавишей нажимаем на пустом поле и выбираем 'open with Visual Studio'
 - В папке 'Medical-Booking\frontend' открыть консоль разработчика и выполнить команду 'npm.cmd run dev' (если из 'cmd' то 'npm run dev').
 Если страница не открылась сама, то делаем это вручную 'http://localhost:3000/'.
+
+
 
 ## Пользоваться  
 **Админ**
@@ -71,11 +74,14 @@
 - Врачи (EmilieBlunt@mail.ru, EmilieBluntPassword), (JamesBond@mail.ru, JamesBondPassword)
 
 
+
+## Идея / источник вдохновения
+
+[demo](https://nevonprojects.com/doctor-appointment-booking-system/)
+
+
+
 ![Главный экран](screenshots/1.png)
 ![Под админом](screenshots/2.png)
 ![Под пациентом](screenshots/3.png)
 ![Под врачом](screenshots/4.png)
-
-
-
-## [Идея / источник вдохновения](https://nevonprojects.com/doctor-appointment-booking-system/)

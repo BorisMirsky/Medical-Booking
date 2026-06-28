@@ -44,7 +44,6 @@
 Если страница не открылась сама, то делаем это вручную 'http://localhost:3000/'.
 
 ## Пользоваться  
-md
 **Админ**
 - Войти под админом.
 - Выбрать врача либо создать нового.
@@ -72,5 +71,11 @@ md
 - Врачи (EmilieBlunt@mail.ru, EmilieBluntPassword), (JamesBond@mail.ru, JamesBondPassword)
 
 
+![Главный экран](screenshots/1.png)
+![Под админом](screenshots/2.png)
+![Под пациентом](screenshots/3.png)
+![Под врачом](screenshots/4.png)
 
-[Идея / источник вдохновения](https://nevonprojects.com/doctor-appointment-booking-system/)
+
+
+## [Идея / источник вдохновения](https://nevonprojects.com/doctor-appointment-booking-system/)

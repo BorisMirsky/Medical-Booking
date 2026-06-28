@@ -17,6 +17,9 @@ import { useState, useEffect } from "react";
 export default function TimeslotsButtons({ numbers, setNumbers, slots }: DoctorSheduleProps) {
     const [currentUserRole, setCurrentUserRole] = useState("");
     const [currentUserId, setCurrentUserId] = useState("");
+    console.log('numbers.length ', numbers.length);
+    console.log('numbers.slots ', slots.length);
+    //let oldNumbers: number[];         // eslint-disable-line no-unused-vars
     //const data1 = Object.keys(slots).map((slot, index) => ({
     //    isBooked: slots[index].isBooked,
     //}));

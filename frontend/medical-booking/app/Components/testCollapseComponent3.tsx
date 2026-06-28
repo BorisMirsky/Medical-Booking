@@ -7,7 +7,7 @@ import { useState } from "react";
 type ButtonStates = { [key: string]: boolean };
 
 interface Element1Props {
-    buttonStates: { [key: string]: boolean };   // ButtonStates;
+    buttonStates: ButtonStates;  
     onButtonClick: (key: string) => void;
 }
 

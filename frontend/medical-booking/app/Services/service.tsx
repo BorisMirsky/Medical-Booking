@@ -4,7 +4,7 @@ import { Slot } from "@/app/Models/Slot";
 
 
 
-//////////////////////////////////   interfaces   //////////////////////////////////////////////
+//   interfaces  
 
 
 export interface UserRegistrationRequest {
@@ -48,8 +48,6 @@ export interface PatientRegisterRequest {
 export interface AdminRegisterRequest {
     email: string;
     password: string;
-    //username: string;
-    //role: string;
 }
 
 export type DoctorSheduleProps = {
@@ -120,7 +118,6 @@ export interface MedicalRecordRequest {
 
 export interface DoctorAppointmentProps {
     booking: Booking;
-    //bookingStatus: boolean;
 }
 
 export interface DoctorMedicalRecordProps {
@@ -129,7 +126,7 @@ export interface DoctorMedicalRecordProps {
 
 
 
-////////////////////////////////   fetch functions   /////////////////////////////////////////
+//   fetch functions   
 
 export const loginDoctor = async (request: UserLoginRequest) => {
     let username: string = "";
@@ -155,7 +152,6 @@ export const loginDoctor = async (request: UserLoginRequest) => {
             }
         })
         .then(data => {
-            //console.log('DATA token: ', data['token']);
             username = data['userName'];
             role = data['rolename'];
             token = data['token'];
@@ -251,7 +247,6 @@ export const loginAdmin = async (request: UserLoginRequest) => {
 
 export const getDoctorsBySpeciality = async (speciality: string) => {
     const token = localStorage.getItem('token');
-    //console.log("getDoctorsBySpeciality token", token);
     const response = await fetch("http://localhost:5032/doctors/" + speciality, {
         headers: {
             'Content-type': 'application/json',
@@ -263,7 +258,6 @@ export const getDoctorsBySpeciality = async (speciality: string) => {
         .then(response => {
             if (!response.ok) {
                 throw new Error("Not response", { cause: response });
-                //window.location.href = 'noauthorized';
             }
             else {
                 return response.json();
@@ -296,7 +290,6 @@ export const getDoctorsFetch = async () => {
         .then(response => {
             if (!response.ok) {
                 throw new Error("Not response", { cause: response });
-                //window.location.href = 'noauthorized';
             }
             else {
                 return response.json();
@@ -335,7 +328,6 @@ export const getPatientsFetch = async () => {
             }
         })
         .then(data => {
-            //console.log('data: ', data);
             return data;
         })
         .catch(function (err) {
@@ -399,7 +391,6 @@ export const getBookingsByDoctor = async (id: string) => {
             }
         })
         .then(data => {
-            //console.log('getBookingsByDoctor data: ', data);
             return data;
         })
         .catch(function (err) {
@@ -429,7 +420,6 @@ export const getDoctorById = async (id: string) => {
         .then(data => {
             return data;
         })
-        //.catch(err => { console.log('Error: ', err); });
         .catch(e => console.log('Connection error', e));
     return response;
 };
@@ -440,7 +430,6 @@ export const registerDoctor = async (request: DoctorRegisterRequest) => {
     await fetch("http://localhost:5032/doctors/register", {
         method: 'POST',
         mode: 'cors',
-        //credentials: true,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -464,7 +453,6 @@ export const registerPatient = async (request: PatientRegisterRequest) => {
     await fetch("http://localhost:5032/patients/registerpatient", {
         method: 'POST',
         mode: 'cors',
-        //credentials: true,
         headers: {
             'Content-Type': 'application/json'
         },
@@ -488,7 +476,6 @@ export const registerAdmin = async (request: AdminRegisterRequest) => {
     await fetch("http://localhost:5032/admins/register", {
         method: 'POST',
         mode: 'cors',
-        //credentials: true,
         headers: {
             'Content-Type': 'application/json'
         },
@@ -499,7 +486,6 @@ export const registerAdmin = async (request: AdminRegisterRequest) => {
         }
         else {
             alert("Регистрация прошла успешно")
-            //window.location.href = 'entranceadmin';
         }
     }).catch(err => {
         console.log('registerError: ', err);
@@ -512,7 +498,6 @@ export const createShedule = async (request: SheduleCreateRequest) => {
     await fetch("http://localhost:5032/timeslots/createtimeslot", {      
         method: 'POST',
         mode: 'cors',
-        //credentials: true,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -526,7 +511,6 @@ export const createShedule = async (request: SheduleCreateRequest) => {
         }
         else {
             alert("Расписание создано")
-            //window.location.href = 'login';
         }
     }).catch(function(err) {
         console.log('Error: ', err);
@@ -573,7 +557,6 @@ export const updateTimeslot = async (request: TimeSlotUpdateRequest) => {
     await fetch("http://localhost:5032/timeslots/updatetimeslot", {
         method: 'PATCH',  
         mode: 'cors',
-        //credentials: true,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -712,7 +695,6 @@ export const getMedicalRecordsByPatient = async (id: string) => {
         .then(response => {
             if (!response.ok) {
                 throw new Error("Not response", { cause: response });
-                //window.location.href = 'noauthorized';
             }
             else {
                 return response.json();

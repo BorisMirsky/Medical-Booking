@@ -29,17 +29,22 @@
 
 
 
-## Как запустить
-
+## Скачать
 1. Склонировать
 2. Поставить пакеты и зависимости:
-2.1 `VS Community` должна сама подхватить и поставить пакеты. Если этого не произошло, то вызывается консоль разработчика 'crtl+`'. Там выполнить `dotnet restore`.
-2.1 Войти в папку 'Medical-Booking\frontend\medical-booking\node_modules' и выполнить 'npm install'.
+- Предполагается, что уже установленые платформы `.Net` и `Node.js`.
+- `VS Community` должна сама подхватить и поставить пакеты. Если этого не произошло, то вызывается консоль разработчика 'crtl+`'. Там выполнить `dotnet restore`.
+- Войти в папку 'Medical-Booking\frontend\medical-booking\node_modules' и выполнить 'npm install'.
 
 
+## Запустить
+- Перейти в папку 'Medical-Booking\backend', щёлкнуть по файлу решения (открыть VS с проектом). Запустить бекенд (F5\зелёный треугольник).
+- Перейти в Medical-Booking\frontend. Правой клавишей нажимаем на пустом поле и выбираем 'open with Visual Studio'
+- В папке 'Medical-Booking\frontend' открыть консоль разработчика и выполнить команду 'npm.cmd run dev' (если из 'cmd' то 'npm run dev').
+Если страница не открылась сама, то делаем это вручную 'http://localhost:3000/'.
 
-## Как пользоваться  
-
+## Пользоваться  
+md
 **Админ**
 - Войти под админом.
 - Выбрать врача либо создать нового.
@@ -68,6 +73,4 @@
 
 
 
-## Идея (источник вдохновения)
-
-https://nevonprojects.com/doctor-appointment-booking-system/
+[Идея / источник вдохновения](https://nevonprojects.com/doctor-appointment-booking-system/)

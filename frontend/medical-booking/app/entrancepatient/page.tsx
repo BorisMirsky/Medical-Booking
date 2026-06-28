@@ -14,13 +14,9 @@ import Link from "next/link";
 
 
 export default function entrancePatient() {
-    //const [currentRole, setCurrentRole] = useState("");
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        //const role = localStorage.getItem("role") || "";
-        //setCurrentRole(role);
-        //localStorage.clear();
         setLoading(false);
     }, []);
 
@@ -30,19 +26,14 @@ export default function entrancePatient() {
 
     const onFinish: FormProps<UserLoginRequest>['onFinish'] = (values) => {
         console.log('entrancePatient values ', values)
-        //window.location.href = 'profilepatient';
         loginPatient(values);
     }
 
     return (
         <div>
-            <br />
-            <br />
-            <br />  
+            <br /><br /><br />  
             <h2>Вход для пациента</h2>
-            <br />
-            <br />
-            <br />
+            <br /><br /><br />
             {
                     <div >
                         {loading ? (
@@ -89,8 +80,7 @@ export default function entrancePatient() {
                                 </Form.Item>
                             </Form>
                         )}
-                    <br />
-                    <br />
+                    <br /><br />
                     <p>Если у вас нет аккаунта, вы можете зарегистрироваться</p>
                     <Link
                         href={{
@@ -99,9 +89,7 @@ export default function entrancePatient() {
                     >
                             <h3>Регистрация</h3>
                     </Link>
-                    <br />
-                    <br />
-                    <br />
+                    <br /><br /><br />
                     </div >
             }
         </div>

@@ -67,7 +67,6 @@ namespace MedicalBookingProject.DataAccess.Repo
 
         public async Task<List<Doctor>> GetDoctorsBySpeciality(string speciality)
         {
-            //string speciality = "surgeon";
             var entities = await _dbContext.Doctors
                .Where(item => item.Speciality == speciality)
                .ToListAsync();

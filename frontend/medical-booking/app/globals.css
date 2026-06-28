@@ -1,5 +1,10 @@
 
 
+.spaced-section {
+    margin: 2rem 0;
+    padding: 1rem;
+}
+
 
 .ant-picker-cell-disabled {
     background-color: #f0f0f0; 

@@ -2,13 +2,10 @@
 "use client"
 
 import React from 'react';
-//import { UserLoginRequest } from "@/app/Services/service";  
 import { FormProps, Button, Form, Input, Space } from 'antd';
 import Title from "antd/es/typography/Title";
 import { useEffect, useState } from "react";
 import { loginDoctor, UserLoginRequest } from "@/app/Services/service"; 
-//import Link from "next/link";
-//import ModalComponent from '../Components/ModalComponent';
 
 
 export default function entranceDoctor() {
@@ -27,26 +24,23 @@ export default function entranceDoctor() {
     }
 
     const onFinish: FormProps<UserLoginRequest>['onFinish'] = (values) => {
-        //console.log('values ', values)
         loginDoctor(values);
-        //window.location.href = 'profiledoctor';
     }
 
     return (
         <div>
             {
                 (!currentRole) ? (
-
-        <div>
-                        <br />
-                        <br />
-                        <br />
-            <h2>Вход для врача</h2>
-                        <br />
-                        <br />
-                        <br />
-            {
-                <div >
+                    <div>
+                        <Space
+                            direction="vertical"
+                            size="large"
+                            style={{ margin: '2rem', width: '50%' }}
+                        >
+                        <Title level={2}>Вход для врача</Title>                   
+                    </Space>
+                        {
+                    <div>
                     {loading ? (
                         <Title>Loading ...</Title>
                     ) : (

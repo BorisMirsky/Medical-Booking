@@ -5,18 +5,20 @@ namespace MedicalBookingProject.Domain.Abstractions
 {
     public interface IDoctorRepo
     {
-        Task<Doctor> Register(string email, string password, 
-                              string username, string role, 
-                              string speciality, string gender);
-
-        Task<Doctor> Get(Guid id);
-
-        Task<List<Doctor>> GetAll();
-
-        Task<List<Doctor>> GetDoctorsBySpeciality(string speciality);
-
-        Task<Doctor> GetDoctorBySpecialityAndName(string speciality, string username);
-
-        Task<Doctor?> Login(string email, string password);
+        Task<Doctor?> GetByIdAsync(Guid id);
+        Task<Doctor?> GetByEmailAsync(string email);
+        Task<List<Doctor>> GetAllAsync();
+        Task<List<Doctor>> GetBySpecialityAsync(string speciality);
+        Task<Doctor?> GetBySpecialityAndNameAsync(string speciality, string username);
+        Task AddAsync(Doctor doctor);
+        Task SaveChangesAsync();
+        //Task<Doctor> Register(string email, string password, 
+        //                      string username, string role, 
+        //                      string speciality, string gender);
+        //Task<Doctor> Get(Guid id);
+        //Task<List<Doctor>> GetAll();
+        //Task<List<Doctor>> GetDoctorsBySpeciality(string speciality);
+        //Task<Doctor> GetDoctorBySpecialityAndName(string speciality, string username);
+        //Task<Doctor?> Login(string email, string password);
     }
 }

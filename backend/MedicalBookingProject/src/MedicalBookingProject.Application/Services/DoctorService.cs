@@ -1,5 +1,9 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Users;
+//using BCrypt.Net;
+using BCrypt_Alias = BCrypt.Net.BCrypt;
+using MedicalBookingProject.Application.Scripts; // для JwtGenerator
+using Microsoft.Extensions.Configuration;
 
 
 
@@ -9,46 +13,96 @@ namespace MedicalBookingProject.Application.Services
     {
 
         private readonly IDoctorRepo _doctorRepo;
+        private readonly IConfiguration _configuration;
 
-        public DoctorService(IDoctorRepo doctorRepo)
+        public DoctorService(IDoctorRepo doctorRepo, IConfiguration configuration)
         {
             _doctorRepo = doctorRepo;
+            _configuration = configuration;
         }
 
-        public async Task<Doctor> Register(string email, string password, 
-                                           string username, string role, 
-                                           string speciality, string gender)
+        public async Task<Doctor> Register(string email, string password, string username,
+                                            string role, string speciality, string gender)
         {
-            return await _doctorRepo.Register(email, password, 
-                                               username, role, 
-                                               speciality, gender);
-        }
+            var hashedPassword = BCrypt_Alias.HashPassword(password);
+            var doctor = new Doctor(email, hashedPassword, role, speciality, username, gender);
+            doctor.Id = Guid.NewGuid();
 
-        public async Task<Doctor> Get(Guid id)
-        {
-            return await _doctorRepo.Get(id);
-        }
-
-        public async Task<List<Doctor>> GetAllDoctors()
-        {
-            return await _doctorRepo.GetAll();
-        }
-
-
-        public async Task<List<Doctor>> GetDoctorsBySpeciality(string speciality)
-        {
-            return await _doctorRepo.GetDoctorsBySpeciality(speciality);
-        }
-
-        public async Task<Doctor> GetDoctorBySpecialityAndName(string speciality, string username)
-        {
-            return await _doctorRepo.GetDoctorBySpecialityAndName(speciality, username);
+            await _doctorRepo.AddAsync(doctor);
+            await _doctorRepo.SaveChangesAsync();
+            return doctor;
         }
 
         public async Task<Doctor?> LoginAccount(string email, string password)
         {
-            return await _doctorRepo.Login(email, password);
+            var userEntity = await _doctorRepo.GetByEmailAsync(email);
+            if (userEntity == null)
+                return null;
+
+            if (!BCrypt_Alias.Verify(password, userEntity.Password))
+                return null;
+
+            var tokenGenerator = new JwtGenerator(_configuration);
+            var token = tokenGenerator.CreateTokenDescriptor(email, userEntity.UserName!, userEntity.Rolename!);
+
+            userEntity.Token = token;
+            userEntity.IsActive = true;
+
+            await _doctorRepo.SaveChangesAsync(); // сохраняем изменения
+            return userEntity;
         }
 
+        public async Task<Doctor> Get(Guid id)
+        {
+            return await _doctorRepo.GetByIdAsync(id);
+        }
+
+        public async Task<List<Doctor>> GetAllDoctors()
+        {
+            return await _doctorRepo.GetAllAsync();
+        }
+
+        public async Task<List<Doctor>> GetDoctorsBySpeciality(string speciality)
+        {
+            return await _doctorRepo.GetBySpecialityAsync(speciality);
+        }
+
+        public async Task<Doctor> GetDoctorBySpecialityAndName(string speciality, string username)
+        {
+            return await _doctorRepo.GetBySpecialityAndNameAsync(speciality, username);
+        }
     }
 }
+
+        //public async Task<Doctor> Register(string email, string password, string username, string role, string speciality, string gender)
+        //{
+        //    return await _doctorRepo.Register(email, password, username, role, speciality, gender);
+        //}
+
+        //public async Task<Doctor> Get(Guid id)
+        //{
+        //    return await _doctorRepo.Get(id);
+        //}
+
+        //public async Task<List<Doctor>> GetAllDoctors()
+        //{
+        //    return await _doctorRepo.GetAll();
+        //}
+
+        //public async Task<List<Doctor>> GetDoctorsBySpeciality(string speciality)
+        //{
+        //    return await _doctorRepo.GetDoctorsBySpeciality(speciality);
+        //}
+
+        //public async Task<Doctor> GetDoctorBySpecialityAndName(string speciality, string username)
+        //{
+        //    return await _doctorRepo.GetDoctorBySpecialityAndName(speciality, username);
+        //}
+
+        //public async Task<Doctor?> LoginAccount(string email, string password)
+        //{
+        //    return await _doctorRepo.Login(email, password);
+        //}
+
+//    }
+//}

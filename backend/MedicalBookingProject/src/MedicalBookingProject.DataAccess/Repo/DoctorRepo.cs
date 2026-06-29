@@ -2,18 +2,14 @@
 using MedicalBookingProject.Domain.Models.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using MedicalBookingProject.Application.Scripts;
+using System.Diagnostics;
+using BCrypt_Alias = BCrypt.Net.BCrypt;
 
 
 
 namespace MedicalBookingProject.DataAccess.Repo
 {
-    using BCrypt.Net;
-    using MedicalBookingProject.Application.Scripts;
-    using MedicalBookingProject.DataAccess;
-    using MedicalBookingProject.Domain.Models.Shedules;
-    using Microsoft.AspNetCore.Authorization;
-    using System.Diagnostics;
-
     public class DoctorRepo : IDoctorRepo
     {
 
@@ -31,7 +27,7 @@ namespace MedicalBookingProject.DataAccess.Repo
                                                string username, string role,
                                                string speciality, string gender)
         {
-            var hashedPassword = BCrypt.HashPassword(password);
+            var hashedPassword = BCrypt_Alias.HashPassword(password);
             Doctor doctor = new(email, hashedPassword,
                                         role, speciality,
                                         username, gender);
@@ -93,7 +89,7 @@ namespace MedicalBookingProject.DataAccess.Repo
             {
                 return null;
             }
-            if (userEntity == null || BCrypt.Verify(password, userEntity.Password) == false)
+            if (userEntity == null || BCrypt_Alias.Verify(password, userEntity.Password) == false)
             {
                 return null;
             }

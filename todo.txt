@@ -3,19 +3,16 @@
 
 1
 backend
+
 - Большая доля логики перетекла в слой DataAccess, а должна быть в Application.
-- вычистить закоментированные строки.
-- тесты (?)
-- В DataAccess строки 'using BCrypt.Net;' внутри 'Namespace{}'. Почему такое?\
-    DoctorRepo, PatientRepo
-- обработка ошибок - ещё раз посмотреть.
-- messages?
+- обработка ошибок - ещё раз посмотреть (слой Repo)
 - DoctorsController ?
 - MessagesController / auth.... ?
 - PatientsController ?!
 - add about Application / Scripts / CreateSlots
 - warnings
-
+- блок Messages сделать полностью!
+- тесты 
 
 
 2
@@ -26,6 +23,6 @@ frontend
 - посмотреть как сделан фронтенд в Intravision (структура проекта)
 - messages?
 
+
 3
-Локально с проектом лежит папка с почти таким же названием.
-Понять, что там полезного.
+Локально с проектом лежит папка с почти таким же названием. Понять, что там полезного.

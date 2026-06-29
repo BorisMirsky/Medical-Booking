@@ -12,13 +12,5 @@ namespace MedicalBookingProject.Domain.Abstractions
         Task<Doctor?> GetBySpecialityAndNameAsync(string speciality, string username);
         Task AddAsync(Doctor doctor);
         Task SaveChangesAsync();
-        //Task<Doctor> Register(string email, string password, 
-        //                      string username, string role, 
-        //                      string speciality, string gender);
-        //Task<Doctor> Get(Guid id);
-        //Task<List<Doctor>> GetAll();
-        //Task<List<Doctor>> GetDoctorsBySpeciality(string speciality);
-        //Task<Doctor> GetDoctorBySpecialityAndName(string speciality, string username);
-        //Task<Doctor?> Login(string email, string password);
     }
 }

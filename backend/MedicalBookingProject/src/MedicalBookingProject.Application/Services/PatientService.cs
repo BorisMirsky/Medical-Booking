@@ -1,6 +1,5 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Users;
-//using BCrypt.Net;
 using MedicalBookingProject.Application.Scripts;
 using Microsoft.Extensions.Configuration;
 using BCrypt_Alias = BCrypt.Net.BCrypt;
@@ -64,25 +63,3 @@ namespace MedicalBookingProject.Application.Services
 
     }
 }
-
-//        public async Task<Patient> Register(string email, string password, string username, string role, string gender)
-//        {
-//            return await _patientRepo.Register(email, password, username, role, gender);
-//        }
-
-//        public async Task<Patient?> Login(string email, string password)
-//        {
-//            return await _patientRepo.Login(email, password);
-//        }
-
-//        public async Task<Patient> Get(Guid id)
-//        {
-//            return await _patientRepo.Get(id);
-//        }
-
-//        public async Task<List<Patient>> GetAll()
-//        {
-//            return await _patientRepo.GetAll();
-//        }
-//    }
-//}

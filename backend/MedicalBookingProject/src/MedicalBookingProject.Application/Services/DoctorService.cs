@@ -1,6 +1,5 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Users;
-//using BCrypt.Net;
 using BCrypt_Alias = BCrypt.Net.BCrypt;
 using MedicalBookingProject.Application.Scripts; // для JwtGenerator
 using Microsoft.Extensions.Configuration;
@@ -48,7 +47,7 @@ namespace MedicalBookingProject.Application.Services
             userEntity.Token = token;
             userEntity.IsActive = true;
 
-            await _doctorRepo.SaveChangesAsync(); // сохраняем изменения
+            await _doctorRepo.SaveChangesAsync(); 
             return userEntity;
         }
 
@@ -73,36 +72,3 @@ namespace MedicalBookingProject.Application.Services
         }
     }
 }
-
-        //public async Task<Doctor> Register(string email, string password, string username, string role, string speciality, string gender)
-        //{
-        //    return await _doctorRepo.Register(email, password, username, role, speciality, gender);
-        //}
-
-        //public async Task<Doctor> Get(Guid id)
-        //{
-        //    return await _doctorRepo.Get(id);
-        //}
-
-        //public async Task<List<Doctor>> GetAllDoctors()
-        //{
-        //    return await _doctorRepo.GetAll();
-        //}
-
-        //public async Task<List<Doctor>> GetDoctorsBySpeciality(string speciality)
-        //{
-        //    return await _doctorRepo.GetDoctorsBySpeciality(speciality);
-        //}
-
-        //public async Task<Doctor> GetDoctorBySpecialityAndName(string speciality, string username)
-        //{
-        //    return await _doctorRepo.GetDoctorBySpecialityAndName(speciality, username);
-        //}
-
-        //public async Task<Doctor?> LoginAccount(string email, string password)
-        //{
-        //    return await _doctorRepo.Login(email, password);
-        //}
-
-//    }
-//}

@@ -129,7 +129,7 @@ namespace MedicalBookingProject.DataAccess.Repo
             var entities = await _context.Appointments
                .Include(item => item.Doctor)
                .Include(item => item.Timeslot)
-               .Include(item => item.Patient)
+               .Include(item => item.Patient!)
                .Include(item => item.Booking)
                .Where(item => item.PatientCame == "no" || item.PatientIsLate == "yes" || item.PatientUnacceptableBehavior != " ") 
                .GroupBy(item => item.TimeslotId)
@@ -144,7 +144,8 @@ namespace MedicalBookingProject.DataAccess.Repo
             var Dtos = entities
                 .Select(b => new AppointmentDTO(b.Id, b.BookingId, b.DoctorId,
                                             b.PatientId, b.TimeslotId,
-                                            b.Doctor.Speciality, b.Doctor.UserName,
+                                            b.Patient.UserName, 
+                                            b.Doctor.UserName,
                                             b.Patient?.UserName,
                                             b.Timeslot?.DatetimeStart,
                                             b.Timeslot?.DatetimeStop,

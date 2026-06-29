@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MedicalBookingProject.Domain.Models.Users
 {
@@ -18,7 +14,6 @@ namespace MedicalBookingProject.Domain.Models.Users
         public string? Password { get; set; } = "";   // PasswordHash
         public string? Role { get; set; } = "Admin";
         public int? RoleId { get; set; } = 1;              
-        //public bool? IsActive { get; set; } = false;
         public string? Token { get; set; } = "";
     }
 }

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-//using Microsoft.AspNet.Identity.EntityFramework;
+﻿
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using MedicalBookingProject.Domain.Models.Users;

@@ -1,14 +1,7 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Users;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Web;
-using BCrypt.Net;
 using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 
 
@@ -73,7 +66,6 @@ namespace MedicalBookingProject.DataAccess.Repo
             if (entities.Count() == 0)
             {
                 Debug.WriteLine("Doctors with speciality {speciality} not found");
-                //throw new Exception($"Doctors with speciality {speciality} not found");
             }
 
             return entities;
@@ -88,7 +80,6 @@ namespace MedicalBookingProject.DataAccess.Repo
             if (entity == null)
             {
                 Debug.WriteLine("Doctor not found");
-                //throw new Exception($"Doctor not found");
             }
 
             return entity!;
@@ -97,13 +88,11 @@ namespace MedicalBookingProject.DataAccess.Repo
 
         public async Task<Doctor?> Login(string email, string password)
         {
-            Doctor? userEntity = await _dbContext.Doctors.FirstOrDefaultAsync(u => u.Email == email);
-            // if login is wrong                                                                                   
+            Doctor? userEntity = await _dbContext.Doctors.FirstOrDefaultAsync(u => u.Email == email);                                                                                 
             if (userEntity == null)
             {
                 return null;
             }
-            // if password is wrong
             if (userEntity == null || BCrypt.Verify(password, userEntity.Password) == false)
             {
                 return null;

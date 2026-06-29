@@ -1,19 +1,5 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
-using MedicalBookingProject.Domain.Models;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MedicalBookingProject.Domain.Models.Messages;
-using MedicalBookingProject.Domain.Models.Users;
-using MedicalBookingProject.DataAccess.Repo;
-using System.Data;
-using System.Reflection;
-using static System.Net.Mime.MediaTypeNames;
-using System.Threading;
 
 
 

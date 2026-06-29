@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace MedicalBookingProject.Domain.Models.Messages
 {
     public class Message
@@ -17,6 +12,5 @@ namespace MedicalBookingProject.Domain.Models.Messages
         public DateTime SendedAt { get; set; }
         public MessageType? messageType { get; set; } = MessageType.NotSelected;
         public Boolean IsRead { get; set; } = false;
-        //public required MessageStatus messageStatus { get; set; } = MessageStatus.NotRead;
     }
 }

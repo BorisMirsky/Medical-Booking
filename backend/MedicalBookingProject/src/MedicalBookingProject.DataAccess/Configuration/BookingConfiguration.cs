@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MedicalBookingProject.Domain.Models.Bookings;
 using Microsoft.EntityFrameworkCore;
-using MedicalBookingProject.Domain.Models.MedicalRecords;
-using MedicalBookingProject.Domain.Models.Appointments;
-
 
 
 namespace MedicalBookingProject.DataAccess.Configuration
@@ -28,14 +25,6 @@ namespace MedicalBookingProject.DataAccess.Configuration
                 .WithMany(d => d.Bookings)
                 .HasForeignKey(b => b.TimeslotId)
                 .IsRequired();
-
-            //builder.HasOne(b => b.Appointment)
-            //    .WithOne(d => d.Booking)
-            //    .HasForeignKey<Appointment>("BookingId");
-
-            //builder.HasOne(b => b.MedicalRecord)
-            //    .WithOne(d => d.Booking)
-            //    .HasForeignKey<MedicalRecord>("BookingId");
 
             builder.Property(b => b.DoctorId)
                 .IsRequired();

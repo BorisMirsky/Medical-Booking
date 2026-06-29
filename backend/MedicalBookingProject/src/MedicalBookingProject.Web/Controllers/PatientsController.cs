@@ -117,8 +117,6 @@ namespace MedicalBookingProject.Web.Controllers
 
             return BadRequest(new { message = "___WTF___" });
         }
-
-
     }
 }
 

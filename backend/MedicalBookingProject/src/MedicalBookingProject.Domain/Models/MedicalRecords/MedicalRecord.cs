@@ -52,7 +52,6 @@ namespace MedicalBookingProject.Domain.Models.MedicalRecords
         [Column("finalcost")]
         public uint? FinalCost { get; set; }     //System.UInt32
 
-        // binded enities
         public Patient? Patient { get; set; }
 
         public Doctor? Doctor { get; set; }

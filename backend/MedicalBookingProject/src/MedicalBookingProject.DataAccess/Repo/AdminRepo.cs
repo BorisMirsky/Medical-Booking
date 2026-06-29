@@ -1,18 +1,9 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Users;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Web;
-using BCrypt.Net;
 using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using System.Diagnostics;
 using MedicalBookingProject.Application.Scripts;
-using MedicalBookingProject.DataAccess;
+
 
 
 namespace MedicalBookingProject.DataAccess.Repo
@@ -33,11 +24,9 @@ namespace MedicalBookingProject.DataAccess.Repo
             _configuration = configuration;
         }
 
-
-
         public async Task<Admin?> Register(string email, string password)
         {
-            if (_dbContext.Admins.Count() == 0)              // !_dbContext.Admins.Any() 
+            if (_dbContext.Admins.Count() == 0)       
             {
                 var hashedPassword = BCrypt.HashPassword(password);
                 Admin admin = new();
@@ -55,22 +44,22 @@ namespace MedicalBookingProject.DataAccess.Repo
         public async Task<Admin?> Login(string email, string password)
         {
             Admin? userEntity = await _dbContext.Admins.FirstOrDefaultAsync(u => u.Email == email);
-            // if login is wrong                                                                                   
+                                                                                 
             if (userEntity == null)
             {
                 return null;
             }
-            // if password is wrong
+
             if (userEntity == null || BCrypt.Verify(password, userEntity.Password) == false)
             {
                 return null;
             }
+
             JwtGenerator tokenInstance = new(_configuration);
             string token = tokenInstance.CreateTokenDescriptor(email,
                                                 userEntity.UserName!,
                                                 userEntity.Role!);
             userEntity.Token = token;
-            //userEntity.IsActive = true;
             return userEntity;
         }
     }

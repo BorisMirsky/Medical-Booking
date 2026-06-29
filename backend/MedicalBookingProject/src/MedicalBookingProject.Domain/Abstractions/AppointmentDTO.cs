@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
+﻿
 namespace MedicalBookingProject.Domain.Abstractions
 {
     public record AppointmentDTO

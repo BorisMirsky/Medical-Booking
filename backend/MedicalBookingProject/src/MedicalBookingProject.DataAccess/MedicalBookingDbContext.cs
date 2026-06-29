@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.Extensions.Logging;
 using MedicalBookingProject.Domain.Models.Users;
 using MedicalBookingProject.Domain.Models.Shedules;
 using MedicalBookingProject.Domain.Models.Bookings;

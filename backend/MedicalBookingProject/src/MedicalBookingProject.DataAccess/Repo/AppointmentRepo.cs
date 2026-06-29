@@ -1,21 +1,13 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
-using MedicalBookingProject.Domain.Models;
-using MedicalBookingProject.DataAccess.Configuration;
-using MedicalBookingProject.DataAccess;
 using MedicalBookingProject.Domain.Models.Appointments;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
-using System.Globalization;
-using MedicalBookingProject.Domain.Models.Bookings;
-using MedicalBookingProject.Domain.Models.Users;
-
 
 
 namespace MedicalBookingProject.DataAccess.Repo
 {
     public class AppointmentRepo : IAppointmentRepo
     {
-
         public BookingRepo bookingRepo;
 
         private readonly MedicalBookingDbContext _context;
@@ -106,7 +98,7 @@ namespace MedicalBookingProject.DataAccess.Repo
                .Include(item => item.Timeslot)
                .Include(item => item.Patient)
                .Include(item => item.Booking)
-               .Where(item => item.DoctorId == doctorId) // && item.IsClosed == false)
+               .Where(item => item.DoctorId == doctorId) 
                .GroupBy(item => item.TimeslotId)
                .Select(g => g.OrderByDescending(item => item.Booking!.CreatedAt).FirstOrDefault())
                .ToListAsync();
@@ -114,7 +106,6 @@ namespace MedicalBookingProject.DataAccess.Repo
             if (entities.Equals(0))
             {
                 Debug.WriteLine("there are not any bookings for that patient");
-                //throw new Exception($"Doctors with speciality {speciality} not found");
             }
 
             var Dtos = entities
@@ -163,8 +154,5 @@ namespace MedicalBookingProject.DataAccess.Repo
 
             return Dtos;
         }
-
-
-
     }
 }

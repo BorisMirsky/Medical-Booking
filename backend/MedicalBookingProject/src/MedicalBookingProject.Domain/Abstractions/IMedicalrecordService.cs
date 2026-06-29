@@ -1,8 +1,4 @@
 ﻿
-using MedicalBookingProject.Domain.Models.MedicalRecords;
-
-
-
 namespace MedicalBookingProject.Domain.Abstractions
 {
     public interface IMedicalRecordService

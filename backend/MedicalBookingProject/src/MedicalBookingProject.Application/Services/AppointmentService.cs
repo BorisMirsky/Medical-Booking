@@ -1,10 +1,4 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using MedicalBookingProject.Domain.Models.Appointments;
-using MedicalBookingProject.DataAccess;
-using MedicalBookingProject.DataAccess.Repo;
-using MedicalBookingProject.Domain.Models.Shedules;
 
 
 

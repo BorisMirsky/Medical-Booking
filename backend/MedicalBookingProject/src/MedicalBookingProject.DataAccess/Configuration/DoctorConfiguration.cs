@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MedicalBookingProject.Domain.Models.Users;
 using Microsoft.EntityFrameworkCore;
-using MedicalBookingProject.Domain.Models.Shedules;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-
 
 
 namespace MedicalBookingProject.DataAccess.Configuration

@@ -1,5 +1,4 @@
-﻿using MedicalBookingProject.DataAccess.Repo;
-using MedicalBookingProject.Domain.Abstractions;
+﻿using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Users;
 
 

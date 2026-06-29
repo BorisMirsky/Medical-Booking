@@ -1,12 +1,6 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Messages;
-using MedicalBookingProject.DataAccess.Configuration;
-using MedicalBookingProject.Domain.Models.Shedules;
-using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
-using System.Globalization;
-using MedicalBookingProject.Domain.Models.Users;
-
 
 
 namespace MedicalBookingProject.DataAccess.Repo

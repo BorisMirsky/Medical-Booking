@@ -75,9 +75,9 @@
 
 
 
-## Идея / источник вдохновения
+## Источник вдохновения
 
-[demo](https://nevonprojects.com/doctor-appointment-booking-system/)
+Идея взята [тут](https://nevonprojects.com/doctor-appointment-booking-system/)
 
 
 ## Screenshots

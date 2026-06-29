@@ -72,12 +72,10 @@ namespace MedicalBookingProject.Application.Scripts
 
         // расставит метки каждые 'chunk' минут
         public static List<string> SplitedDay(int startYear, int startMonth, int startDay,
-                                                //int stopYear, int stopMonth, int stopDay,
                                                 int workStartTime, int workStopTime,
                                                 int chunkTime, int days)
         {
             var startWorkingDay = new DateTime(startYear, startMonth, startDay);
-            //var stopWorkingDay = new DateTime(stopYear, stopMonth, stopDay);
             List<DateTime> businessDays = AddBusinessDays(startWorkingDay, days);
             List<string> result = new List<string>();
             foreach (var day in businessDays)

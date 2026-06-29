@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MedicalBookingProject.Domain.Models.Shedules;
 using Microsoft.EntityFrameworkCore;
-using MedicalBookingProject.Domain.Models.Appointments;
-using MedicalBookingProject.Domain.Models.MedicalRecords;
-
-
 
 
 namespace MedicalBookingProject.DataAccess.Configuration

@@ -1,13 +1,7 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Bookings;
-using MedicalBookingProject.Domain.Models.Shedules;
-using MedicalBookingProject.DataAccess.Repo;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
-using MedicalBookingProject.Domain.Models.Users;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
 
 
 
@@ -47,7 +41,7 @@ namespace MedicalBookingProject.DataAccess.Repo
                .Include(item => item.Doctor)
                .Include(item => item.Timeslot)
                .Include(item => item.Patient)
-               .Where(item => item.PatientId == patientId) // && item.IsBooked == true)
+               .Where(item => item.PatientId == patientId) 
                .GroupBy(item => item.TimeslotId)
                .Select(g => g.OrderByDescending(item => item.CreatedAt).FirstOrDefault())
                .ToListAsync();
@@ -55,7 +49,6 @@ namespace MedicalBookingProject.DataAccess.Repo
             if (entities.Equals(0))
             {
                 Debug.WriteLine("there are not shit bookings for that patient");
-                //throw new Exception($"Doctors with speciality {speciality} not found");
             }
             
             var Dtos = entities
@@ -87,7 +80,6 @@ namespace MedicalBookingProject.DataAccess.Repo
             if (entities.Equals(0))
             {
                 Debug.WriteLine("there are not any bookings for that patient");
-                //throw new Exception($"Doctors with speciality {speciality} not found");
             }
 
             var Dtos = entities
@@ -115,8 +107,5 @@ namespace MedicalBookingProject.DataAccess.Repo
             return id;
         }
     }
-
-
-
 }
 

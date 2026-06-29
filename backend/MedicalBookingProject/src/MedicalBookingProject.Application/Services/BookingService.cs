@@ -1,7 +1,5 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
-using MedicalBookingProject.Domain.Models.Bookings;
-using MedicalBookingProject.Domain.Models.Users;
-using System.Runtime.CompilerServices;
+
 
 
 

@@ -1,22 +1,12 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
-using MedicalBookingProject.Domain.Models.Bookings;
-using MedicalBookingProject.Domain.Models.Appointments;
-using MedicalBookingProject.Domain.Models.Shedules;
 using MedicalBookingProject.Domain.Models.MedicalRecords;
-using MedicalBookingProject.DataAccess.Configuration;
-using MedicalBookingProject.DataAccess.Repo;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
-using System.Globalization;
-using MedicalBookingProject.Domain.Models.Users;
-
 
 
 
 namespace MedicalBookingProject.DataAccess.Repo
 {
-
-
     public class MedicalRecordRepo : IMedicalRecordRepo
     {
 
@@ -66,7 +56,6 @@ namespace MedicalBookingProject.DataAccess.Repo
         }
 
 
-        // getByPatient
         public async Task<List<MedicalRecordDTO>> GetByPatient(Guid patientId)
         {
             var entities = await _context.MedicalRecords
@@ -75,13 +64,12 @@ namespace MedicalBookingProject.DataAccess.Repo
                .Include(item => item.Patient)
                .Include(item => item.Booking)
                .Include(item => item.Appointment)
-               .Where(item => item.PatientId == patientId) // && item.IsBooked == true)
+               .Where(item => item.PatientId == patientId) 
                .ToListAsync();
 
             if (entities.Equals(0))
             {
                 Debug.WriteLine("there are not shit bookings for that patient");
-                //throw new Exception($"Doctors with speciality {speciality} not found");
             }
 
             var Dtos = entities

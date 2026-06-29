@@ -1,8 +1,4 @@
-﻿using MedicalBookingProject.DataAccess.Repo;
-using MedicalBookingProject.Domain.Abstractions;
-using MedicalBookingProject.Domain.Models.MedicalRecords;
-
-
+﻿using MedicalBookingProject.Domain.Abstractions;
 
 
 namespace MedicalBookingProject.Application.Services

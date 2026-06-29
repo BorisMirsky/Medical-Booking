@@ -14,7 +14,6 @@ namespace MedicalBookingProject.DataAccess.Repo
     using System.Diagnostics;
 
 
-
     public class PatientRepo : IPatientRepo
     {
         private readonly MedicalBookingDbContext _dbContext;
@@ -41,13 +40,12 @@ namespace MedicalBookingProject.DataAccess.Repo
 
         public async Task<Patient?> Login(string email, string password)
         {
-            Patient? userEntity = await _dbContext.Patients.FirstOrDefaultAsync(u => u.Email == email);
-            // if login is wrong                                                                                   
+            Patient? userEntity = await _dbContext.Patients.FirstOrDefaultAsync(u => u.Email == email);                                                                                 
             if (userEntity == null)
             {
                 return null;
             }
-            // if password is wrong
+
             if (userEntity == null || BCrypt.Verify(password, userEntity.Password) == false)
             {
                 return null;

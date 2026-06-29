@@ -1,5 +1,4 @@
-﻿using MedicalBookingProject.Domain.Models.Appointments;
-
+﻿
 
 namespace MedicalBookingProject.Domain.Abstractions
 {

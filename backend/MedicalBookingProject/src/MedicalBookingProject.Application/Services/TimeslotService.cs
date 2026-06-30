@@ -1,7 +1,8 @@
 ﻿
+using MedicalBookingProject.Application.Scripts;
 using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Shedules;
-using MedicalBookingProject.Application.Scripts;
+using MedicalBookingProject.Domain.Models.Users;
 
 
 
@@ -17,14 +18,14 @@ namespace MedicalBookingProject.Application.Services
             _timeslotRepo = timeslotRepo;
         }
 
-        public async Task<Guid> CreateTimeslot(Guid id,
+        public async Task<int> CreateTimeslot(Guid doctorId,
                                                 DateTime startDay, int days,
                                                 int timeStart, int timeStop, int timeChunk)
         {
             CreateSlots slots = new(startDay.Year, startDay.Month, startDay.Day,
                                 timeStart, timeStop, timeChunk, days);
             List<List<String>> splittedSlots = slots.Run();
-            return await _timeslotRepo.Create(splittedSlots, id);
+            return await _timeslotRepo.Create(splittedSlots, doctorId);
         }
 
 
@@ -46,10 +47,10 @@ namespace MedicalBookingProject.Application.Services
         }
 
 
-        public async Task<Guid> UpdateTimeslot(Guid slotid, Guid patientid, Boolean isbooked)
+        public async Task UpdateTimeslot(Guid slotid, Guid patientid, Boolean isbooked)
         {
-            Guid _patientid = (isbooked == true) ? patientid : Guid.Empty;
-            return await _timeslotRepo.Update(slotid, _patientid, isbooked);
+            Guid patientIdToUse = isbooked ? patientid : Guid.Empty;
+            await _timeslotRepo.Update(slotid, patientIdToUse, isbooked);
         }
     }
 }

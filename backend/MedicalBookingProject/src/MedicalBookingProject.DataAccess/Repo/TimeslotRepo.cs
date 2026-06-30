@@ -17,21 +17,25 @@ namespace MedicalBookingProject.DataAccess.Repo
         }
 
 
-        public async Task<Guid> Create(List<List<String>> slotsList, Guid doctorId)
+        public async Task<int> Create(List<List<string>> slotsList, Guid doctorId)
         {
-            Guid sheduleIdGuid = Guid.NewGuid();     
+            int count = 0;
             foreach (var slot in slotsList)
             {
-                var entity = new Timeslot(); 
-                entity.Id = Guid.NewGuid();
-                entity.DoctorId = doctorId;
-                entity.DatetimeStart = slot[0];
-                entity.DatetimeStop = slot[1];
+                var entity = new Timeslot
+                {
+                    Id = Guid.NewGuid(),
+                    DoctorId = doctorId,
+                    DatetimeStart = slot[0],
+                    DatetimeStop = slot[1]
+                };
                 await _context.Timeslots.AddAsync(entity);
-                await _context.SaveChangesAsync();
+                count++;
             }
-            return sheduleIdGuid;
+            await _context.SaveChangesAsync(); 
+            return count;
         }
+
 
 
 
@@ -63,16 +67,15 @@ namespace MedicalBookingProject.DataAccess.Repo
 
 
 
-        public async Task<Guid> Update(Guid slotId, 
-                                        Guid patientId, 
-                                        Boolean isBooked)
+        public async Task Update(Guid slotId, Guid patientId, Boolean isBooked)
         {
-            await _context.Timeslots
-                .Where(item => item.Id == slotId)
-                .ExecuteUpdateAsync(s => s
-                .SetProperty(s => s.IsBooked, s => isBooked)
-                );
-            return slotId;
+            var slot = await _context.Timeslots.FirstOrDefaultAsync(s => s.Id == slotId);
+            if (slot != null)
+            {
+                slot.IsBooked = isBooked;
+                slot.PatientId = patientId;
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

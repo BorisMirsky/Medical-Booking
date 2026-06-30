@@ -56,13 +56,13 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
-        [Route("UpdateTimeslot")]       
+        [Route("UpdateTimeslot")]
         [HttpPatch]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "patient")]
-        public async Task<ActionResult<Guid>> UpdateTimeslot([FromBody] TimeslotUpdateRequest request)
+        public async Task<ActionResult> UpdateTimeslot([FromBody] TimeslotUpdateRequest request)
         {
-            var slotId = await _timeslotService.UpdateTimeslot(request.SlotId, request.PatientId, request.IsBooked);
-            return Ok(slotId);
+            await _timeslotService.UpdateTimeslot(request.SlotId, request.PatientId, request.IsBooked);
+            return Ok("Slot updated");
         }
     }
 }

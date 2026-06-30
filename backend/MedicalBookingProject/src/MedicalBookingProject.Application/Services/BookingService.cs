@@ -7,7 +7,9 @@ namespace MedicalBookingProject.Application.Services
 {
     public class BookingService : IBookingService
     {
+
         private readonly IBookingRepo _bookingRepo;
+
         public BookingService(IBookingRepo bookingRepo)
         {
             _bookingRepo = bookingRepo;
@@ -31,9 +33,9 @@ namespace MedicalBookingProject.Application.Services
             return await _bookingRepo.GetByDoctor(id);
         }
 
-        public async Task<Guid> SetBookingClosed(Guid id)
+        public async Task SetBookingClosed(Guid id)  
         {
-            return await _bookingRepo.SetBookingClosed(id);
+            await _bookingRepo.SetBookingClosed(id);
         }
     }
 }

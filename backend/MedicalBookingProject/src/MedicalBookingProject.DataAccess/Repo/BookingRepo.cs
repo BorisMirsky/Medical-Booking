@@ -35,76 +35,85 @@ namespace MedicalBookingProject.DataAccess.Repo
         }
 
 
+        // группировка – это чисто запросная логика, которую можно оставить в репозитории
         public async Task<List<BookingDTO>> GetByPatient(Guid patientId)
         {
             var entities = await _context.Bookings
-               .Include(item => item.Doctor)
-               .Include(item => item.Timeslot)
-               .Include(item => item.Patient)
-               .Where(item => item.PatientId == patientId) 
-               .GroupBy(item => item.TimeslotId)
-               .Select(g => g.OrderByDescending(item => item.CreatedAt).FirstOrDefault())
-               .ToListAsync();
+                .Include(b => b.Doctor)
+                .Include(b => b.Timeslot)
+                .Include(b => b.Patient)
+                .Where(b => b.PatientId == patientId)
+                .GroupBy(b => b.TimeslotId)
+                .Select(g => g.OrderByDescending(b => b.CreatedAt).FirstOrDefault())
+                .ToListAsync();
 
-            if (entities.Equals(0))
+            if (!entities.Any())
             {
-                Debug.WriteLine("there are not shit bookings for that patient");
+                Console.WriteLine($"No bookings found for patient {patientId} at {DateTime.Now}");
             }
-            
-            var Dtos = entities
-                .Select(b => new BookingDTO(b.Id, b.DoctorId, b.PatientId,
-                                            b.TimeslotId, b.IsBooked, b.IsClosed,
-                                            b.CreatedAt,
-                                            b.Doctor?.UserName,
-                                            b.Doctor?.Speciality,
-                                            b.Patient?.UserName,
-                                            b.Timeslot?.DatetimeStart,
-                                            b.Timeslot?.DatetimeStop))
-                .ToList();
 
-            return Dtos;  
+            return entities
+                .Select(b => new BookingDTO(
+                    b.Id,
+                    b.DoctorId,
+                    b.PatientId,
+                    b.TimeslotId,
+                    b.IsBooked,
+                    b.IsClosed,
+                    b.CreatedAt,
+                    b.Doctor?.UserName,
+                    b.Doctor?.Speciality,
+                    b.Patient?.UserName,
+                    b.Timeslot?.DatetimeStart,
+                    b.Timeslot?.DatetimeStop))
+                .ToList();
         }
+
 
 
         public async Task<List<BookingDTO>> GetByDoctor(Guid doctorId)
         {
             var entities = await _context.Bookings
-               .Include(item => item.Doctor)
-               .Include(item => item.Timeslot)
-               .Include(item => item.Patient)
-               .Where(item => item.DoctorId == doctorId && item.IsClosed == false)
-               .GroupBy(item => item.TimeslotId)
-               .Select(g => g.OrderByDescending(item => item.CreatedAt).FirstOrDefault())
-               .ToListAsync();
+                .Include(b => b.Doctor)
+                .Include(b => b.Timeslot)
+                .Include(b => b.Patient)
+                .Where(b => b.DoctorId == doctorId && b.IsClosed == false)
+                .GroupBy(b => b.TimeslotId)
+                .Select(g => g.OrderByDescending(b => b.CreatedAt).FirstOrDefault())
+                .ToListAsync();
 
-            if (entities.Equals(0))
+            if (!entities.Any())
             {
-                Debug.WriteLine("there are not any bookings for that patient");
+                Console.WriteLine($"No active bookings for doctor {doctorId} at {DateTime.Now}");
             }
 
-            var Dtos = entities
-                .Select(b => new BookingDTO(b.Id, b.DoctorId, b.PatientId,
-                                            b.TimeslotId, b.IsBooked, b.IsClosed,
-                                            b.CreatedAt,
-                                            b.Doctor?.UserName,
-                                            b.Doctor?.Speciality,
-                                            b.Patient?.UserName,
-                                            b.Timeslot?.DatetimeStart,
-                                            b.Timeslot?.DatetimeStop))
+            return entities
+                .Select(b => new BookingDTO(
+                    b.Id,
+                    b.DoctorId,
+                    b.PatientId,
+                    b.TimeslotId,
+                    b.IsBooked,
+                    b.IsClosed,
+                    b.CreatedAt,
+                    b.Doctor?.UserName,
+                    b.Doctor?.Speciality,
+                    b.Patient?.UserName,
+                    b.Timeslot?.DatetimeStart,
+                    b.Timeslot?.DatetimeStop))
                 .ToList();
-
-            return Dtos;
         }
 
-       
-        public async Task<Guid> SetBookingClosed(Guid id)
+
+
+        public async Task SetBookingClosed(Guid id)
         {
-            await _context.Bookings
-                .Where(item => item.Id == id)
-                .ExecuteUpdateAsync(s => s
-                .SetProperty(s => s.IsClosed, s => true)
-                );
-            return id;
+            var booking = await _context.Bookings.FirstOrDefaultAsync(b => b.Id == id);
+            if (booking != null)
+            {
+                booking.IsClosed = true;
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

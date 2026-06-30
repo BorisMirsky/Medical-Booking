@@ -12,6 +12,6 @@ namespace MedicalBookingProject.Domain.Abstractions
         
         Task<List<BookingDTO>> GetByDoctor(Guid id);
 
-        Task<Guid> SetBookingClosed(Guid id);
+        Task SetBookingClosed(Guid id);
     }
 }

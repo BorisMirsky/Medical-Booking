@@ -41,10 +41,10 @@ namespace MedicalBookingProject.Web.Controllers
         [Route("SetBookingClosed")]
         [HttpPatch]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "doctor")]
-        public async Task<ActionResult<Guid>> SetBookingClosed([FromQuery] Guid id)
+        public async Task<ActionResult> SetBookingClosed(Guid id)
         {
-            var result = await _bookingService.SetBookingClosed(id);
-            return Ok(result);
+            await _bookingService.SetBookingClosed(id);
+            return Ok("Booking closed");
         }
 
 

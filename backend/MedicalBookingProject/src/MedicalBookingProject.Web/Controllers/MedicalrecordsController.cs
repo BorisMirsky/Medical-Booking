@@ -1,16 +1,8 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using MedicalBookingProject.Domain.Models.MedicalRecords; 
 using MedicalBookingProject.Web.Contracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using MedicalBookingProject.Domain.Models.Users;
-using MedicalBookingProject.Application.Services;
-using MedicalBookingProject.Domain.Models.Shedules;
-using System.Diagnostics;
-
 
 
 namespace MedicalBookingProject.Web.Controllers
@@ -38,7 +30,7 @@ namespace MedicalBookingProject.Web.Controllers
                                                             request.DoctorId,
                                                             request.PatientId,
                                                             request.TimeslotId,
-                                                            request.AppointmentId,
+                                                            //request.AppointmentId,
                                                             request.Diagnosis,
                                                             request.Symptoms,
                                                             request.PrescribedTreatment,

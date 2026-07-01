@@ -1,6 +1,5 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Appointments;
-using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -8,28 +7,25 @@ namespace MedicalBookingProject.DataAccess.Repo
 {
     public class AppointmentRepo : IAppointmentRepo
     {
-        public BookingRepo bookingRepo;
 
         private readonly MedicalBookingDbContext _context;
 
         public AppointmentRepo(MedicalBookingDbContext context)
         {
             _context = context;
-            bookingRepo = new BookingRepo(context);
         }
 
-
-        public async Task<Guid> Create(Guid bookingId, Guid doctorId,
-                                     Guid patientId, Guid timeslotId, 
-                                     string? patientCame, string? patientIsLate,
-                                     string? patientUnacceptableBehavior)
+        public async Task<Guid> Create(Guid doctorId, Guid patientId,
+                               Guid timeslotId, Guid bookingId,
+                               string? patientCame, string? patientIsLate,
+                               string? patientUnacceptableBehavior)
         {
             Guid id = Guid.NewGuid();
             Appointment app = new()
             {
                 Id = id,
-                PatientId = patientId,
                 DoctorId = doctorId,
+                PatientId = patientId,
                 TimeslotId = timeslotId,
                 BookingId = bookingId,
                 PatientCame = patientCame,
@@ -41,23 +37,15 @@ namespace MedicalBookingProject.DataAccess.Repo
             return id;
         }
 
-
-        public async Task<Guid> GetByBookingId(Guid id)
+        public async Task<Guid?> GetByBookingId(Guid id)
         {
 
             Appointment? entity = await _context.Appointments
                 .FirstOrDefaultAsync(a => a.BookingId == id);
 
-            if (entity == null)
-            {
-                Debug.WriteLine("there are not such shit Appointments");
-            }
-
             Guid appId = entity!.Id;
             return appId;
         }
-
-
 
         public async Task<List<AppointmentDTO>> GetByPatient(Guid patientId)
         {
@@ -71,25 +59,36 @@ namespace MedicalBookingProject.DataAccess.Repo
                .Select(g => g.OrderByDescending(item => item.Booking!.CreatedAt).FirstOrDefault())
                .ToListAsync();
 
-            if (entities.Equals(0))
-            {
-                Debug.WriteLine("there are not shit bookings for that patient");
-            }
-
+            //var Dtos = entities
+            //    .Select(b => new AppointmentDTO(b.Id, b.BookingId, b.DoctorId, 
+            //                                b.PatientId, b.TimeslotId, 
+            //                                b.Doctor?.Speciality, b.Doctor?.UserName,
+            //                                b.Patient?.UserName,
+            //                                b.Timeslot?.DatetimeStart,
+            //                                b.Timeslot?.DatetimeStop,
+            //                                b.PatientCame, b.PatientIsLate,
+            //                                b.PatientUnacceptableBehavior))
+            //    .ToList();
             var Dtos = entities
-                .Select(b => new AppointmentDTO(b.Id, b.BookingId, b.DoctorId, 
-                                            b.PatientId, b.TimeslotId, 
-                                            b.Doctor.Speciality, b.Doctor.UserName,
-                                            b.Patient?.UserName,
-                                            b.Timeslot?.DatetimeStart,
-                                            b.Timeslot?.DatetimeStop,
-                                            b.PatientCame, b.PatientIsLate,
-                                            b.PatientUnacceptableBehavior))
+                .Select(b => new AppointmentDTO(
+                    b.Id,
+                    b.BookingId,
+                    b.DoctorId,
+                    b.PatientId,
+                    b.TimeslotId,
+                    b.Doctor?.Speciality ?? string.Empty,     
+                    b.Doctor?.UserName ?? string.Empty,        
+                    b.Patient?.UserName ?? string.Empty,      
+                    b.Timeslot?.DatetimeStart ?? string.Empty,
+                    b.Timeslot?.DatetimeStop ?? string.Empty,
+                    b.PatientCame ?? string.Empty,
+                    b.PatientIsLate ?? string.Empty,
+                    b.PatientUnacceptableBehavior ?? string.Empty
+                ))
                 .ToList();
 
             return Dtos;
         }
-
 
         public async Task<List<AppointmentDTO>> GetByDoctor(Guid doctorId)
         {
@@ -103,54 +102,101 @@ namespace MedicalBookingProject.DataAccess.Repo
                .Select(g => g.OrderByDescending(item => item.Booking!.CreatedAt).FirstOrDefault())
                .ToListAsync();
 
-            if (entities.Equals(0))
-            {
-                Debug.WriteLine("there are not any bookings for that patient");
-            }
-
+            //var Dtos = entities
+            //    .Select(b => new AppointmentDTO(b.Id, b.BookingId, b.DoctorId,
+            //                                b.PatientId, b.TimeslotId,
+            //                                b.Doctor?.Speciality, b.Doctor?.UserName,
+            //                                b.Patient?.UserName,
+            //                                b.Timeslot?.DatetimeStart,
+            //                                b.Timeslot?.DatetimeStop,
+            //                                b.PatientCame, b.PatientIsLate,
+            //                                b.PatientUnacceptableBehavior))
+            //    .ToList();
             var Dtos = entities
-                .Select(b => new AppointmentDTO(b.Id, b.BookingId, b.DoctorId,
-                                            b.PatientId, b.TimeslotId,
-                                            b.Doctor.Speciality, b.Doctor.UserName,
-                                            b.Patient?.UserName,
-                                            b.Timeslot?.DatetimeStart,
-                                            b.Timeslot?.DatetimeStop,
-                                            b.PatientCame, b.PatientIsLate,
-                                            b.PatientUnacceptableBehavior))
+                .Select(b => new AppointmentDTO(
+                    b.Id,
+                    b.BookingId,
+                    b.DoctorId,
+                    b.PatientId,
+                    b.TimeslotId,
+                    b.Doctor?.Speciality ?? string.Empty,     
+                    b.Doctor?.UserName ?? string.Empty,        
+                    b.Patient?.UserName ?? string.Empty,      
+                    b.Timeslot?.DatetimeStart ?? string.Empty,
+                    b.Timeslot?.DatetimeStop ?? string.Empty,
+                    b.PatientCame ?? string.Empty,
+                    b.PatientIsLate ?? string.Empty,
+                    b.PatientUnacceptableBehavior ?? string.Empty
+                ))
                 .ToList();
 
             return Dtos;
         }
 
+        //public async Task<List<AppointmentDTO>> GetAll()
+        //{
+        //    var entities = await _context.Appointments
+        //       .Include(item => item.Doctor)
+        //       .Include(item => item.Timeslot)
+        //       .Include(item => item.Patient!)
+        //       .Include(item => item.Booking)
+        //       .Where(item => item.PatientCame == "no" || item.PatientIsLate == "yes" || item.PatientUnacceptableBehavior != " ") 
+        //       .GroupBy(item => item.TimeslotId)
+        //       .Select(g => g.OrderByDescending(item => item.Booking!.CreatedAt).FirstOrDefault())
+        //       .ToListAsync();
 
+        //    var Dtos = entities
+        //        .Select(b => new AppointmentDTO(b.Id, b.BookingId, b.DoctorId,
+        //                                    b.PatientId, b.TimeslotId,
+        //                                    b.Patient.UserName, 
+        //                                    b.Doctor.UserName,
+        //                                    b.Patient?.UserName,
+        //                                    b.Timeslot?.DatetimeStart,
+        //                                    b.Timeslot?.DatetimeStop,
+        //                                    b.PatientCame, b.PatientIsLate,
+        //                                    b.PatientUnacceptableBehavior))
+        //        .ToList();
+
+        //    return Dtos;
+        //}
 
         public async Task<List<AppointmentDTO>> GetAll()
         {
             var entities = await _context.Appointments
-               .Include(item => item.Doctor)
-               .Include(item => item.Timeslot)
-               .Include(item => item.Patient!)
-               .Include(item => item.Booking)
-               .Where(item => item.PatientCame == "no" || item.PatientIsLate == "yes" || item.PatientUnacceptableBehavior != " ") 
-               .GroupBy(item => item.TimeslotId)
-               .Select(g => g.OrderByDescending(item => item.Booking!.CreatedAt).FirstOrDefault())
-               .ToListAsync();
+                .Include(item => item.Doctor)
+                .Include(item => item.Timeslot)
+                .Include(item => item.Patient)
+                .Include(item => item.Booking)
+                .GroupBy(item => item.TimeslotId)
+                .Select(g => g.OrderByDescending(item => item.Booking!.CreatedAt).FirstOrDefault())
+                .ToListAsync();
 
-            if (entities.Equals(0))
-            {
-                Debug.WriteLine("all patients are ok");
-            }
-
+            //var Dtos = entities
+            //    .Select(b => new AppointmentDTO(b.Id, b.BookingId, b.DoctorId,
+            //                                b.PatientId, b.TimeslotId,
+            //                                b.Doctor?.Speciality, b.Doctor?.UserName,
+            //                                b.Patient?.UserName, 
+            //                                b.Timeslot?.DatetimeStart,
+            //                                b.Timeslot?.DatetimeStop,
+            //                                b.PatientCame, b.PatientIsLate,
+            //                                b.PatientUnacceptableBehavior))
+            //    .ToList();
             var Dtos = entities
-                .Select(b => new AppointmentDTO(b.Id, b.BookingId, b.DoctorId,
-                                            b.PatientId, b.TimeslotId,
-                                            b.Patient.UserName, 
-                                            b.Doctor.UserName,
-                                            b.Patient?.UserName,
-                                            b.Timeslot?.DatetimeStart,
-                                            b.Timeslot?.DatetimeStop,
-                                            b.PatientCame, b.PatientIsLate,
-                                            b.PatientUnacceptableBehavior))
+                .Select(b => new AppointmentDTO(
+                    b.Id,
+                    b.BookingId,
+                    b.DoctorId,
+                    b.PatientId,
+                    b.TimeslotId,
+                    b.Doctor?.Speciality ?? string.Empty,      
+                    b.Doctor?.UserName ?? string.Empty,       
+                    b.Patient?.UserName ?? string.Empty,       
+                    b.Timeslot?.DatetimeStart ?? string.Empty,
+                    b.Timeslot?.DatetimeStop ?? string.Empty,
+                    b.PatientCame ?? string.Empty,
+                    b.PatientIsLate ?? string.Empty,
+                    b.PatientUnacceptableBehavior ?? string.Empty
+                ))
                 .ToList();
 
             return Dtos;

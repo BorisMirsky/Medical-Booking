@@ -1,6 +1,5 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.MedicalRecords;
-using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -10,14 +9,11 @@ namespace MedicalBookingProject.DataAccess.Repo
     public class MedicalRecordRepo : IMedicalRecordRepo
     {
 
-        public AppointmentRepo appointmentRepo;
-
         private readonly MedicalBookingDbContext _context;
 
         public MedicalRecordRepo(MedicalBookingDbContext context)
         {
             _context = context;
-            appointmentRepo = new AppointmentRepo(context);
         }
 
 
@@ -25,7 +21,7 @@ namespace MedicalBookingProject.DataAccess.Repo
                                         Guid doctorId,
                                         Guid patientId,
                                         Guid timeslotId,
-                                        Guid appointmentId,
+                                        Guid appointmentId,   
                                         string? diagnosis,
                                         string? symptoms,
                                         string? prescribedTreatment,
@@ -34,7 +30,6 @@ namespace MedicalBookingProject.DataAccess.Repo
                                         uint? finalCost)
         {
             Guid id = Guid.NewGuid();
-            Guid AppointmentId = await appointmentRepo.GetByBookingId(bookingId); 
             MedicalRecord medRec = new()
             {
                 Id = id,
@@ -42,7 +37,7 @@ namespace MedicalBookingProject.DataAccess.Repo
                 DoctorId = doctorId,
                 PatientId = patientId,
                 TimeslotId = timeslotId,
-                AppointmentId = AppointmentId,
+                AppointmentId = appointmentId,  
                 Diagnosis = diagnosis,
                 Symptoms = symptoms,
                 PrescribedTreatment = prescribedTreatment,
@@ -67,24 +62,23 @@ namespace MedicalBookingProject.DataAccess.Repo
                .Where(item => item.PatientId == patientId) 
                .ToListAsync();
 
-            if (entities.Equals(0))
-            {
-                Debug.WriteLine("there are not shit bookings for that patient");
-            }
-
             var Dtos = entities
                 .Select(b => new MedicalRecordDTO(b.Id,
                                             b.PatientId,
-                                            b.Doctor?.Speciality,
-                                            b.Doctor?.UserName,
-                                            b.Patient?.UserName,
-                                            b.Timeslot?.DatetimeStart,
-                                            b.Timeslot?.DatetimeStop,
-                                            b.Appointment?.PatientCame,
-                                            b.Appointment?.PatientIsLate,
-                                            b.Appointment?.PatientUnacceptableBehavior,
-                                            b.Symptoms, b.Diagnosis, b.PrescribedTreatment,
-                                            b.VisualExamination, b.ReferralTests, b.FinalCost))
+                                            b.Doctor?.Speciality ?? string.Empty,
+                                            b.Doctor?.UserName ?? string.Empty,
+                                            b.Patient?.UserName ?? string.Empty,
+                                            b.Timeslot?.DatetimeStart ?? string.Empty,
+                                            b.Timeslot?.DatetimeStop ?? string.Empty,
+                                            b.Appointment?.PatientCame ?? string.Empty,
+                                            b.Appointment?.PatientIsLate ?? string.Empty,
+                                            b.Appointment?.PatientUnacceptableBehavior ?? string.Empty,
+                                            b.Symptoms ?? string.Empty, 
+                                            b.Diagnosis ?? string.Empty,
+                                            b.PrescribedTreatment ?? string.Empty,
+                                            b.VisualExamination ?? string.Empty, 
+                                            b.ReferralTests ?? string.Empty, 
+                                            b.FinalCost))
 
                 .ToList();
 

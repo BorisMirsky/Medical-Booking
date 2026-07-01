@@ -12,7 +12,6 @@ namespace MedicalBookingProject.Application.Services
             _appointmentRepo = appointmentRepo;
         }
 
-
         public async Task<Guid> CreateAppointment(Guid doctorId, Guid patientId,
                                     Guid timeslotId, Guid bookingId,
                                      string? patientCame, string? patientIsLate,
@@ -24,7 +23,7 @@ namespace MedicalBookingProject.Application.Services
                                       patientUnacceptableBehavior);
         }
 
-        public async Task<Guid> GetByBookingId(Guid id)
+        public async Task<Guid?> GetByBookingId(Guid id)
         {
             return await _appointmentRepo.GetByBookingId(id);
         }
@@ -40,10 +39,19 @@ namespace MedicalBookingProject.Application.Services
             return await _appointmentRepo.GetByDoctor(id);
         }
 
-
+        //public async Task<List<AppointmentDTO>> GetAll()
+        //{
+        //    return await _appointmentRepo.GetAll();
+        //}
         public async Task<List<AppointmentDTO>> GetAll()
         {
-            return await _appointmentRepo.GetAll();
+            var allAppointments = await _appointmentRepo.GetAll();
+
+            return allAppointments
+                .Where(dto => dto.PatientCame == "no"
+                              || dto.PatientIsLate == "yes"
+                              || dto.PatientUnacceptableBehavior != " ")
+                .ToList();
         }
     }
 }

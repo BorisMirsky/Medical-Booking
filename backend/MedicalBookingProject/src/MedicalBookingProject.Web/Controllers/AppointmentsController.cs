@@ -1,15 +1,8 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using MedicalBookingProject.Domain.Models.Appointments;
 using MedicalBookingProject.Web.Contracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using MedicalBookingProject.Domain.Models.Users;
-using MedicalBookingProject.Application.Services;
-using MedicalBookingProject.Domain.Models.Shedules;
-
 
 
 
@@ -34,9 +27,10 @@ namespace MedicalBookingProject.Web.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "doctor")]
         public async Task<ActionResult> CreateAppointment([FromBody] AppointmentRequest request)
         {
-            await _appointmentService.CreateAppointment(request.BookingId, request.DoctorId,
-                                                  request.PatientId, request.TimeslotId, request.PatientCame,
-                                                  request.PatientIsLate, request.PatientUnacceptableBehavior);
+            await _appointmentService.CreateAppointment(request.DoctorId, request.PatientId, 
+                                                        request.TimeslotId, request.BookingId, 
+                                                        request.PatientCame, request.PatientIsLate, 
+                                                        request.PatientUnacceptableBehavior);
             return Ok();
         }
 

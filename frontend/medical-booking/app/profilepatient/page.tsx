@@ -5,6 +5,7 @@ import React from 'react';
 import Title from "antd/es/typography/Title";
 import { useEffect, useState } from "react";
 import CollapseElement from '../Components/patientCollapseComponent';
+import { Space } from 'antd';
 
 
 export default function profilePatient() {
@@ -23,19 +24,17 @@ export default function profilePatient() {
 
     return (
         <div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+
             {
                 (currentRole === 'patient') ? (
                     <div>
-                        <br />
-                        <h2>Профиль пациента {currentName}</h2>
-                        <br />
-                        <br />
-                        <br />
+                        <Space
+                            direction="vertical"
+                            size="large"
+                            style={{ margin: '2rem', width: '50%' }}
+                        >
+                            <Title level={2}>Профиль пациента {currentName}</Title>
+                        </Space>
                         {loading ? (
                             <Title>Loading ...</Title>
                         ) : (
@@ -44,7 +43,7 @@ export default function profilePatient() {
 
                     </div >
                 ) : (
-                        <div><h2> Только для залогинившегося пациента</h2></div>
+                        <Title level={2}> Только для залогинившегося пациента</Title>
                 )}
         </div>
     );

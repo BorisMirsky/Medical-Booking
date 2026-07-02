@@ -7,7 +7,7 @@ import { FormProps, Button, Form, Input, Space } from 'antd';
 import Title from "antd/es/typography/Title";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-//import ModalComponent from '../Components/ModalComponent';
+
 
 
 
@@ -25,15 +25,19 @@ export default function entrancePatient() {
     }
 
     const onFinish: FormProps<UserLoginRequest>['onFinish'] = (values) => {
-        console.log('entrancePatient values ', values)
+        //console.log('entrancePatient values ', values)
         loginPatient(values);
     }
 
     return (
         <div>
-            <br /><br /><br />  
-            <h2>Вход для пациента</h2>
-            <br /><br /><br />
+            <Space
+                direction="vertical"
+                size="large"
+                style={{ margin: '2rem', width: '50%' }}
+            >
+                <Title level={2}>Вход для пациента</Title>
+            </Space>
             {
                     <div >
                         {loading ? (
@@ -80,8 +84,14 @@ export default function entrancePatient() {
                                 </Form.Item>
                             </Form>
                         )}
-                    <br /><br />
-                    <p>Если у вас нет аккаунта, вы можете зарегистрироваться</p>
+                    <Space
+                        direction="vertical"
+                        size="large"
+                        style={{ margin: '2rem', width: '50%' }}
+                    >
+                        <Title level={4}>Если у вас нет аккаунта, вы можете зарегистрироваться</Title>
+                    </Space>
+
                     <Link
                         href={{
                             pathname: "registrationpatient"
@@ -89,7 +99,12 @@ export default function entrancePatient() {
                     >
                             <h3>Регистрация</h3>
                     </Link>
-                    <br /><br /><br />
+                    <Space
+                        direction="vertical"
+                        size="large"
+                        style={{ margin: '2rem', width: '50%' }}
+                    >
+                    </Space>
                     </div >
             }
         </div>

@@ -9,7 +9,6 @@ import { useEffect } from "react";
 export default function Home() {
     useEffect(() => {
         const role = localStorage.getItem("role") || "";
-        // эта страница для незалогинившегося юзера
         if (role == "doctor") {
             window.location.href = 'profiledoctor';
         }
@@ -24,17 +23,14 @@ export default function Home() {
 
     const loginAdminPage = async () => {
         window.location.href = 'entranceadmin';
-        //router.push("/updateorder?id=" + id);
     };
 
     const loginPatientPage = async () => {
         window.location.href = 'entrancepatient';
-        //router.push("/updateorder?id=" + id);
     };
 
     const loginDoctorPage = async () => {
         window.location.href = 'entrancedoctor';
-        //router.push("/updateorder?id=" + id);
     };
 
 

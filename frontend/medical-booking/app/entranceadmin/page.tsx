@@ -30,15 +30,21 @@ export default function entranceAdmin() {
 
     return (
         <div>
-            <br />
-            <br />
-            <h2>Вход для админа</h2>
-            <br />
-            <br />
-            <br />
-            <h2>Залогиниться</h2>
-            <br />
-            <br />
+            <Space
+                direction="vertical"
+                size="large"
+                style={{ margin: '2rem', width: '50%' }}
+            >
+                <Title level={2}>Вход для админа</Title>
+            </Space>
+            <Space
+                direction="vertical"
+                size="large"
+                style={{ margin: '2rem', width: '50%' }}
+            >
+                <Title level={2}>Залогиниться</Title>
+            </Space>
+
             {
                 (currentRole === '') ? (
                     <div >
@@ -90,7 +96,13 @@ export default function entranceAdmin() {
                         <br />
                     </div >
                 ) : (
-                    <div> Только для незалогинившегося юзера (надеюсь что Админа)</div>
+                        <Space
+                            direction="vertical"
+                            size="large"
+                            style={{ margin: '2rem', width: '50%' }}
+                        >
+                            <Title level={2}>Только для незалогинившегося юзера</Title>
+                        </Space>
                 )
             }
         </div>

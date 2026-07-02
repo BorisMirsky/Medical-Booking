@@ -5,7 +5,7 @@ import React from 'react';
 import Title from "antd/es/typography/Title";
 import { useEffect, useState } from "react";
 import CollapseElement from '../Components/adminCollapseComponent';
-
+import { Space } from 'antd';
 
 
 export default function profileAdmin() {
@@ -27,21 +27,26 @@ export default function profileAdmin() {
     return (
 
         <div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
             {
                     (currentRole === 'Admin') ? (
             <div>
-                        <br />
-            <h2>Профиль админа {currentName}</h2>
-                        <br />
-                        <br />
-                        <br />
+
+                        <Space
+                            direction="vertical"
+                            size="large"
+                            style={{ margin: '2rem', width: '50%' }}
+                        >
+                            <Title level={2}>Профиль админа {currentName}</Title>
+                        </Space>
+
                     {loading ? (
-                        <Title>Loading ...</Title>
+                            <Space
+                                direction="vertical"
+                                size="large"
+                                style={{ margin: '2rem', width: '50%' }}
+                            >
+                                <Title level={2}>Loading ...</Title>
+                            </Space>
                     ) : (
                             <CollapseElement />
                     )}

@@ -1,9 +1,7 @@
 ﻿
 import { Select, FormProps, Button, Form, Input, Space } from 'antd';
 const { Option } = Select;
-import { registerDoctor, DoctorRegisterRequest } from '@/../Components/Services/ervice';
-//import Card from '@/components/Card'; 
-
+import { registerDoctor, DoctorRegisterRequest } from '@/app/Services/service';
 
 
 

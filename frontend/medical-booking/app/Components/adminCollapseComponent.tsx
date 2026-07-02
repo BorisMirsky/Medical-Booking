@@ -1,9 +1,8 @@
 ﻿///* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import type { CollapseProps } from 'antd';
-import { Collapse } from 'antd';
+import { Collapse, Space } from 'antd';
 import DoctorRegistration from '../Components/doctorRegistrationComponent';
-//import DoctorRegistration from '../Components/Admin/doctorRegistrationComponent';
 import CreateShedule from '../Components/adminCreateSheduleComponent';
 import DoctorShedule from '../Components/doctorSheduleComponent';
 import AllDoctors from '../Components/adminAllDoctorsComponent';
@@ -53,7 +52,14 @@ const CollapseElement: React.FC = () => {
     return (
         <div>
             <p>{numbers}</p>
-            <br /><br />
+            <div>
+            <Space
+                direction="vertical"
+                size="large"
+                style={{ margin: '2rem', width: '50%' }}
+            >
+                </Space>
+             </div>
             <Collapse accordion items={items} />
         </div>
     );

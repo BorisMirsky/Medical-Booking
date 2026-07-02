@@ -6,13 +6,13 @@ import { getDoctorsFetch } from "@/app/Services/service";
 import { Doctor } from "@/app/Models/Doctor";
 import { Table } from "antd";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import "../globals.css";
-
+import { Space } from 'antd';
+import Title from "antd/es/typography/Title";
 
 
 export default function AllDoctors() {
-    const [currentRole, setCurrentRole] = useState("");
+    const [, setCurrentRole] = useState("");
     const [doctors, setDoctors] = useState<Doctor[]>([]);
 
     const columns = [
@@ -21,26 +21,6 @@ export default function AllDoctors() {
             dataIndex: 'n',
             key: 'n',
         },
-        //{
-        //    title: 'UniqueId',
-        //    dataIndex: 'uniqueid',
-        //    key: 'uniqueid',
-        //    render: (id: string) => (
-        //        <Link
-        //            href={{
-        //                pathname: "profiledoctor",
-        //                query: {
-        //                    id: id
-        //                }
-        //            }}
-        //            //legacyBehavior={true}
-        //        >
-        //            {/*<a className="tableLink" >*/}
-        //                {id}
-        //            {/*</a>*/}
-        //        </Link>
-        //    )
-        //},
         {
             title: 'Имя',
             dataIndex: 'username',
@@ -74,22 +54,22 @@ export default function AllDoctors() {
     const data = doctors.map((doctor: Doctor, index: number) => ({
         key: index,
         n: (index + 1),
-        //uniqueid: doctor.id,
         username: doctor.userName,
         speciality: doctor.speciality,
         gender: doctor.gender
-        //date: moment(order.date).format("DD/MM/YYYY")
     })); 
 
 
 
     return (
             <div>
-            <br /><br />
-                <h1>Все врачи клиники</h1>
-            <br /><br />
-                    <div>
-                <br /><br /><br />
+                <Space
+                    direction="vertical"
+                    size="large"
+                    style={{ margin: '2rem', width: '50%' }}
+                >
+                    <Title level={1}>Все врачи клиники</Title>
+                </Space>
                         <Table
                             dataSource={data}
                             columns={columns}
@@ -97,7 +77,6 @@ export default function AllDoctors() {
                             footer={() => ""}
                             bordered
                         />
-                    </div>
         </div>
     );    
 }

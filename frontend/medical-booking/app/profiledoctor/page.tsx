@@ -5,7 +5,7 @@ import React from 'react';
 import CollapseElement from '../Components/doctorCollapseComponent';
 import { useEffect, useState } from "react";
 import Title from "antd/es/typography/Title";
-
+import { Space } from 'antd';
 
 
 export default function ProfileDoctor() { 
@@ -29,18 +29,27 @@ export default function ProfileDoctor() {
     return (
         <div>
             <div>
-                <br />
-                <br />
-                <br />
+
                 {
                     (currentUserRole === 'doctor') ? (
                 <div >
-                            <br />
-                    <h2>Профиль врача {currentUserName}</h2>
-                            <br />
-                            <br />
+
+                            <Space
+                                direction="vertical"
+                                size="large"
+                                style={{ margin: '2rem', width: '50%' }}
+                            >
+                                <Title level={2}>Профиль врача {currentUserName}</Title>
+                            </Space>
                     {loading ? (
-                        <Title>Loading ...</Title>
+                                <Space
+                                direction="vertical"
+                                size="large"
+                                style={{ margin: '2rem', width: '50%' }}
+                            >
+                                <Title level={2}>Loading ...</Title>
+                            </Space>
+
                     ) : (
                     <CollapseElement />
                     )}

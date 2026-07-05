@@ -25,7 +25,6 @@ const FormMedicalRecord: React.FC<DoctorAppointmentProps> = ({ booking }) => {
             doctorid: booking.doctorId,
             patientid: booking.patientId,
             timeslotid: booking.timeslotId,
-            //appointmentid: booking.timeslotId,   
             symptoms: values.symptoms,
             diagnosis: values.diagnosis,
             prescribedtreatment: values.prescribedtreatment,
@@ -100,12 +99,8 @@ const FormMedicalRecord: React.FC<DoctorAppointmentProps> = ({ booking }) => {
                     <InputNumber
                         min={5000}
                         max={50000}
-                        //defaultValue={5000}
                     />
                 </Form.Item>
-
-                <br></br>
-                <br></br>
 
                 <Form.Item label={null}>
                     <Space size='large'>

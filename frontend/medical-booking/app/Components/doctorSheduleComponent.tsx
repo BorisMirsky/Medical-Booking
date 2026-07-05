@@ -21,7 +21,7 @@ import moment from "moment";
 export default function DoctorShedule({ numbers, setNumbers, }: DoctorSheduleProps) {
     const [doctors, setDoctors] = useState<Doctor[]>([]);
     const [slots_, setSlots] = useState<Slot[]>([]);            // slots all days
-    const [slots1, setSlots1] = useState<Slot[]>([]);           // slots one days
+    const [slots1, setSlots1] = useState<Slot[]>([]);           // slots one day
     const [buttonsFlag, setButtonsFlag] = useState<number>(0);
 
 
@@ -40,13 +40,12 @@ export default function DoctorShedule({ numbers, setNumbers, }: DoctorShedulePro
 
 
     const onFinish: FormProps<DoctorSheduleRequest>['onFinish'] = (values: DoctorSheduleRequest) => {
-        console.log('onFinish ', values);
         setSlots1(processedSlots[selectedDay]);
         setButtonsFlag(1);
     }
 
 
-    //                      поле 'выбор специальности'
+    //  поле 'выбор специальности'
     const handleSelectSpeciality = (value: string) => {
         setDoctors([]);
         const getDoctors = async () => {
@@ -57,7 +56,7 @@ export default function DoctorShedule({ numbers, setNumbers, }: DoctorShedulePro
     }
 
 
-    //                        поле 'выбор врача'
+    //  поле 'выбор врача'
     const doctorsData = doctors.map((doctor: Doctor, index: number) => ({
         key: index,
         value : doctor.userName,
@@ -108,7 +107,7 @@ export default function DoctorShedule({ numbers, setNumbers, }: DoctorShedulePro
     };
 
 
-    //                        поле 'выбор даты'
+    // поле 'выбор даты'
     let selectedDay: string = "";
 
     const selectDate = (value: string) => {

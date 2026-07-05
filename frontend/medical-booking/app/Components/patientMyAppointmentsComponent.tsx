@@ -4,16 +4,16 @@
 import React from 'react';
 import { getAppointmentsByPatientId } from "@/app/Services/service";
 import { Appointment } from "@/app/Models/Appointment";
-import { Table } from "antd";
+import { Table, Space } from "antd";
 import { useEffect, useState } from "react";
 import "../globals.css";
+import Title from "antd/es/typography/Title";
 
 
 
 export default function PatientMyAppointments() {
-    const [currentUserId, setCurrentUserId] = useState("");
+    const [, setCurrentUserId] = useState("");
     const [apps, setApps] = useState<Appointment[]>([]);
-    //console.log('PatientMyAppointments ', apps);
 
     useEffect(() => {
         const id = localStorage.getItem("id") || "";
@@ -62,18 +62,27 @@ export default function PatientMyAppointments() {
 
     return (
         <div>
-            <br/><br/>
-            <h1>Мои посещения врачей</h1>
-            <br/><br/>
+            <Space
+                direction="vertical"
+                size="large"
+                style={{ margin: '2rem', width: '50%' }}
+            >
+                <Title level={2}>Мои посещения врачей</Title>
+            </Space>
             <div>
-                <br/><br/><br/>
+                <Space
+                    direction="vertical"
+                    size="large"
+                    style={{ margin: '2rem', width: '50%' }}
+                >
                 <Table
                     dataSource={data}
                     columns={columns}
                     pagination={false}
                     footer={() => ""}
                     bordered
-                />
+                    />
+                </Space>
             </div>
         </div>
     );

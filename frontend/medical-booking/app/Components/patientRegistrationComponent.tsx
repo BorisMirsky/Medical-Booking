@@ -6,8 +6,6 @@ import { PatientRegisterRequest } from "@/app/Services/service";
 
 
 
-
-
 export default function PatientRegistration() {
 
     const [form] = Form.useForm();

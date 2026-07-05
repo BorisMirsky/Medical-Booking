@@ -7,10 +7,11 @@ import {
     getBookingsByDoctor
 } from "@/app/Services/service";
 import { Booking } from "@/app/Models/Booking";
-import { Table, Button } from "antd";
+import { Table, Button, Space } from "antd";
 import { useEffect, useState } from "react";
 import "../globals.css";
-
+import Title from "antd/es/typography/Title";
+//import { cancelBooking } from '../Services/service';
 
 
 
@@ -89,17 +90,27 @@ export default function PatientBookings() {
 
     return (
         <div>
-            <br></br>
-            <h2>Мои бронирования</h2>
+            <Space
+                direction="vertical"
+                size="large"
+                style={{ margin: '2rem', width: '50%' }}
+            >
+                <Title level={2}>Мои бронирования</Title>
+            </Space>
             <div>
-                <br></br><br></br>
+                <Space
+                    direction="vertical"
+                    size="large"
+                    style={{ margin: '2rem', width: '50%' }}
+                >
                 <Table
                     dataSource={data}
                     columns={columns}
                     pagination={false}
                     footer={() => ""}
                     bordered
-                />
+                    />
+                </Space>
             </div>
         </div>
     );

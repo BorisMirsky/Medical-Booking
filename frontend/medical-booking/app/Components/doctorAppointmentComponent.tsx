@@ -15,8 +15,6 @@ import "../globals.css";
 
 const DoctorAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
     const [, setCurrentId] = useState("");
-    //const [bookingClosed, setBookingClosed] = useState(false);
-    //bookingStatus={bookingClosed}
     const patientusername: string = !booking ? "" : booking.patientUserName;
 
     useEffect(() => {
@@ -32,7 +30,6 @@ const DoctorAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
 
     return (
         <div>
-            <br></br>
             <div>
                 <Space direction="vertical" size={16}>
 

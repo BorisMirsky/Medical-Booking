@@ -4,10 +4,10 @@
 import React from 'react';
 import { getBookingsByDoctor } from "@/app/Services/service";
 import { Booking } from "@/app/Models/Booking";
-import { Table, Button } from "antd";
+import { Table, Button, Space } from "antd";
 import { useEffect, useState } from "react";
 import "../globals.css";
-
+import Title from "antd/es/typography/Title";
 
 
 interface IDoctorCreateAppointmentProps {
@@ -16,7 +16,7 @@ interface IDoctorCreateAppointmentProps {
 
 
 const DoctorCreateAppointment: React.FC<IDoctorCreateAppointmentProps> = ({ onNext }) => {
-    const [currentId, setCurrentId] = useState("");
+    const [, setCurrentId] = useState("");
     const [bookings, setBookings] = useState<Booking[]>([]);
 
     const columns = [
@@ -46,9 +46,7 @@ const DoctorCreateAppointment: React.FC<IDoctorCreateAppointmentProps> = ({ onNe
             key: 'cancel',
             render: (text: string, record: object) => (
                 <Button
-                    //onClick={() => onNext(record['key' as keyof typeof record])}
                     onClick={() => createAppointment(record['key' as keyof typeof record])}
-                    //disabled={!bookings[record['key' as keyof typeof record]].isBooked}
                 >
                     {"Создать"}
                 </Button>
@@ -84,17 +82,27 @@ const DoctorCreateAppointment: React.FC<IDoctorCreateAppointmentProps> = ({ onNe
 
     return (
         <div>
-            <br />
-            <h2>Мои бронирования</h2>
+            <Space
+                direction="vertical"
+                size="large"
+                style={{ margin: '2rem', width: '50%' }}
+            >
+                <Title level={2}>Мои бронирования</Title>
+            </Space>
             <div>
-                <br /><br />
+                <Space
+                    direction="vertical"
+                    size="large"
+                    style={{ margin: '2rem', width: '50%' }}
+                >
                 <Table
                     dataSource={data}
                     columns={columns}
                     pagination={false}
                     footer={() => ""}
                     bordered
-                />
+                    />
+                </Space>
             </div>
         </div>
     );

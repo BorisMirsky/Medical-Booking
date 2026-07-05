@@ -1,6 +1,6 @@
-﻿//import '../App.css';
+﻿
 import { Select, Space } from 'antd';
-//const { Option } = Select;
+
 
 
 export default function SelectDoctorBySpeciality() {
@@ -9,7 +9,6 @@ export default function SelectDoctorBySpeciality() {
             Подбор врача по специализации
             <Select
                 style={{ width: 200 }}
-                //onChange={handleFunction}
                 options={[
                     { value: 'Neurologist', label: 'Невролог' },
                     { value: 'Surgeon', label: 'Хирург' },

@@ -93,8 +93,6 @@ export default function DoctorRegistration() {
                     <Option value="female">female</Option>
                 </Select>
             </Form.Item>
-            <br></br>
-            <br></br>
             <Form.Item label={null}>
                 <Space size='large'>
                     <Button

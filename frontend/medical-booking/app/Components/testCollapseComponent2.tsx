@@ -16,9 +16,6 @@ interface Element2Props {
 }
 
 
-
-
-// Child component for buttons
 const Element1 = ({ buttonStates, onButtonClick }: Element1Props) => {
     return (
         <Space>
@@ -49,7 +46,6 @@ const Element1 = ({ buttonStates, onButtonClick }: Element1Props) => {
 
 
 
-// Child component to display values
 const Element2 = ({ buttonStates }: Element2Props) => {
     return (
         <div>
@@ -62,16 +58,13 @@ const Element2 = ({ buttonStates }: Element2Props) => {
 
 
 
-// Parent component that holds the state
 const CollapseComponent: React.FC = () => {
-    // State is "lifted up" to the parent component
     const [buttonStates, setButtonStates] = useState<ButtonStates>({
         btn1: false,
         btn2: false,
         btn3: false,
     });
 
-    // This function updates the state and is passed to the child
     const handleButtonClick = (key: string) => {
         setButtonStates(prevStates => ({
             ...prevStates,

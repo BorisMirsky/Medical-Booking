@@ -46,9 +46,6 @@ const Element1 = ({ buttonStates, onButtonClick }: Element1Props) => {
 const Element1Parent = ({ buttonStates, onButtonClick }: Element1Props) => {   
     return (
         <div>
-            <br />
-            <br />
-            <br />
             <div>
                 <Element1
                     buttonStates={buttonStates}
@@ -82,11 +79,6 @@ const CollapseComponent: React.FC = () => {
                 buttonStates={buttonStates}
                 onButtonClick={handleButtonClick} />,
         },
-        //{
-        //    key: '2',
-        //    label: 'Element2 (See Results Here)',
-        //    children: <Element2 buttonStates={buttonStates} />,
-        //},
     ];
 
     return <Collapse defaultActiveKey={['1', '2']} items={items} />;

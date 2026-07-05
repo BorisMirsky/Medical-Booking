@@ -4,14 +4,16 @@
 import React from 'react';
 import { getAllAppointments } from "@/app/Services/service";
 import { Appointment } from "@/app/Models/Appointment";
-import { Table } from "antd";
+import { Table, Space } from "antd";
 import { useEffect, useState } from "react";
 import "../globals.css";
+import Title from "antd/es/typography/Title";
+
 
 
 
 export default function PatientsMisbehavior() {
-    const [currentRole, setCurrentRole] = useState("");
+    const [ , setCurrentRole] = useState("");
     const [apps, setApps] = useState<Appointment[]>([]);
 
     const columns = [
@@ -80,17 +82,28 @@ export default function PatientsMisbehavior() {
 
     return (
         <div>
-            <br /><br />
-            <h1>Пациенты с нарушениями дисциплины</h1>
+            <Space
+                direction="vertical"
+                size="large"
+                style={{ margin: '2rem', width: '50%' }}
+            >
+                <Title level={2}>Пациенты с нарушениями дисциплины</Title>
+                </Space>
+
             <div>
-                <br /><br /><br />
+                <Space
+                    direction="vertical"
+                    size="large"
+                    style={{ margin: '2rem', width: '50%' }}
+                >
                 <Table
                     dataSource={data}
                     columns={columns}
                     pagination={false}
                     footer={() => ""}
                     bordered
-                />
+                    />
+                </Space>
             </div>
         </div>
     );

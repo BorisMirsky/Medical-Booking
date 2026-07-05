@@ -11,15 +11,10 @@ import dayjs from 'dayjs';
 
 
 export default function SelectSlot() {
-    //const [currentRole, setCurrentRole] = useState("");
     const [doctors, setDoctors] = useState<Doctor[]>([]);
 
-
     useEffect(() => {
-        //const role = localStorage.getItem("role") || "";
-        //setCurrentRole(role);
-        //localStorage.clear();
-    }, []);
+        }, []);
 
     const [form] = Form.useForm();
 
@@ -27,21 +22,15 @@ export default function SelectSlot() {
         console.log('onFinishFailed:', errorInfo);
     }
 
-
     const onFinish: FormProps<DoctorSheduleRequest>['onFinish'] = (values: any) => {
-
         for (const variable in doctors) {
             if (doctors[variable].userName == values.username && doctors[variable].speciality == values.speciality) {
                 values.id = doctors[variable].id;
             }
         }
         values.day = dayjs(values.day).format('MM-DD-YYYY');
-        //getSlotsByDoctorIdAndDay(values.id, values.day)
-        //console.log('values ', values);
         form.resetFields();
     }
-
-
 
     const handleSelectSpeciality = (value: string) => {
         setDoctors([]);
@@ -57,9 +46,6 @@ export default function SelectSlot() {
         value: doctor.userName,
         label: doctor.userName
     }));
-
-
-
 
     return (
         <Form
@@ -105,9 +91,7 @@ export default function SelectSlot() {
                 name="day"
                 rules={[{ required: true, message: 'Please input startday!' }]}
             >
-                <DatePicker
-                    //className="custom-datepicker"
-                />
+                <DatePicker />
             </Form.Item>
 
             <Space size='large'>
@@ -121,9 +105,7 @@ export default function SelectSlot() {
                     Сбросить
                 </Button>
             </Space>
-
         </Form>
-
     );
 }
 

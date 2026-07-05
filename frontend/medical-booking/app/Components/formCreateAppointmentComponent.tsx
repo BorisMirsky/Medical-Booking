@@ -4,10 +4,9 @@ import React from 'react';
 import {
     createAppointment, AppointmentRequest, DoctorAppointmentProps, setBookingClosed
 } from "@/app/Services/service";
-//import { Booking } from "@/app/Models/Booking";
 import { Select, FormProps, Button, Form, Input, Space } from "antd";
 import "../globals.css";
-import { useState } from "react";      //useEffect
+import { useState } from "react";    
 
 
 
@@ -55,7 +54,6 @@ const FormAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
                     rules={[{ required: true, message: 'Надо заполнить' }]}
                 >
                     <Select
-                        //defaultValue=" "
                         style={{ width: 120 }}
                         options={[
                             { value: 'да', label: 'Да' },
@@ -70,7 +68,6 @@ const FormAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
                     rules={[{ required: true, message: 'Надо заполнить' }]}
                 >
                     <Select
-                        //defaultValue=" "
                         style={{ width: 120 }}
                         options={[
                             { value: 'да', label: 'Да' },
@@ -86,9 +83,6 @@ const FormAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
                 >
                     <Input />
                 </Form.Item>
-
-                <br></br>
-                <br></br>
 
                 <Form.Item label={null}>
                     <Space size='large'>

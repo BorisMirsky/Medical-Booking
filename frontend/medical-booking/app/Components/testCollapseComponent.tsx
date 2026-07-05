@@ -16,28 +16,21 @@ interface Element2Props {
 }
 
 
-// doctorSheduleComponent    parent
 const Element1Parent = ({ buttonStates, onButtonClick }: Element1Props) => {
     return (
         <div>
             <p>value1 <b>{buttonStates.btn1.toString()}</b></p>
             <p>value2 <b>{buttonStates.btn2.toString()}</b></p>
             <p>value3 <b>{buttonStates.btn3.toString()}</b></p>
-            <br/>
-            <br/>
-            <br/>
-        <div>
             <Element1
                 buttonStates={buttonStates}
                 onButtonClick={onButtonClick} />
-        </div>
         </div>
 
     );
 };
 
 
-// TimeslotsButtonsComponent
 const Element1 = ({ buttonStates, onButtonClick }: Element1Props) => {
     return (
         <Space>

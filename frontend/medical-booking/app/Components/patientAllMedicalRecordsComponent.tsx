@@ -3,15 +3,9 @@
 import React from 'react';
 import { getMedicalRecordsByPatient, DoctorAppointmentProps } from "@/app/Services/service";
 import { MedicalRecord } from "@/app/Models/MedicalRecord";
-import { Table } from "antd";
+import { Table, Space } from "antd";
 import { useEffect, useState } from "react";
 import "../globals.css";
-
-
-
-//interface PatientAllMedicalRecordsProps {
-//    patientid: string;
-//}
 
 
 const PatientAllMedicalRecords: React.FC<DoctorAppointmentProps> = ({booking }) => {
@@ -72,7 +66,6 @@ const PatientAllMedicalRecords: React.FC<DoctorAppointmentProps> = ({booking }) 
         const getMedrecords = async () => {
             const responce = await getMedicalRecordsByPatient(booking.patientId);
             setMedrecords(responce);
-            console.log('medrecords ', medrecords);
         }
         getMedrecords();
     }, []);
@@ -98,16 +91,20 @@ const PatientAllMedicalRecords: React.FC<DoctorAppointmentProps> = ({booking }) 
 
     return (
         <div>
-            <br/>
             <div>
-                <br/><br/>
+                <Space
+                    direction="vertical"
+                    size="large"
+                    style={{ margin: '2rem', width: '50%' }}
+                >
                 <Table
                     dataSource={data}
                     columns={columns}
                     pagination={false}
                     footer={() => ""}
                     bordered
-                />
+                    />
+                </Space>
             </div>
         </div>
     );

@@ -15,7 +15,7 @@ interface Props {
 }
 
 
-const Element1 = ({ numbers, setNumbers }: Props) => {
+const Element1 = ({ , setNumbers }: Props) => {
 
     const handleClick = (key: number) => {
         if (key == 1) {
@@ -31,7 +31,6 @@ const Element1 = ({ numbers, setNumbers }: Props) => {
             console.log('value3 ', value3.toString())
         }
         setNumbers(oldNumbers => [...oldNumbers, 1]);
-        //console.log("handleClick numbers ", numbers);
     }
 
 
@@ -79,7 +78,6 @@ const Element2 = () => {
 
 const CollapseComponent: React.FC = () => {
     const [numbers, setNumbers] = useState<number[]>([]);
-    //console.log("CollapseComponent numbers ", numbers);
     const items: CollapseProps['items'] = [
         {
             key: '1',

@@ -16,6 +16,7 @@ export default function PatientsMisbehavior() {
     const [ , setCurrentRole] = useState("");
     const [apps, setApps] = useState<Appointment[]>([]);
 
+
     const columns = [
         {
             title: 'N',
@@ -91,11 +92,6 @@ export default function PatientsMisbehavior() {
                 </Space>
 
             <div>
-                <Space
-                    direction="vertical"
-                    size="large"
-                    style={{ margin: '2rem', width: '50%' }}
-                >
                 <Table
                     dataSource={data}
                     columns={columns}
@@ -103,7 +99,6 @@ export default function PatientsMisbehavior() {
                     footer={() => ""}
                     bordered
                     />
-                </Space>
             </div>
         </div>
     );

@@ -70,11 +70,6 @@ export default function PatientMyAppointments() {
                 <Title level={2}>Мои посещения врачей</Title>
             </Space>
             <div>
-                <Space
-                    direction="vertical"
-                    size="large"
-                    style={{ margin: '2rem', width: '50%' }}
-                >
                 <Table
                     dataSource={data}
                     columns={columns}
@@ -82,7 +77,6 @@ export default function PatientMyAppointments() {
                     footer={() => ""}
                     bordered
                     />
-                </Space>
             </div>
         </div>
     );

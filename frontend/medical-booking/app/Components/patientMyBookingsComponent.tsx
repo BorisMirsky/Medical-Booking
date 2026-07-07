@@ -45,6 +45,9 @@ export default function PatientBookings() {
             title: 'Начало приёма',
             dataIndex: 'timeslotStart',
             key: 'timeslotStart',
+            sorter: (a: any, b: any) => a.timeslotStart.localeCompare(b.timeslotStart),
+            //sorter: (a: any, b: any) => new Date(a.timeslotStart).getTime() - new Date(b.timeslotStart).getTime(),
+            //defaultSortOrder: 'ascend', // опционально
         },
         {
             title: 'Конец приёма',
@@ -135,11 +138,6 @@ export default function PatientBookings() {
                 <Title level={2}>Мои записи к врачам (бронирования)</Title>
             </Space>
             <div>
-                <Space
-                    direction="vertical"
-                    size="large"
-                    style={{ margin: '2rem', width: '50%' }}
-                >
                 <Table
                     dataSource={data}
                     columns={columns}
@@ -147,7 +145,6 @@ export default function PatientBookings() {
                     footer={() => ""}
                     bordered
                     />
-                </Space>
             </div>
         </div>
     );

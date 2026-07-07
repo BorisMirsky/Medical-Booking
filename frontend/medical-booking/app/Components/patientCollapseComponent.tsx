@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import type { CollapseProps } from 'antd';
-import { Collapse, Space } from 'antd';
+import { Collapse } from 'antd';
 import DoctorShedule from '../Components/doctorSheduleComponent';
 import PatientBookings from '../Components/patientMyBookingsComponent';
 import PatientMyAppointments from '../Components/patientMyAppointmentsComponent';
@@ -36,13 +36,9 @@ const CollapseElement: React.FC = () => {
 
     return (
         <div>
-            <Space
-                direction="vertical"
-                size="large"
-                style={{ margin: '2rem', width: '50%' }}
-            >
+
                 <Collapse accordion items={items} />
-            </Space>
+
         </div>
         );
     }

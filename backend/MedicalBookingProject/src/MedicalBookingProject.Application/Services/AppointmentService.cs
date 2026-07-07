@@ -42,12 +42,11 @@ namespace MedicalBookingProject.Application.Services
         public async Task<List<AppointmentDTO>> GetAll()
         {
             var allAppointments = await _appointmentRepo.GetAll();
-
             return allAppointments
-                .Where(dto => dto.PatientCame == "no"
-                              || dto.PatientIsLate == "yes"
-                              || dto.PatientUnacceptableBehavior != " ")
-                .ToList();
+                    .Where(dto => string.Equals(dto.PatientCame, "нет", StringComparison.OrdinalIgnoreCase)
+                                  || string.Equals(dto.PatientIsLate, "да", StringComparison.OrdinalIgnoreCase)
+                                  || !string.IsNullOrWhiteSpace(dto.PatientUnacceptableBehavior))
+                    .ToList();
         }
     }
 }

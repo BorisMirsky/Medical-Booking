@@ -47,8 +47,9 @@ namespace MedicalBookingProject.Application.Services
 
         public async Task UpdateTimeslot(Guid slotid, Guid patientid, Boolean isbooked)
         {
-            Guid patientIdToUse = isbooked ? patientid : Guid.Empty;
-            await _timeslotRepo.Update(slotid, patientIdToUse, isbooked);
+            //Guid patientIdToUse = isbooked ? patientid : Guid.Empty;
+            //await _timeslotRepo.Update(slotid, patientIdToUse, isbooked);
+            await _timeslotRepo.Update(slotid, patientid, isbooked);
         }
     }
 }

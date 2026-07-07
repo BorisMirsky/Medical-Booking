@@ -6,8 +6,6 @@ using MedicalBookingProject.Domain.Models.Appointments;
 using MedicalBookingProject.Domain.Models.MedicalRecords;
 
 
-
-
 namespace MedicalBookingProject.Domain.Models.Shedules
 {
     [Table("timeslots")]

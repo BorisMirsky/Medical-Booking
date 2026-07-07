@@ -1,8 +1,6 @@
-﻿
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using MedicalBookingProject.Domain.Models.Users;
-
 
 
 namespace MedicalBookingProject.DataAccess.Configuration

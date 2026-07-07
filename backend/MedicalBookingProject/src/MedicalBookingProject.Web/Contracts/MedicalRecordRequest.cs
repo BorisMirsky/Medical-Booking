@@ -1,6 +1,5 @@
-﻿using MedicalBookingProject.Domain.Models.Appointments;
-using MedicalBookingProject.Domain.Models.Users;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿
+
 
 namespace MedicalBookingProject.Web.Contracts
 {

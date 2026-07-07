@@ -1,18 +1,12 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Users;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using MedicalBookingProject.Application.Scripts;
-
-
 
 
 namespace MedicalBookingProject.DataAccess.Repo
 {
 
     using BCrypt.Net;
-
-
     public class AdminRepo : IAdminRepo
     {
 

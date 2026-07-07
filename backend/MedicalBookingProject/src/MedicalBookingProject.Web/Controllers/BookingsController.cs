@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Mvc;
-using MedicalBookingProject.Domain.Models.Bookings;
 using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Web.Contracts;
-using MedicalBookingProject.Application.Services;
-using MedicalBookingProject.Domain.Models.Shedules;
-using MedicalBookingProject.Domain.Models.Users;
-using System.Diagnostics;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 

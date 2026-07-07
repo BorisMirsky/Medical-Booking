@@ -6,8 +6,6 @@ using MedicalBookingProject.Domain.Models.Users;
 using MedicalBookingProject.Domain.Models.MedicalRecords;
 
 
-
-
 namespace MedicalBookingProject.Domain.Models.Appointments
 {
     [Table("appointments")]
@@ -42,13 +40,9 @@ namespace MedicalBookingProject.Domain.Models.Appointments
 
         // binded enities
         public Patient? Patient { get; set; }
-
         public Doctor? Doctor { get; set; }
-
         public Timeslot? Timeslot { get; set; }
-
         public Booking? Booking { get; set; }
-
         public MedicalRecord? MedicalRecord { get; set; }
     }
 }

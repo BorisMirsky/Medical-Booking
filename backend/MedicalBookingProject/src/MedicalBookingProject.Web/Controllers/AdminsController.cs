@@ -2,12 +2,7 @@
 using MedicalBookingProject.Domain.Models.Users;
 using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Web.Contracts;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication;
-using System.Diagnostics;
 using Microsoft.AspNetCore.Identity.Data;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-
 
 
 namespace MedicalBookingProject.Web.Controllers

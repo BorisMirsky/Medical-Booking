@@ -1,8 +1,6 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
 
 
-
-
 namespace MedicalBookingProject.Application.Services
 {
     public class BookingService : IBookingService

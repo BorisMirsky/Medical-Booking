@@ -3,16 +3,8 @@ using MedicalBookingProject.Domain.Models.Users;
 using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Web.Contracts;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication;
-using System.Diagnostics;
 using Microsoft.AspNetCore.Identity.Data;
-using MedicalBookingProject.Application.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-//                     is possible to do:        
-//  + LoginDoctor + RegisterPatient + LoginPatient + LoginAdmin (все POST)
-// + возможность редактирования Doctor           (UPDATE)
-// + возможность блокировки Doctor & Patient     (как это сделать? добавит флажок)
-
 
 
 namespace MedicalBookingProject.Web.Controllers
@@ -22,6 +14,7 @@ namespace MedicalBookingProject.Web.Controllers
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class PatientsController : ControllerBase
     {
+
         private readonly IPatientService _patientService;
 
         public PatientsController(IPatientService patientService)
@@ -59,7 +52,6 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
-
         [Route("Login")]
         [HttpPost]
         [AllowAnonymous]
@@ -85,7 +77,6 @@ namespace MedicalBookingProject.Web.Controllers
         }
 
 
-
         [Route("GetPatient")]
         [HttpGet]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin, admin, doctor, patient")]
@@ -100,7 +91,6 @@ namespace MedicalBookingProject.Web.Controllers
 
             return BadRequest(new { message = "User Patient is not recognized" });
         }
-
 
 
         [Route("GetPatients")]

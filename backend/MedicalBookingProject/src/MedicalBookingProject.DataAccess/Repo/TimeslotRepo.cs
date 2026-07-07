@@ -37,8 +37,6 @@ namespace MedicalBookingProject.DataAccess.Repo
         }
 
 
-
-
         public async Task<Timeslot> Get(Guid id)
         {
             Timeslot? entity = await _context.Timeslots

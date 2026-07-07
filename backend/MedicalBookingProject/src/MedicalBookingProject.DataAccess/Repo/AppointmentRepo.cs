@@ -59,16 +59,6 @@ namespace MedicalBookingProject.DataAccess.Repo
                .Select(g => g.OrderByDescending(item => item.Booking!.CreatedAt).FirstOrDefault())
                .ToListAsync();
 
-            //var Dtos = entities
-            //    .Select(b => new AppointmentDTO(b.Id, b.BookingId, b.DoctorId, 
-            //                                b.PatientId, b.TimeslotId, 
-            //                                b.Doctor?.Speciality, b.Doctor?.UserName,
-            //                                b.Patient?.UserName,
-            //                                b.Timeslot?.DatetimeStart,
-            //                                b.Timeslot?.DatetimeStop,
-            //                                b.PatientCame, b.PatientIsLate,
-            //                                b.PatientUnacceptableBehavior))
-            //    .ToList();
             var Dtos = entities
                 .Select(b => new AppointmentDTO(
                     b.Id,
@@ -102,16 +92,6 @@ namespace MedicalBookingProject.DataAccess.Repo
                .Select(g => g.OrderByDescending(item => item.Booking!.CreatedAt).FirstOrDefault())
                .ToListAsync();
 
-            //var Dtos = entities
-            //    .Select(b => new AppointmentDTO(b.Id, b.BookingId, b.DoctorId,
-            //                                b.PatientId, b.TimeslotId,
-            //                                b.Doctor?.Speciality, b.Doctor?.UserName,
-            //                                b.Patient?.UserName,
-            //                                b.Timeslot?.DatetimeStart,
-            //                                b.Timeslot?.DatetimeStop,
-            //                                b.PatientCame, b.PatientIsLate,
-            //                                b.PatientUnacceptableBehavior))
-            //    .ToList();
             var Dtos = entities
                 .Select(b => new AppointmentDTO(
                     b.Id,
@@ -133,33 +113,6 @@ namespace MedicalBookingProject.DataAccess.Repo
             return Dtos;
         }
 
-        //public async Task<List<AppointmentDTO>> GetAll()
-        //{
-        //    var entities = await _context.Appointments
-        //       .Include(item => item.Doctor)
-        //       .Include(item => item.Timeslot)
-        //       .Include(item => item.Patient!)
-        //       .Include(item => item.Booking)
-        //       .Where(item => item.PatientCame == "no" || item.PatientIsLate == "yes" || item.PatientUnacceptableBehavior != " ") 
-        //       .GroupBy(item => item.TimeslotId)
-        //       .Select(g => g.OrderByDescending(item => item.Booking!.CreatedAt).FirstOrDefault())
-        //       .ToListAsync();
-
-        //    var Dtos = entities
-        //        .Select(b => new AppointmentDTO(b.Id, b.BookingId, b.DoctorId,
-        //                                    b.PatientId, b.TimeslotId,
-        //                                    b.Patient.UserName, 
-        //                                    b.Doctor.UserName,
-        //                                    b.Patient?.UserName,
-        //                                    b.Timeslot?.DatetimeStart,
-        //                                    b.Timeslot?.DatetimeStop,
-        //                                    b.PatientCame, b.PatientIsLate,
-        //                                    b.PatientUnacceptableBehavior))
-        //        .ToList();
-
-        //    return Dtos;
-        //}
-
         public async Task<List<AppointmentDTO>> GetAll()
         {
             var entities = await _context.Appointments
@@ -171,16 +124,6 @@ namespace MedicalBookingProject.DataAccess.Repo
                 .Select(g => g.OrderByDescending(item => item.Booking!.CreatedAt).FirstOrDefault())
                 .ToListAsync();
 
-            //var Dtos = entities
-            //    .Select(b => new AppointmentDTO(b.Id, b.BookingId, b.DoctorId,
-            //                                b.PatientId, b.TimeslotId,
-            //                                b.Doctor?.Speciality, b.Doctor?.UserName,
-            //                                b.Patient?.UserName, 
-            //                                b.Timeslot?.DatetimeStart,
-            //                                b.Timeslot?.DatetimeStop,
-            //                                b.PatientCame, b.PatientIsLate,
-            //                                b.PatientUnacceptableBehavior))
-            //    .ToList();
             var Dtos = entities
                 .Select(b => new AppointmentDTO(
                     b.Id,

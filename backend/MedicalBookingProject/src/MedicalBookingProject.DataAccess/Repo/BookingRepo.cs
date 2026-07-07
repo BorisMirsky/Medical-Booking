@@ -1,8 +1,6 @@
 ﻿using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Bookings;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
-
 
 
 namespace MedicalBookingProject.DataAccess.Repo
@@ -103,8 +101,6 @@ namespace MedicalBookingProject.DataAccess.Repo
                     b.Timeslot?.DatetimeStop))
                 .ToList();
         }
-
-
 
         public async Task SetBookingClosed(Guid id)
         {

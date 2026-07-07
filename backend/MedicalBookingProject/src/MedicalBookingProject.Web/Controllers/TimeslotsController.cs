@@ -1,15 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using MedicalBookingProject.Domain.Models.Shedules;
 using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Web.Contracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using MedicalBookingProject.Domain.Models.Users;
-using MedicalBookingProject.Application.Services;
-using System.Diagnostics;
-
-
 
 
 
@@ -23,12 +18,9 @@ namespace MedicalBookingProject.Web.Controllers
 
         private readonly ITimeslotService _timeslotService;
 
-        private readonly IBookingService _bookingService;
-
-        public TimeslotsController(ITimeslotService timeslotService, IBookingService bookingService)
+        public TimeslotsController(ITimeslotService timeslotService) 
         {
             _timeslotService = timeslotService;
-            _bookingService = bookingService;
         }
 
 
@@ -43,7 +35,6 @@ namespace MedicalBookingProject.Web.Controllers
                                                   request.TimeStop, request.TimeChunk);
             return Ok("ok");
         }
-
 
 
         [Route("ByDoctorId")]

@@ -9,9 +9,9 @@ using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using MedicalBookingProject.Application.Scripts;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
-
-
 
 string connection = builder.Configuration.GetConnectionString("DefaultConnection")!;
 

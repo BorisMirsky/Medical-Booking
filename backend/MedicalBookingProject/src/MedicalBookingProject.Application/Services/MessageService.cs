@@ -2,7 +2,6 @@
 using MedicalBookingProject.Domain.Models.Messages;
 
 
-
 namespace MedicalBookingProject.Application.Services
 {
     public class MessageService : IMessageService

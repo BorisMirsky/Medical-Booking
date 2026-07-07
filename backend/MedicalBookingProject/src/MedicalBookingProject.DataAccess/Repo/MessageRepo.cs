@@ -31,8 +31,6 @@ namespace MedicalBookingProject.DataAccess.Repo
             return entity;
         }
 
-
-
         public async Task<List<Message>> ReadReceived(Int16 ToRoleId, Guid ToId)
         {
             List<Message> entities = await _context.Messages
@@ -49,6 +47,5 @@ namespace MedicalBookingProject.DataAccess.Repo
                                             .ToListAsync();
             return entities!;
         }
-
     }
 }

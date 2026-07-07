@@ -41,7 +41,6 @@ namespace MedicalBookingProject.DataAccess.Repo
         {
             await _dbContext.SaveChangesAsync();
         }
-
     }
 }
 

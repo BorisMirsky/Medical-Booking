@@ -1,7 +1,6 @@
 ﻿using MedicalBookingProject.Domain.Models.Shedules;
 
 
-
 namespace MedicalBookingProject.Domain.Abstractions
 {
     public interface ITimeslotService

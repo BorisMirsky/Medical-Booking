@@ -1,5 +1,4 @@
 ﻿
-
 using BCrypt_Alias = BCrypt.Net.BCrypt;
 using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Users;

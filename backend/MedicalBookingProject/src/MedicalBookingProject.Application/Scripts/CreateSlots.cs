@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
+﻿
 
 namespace MedicalBookingProject.Application.Scripts
 {
@@ -21,22 +13,23 @@ namespace MedicalBookingProject.Application.Scripts
         public int Days;
         public CreateSlots(int y, int m, int d, int startTime, int stopTime, int chunk, int days) 
         {
-            this.Y = y;
-            this.M = m;
-            this.D = d;
-            this.StartTime = startTime;
-            this.StopTime = stopTime;
-            this.Chunk = chunk;
-            this.Days = days; 
+            Y = y;
+            M = m;
+            D = d;
+            StartTime = startTime;
+            StopTime = stopTime;
+            Chunk = chunk;
+            Days = days; 
         }    
 
 
         public List<List<string>> Run() 
         {
-            List<string> result = SplitedDay(this.Y, this.M, this.D, this.StartTime, this.StopTime, this.Chunk, this.Days);
+
+            List<string> result = SplitedDay(Y, M, D, StartTime, StopTime, Chunk, Days);
             List<List<string>> result1 = CollectSlots(result);
             List<List<string>> result2 = [];
-            //
+
             foreach (var slot in result1)
             {
                 List<string> slot1 = new List<string>(2);
@@ -97,7 +90,7 @@ namespace MedicalBookingProject.Application.Scripts
         }
 
 
-        // соберёт отдельные метки в слоты вида [s1,s2], [s2,s3], [s3,s4]
+        // соберёт отдельные метки в слоты вида [s1,s2], [s2,s3], [s3,s4], ...
         public static List<List<string>> CollectSlots(List<string> allSplits)
         {
             int counter = 0;    // сквозной счётчкик

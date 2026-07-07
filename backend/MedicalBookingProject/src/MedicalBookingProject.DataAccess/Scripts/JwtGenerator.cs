@@ -6,8 +6,6 @@ using MedicalBookingProject.Domain.Abstractions;
 using Microsoft.Extensions.Configuration;
 
 
-
-
 namespace MedicalBookingProject.Application.Scripts
 {
     public class JwtGenerator : IJwtGenerator

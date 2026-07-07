@@ -30,7 +30,6 @@ namespace MedicalBookingProject.Web.Controllers
                                                             request.DoctorId,
                                                             request.PatientId,
                                                             request.TimeslotId,
-                                                            //request.AppointmentId,
                                                             request.Diagnosis,
                                                             request.Symptoms,
                                                             request.PrescribedTreatment,

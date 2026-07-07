@@ -2,8 +2,6 @@
 using MedicalBookingProject.Application.Scripts;
 using MedicalBookingProject.Domain.Abstractions;
 using MedicalBookingProject.Domain.Models.Shedules;
-using MedicalBookingProject.Domain.Models.Users;
-
 
 
 namespace MedicalBookingProject.Application.Services

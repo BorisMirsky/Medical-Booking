@@ -1,4 +1,4 @@
-﻿using MedicalBookingProject.DataAccess.Repo;
+﻿
 using MedicalBookingProject.Domain.Abstractions;
 
 
@@ -21,7 +21,7 @@ namespace MedicalBookingProject.Application.Services
                                                 string? prescribedTreatment, string? referralTests,
                                                 string? visualExamination, uint? finalCost)
         {
-            // Получаем AppointmentId по BookingId
+
             var appointmentId = await _appointmentService.GetByBookingId(bookingId);
             if (appointmentId == null)
             {

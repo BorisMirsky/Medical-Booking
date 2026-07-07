@@ -39,10 +39,6 @@ namespace MedicalBookingProject.Application.Services
             return await _appointmentRepo.GetByDoctor(id);
         }
 
-        //public async Task<List<AppointmentDTO>> GetAll()
-        //{
-        //    return await _appointmentRepo.GetAll();
-        //}
         public async Task<List<AppointmentDTO>> GetAll()
         {
             var allAppointments = await _appointmentRepo.GetAll();

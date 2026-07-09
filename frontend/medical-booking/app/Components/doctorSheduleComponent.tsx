@@ -41,6 +41,7 @@ export default function DoctorShedule({ numbers, setNumbers, }: DoctorShedulePro
 
     const onFinish: FormProps<DoctorSheduleRequest>['onFinish'] = (values: DoctorSheduleRequest) => {
         setSlots1(processedSlots[selectedDay]);
+        console.log("DoctorShedule onFinish values: ", values);
         setButtonsFlag(1);
     }
 
@@ -206,20 +207,28 @@ export default function DoctorShedule({ numbers, setNumbers, }: DoctorShedulePro
 
             </Form>
 
-            <br/><br/><br/>
+
             <div>
                 {
                     (buttonsFlag === 0) ? (
                         <div> </div>
                     ) : (
+                            <Space
+                                direction="vertical"
+                                size="large"
+                                style={{ margin: '2rem', width: '50%' }}
+                            >
                             <div>
                                 <TimeslotsButtons
                                     {...props}
                                 />
-                            </div>
+                                </div>
+                                </Space>
                     )
                 }
-            </div>
+                </div>
+
+
         </div>
         );
 }

@@ -25,13 +25,8 @@
 
 - Все пользователи разбиты на три роли: админ, врачи, пациенты.
 
-- БД лежат готовые пользователи с разными ролями, и ими можно сразу начинать пользоваться (логины и пароли ниже).
+- В БД лежат готовые пользователи с разными ролями, и ими можно сразу начинать пользоваться (логины и пароли ниже).
 
-- Две папки Scripts:
-
--- Medical-Booking\backend\MedicalBookingProject\src\MedicalBookingProject.Application\Scripts\CreateSlots.cs - разбивка временнОго диапазона на слоты заданной длительности.
-
--- Medical-Booking\backend\MedicalBookingProject\src\MedicalBookingProject.DataAccess\Scripts\JwtGenerator.cs - генерит Jwt токены.
 
 
 ## Скачать

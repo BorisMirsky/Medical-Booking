@@ -4,13 +4,12 @@
 import React from 'react';
 import "../globals.css";
 import { Slot } from "@/app/Models/Slot";   
-import { Button, Space } from 'antd';
+import { Button } from 'antd';
 import {
     updateTimeslot, TimeSlotUpdateRequest,
     createBooking, BookingCreateRequest, DoctorSheduleProps
 } from "@/app/Services/service";
 import { useState, useEffect } from "react";  
-
 
 
 
@@ -26,15 +25,19 @@ export default function TimeslotsButtons({ setNumbers, slots }: DoctorShedulePro
     }, []);
 
 
-    const data = Object.keys(slots).map((slot, index) => ({
+    const sortedSlots = [...slots].sort((a, b) => {
+        return a.datetimeStart.localeCompare(b.datetimeStart);
+    });
+
+    const data = Object.keys(sortedSlots).map((slot, index) => ({
         key: index,
-        id: slots[index].id,
-        datetimeStart: slots[index].datetimeStart,
-        datetimeStop: slots[index].datetimeStop,
-        label: slots[index].datetimeStart.split(" ")[1] + " - " + slots[index].datetimeStop.split(" ")[1],
-        isBooked: slots[index].isBooked,
-        doctorId: slots[index].doctorId,
-        patientId: slots[index].patientId
+        id: sortedSlots[index].id,
+        datetimeStart: sortedSlots[index].datetimeStart,
+        datetimeStop: sortedSlots[index].datetimeStop,
+        label: sortedSlots[index].datetimeStart.split(" ")[1] + " - " + sortedSlots[index].datetimeStop.split(" ")[1],
+        isBooked: sortedSlots[index].isBooked,
+        doctorId: sortedSlots[index].doctorId,
+        patientId: sortedSlots[index].patientId
     }));
 
     const timeslotRequest: TimeSlotUpdateRequest = {
@@ -56,34 +59,45 @@ export default function TimeslotsButtons({ setNumbers, slots }: DoctorShedulePro
         if (currentUserRole == 'patient') {
             if (!value.isBooked) {
                 timeslotRequest.slotid = value.id;
-                timeslotRequest.patientid = currentUserId; 
+                timeslotRequest.patientid = currentUserId;
                 timeslotRequest.isbooked = true;
                 bookingRequest.slotid = value.id;
-                bookingRequest.patientid = currentUserId; 
+                bookingRequest.patientid = currentUserId;
                 bookingRequest.doctorid = value.doctorId;
                 bookingRequest.isbooked = true;
                 updateTimeslot(timeslotRequest);
                 createBooking(bookingRequest);
-                setNumbers(oldNumbers => [...oldNumbers, 1]);
+                setNumbers((oldNumbers: number[]) => [...oldNumbers, 1]);
             }
         }
     };
 
-
     return (
         <div>
-            <Space size='large'>
-                    {data.map((s) => (
-                        <Button
-                            key={s.id}
-                            onClick={() => handleClick(s)}
-                            color={(!s.isBooked) ? "primary" : "danger"}
-                            variant="solid"
-                        >
-                            {s.label}
-                </Button>
-                    ))}
-            </Space>
+            <div
+                style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(5, 1fr)',
+                    gap: '10px',
+                    maxWidth: '800px' 
+                }}
+            >
+                {data.map((s) => (
+                    <Button
+                        key={s.id}
+                        onClick={() => handleClick(s)}
+                        color={(!s.isBooked) ? "primary" : "danger"}
+                        variant="solid"
+                        style={{
+                            width: '100%', 
+                            height: '40px'
+                        }}
+                    >
+                        {s.label}
+                    </Button>
+                ))}
+                </div>
             </div>
     );
 }
+

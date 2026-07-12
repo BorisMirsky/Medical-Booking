@@ -46,8 +46,7 @@ export default function PatientBookings() {
             dataIndex: 'timeslotStart',
             key: 'timeslotStart',
             sorter: (a: any, b: any) => a.timeslotStart.localeCompare(b.timeslotStart),
-            //sorter: (a: any, b: any) => new Date(a.timeslotStart).getTime() - new Date(b.timeslotStart).getTime(),
-            //defaultSortOrder: 'ascend', // опционально
+            defaultSortOrder: 'descend', 
         },
         {
             title: 'Конец приёма',
@@ -117,7 +116,6 @@ export default function PatientBookings() {
         timeslotRequest.slotid = bookings[key].timeslotId;
         timeslotRequest.patientid = currentUserId; 
         timeslotRequest.isbooked = false;
-        //
         bookingRequest.slotid = bookings[key].timeslotId;
         bookingRequest.patientid = currentUserId; 
         bookingRequest.doctorid = bookings[key].doctorId;

@@ -90,11 +90,6 @@ const DoctorCreateAppointment: React.FC<IDoctorCreateAppointmentProps> = ({ onNe
                 <Title level={2}>Мои бронирования</Title>
             </Space>
             <div>
-                <Space
-                    direction="vertical"
-                    size="large"
-                    style={{ margin: '2rem', width: '50%' }}
-                >
                 <Table
                     dataSource={data}
                     columns={columns}
@@ -102,7 +97,6 @@ const DoctorCreateAppointment: React.FC<IDoctorCreateAppointmentProps> = ({ onNe
                     footer={() => ""}
                     bordered
                     />
-                </Space>
             </div>
         </div>
     );

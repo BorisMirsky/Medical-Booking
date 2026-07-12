@@ -134,7 +134,7 @@ export default function DoctorShedule({ numbers, setNumbers, }: DoctorShedulePro
 
 
     return (
-            <div>
+        <div>
             <Form
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
@@ -218,6 +218,8 @@ export default function DoctorShedule({ numbers, setNumbers, }: DoctorShedulePro
                                 size="large"
                                 style={{ margin: '2rem', width: '50%' }}
                             >
+                                <h3>Нажимая на кнопку вы создаёте бронирование.</h3>
+
                             <div>
                                 <TimeslotsButtons
                                     {...props}

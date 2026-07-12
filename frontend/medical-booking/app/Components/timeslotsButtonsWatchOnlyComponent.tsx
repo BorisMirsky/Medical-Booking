@@ -3,36 +3,51 @@
 import React from 'react';
 import "../globals.css";
 import { Slot } from "@/app/Models/Slot";
-import { Button, Space } from 'antd';
+import { Button} from 'antd';
 
 
 export default function TimeslotsButtonsWatchOnly(slots: Array<Slot>) {
 
-    const data = Object.keys(slots).map((slot, index) => ({
+    const slotsArray: Array<Slot> = Object.values(slots);
+    const sortedSlots = [...slotsArray].sort((a, b) => {
+        return a.datetimeStart.localeCompare(b.datetimeStart);
+    });
+
+    const data = sortedSlots.map((slot, index) => ({
         key: index,
-        id: slots[index].id,
-        datetimeStart: slots[index].datetimeStart,
-        datetimeStop: slots[index].datetimeStop,
-        label: slots[index].datetimeStart.split(" ")[1] + " - " + slots[index].datetimeStop.split(" ")[1],
-        isBooked: slots[index].isBooked,
-        doctorId: slots[index].doctorId,
-        patientId: slots[index].patientId
+        id: slot.id,
+        datetimeStart: slot.datetimeStart,
+        datetimeStop: slot.datetimeStop,
+        label: slot.datetimeStart.split(" ")[1] + " - " + slot.datetimeStop.split(" ")[1],
+        isBooked: slot.isBooked,
+        doctorId: slot.doctorId,
+        patientId: slot.patientId
     }));
 
     return (
         <div>
-            <Space size='large'>
+            <div
+                style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(5, 1fr)',
+                    gap: '10px',
+                    maxWidth: '800px'
+                }}
+            >
                 {data.map((s) => (
-
                     <Button
                         key={s.id}
                         color={(!s.isBooked) ? "primary" : "danger"}
                         variant="solid"
+                        style={{
+                            width: '100%',
+                            height: '40px'
+                        }}
                     >
                         {s.label}
                     </Button>
                 ))}
-            </Space>
+            </div>
         </div>
     );
 }

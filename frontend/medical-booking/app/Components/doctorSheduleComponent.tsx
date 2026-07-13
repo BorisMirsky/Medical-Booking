@@ -6,19 +6,19 @@ import "../globals.css";
 import {
     getDoctorsBySpeciality, DoctorSheduleRequest,
     getSlotsByDoctorId, DoctorSheduleProps
-} from "@/app/Services/service";   
+} from "@/app/Services/service";
 import { Doctor } from "@/app/Models/Doctor";
-import { Slot } from "@/app/Models/Slot";         
-import TimeslotsButtons from "../Components/timeslotsButtonsComponent"; 
+import { Slot } from "@/app/Models/Slot";
+import TimeslotsButtons from "../Components/timeslotsButtonsComponent";
 import { Select, Space, DatePicker, Button, Form, FormProps } from 'antd';
-import { useState, useEffect} from "react";  
-import dayjs, { Dayjs } from 'dayjs'; 
-import moment from "moment";   
+import { useState, useEffect } from "react";
+import dayjs, { Dayjs } from 'dayjs';
+import moment from "moment";
 
 
 
 
-export default function DoctorShedule({ numbers, setNumbers, }: DoctorSheduleProps) {
+export default function DoctorShedule({ numbers, setNumbersAction, }: DoctorSheduleProps) {
     const [doctors, setDoctors] = useState<Doctor[]>([]);
     const [slots_, setSlots] = useState<Slot[]>([]);            // slots all days
     const [slots1, setSlots1] = useState<Slot[]>([]);           // slots one day
@@ -60,7 +60,7 @@ export default function DoctorShedule({ numbers, setNumbers, }: DoctorShedulePro
     //  поле 'выбор врача'
     const doctorsData = doctors.map((doctor: Doctor, index: number) => ({
         key: index,
-        value : doctor.userName,
+        value: doctor.userName,
         label: doctor.userName
     }));
 
@@ -78,10 +78,10 @@ export default function DoctorShedule({ numbers, setNumbers, }: DoctorShedulePro
         setSlots([]);
         const getSlots = async () => {
             const responce = await getSlotsByDoctorId(id);
-            setSlots(responce);  
+            setSlots(responce);
         }
         getSlots();
-    }; 
+    };
 
     // даты приёма врача
     const uniquePrefixes = new Set(slots_.map(item => item.datetimeStart.split(' ')[0]));
@@ -128,7 +128,7 @@ export default function DoctorShedule({ numbers, setNumbers, }: DoctorShedulePro
 
     const props: DoctorSheduleProps = {
         numbers: numbers,
-        setNumbers: setNumbers,
+        setNumbersAction: setNumbersAction,
         slots: slots1
     }
 
@@ -213,25 +213,22 @@ export default function DoctorShedule({ numbers, setNumbers, }: DoctorShedulePro
                     (buttonsFlag === 0) ? (
                         <div> </div>
                     ) : (
-                            <Space
-                                direction="vertical"
-                                size="large"
-                                style={{ margin: '2rem', width: '50%' }}
-                            >
-                                <h3>Нажимая на кнопку вы создаёте бронирование.</h3>
-
+                        <Space
+                            direction="vertical"
+                            size="large"
+                            style={{ margin: '2rem', width: '50%' }}
+                        >
                             <div>
                                 <TimeslotsButtons
                                     {...props}
                                 />
-                                </div>
-                                </Space>
+                            </div>
+                        </Space>
                     )
                 }
-                </div>
+            </div>
 
 
         </div>
-        );
+    );
 }
-

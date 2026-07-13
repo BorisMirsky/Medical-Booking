@@ -10,9 +10,6 @@ import Link from "next/link";
 
 
 
-
-
-
 export default function entrancePatient() {
     const [loading, setLoading] = useState(true);
 
@@ -25,7 +22,6 @@ export default function entrancePatient() {
     }
 
     const onFinish: FormProps<UserLoginRequest>['onFinish'] = (values) => {
-        //console.log('entrancePatient values ', values)
         loginPatient(values);
     }
 

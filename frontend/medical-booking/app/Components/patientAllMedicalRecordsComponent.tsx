@@ -96,7 +96,7 @@ const PatientAllMedicalRecords: React.FC<DoctorAppointmentProps> = ({booking }) 
                     direction="vertical"
                     size="large"
                     style={{ margin: '2rem', width: '50%' }}
-                >
+                >                </Space>
                 <Table
                     dataSource={data}
                     columns={columns}
@@ -104,7 +104,6 @@ const PatientAllMedicalRecords: React.FC<DoctorAppointmentProps> = ({booking }) 
                     footer={() => ""}
                     bordered
                     />
-                </Space>
             </div>
         </div>
     );

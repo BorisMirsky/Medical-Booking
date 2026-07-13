@@ -31,7 +31,7 @@ const CollapseElement: React.FC = () => {
         {
             key: '3',
             label: 'Просмотр расписания врача',
-            children: <DoctorShedule numbers={numbers} setNumbers={setNumbers} slots={slots} ></DoctorShedule>
+            children: <DoctorShedule numbers={numbers} setNumbersAction={setNumbers} slots={slots} ></DoctorShedule>
         },
         {
             key: '4',

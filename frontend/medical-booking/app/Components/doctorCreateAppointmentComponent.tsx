@@ -2,7 +2,7 @@
 "use client"
 
 import React from 'react';
-import { getBookingsByDoctor } from "@/app/Services/service";
+import { getBookingsByDoctor, IDoctorCreateAppointmentProps, DataType1 } from "@/app/Services/service";
 import { Booking } from "@/app/Models/Booking";
 import { Table, Button, Space } from "antd";
 import { useEffect, useState } from "react";
@@ -10,9 +10,7 @@ import "../globals.css";
 import Title from "antd/es/typography/Title";
 
 
-interface IDoctorCreateAppointmentProps {
-    onNext: (booking: Booking) => void;
-}
+
 
 
 const DoctorCreateAppointment: React.FC<IDoctorCreateAppointmentProps> = ({ onNext }) => {
@@ -34,6 +32,9 @@ const DoctorCreateAppointment: React.FC<IDoctorCreateAppointmentProps> = ({ onNe
             title: 'Начало приёма',
             dataIndex: 'timeslotStart',
             key: 'timeslotStart',
+            sorter: (a: DataType1, b: DataType1) => a.timeslotStart.localeCompare(b.timeslotStart),
+            defaultSortOrder: 'descend' as const,
+            // sorter: (a: DataType, b: DataType) => a.timeslotStart.localeCompare(b.timeslotStart),
         },
         {
             title: 'Конец приёма',

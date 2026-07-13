@@ -11,8 +11,6 @@ import { Table, Button, Space } from "antd";
 import { useEffect, useState } from "react";
 import "../globals.css";
 import Title from "antd/es/typography/Title";
-//import { cancelBooking } from '../Services/service';
-
 
 
 export default function PatientBookings() {

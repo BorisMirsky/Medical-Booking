@@ -18,11 +18,11 @@ export default function SelectSlot() {
 
     const [form] = Form.useForm();
 
-    const onFinishFailed: FormProps<DoctorSheduleRequest>['onFinishFailed'] = (errorInfo: any) => {
+    const onFinishFailed: FormProps<DoctorSheduleRequest>['onFinishFailed'] = (errorInfo) => {
         console.log('onFinishFailed:', errorInfo);
     }
 
-    const onFinish: FormProps<DoctorSheduleRequest>['onFinish'] = (values: any) => {
+    const onFinish: FormProps<DoctorSheduleRequest>['onFinish'] = (values) => {
         for (const variable in doctors) {
             if (doctors[variable].userName == values.username && doctors[variable].speciality == values.speciality) {
                 values.id = doctors[variable].id;

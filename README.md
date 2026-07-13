@@ -71,7 +71,7 @@
 
 - Пациенты (Nina@mail.de, NinaPassword), (Alla@mail.uk, AllaPassword), (basil@mail.uk, basilpassword)
 
-- Врачи (EmilieBlunt@mail.ru, EmilieBluntPassword), (JamesBond@mail.ru, JamesBondPassword)
+- Врачи (EmilieBlunt@mail.ru, EmilieBluntPassword), (JamesBond@mail.ru, JamesBondPassword), (ValterHrenov@mail.ru, ValterHrenovPassword)
 
 
 

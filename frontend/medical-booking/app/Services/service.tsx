@@ -6,6 +6,10 @@ import { Slot } from "@/app/Models/Slot";
 
 //   interfaces  
 
+export interface IDoctorCreateAppointmentProps {
+    onNext: (booking: Booking) => void;
+}
+
 
 export interface UserRegistrationRequest {
     email: string;
@@ -50,10 +54,33 @@ export interface AdminRegisterRequest {
     password: string;
 }
 
-export type DoctorSheduleProps = {
+export interface DataType {
+    key: number;
+    n: number;
+    username: string;
+    speciality: string;
+    timeslotId: string;
+    isBooked: string;
+    timeslotStart: string;
+    timeslotStop: string;
+    cancel: string;
+}
+
+// for 'DoctorCreateAppointmentComponent'
+export interface DataType1 {
+    key: number;
+    n: number;
+    username: string;
+    timeslotStart: string;
+    timeslotStop: string;
+    create: string;
+}
+
+
+export interface DoctorSheduleProps {
     numbers: number[];
-    setNumbers(values: number[]): void;
-    slots: Array<Slot>;
+    setNumbersAction: React.Dispatch<React.SetStateAction<number[]>>;
+    slots: Slot[];
 }
 
 export interface SheduleCreateRequest {
@@ -117,7 +144,7 @@ export interface MedicalRecordRequest {
 }
 
 export interface DoctorAppointmentProps {
-    booking: Booking;
+    booking?: Booking; 
 }
 
 export interface DoctorMedicalRecordProps {

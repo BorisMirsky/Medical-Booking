@@ -3,17 +3,17 @@
 
 import React from 'react';
 import "../globals.css";
-import { Slot } from "@/app/Models/Slot";   
+import { Slot } from "@/app/Models/Slot";
 import { Button } from 'antd';
 import {
     updateTimeslot, TimeSlotUpdateRequest,
     createBooking, BookingCreateRequest, DoctorSheduleProps
 } from "@/app/Services/service";
-import { useState, useEffect } from "react";  
+import { useState, useEffect } from "react";
 
 
 
-export default function TimeslotsButtons({ setNumbers, slots }: DoctorSheduleProps) {
+export default function TimeslotsButtons({ setNumbersAction, slots }: DoctorSheduleProps) {
     const [currentUserRole, setCurrentUserRole] = useState("");
     const [currentUserId, setCurrentUserId] = useState("");
 
@@ -67,7 +67,7 @@ export default function TimeslotsButtons({ setNumbers, slots }: DoctorShedulePro
                 bookingRequest.isbooked = true;
                 updateTimeslot(timeslotRequest);
                 createBooking(bookingRequest);
-                setNumbers((oldNumbers: number[]) => [...oldNumbers, 1]);
+                setNumbersAction((oldNumbers: number[]) => [...oldNumbers, 1]);
             }
         }
     };
@@ -79,7 +79,7 @@ export default function TimeslotsButtons({ setNumbers, slots }: DoctorShedulePro
                     display: 'grid',
                     gridTemplateColumns: 'repeat(5, 1fr)',
                     gap: '10px',
-                    maxWidth: '800px' 
+                    maxWidth: '800px'
                 }}
             >
                 {data.map((s) => (
@@ -89,15 +89,14 @@ export default function TimeslotsButtons({ setNumbers, slots }: DoctorShedulePro
                         color={(!s.isBooked) ? "primary" : "danger"}
                         variant="solid"
                         style={{
-                            width: '100%', 
+                            width: '100%',
                             height: '40px'
                         }}
                     >
                         {s.label}
                     </Button>
                 ))}
-                </div>
             </div>
+        </div>
     );
 }
-

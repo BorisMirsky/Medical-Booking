@@ -8,8 +8,10 @@ import { useState } from "react";
 import { Slot } from "@/app/Models/Slot";   
 
 
+
+
 const CollapseElement: React.FC = () => {
-    const [numbers, setNumbers] = useState<number[]>([]);
+    const [numbers, setNumbersAction] = useState<number[]>([]);
     const slots: Array<Slot> = [];
 
     const items: CollapseProps['items'] = [
@@ -18,7 +20,7 @@ const CollapseElement: React.FC = () => {
             label: 'Запись к врачу',
             children: <DoctorShedule
                 numbers={numbers}
-                setNumbers={setNumbers}
+                setNumbersAction={setNumbersAction}
                 slots={slots}
             />
         },

@@ -5,14 +5,13 @@ import React from 'react';
 import {
     getBookingsByPatient,
     updateTimeslot, TimeSlotUpdateRequest,
-    BookingCreateRequest, createBooking
+    BookingCreateRequest, createBooking, DataType
 } from "@/app/Services/service";
 import { Booking } from "@/app/Models/Booking";
 import { Table, Button, Space } from "antd";
 import { useEffect, useState } from "react";  
 import "../globals.css";
 import Title from "antd/es/typography/Title";
-
 
 
 
@@ -45,8 +44,8 @@ export default function PatientBookings() {
             title: 'Начало приёма',
             dataIndex: 'timeslotStart',
             key: 'timeslotStart',
-            sorter: (a: any, b: any) => a.timeslotStart.localeCompare(b.timeslotStart),
-            defaultSortOrder: 'descend', 
+            sorter: (a: DataType, b: DataType) => a.timeslotStart.localeCompare(b.timeslotStart),
+            defaultSortOrder: 'descend' as const,   
         },
         {
             title: 'Конец приёма',

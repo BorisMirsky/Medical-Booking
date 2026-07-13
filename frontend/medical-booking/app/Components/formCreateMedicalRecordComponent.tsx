@@ -20,6 +20,11 @@ const FormMedicalRecord: React.FC<DoctorAppointmentProps> = ({ booking }) => {
     }
 
     const onFinish: FormProps<MedicalRecordRequest>['onFinish'] = (values) => {
+        // if (!booking) {
+        //     console.error('Booking is undefined');
+        //     return;
+        // }
+
         const result: MedicalRecordRequest = {
             bookingid: booking.id,
             doctorid: booking.doctorId,
@@ -36,6 +41,10 @@ const FormMedicalRecord: React.FC<DoctorAppointmentProps> = ({ booking }) => {
         form.resetFields();
         setComponentDisabled(true);
     }
+
+    // if (!booking) {
+    //     return <div>Нет данных о бронировании</div>;
+    // }
 
     return (
         <div>

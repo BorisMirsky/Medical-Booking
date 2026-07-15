@@ -19,6 +19,9 @@ const FormAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
     }
 
     const onFinish: FormProps<AppointmentRequest>['onFinish'] = (values) => {
+
+        if (!booking) return;
+
         const result: AppointmentRequest = {
             bookingid: booking.id,
             doctorid: booking.doctorId,

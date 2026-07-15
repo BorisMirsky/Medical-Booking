@@ -53,7 +53,7 @@ export default function PatientBookings() {
             key: 'cancel',
             render: (text: string, record: object) => (
                 <Button
-                    onClick={() => cancelBooking(record['key' as keyof typeof record])}
+                    //onClick={() => cancelBooking(record['key' as keyof typeof record])}
                     disabled={!bookings[record['key' as keyof typeof record]].isBooked}
                 >
                     {"Отмена"}

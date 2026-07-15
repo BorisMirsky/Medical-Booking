@@ -134,7 +134,7 @@ export interface MedicalRecordRequest {
     doctorid: string;
     patientid: string;
     timeslotid: string;
-    appointmentid: string;
+    //appointmentid: string;
     diagnosis?: string;
     symptoms?: string;
     prescribedtreatment?: string;

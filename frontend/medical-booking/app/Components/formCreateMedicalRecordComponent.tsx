@@ -20,10 +20,8 @@ const FormMedicalRecord: React.FC<DoctorAppointmentProps> = ({ booking }) => {
     }
 
     const onFinish: FormProps<MedicalRecordRequest>['onFinish'] = (values) => {
-        // if (!booking) {
-        //     console.error('Booking is undefined');
-        //     return;
-        // }
+
+        if (!booking) return;
 
         const result: MedicalRecordRequest = {
             bookingid: booking.id,

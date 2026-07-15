@@ -20,8 +20,7 @@ export default function CreateShedule() {
     useEffect(() => {
         const role = localStorage.getItem("role") || "";
         setCurrentRole(role);
-        console.log("CreateShedule currentRole ", currentRole, role);
-    }, []);
+    }, [currentRole]);
 
     const [form] = Form.useForm();
 

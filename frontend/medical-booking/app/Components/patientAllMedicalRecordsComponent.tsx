@@ -62,15 +62,20 @@ const PatientAllMedicalRecords: React.FC<DoctorAppointmentProps> = ({booking }) 
 
 
     useEffect(() => {
+        if (!booking) return;
+
         setMedrecords([]);
         const getMedrecords = async () => {
             const responce = await getMedicalRecordsByPatient(booking.patientId);
             setMedrecords(responce);
         }
         getMedrecords();
-    }, []);
+    }, [booking]);
 
 
+    if (!booking) {
+        return <div>Нет данных о бронировании</div>;
+    }
 
     const data = medrecords.map((medicalrecord: MedicalRecord, index: number) => ({
         key: index,

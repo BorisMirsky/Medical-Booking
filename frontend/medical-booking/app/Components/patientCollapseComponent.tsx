@@ -9,10 +9,14 @@ import { Slot } from "@/app/Models/Slot";
 
 
 
-
 const CollapseElement: React.FC = () => {
+    const [slots, setSlots] = useState<Array<Slot>>([]);
     const [numbers, setNumbersAction] = useState<number[]>([]);
-    const slots: Array<Slot> = [];
+
+    const updateSlots = (newSlots: Slot[]): void => {
+        setSlots(newSlots);
+    };
+
 
     const items: CollapseProps['items'] = [
         {
@@ -21,7 +25,9 @@ const CollapseElement: React.FC = () => {
             children: <DoctorShedule
                 numbers={numbers}
                 setNumbersAction={setNumbersAction}
-                slots={slots}
+                slots={slots}          
+                updateSlots={updateSlots} 
+
             />
         },
         {

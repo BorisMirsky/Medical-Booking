@@ -43,8 +43,14 @@ namespace MedicalBookingProject.DataAccess.Repo
             Appointment? entity = await _context.Appointments
                 .FirstOrDefaultAsync(a => a.BookingId == id);
 
-            Guid appId = entity!.Id;
-            return appId;
+            if (entity != null)
+            {
+                Guid appId = entity!.Id;
+                return appId;
+            }
+            //Guid appId = entity!.Id;
+            //return appId;
+            return id;
         }
 
         public async Task<List<AppointmentDTO>> GetByPatient(Guid patientId)

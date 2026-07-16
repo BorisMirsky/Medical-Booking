@@ -11,6 +11,11 @@ export interface IDoctorCreateAppointmentProps {
 }
 
 
+export interface TimeslotsButtonsProps extends DoctorSheduleProps {
+    onSlotsUpdate?: (slots: Slot[]) => void;
+}
+
+
 export interface UserRegistrationRequest {
     email: string;
     password: string;
@@ -77,10 +82,12 @@ export interface DataType1 {
 }
 
 
+
 export interface DoctorSheduleProps {
     numbers: number[];
     setNumbersAction: React.Dispatch<React.SetStateAction<number[]>>;
     slots: Slot[];
+    updateSlots?: (slots: Slot[]) => void;           
 }
 
 export interface SheduleCreateRequest {

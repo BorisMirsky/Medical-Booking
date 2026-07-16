@@ -1,5 +1,4 @@
-﻿
-"use client"
+﻿"use client"
 
 import React from 'react';
 import "../globals.css";
@@ -17,20 +16,30 @@ import moment from "moment";
 
 
 
-
-export default function DoctorShedule({ numbers, setNumbersAction, }: DoctorSheduleProps) {
+export default function DoctorShedule({
+                                        numbers,
+                                        setNumbersAction,
+                                        slots: parentSlots,
+                                        updateSlots
+                                    }: DoctorSheduleProps) {
     const [doctors, setDoctors] = useState<Doctor[]>([]);
-    const [slots_, setSlots] = useState<Slot[]>([]);            // slots all days
-    const [slots1, setSlots1] = useState<Slot[]>([]);           // slots one day
+    const [slots_, setSlots] = useState<Slot[]>([]);
+    const [slots1, setSlots1] = useState<Slot[]>([]);
     const [buttonsFlag, setButtonsFlag] = useState<number>(0);
+    const [selectedDayState, setSelectedDayState] = useState<string>("");
+    // состояние для хранения обработанных слотов
+    const [processedSlots, setProcessedSlots] = useState<{ [key: string]: Slot[] }>({});
 
+    useEffect(() => {
+        if (parentSlots && parentSlots.length > 0) {
+            setSlots1(parentSlots);
+        }
+    }, [parentSlots]);
 
     useEffect(() => {
         processSlots(slots_);
-        //  СТРОКУ НИЖЕ НЕ УБИРАТЬ !
         // eslint-disable-next-line react-hooks/exhaustive-deps   
     }, [slots_]);
-
 
     const [form] = Form.useForm();
 
@@ -38,15 +47,15 @@ export default function DoctorShedule({ numbers, setNumbersAction, }: DoctorShed
         console.log('onFinishFailed:', errorInfo);
     }
 
-
     const onFinish: FormProps<DoctorSheduleRequest>['onFinish'] = (values: DoctorSheduleRequest) => {
-        setSlots1(processedSlots[selectedDay]);
-        console.log("DoctorShedule onFinish values: ", values);
-        setButtonsFlag(1);
+        if (selectedDayState && processedSlots[selectedDayState]) {
+            setSlots1(processedSlots[selectedDayState]);
+            setButtonsFlag(1);
+        } else {
+            console.log(values, "No slots found for selected day");
+        }
     }
 
-
-    //  поле 'выбор специальности'
     const handleSelectSpeciality = (value: string) => {
         setDoctors([]);
         const getDoctors = async () => {
@@ -56,50 +65,42 @@ export default function DoctorShedule({ numbers, setNumbersAction, }: DoctorShed
         getDoctors();
     }
 
-
-    //  поле 'выбор врача'
     const doctorsData = doctors.map((doctor: Doctor, index: number) => ({
         key: index,
         value: doctor.userName,
         label: doctor.userName
     }));
 
-
-    // имя доктора ---> id доктора ---> все слоты доктора
     const handleSelectDoctor = (value: string) => {
         let id: string = '';
         for (const variable in doctors) {
             if (doctors[variable].userName == value) {
-                {
-                    id = doctors[variable].id;
-                }
+                id = doctors[variable].id;
             }
         }
         setSlots([]);
         const getSlots = async () => {
             const responce = await getSlotsByDoctorId(id);
-            setSlots(responce);
+            const converted = responce.map((slot: Slot) => ({                       // ?
+                ...slot,
+                isBooked: slot.isBooked ? 1 : 0
+            }));
+            setSlots(converted);
         }
         getSlots();
     };
 
-    // даты приёма врача
     const uniquePrefixes = new Set(slots_.map(item => item.datetimeStart.split(' ')[0]));
 
-    interface MyResult {
-        [key: string]: Array<Slot>;
-    }
 
-    const processedSlots: MyResult = {};
-
-    // преобразование массива слотов
     const processSlots = (data: Array<Slot>) => {
+        const newProcessedSlots: { [key: string]: Slot[] } = {};
         uniquePrefixes.forEach(prefix => {
-            processedSlots[prefix] = data.filter(item => item.datetimeStart.startsWith(prefix));
-        })
+            newProcessedSlots[prefix] = data.filter(item => item.datetimeStart.startsWith(prefix));
+        });
+        setProcessedSlots(newProcessedSlots);
     };
 
-    // даты для календаря
     const allowedDates = Array.from(uniquePrefixes.values())
         .map(date => dayjs(date, 'YYYY-DD-MM'));
 
@@ -107,31 +108,39 @@ export default function DoctorShedule({ numbers, setNumbersAction, }: DoctorShed
         return current && !allowedDates.some(allowed => allowed.isSame(current, 'day'));
     };
 
-
-    // поле 'выбор даты'
-    let selectedDay: string = "";
-
     const selectDate = (value: string) => {
-        // Если удалили поле 'датa'
         try {
-            selectedDay = moment(value.toString()).format('YYYY-DD-MM');
+            const day = moment(value.toString()).format('YYYY-DD-MM');
+            setSelectedDayState(day);
         } catch (e) {
-            console.log(e);
+            console.log("Error in selectDate:", e);
         }
     };
 
-
     const cleanData = () => {
         setSlots1([]);
+        setButtonsFlag(0);
+        setSelectedDayState("");
+        setProcessedSlots({}); 
+        form.resetFields();
+        if (updateSlots) {
+            updateSlots([]);
+        }
     }
 
+    const handleSlotsUpdate = (updatedSlots: Slot[]) => {
+        setSlots1(updatedSlots);
+        if (updateSlots) {
+            updateSlots(updatedSlots);
+        }
+    }
 
-    const props: DoctorSheduleProps = {
+    const props = {
         numbers: numbers,
         setNumbersAction: setNumbersAction,
-        slots: slots1
+        slots: slots1,
+        onSlotsUpdate: handleSlotsUpdate
     }
-
 
     return (
         <div>
@@ -144,7 +153,6 @@ export default function DoctorShedule({ numbers, setNumbersAction, }: DoctorShed
                 autoComplete="off"
                 form={form}
             >
-
                 <Form.Item<DoctorSheduleRequest>
                     label="Специализация врача"
                     name="speciality"
@@ -184,11 +192,9 @@ export default function DoctorShedule({ numbers, setNumbersAction, }: DoctorShed
                         disabledDate={disabledDateFunc}
                         className="custom-datepicker"
                     />
-
                 </Form.Item>
 
                 <Space size='large'>
-
                     <Button
                         htmlType="submit"
                         type="default"
@@ -202,11 +208,8 @@ export default function DoctorShedule({ numbers, setNumbersAction, }: DoctorShed
                     >
                         Сбросить
                     </Button>
-
                 </Space>
-
             </Form>
-
 
             <div>
                 {
@@ -227,8 +230,6 @@ export default function DoctorShedule({ numbers, setNumbersAction, }: DoctorShed
                     )
                 }
             </div>
-
-
         </div>
     );
 }

@@ -10,13 +10,9 @@ import "../globals.css";
 import Title from "antd/es/typography/Title";
 
 
-
-
-
 const DoctorCreateAppointment: React.FC<IDoctorCreateAppointmentProps> = ({ onNext }) => {
     const [, setCurrentId] = useState("");
     const [bookings, setBookings] = useState<Booking[]>([]);
-
     const columns = [
         {
             title: 'N',
@@ -33,8 +29,7 @@ const DoctorCreateAppointment: React.FC<IDoctorCreateAppointmentProps> = ({ onNe
             dataIndex: 'timeslotStart',
             key: 'timeslotStart',
             sorter: (a: DataType1, b: DataType1) => a.timeslotStart.localeCompare(b.timeslotStart),
-            defaultSortOrder: 'descend' as const,
-            // sorter: (a: DataType, b: DataType) => a.timeslotStart.localeCompare(b.timeslotStart),
+            defaultSortOrder: 'descend' as const
         },
         {
             title: 'Конец приёма',
@@ -66,14 +61,26 @@ const DoctorCreateAppointment: React.FC<IDoctorCreateAppointmentProps> = ({ onNe
         getBookings();
     }, []);
 
-    const data = bookings.map((booking: Booking, index: number) => ({
-        key: index,
-        n: (index + 1),
-        username: booking.patientUserName,
-        timeslotStart: booking.timeslotDatetimeStart,
-        timeslotStop: booking.timeslotDatetimeStop,
-        create: ""
-    }));
+    // const data1 = bookings.map((booking: Booking, index: number) => ({
+    //     key: index,
+    //     n: (index + 1),
+    //     username: booking.patientUserName,
+    //     timeslotStart: booking.timeslotDatetimeStart,
+    //     timeslotStop: booking.timeslotDatetimeStop,
+    //     create: ""
+    // }));
+
+    const data = bookings
+        .sort((a, b) => a.timeslotDatetimeStart.localeCompare(b.timeslotDatetimeStart))
+        .map((booking: Booking, index: number) => ({
+            key: index,
+            n: (index + 1),
+            username: booking.patientUserName,
+            timeslotStart: booking.timeslotDatetimeStart,
+            timeslotStop: booking.timeslotDatetimeStop,
+            create: ""
+        }));
+
 
 
     const createAppointment = (key: number) => {

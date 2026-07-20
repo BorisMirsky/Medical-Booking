@@ -32,7 +32,6 @@ const DoctorAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
         <div>
             <div>
                 <Space direction="vertical" size={16}>
-
                     <Card
                         title="Данные визита"
                         style={{ width: 500 }}
@@ -62,7 +61,7 @@ const DoctorAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
 
                     <Card
                         title={_title}
-                        style={{ width: 1000 }}
+                        style={{ width: 1500 }}
                     >
                         <div>
                             <PatientAllMedicalRecords booking={booking} />

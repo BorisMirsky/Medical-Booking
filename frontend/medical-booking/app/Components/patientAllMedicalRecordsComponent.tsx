@@ -8,9 +8,9 @@ import { useEffect, useState } from "react";
 import "../globals.css";
 
 
+
 const PatientAllMedicalRecords: React.FC<DoctorAppointmentProps> = ({booking }) => {
     const [medrecords, setMedrecords] = useState<MedicalRecord[]>([]);
-
 
     const columns = [
         {
@@ -24,14 +24,22 @@ const PatientAllMedicalRecords: React.FC<DoctorAppointmentProps> = ({booking }) 
             key: 'patient',
         },
         {
-            title: 'Врач',
-            dataIndex: 'doctor',
-            key: 'doctor',
+            title: <><div>Врач</div><div>имя</div></>,
+            dataIndex: 'doctorName',
+            key: 'doctorName',
+        },
+        {
+            title: <><div>Врач</div><div>специализация</div></>,
+            dataIndex: 'doctorSpecialization',
+            key: 'doctorSpecialization',
         },
         {
             title: 'Когда был приём',
             dataIndex: 'appointment',
             key: 'appointment',
+            render: (text: string) => {
+                return <div style={{ whiteSpace: 'pre-wrap' }}>{text}</div>;
+            }
         },
         {
             title: 'Симптомы',
@@ -54,7 +62,7 @@ const PatientAllMedicalRecords: React.FC<DoctorAppointmentProps> = ({booking }) 
             key: 'diagnosis',
         },
         {
-            title: 'Назначенное лечение',
+            title: <><div>Назначенное</div><div>лечение</div></>,
             dataIndex: 'prescribedTreatment',
             key: 'prescribedTreatment',
         }
@@ -81,16 +89,15 @@ const PatientAllMedicalRecords: React.FC<DoctorAppointmentProps> = ({booking }) 
         key: index,
         n: (index + 1),
         patient: booking.patientUserName,
-        doctor: booking.doctorUserName,
-        appointment: booking.timeslotDatetimeStart.split(" ")[0] + "   " +
-                            booking.timeslotDatetimeStart.split(" ")[1] +
-                            " - " + booking.timeslotDatetimeStop.split(" ")[1],
+        doctorName: medicalrecord.doctorUserName,                
+        doctorSpecialization: "???",
+        appointment: medicalrecord.timeslotDatetimeStart.split(" ")[0] + '\n' + medicalrecord.timeslotDatetimeStart.split(" ")[1],
         symptoms: medicalrecord.symptoms,
         visualExamination: medicalrecord.visualExamination,
         referralTests: medicalrecord.referralTests,
         diagnosis: medicalrecord.diagnosis,
         prescribedTreatment: medicalrecord.prescribedTreatment
-    }));
+    })); 
 
 
 
@@ -101,14 +108,14 @@ const PatientAllMedicalRecords: React.FC<DoctorAppointmentProps> = ({booking }) 
                     direction="vertical"
                     size="large"
                     style={{ margin: '2rem', width: '50%' }}
-                >                </Space>
+                >                   </Space>            
                 <Table
                     dataSource={data}
                     columns={columns}
                     pagination={false}
-                    footer={() => ""}
                     bordered
                     />
+
             </div>
         </div>
     );

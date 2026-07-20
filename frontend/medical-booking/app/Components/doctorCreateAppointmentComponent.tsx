@@ -61,14 +61,6 @@ const DoctorCreateAppointment: React.FC<IDoctorCreateAppointmentProps> = ({ onNe
         getBookings();
     }, []);
 
-    // const data1 = bookings.map((booking: Booking, index: number) => ({
-    //     key: index,
-    //     n: (index + 1),
-    //     username: booking.patientUserName,
-    //     timeslotStart: booking.timeslotDatetimeStart,
-    //     timeslotStop: booking.timeslotDatetimeStop,
-    //     create: ""
-    // }));
 
     const data = bookings
         .sort((a, b) => a.timeslotDatetimeStart.localeCompare(b.timeslotDatetimeStart))

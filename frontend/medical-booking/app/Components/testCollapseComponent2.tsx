@@ -58,7 +58,7 @@ const Element2 = ({ buttonStates }: Element2Props) => {
 
 
 
-const CollapseComponent: React.FC = () => {
+export const CollapseComponent: React.FC = () => {
     const [buttonStates, setButtonStates] = useState<ButtonStates>({
         btn1: false,
         btn2: false,

@@ -61,7 +61,7 @@ const Element1 = ({ buttonStates, onButtonClick }: Element1Props) => {
 
 
 
-// PatientBookings
+
 const Element2 = ({ buttonStates }: Element2Props) => {
     return (
         <div>
@@ -74,16 +74,14 @@ const Element2 = ({ buttonStates }: Element2Props) => {
 
 
 
-// patientCollapseComponent
-const CollapseComponent: React.FC = () => {
-    // State is "lifted up" to the parent component
+
+export const CollapseComponent: React.FC = () => {
     const [buttonStates, setButtonStates] = useState<ButtonStates>({
         btn1: false,
         btn2: false,
         btn3: false,
     });
 
-    // This function updates the state and is passed to the child
     const handleButtonClick = (key: string) => {
         setButtonStates(prevStates => ({
             ...prevStates,

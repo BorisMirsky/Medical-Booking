@@ -57,7 +57,7 @@ const Element1Parent = ({ buttonStates, onButtonClick }: Element1Props) => {
 
 
 
-const CollapseComponent: React.FC = () => {
+export const CollapseComponent: React.FC = () => {
     const [buttonStates, setButtonStates] = useState<ButtonStates>({
         btn1: false,
         btn2: false,

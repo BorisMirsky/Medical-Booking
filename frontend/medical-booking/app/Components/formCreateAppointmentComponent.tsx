@@ -2,7 +2,8 @@
 
 import React from 'react';
 import {
-    createAppointment, AppointmentRequest, DoctorAppointmentProps, setBookingClosed
+    createAppointment, AppointmentRequest,
+    DoctorAppointmentProps, setBookingClosed
 } from "@/app/Services/service";
 import { Select, FormProps, Button, Form, Input, Space } from "antd";
 import "../globals.css";

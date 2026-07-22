@@ -2,12 +2,13 @@
 "use client"
 
 import React from 'react';
-import { DoctorAppointmentProps } from "@/app/Services/service";
+import { getMedicalRecordsByPatient, DoctorAppointmentProps } from "@/app/Services/service";
 import { Card, Space } from "antd"; 
 import FormAppointment from "../Components/formCreateAppointmentComponent";
 import FormMedicalRecord from "../Components/formCreateMedicalRecordComponent"; 
 import PatientAllMedicalRecords from '../Components/patientAllMedicalRecordsComponent';
-import { useState, useEffect } from "react";       
+import { useState, useEffect } from "react";
+import { MedicalRecord } from "@/app/Models/MedicalRecord";
 import "../globals.css";
 
 
@@ -16,6 +17,27 @@ import "../globals.css";
 const DoctorAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
     const [, setCurrentId] = useState("");
     const patientusername: string = !booking ? "" : booking.patientUserName;
+    const [medicalRecords, setMedicalRecords] = useState<MedicalRecord[]>([]);
+
+    const loadMedicalRecords = async () => {
+        if (!booking) return;
+
+        try {
+            const records = await getMedicalRecordsByPatient(booking.patientId);
+            setMedicalRecords(records);
+        } catch (error) {
+            console.error("Ошибка при загрузке медицинских записей:", error);
+        }
+    };
+
+    useEffect(() => {
+        loadMedicalRecords();
+    }, [booking]);
+
+    const handleMedicalRecordSaved = () => {
+        loadMedicalRecords();
+    };
+
 
     useEffect(() => {
         const id = localStorage.getItem("id") || "";
@@ -55,7 +77,10 @@ const DoctorAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
                         style={{ width: 600 }}
                     >
                         <div>
-                            <FormMedicalRecord booking={booking} />
+                            <FormMedicalRecord
+                                booking={booking}
+                                onSave={handleMedicalRecordSaved}
+                            />
                         </div>
                     </Card>
 
@@ -64,7 +89,10 @@ const DoctorAppointment: React.FC<DoctorAppointmentProps> = ({ booking }) => {
                         style={{ width: 1500 }}
                     >
                         <div>
-                            <PatientAllMedicalRecords booking={booking} />
+                            <PatientAllMedicalRecords
+                                booking={booking}
+                                medicalRecords={medicalRecords}
+                            />
                         </div>
                     </Card>
 

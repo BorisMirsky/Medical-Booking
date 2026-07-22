@@ -4,10 +4,18 @@ import { Slot } from "@/app/Models/Slot";
 
 
 
-//   interfaces  
+//   interfaces
+
+export interface FormMedicalRecordProps extends DoctorAppointmentProps {
+    onSave?: () => void;
+}
 
 export interface IDoctorCreateAppointmentProps {
     onNext: (booking: Booking) => void;
+}
+
+export interface PatientAllMedicalRecordsProps extends DoctorAppointmentProps {
+    medicalRecords: MedicalRecord[];
 }
 
 
@@ -141,7 +149,7 @@ export interface MedicalRecordRequest {
     doctorid: string;
     patientid: string;
     timeslotid: string;
-    //appointmentid: string;
+    //appointmentid: string;                     // ?
     diagnosis?: string;
     symptoms?: string;
     prescribedtreatment?: string;
@@ -161,7 +169,6 @@ export interface DoctorMedicalRecordProps {
 
 
 //   fetch functions   
-
 export const loginDoctor = async (request: UserLoginRequest) => {
     let username: string = "";
     let token: string = ""

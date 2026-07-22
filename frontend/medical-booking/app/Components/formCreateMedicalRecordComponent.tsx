@@ -1,9 +1,7 @@
 ﻿"use client"
 
 import React from 'react';
-import {
-    MedicalRecordRequest, DoctorAppointmentProps, createMedicalRecord
-} from "@/app/Services/service";
+import { MedicalRecordRequest, createMedicalRecord, FormMedicalRecordProps } from "@/app/Services/service";
 import { FormProps, InputNumber, Button, Form, Input, Space } from "antd";
 const { TextArea } = Input;
 import "../globals.css";
@@ -11,7 +9,7 @@ import { useState } from "react";
 
 
 
-const FormMedicalRecord: React.FC<DoctorAppointmentProps> = ({ booking }) => {
+const FormMedicalRecord: React.FC<FormMedicalRecordProps> = ({ booking, onSave }) => {
     const [componentDisabled, setComponentDisabled] = useState<boolean>(false);
     const [form] = Form.useForm();
 
@@ -35,14 +33,20 @@ const FormMedicalRecord: React.FC<DoctorAppointmentProps> = ({ booking }) => {
             referraltests: values.referraltests,
             finalcost: values.finalcost
         };
-        createMedicalRecord(result);
-        form.resetFields();
-        setComponentDisabled(true);
+        createMedicalRecord(result)
+            .then(() => {
+                form.resetFields();
+                setComponentDisabled(true);
+                if (onSave) {
+                    onSave();
+                }
+            })
+            .catch((error) => {
+                console.error('Ошибка при сохранении медицинской записи:', error);
+            });
     }
 
-    // if (!booking) {
-    //     return <div>Нет данных о бронировании</div>;
-    // }
+    
 
     return (
         <div>

@@ -1,17 +1,14 @@
 ﻿"use client"
 
 import React from 'react';
-import { getMedicalRecordsByPatient, DoctorAppointmentProps } from "@/app/Services/service";
+import { PatientAllMedicalRecordsProps } from "@/app/Services/service"; 
 import { MedicalRecord } from "@/app/Models/MedicalRecord";
 import { Table, Space } from "antd";
-import { useEffect, useState } from "react";
 import "../globals.css";
 
 
 
-const PatientAllMedicalRecords: React.FC<DoctorAppointmentProps> = ({booking }) => {
-    const [medrecords, setMedrecords] = useState<MedicalRecord[]>([]);
-
+const PatientAllMedicalRecords: React.FC<PatientAllMedicalRecordsProps> = ({ booking, medicalRecords }) => {
     const columns = [
         {
             title: 'N',
@@ -69,23 +66,15 @@ const PatientAllMedicalRecords: React.FC<DoctorAppointmentProps> = ({booking }) 
     ]
 
 
-    useEffect(() => {
-        if (!booking) return;
 
-        setMedrecords([]);
-        const getMedrecords = async () => {
-            const responce = await getMedicalRecordsByPatient(booking.patientId);
-            setMedrecords(responce);
-        }
-        getMedrecords();
-    }, [booking]);
 
 
     if (!booking) {
         return <div>Нет данных о бронировании</div>;
     }
 
-    const data = medrecords.map((medicalrecord: MedicalRecord, index: number) => ({
+
+    const data = medicalRecords.map((medicalrecord: MedicalRecord, index: number) => ({
         key: index,
         n: (index + 1),
         patient: booking.patientUserName,

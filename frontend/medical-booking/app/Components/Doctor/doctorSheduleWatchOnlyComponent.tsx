@@ -1,12 +1,12 @@
 ﻿"use client"
 
 import React from 'react';
-import "../globals.css";
+import "@/app/globals.css";
 import {
     DoctorSheduleRequest, getSlotsByDoctorId
 } from "@/app/Services/service";
 import { Slot } from "@/app/Models/Slot";
-import TimeslotsButtonsWatchOnly from "../Components/timeslotsButtonsWatchOnlyComponent";
+import TimeslotsButtonsWatchOnly from "./timeslotsButtonsWatchOnlyComponent";
 import { Space, DatePicker, Button, Form, FormProps } from 'antd';         
 import { useState, useEffect } from "react";
 import dayjs, { Dayjs } from 'dayjs';

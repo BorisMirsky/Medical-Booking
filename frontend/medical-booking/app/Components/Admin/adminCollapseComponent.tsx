@@ -2,12 +2,12 @@
 import React from 'react';
 import type { CollapseProps } from 'antd';
 import { Collapse, Space } from 'antd';
-import DoctorRegistration from '../Components/doctorRegistrationComponent';
-import CreateShedule from '../Components/adminCreateSheduleComponent';
-import DoctorShedule from '../Components/doctorSheduleComponent';
-import AllDoctors from '../Components/adminAllDoctorsComponent';
-import AllPatients from '../Components/adminAllPatientsComponent';
-import PatientsMisbehavior from '../Components/patientMisbehaviorComponent';
+import DoctorRegistration from './doctorRegistrationComponent';
+import CreateShedule from './adminCreateSheduleComponent';
+import DoctorShedule from '../Common/doctorSheduleComponent';
+import AllDoctors from './adminAllDoctorsComponent';
+import AllPatients from './adminAllPatientsComponent';
+import PatientsMisbehavior from './patientMisbehaviorComponent';
 import { Slot } from "@/app/Models/Slot";  
 import { useState } from "react"; 
 

@@ -6,7 +6,6 @@ import { FormProps, Button, Form, Input, Space } from 'antd';
 import Title from "antd/es/typography/Title";
 import { useEffect, useState } from "react";
 import { loginDoctor, UserLoginRequest } from "@/app/Services/service"; 
-//import { CollapseComponent } from "@/app/Components/testCollapseComponent"; 
 
 
 export default function entranceDoctor() {

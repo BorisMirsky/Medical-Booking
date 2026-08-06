@@ -3,14 +3,13 @@
 
 import React from 'react';
 import {
-    getBookingsByPatient,
-    updateTimeslot, TimeSlotUpdateRequest,
+    getBookingsByPatient, updateTimeslot, TimeSlotUpdateRequest,
     BookingCreateRequest, createBooking, DataType
 } from "@/app/Services/service";
 import { Booking } from "@/app/Models/Booking";
 import { Table, Button, Space } from "antd";
 import { useEffect, useState } from "react";  
-import "../globals.css";
+import "@/app/globals.css";
 import Title from "antd/es/typography/Title";
 
 

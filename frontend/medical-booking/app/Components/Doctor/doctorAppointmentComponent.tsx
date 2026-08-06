@@ -4,12 +4,12 @@
 import React from 'react';
 import { getMedicalRecordsByPatient, DoctorAppointmentProps } from "@/app/Services/service";
 import { Card, Space } from "antd"; 
-import FormAppointment from "../Components/formCreateAppointmentComponent";
-import FormMedicalRecord from "../Components/formCreateMedicalRecordComponent"; 
-import PatientAllMedicalRecords from '../Components/patientAllMedicalRecordsComponent';
+import FormAppointment from "./formCreateAppointmentComponent";
+import FormMedicalRecord from "./formCreateMedicalRecordComponent"; 
+import PatientAllMedicalRecords from "./patientAllMedicalRecordsComponent";
 import { useState, useEffect } from "react";
 import { MedicalRecord } from "@/app/Models/MedicalRecord";
-import "../globals.css";
+import "@/app/globals.css";
 
 
 

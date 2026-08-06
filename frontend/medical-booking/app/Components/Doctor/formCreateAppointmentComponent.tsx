@@ -6,7 +6,7 @@ import {
     DoctorAppointmentProps, setBookingClosed
 } from "@/app/Services/service";
 import { Select, FormProps, Button, Form, Input, Space } from "antd";
-import "../globals.css";
+import "@/app/globals.css";
 import { useState } from "react";    
 
 

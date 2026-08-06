@@ -6,8 +6,9 @@ import { getBookingsByDoctor, IDoctorCreateAppointmentProps, DataType1 } from "@
 import { Booking } from "@/app/Models/Booking";
 import { Table, Button, Space } from "antd";
 import { useEffect, useState } from "react";
-import "../globals.css";
+import "@/app/globals.css";
 import Title from "antd/es/typography/Title";
+
 
 
 const DoctorCreateAppointment: React.FC<IDoctorCreateAppointmentProps> = ({ onNext }) => {
@@ -94,7 +95,7 @@ const DoctorCreateAppointment: React.FC<IDoctorCreateAppointmentProps> = ({ onNe
                     dataSource={data}
                     columns={columns}
                     pagination={false}
-                    footer={() => ""}
+                    //footer={() => ""}
                     bordered
                     />
             </div>

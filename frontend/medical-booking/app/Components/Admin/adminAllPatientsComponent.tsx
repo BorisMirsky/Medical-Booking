@@ -7,7 +7,7 @@ import { Patient } from "@/app/Models/Patient";
 import {  Space } from 'antd';
 import { Table } from "antd";
 import { useEffect, useState } from "react";
-import "../globals.css";
+import "@/app/globals.css";
 import Title from "antd/es/typography/Title";
 
 

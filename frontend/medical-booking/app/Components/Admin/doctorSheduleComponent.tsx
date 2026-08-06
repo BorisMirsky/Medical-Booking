@@ -1,14 +1,14 @@
 ﻿"use client"
 
 import React from 'react';
-import "../globals.css";
+import "@/app/globals.css";
 import {
     getDoctorsBySpeciality, DoctorSheduleRequest,
     getSlotsByDoctorId, DoctorSheduleProps
 } from "@/app/Services/service";
 import { Doctor } from "@/app/Models/Doctor";
 import { Slot } from "@/app/Models/Slot";
-import TimeslotsButtons from "../Components/timeslotsButtonsComponent";
+import TimeslotsButtons from "./timeslotsButtonsComponent";
 import { Select, Space, DatePicker, Button, Form, FormProps } from 'antd';
 import { useState, useEffect } from "react";
 import dayjs, { Dayjs } from 'dayjs';

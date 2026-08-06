@@ -2,13 +2,14 @@
 "use client"
 
 import React from 'react';
+import { useEffect, useState } from "react";
 import { getDoctorsFetch } from "@/app/Services/service";
 import { Doctor } from "@/app/Models/Doctor";
 import { Table } from "antd";
-import { useEffect, useState } from "react";
-import "../globals.css";
 import { Space } from 'antd';
 import Title from "antd/es/typography/Title";
+import "@/app/globals.css";
+
 
 
 export default function AllDoctors() {

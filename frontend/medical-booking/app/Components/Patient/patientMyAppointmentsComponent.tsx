@@ -6,7 +6,7 @@ import { getAppointmentsByPatientId } from "@/app/Services/service";
 import { Appointment } from "@/app/Models/Appointment";
 import { Table, Space } from "antd";
 import { useEffect, useState } from "react";
-import "../globals.css";
+import "@/app/globals.css";
 import Title from "antd/es/typography/Title";
 
 

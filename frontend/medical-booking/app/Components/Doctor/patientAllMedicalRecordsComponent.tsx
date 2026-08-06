@@ -4,7 +4,7 @@ import React from 'react';
 import { PatientAllMedicalRecordsProps } from "@/app/Services/service"; 
 import { MedicalRecord } from "@/app/Models/MedicalRecord";
 import { Table, Space } from "antd";
-import "../globals.css";
+import "@/app/globals.css";
 
 
 

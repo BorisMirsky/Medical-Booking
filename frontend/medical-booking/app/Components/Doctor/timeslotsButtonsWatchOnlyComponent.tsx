@@ -1,7 +1,7 @@
 ﻿"use client"
 
 import React from 'react';
-import "../globals.css";
+import "@/app/globals.css";
 import { Slot } from "@/app/Models/Slot";
 import { Button} from 'antd';
 

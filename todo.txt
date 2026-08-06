@@ -22,19 +22,13 @@
 Исправлять
 2.1.1 сейчас в корне Components все файлы в одной куче, их надо распределить по role-папкам (admin, doctor, patient).
 2.1.2 Переделать структуру проекта как в Intravision - need?
-2.1.3 Врач. При создании новой записи в мед карту нужно сразу:
-             2.1.3.1 PatientAllMedicalRecords (мед. карта пациента) - добавить специализацию врача 
-             2.1.3.2 обновление в 'истории болезни' (добавление строки)
-               DoctorCollapseComponent (DoctorSheduleWatchOnly, DoctorCreateAppointment, DoctorAppointment)  
-                  DoctorAppointmentComponent
-                      formCreateAppointmentComponent
-                      formCreateMedicalRecordComponent      заполнили и сохранили форму записи ->
-                      patientAllMedicalRecordsComponent        -> запись появилась в таблице
-           Это всё одна ячейка collapse
+2.1.3 Врач. Обновление у врача таблицы *мои бронирования* после действий в другой вкладке (ниже).
   
+2.2
+'пациент \ Мои записи к врачам (бронирования)' & 'Мои посещения врачей' - опять неверная сортировка
 
-
-
+2.3
+Доктор 'Медицинская карта пациента \ Врач специализация' - нет специализации врача
 
 2.2
 Писать блок messages 
@@ -61,4 +55,67 @@ export interface MedicalRecordRequest {                      ?
     ...
 }
 4.4 - несколько файлов 'test...' - надо?   -> tests/
+
+
+
+
+
+
+
+
+
+===admin===
+adminCollapseComponent
+doctorRegistrationComponent
+adminCreateSheduleComponent
+doctorSheduleComponent                          !
+adminAllDoctorsComponent
+adminAllPatientsComponent
+patientMisbehaviorComponent
+timeslotsButtonsComponent                       !
+
+
+===Doctor===
+doctorCollapseElement
+doctorCreateAppointmentComponent
+doctorAppointmentComponent
+doctorSheduleWatchOnlyComponent
+formCreateAppointmentComponent
+formCreateMedicalRecordComponent
+patientAllMedicalRecordsComponent
+timeslotsButtonsWatchOnlyComponent
+
+
+===Patient===
+patientCollapseElement
+doctorSheduleComponent                            !
+patientMyBookingsComponent
+patientMyAppointmentsComponent
+timeslotsButtonsComponent                               !
+
+
+
+===Common===
+doctorSheduleComponent
+timeslotsButtonsComponent
+NavbarLogoutComponent
+NavbarCurrentUserComponent
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

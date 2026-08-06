@@ -2,7 +2,7 @@
 "use client"
 
 import React from 'react';
-import CollapseElement from '../Components/doctorCollapseComponent';
+import CollapseElement from '../Components/Doctor/doctorCollapseComponent';
 import { useEffect, useState } from "react";
 import Title from "antd/es/typography/Title";
 import { Space } from 'antd';

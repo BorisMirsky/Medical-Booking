@@ -1,9 +1,9 @@
 ﻿import React from 'react';
 import type { CollapseProps } from 'antd';
 import { Collapse } from 'antd';
-import DoctorCreateAppointment from '../Components/doctorCreateAppointmentComponent';
-import DoctorAppointment from '../Components/doctorAppointmentComponent';
-import DoctorSheduleWatchOnly from '../Components/doctorSheduleWatchOnlyComponent';
+import DoctorCreateAppointment from './doctorCreateAppointmentComponent';
+import DoctorAppointment from './doctorAppointmentComponent';
+import DoctorSheduleWatchOnly from './doctorSheduleWatchOnlyComponent';
 import { useState } from "react";
 import { Booking } from "@/app/Models/Booking";
 

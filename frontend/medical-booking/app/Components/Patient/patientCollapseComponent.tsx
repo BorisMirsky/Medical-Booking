@@ -1,9 +1,9 @@
 ﻿import React from 'react';
 import type { CollapseProps } from 'antd';
 import { Collapse } from 'antd';
-import DoctorShedule from '../Components/doctorSheduleComponent';
-import PatientBookings from '../Components/patientMyBookingsComponent';
-import PatientMyAppointments from '../Components/patientMyAppointmentsComponent';
+import DoctorShedule from '../Common/doctorSheduleComponent';
+import PatientBookings from './patientMyBookingsComponent';
+import PatientMyAppointments from './patientMyAppointmentsComponent';
 import { useState } from "react";           
 import { Slot } from "@/app/Models/Slot";   
 

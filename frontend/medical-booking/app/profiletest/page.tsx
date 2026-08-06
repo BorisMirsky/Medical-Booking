@@ -2,7 +2,7 @@
 "use client"
 
 import React from 'react';
-import CollapseElement from '../Components/testCollapseComponent3';
+import CollapseElement from '../Components/Test/testCollapseComponent3';
 import { Space } from 'antd';
 import Title from "antd/es/typography/Title";
 

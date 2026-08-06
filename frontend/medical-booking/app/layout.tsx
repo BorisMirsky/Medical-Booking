@@ -6,8 +6,8 @@ import "./globals.css";
 import Layout, { Header, Content, Footer } from "antd/es/layout/layout";
 import { Menu } from "antd";
 import Link from "next/link";
-import CurrentUserComponent from './Components/NavbarCurrentUserComponent';
-import LogoutComponent from './Components/NavbarLogoutComponent';
+import CurrentUserComponent from './Components/Common/NavbarCurrentUserComponent';
+import LogoutComponent from './Components/Common/NavbarLogoutComponent';
 
 
 

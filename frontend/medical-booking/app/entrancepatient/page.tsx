@@ -2,7 +2,7 @@
 "use client"
 
 import React from 'react';
-import { UserLoginRequest, loginPatient } from "@/app/Services/service";   //loginResponse  loginUser, 
+import { UserLoginRequest, loginPatient } from "@/app/Services/service";   
 import { FormProps, Button, Form, Input, Space } from 'antd';
 import Title from "antd/es/typography/Title";
 import { useEffect, useState } from "react";

@@ -4,7 +4,7 @@ import React from 'react';
 import { MedicalRecordRequest, createMedicalRecord, FormMedicalRecordProps } from "@/app/Services/service";
 import { FormProps, InputNumber, Button, Form, Input, Space } from "antd";
 const { TextArea } = Input;
-import "../globals.css";
+import "@/app/globals.css";
 import { useState } from "react";   
 
 

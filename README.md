@@ -33,8 +33,8 @@
 1. Склонировать
 2. Поставить пакеты и зависимости:
 - Предполагается, что уже установленые платформы `.Net` и `Node.js`.
-- `VS Community` должна сама подхватить и поставить пакеты. Если этого не произошло, то вызывается консоль разработчика 'crtl+`'. Там выполнить `dotnet restore`.
-- Войти в папку 'Medical-Booking\frontend\medical-booking\node_modules' и выполнить 'npm install'.
+- `VS Community` должна сама подхватить и поставить пакеты. Если этого не произошло, то вызывается консоль разработчика "crtl+`". Там выполнить `dotnet restore`.
+- Войти в папку 'Medical-Booking\frontend\medical-booking\node_modules' и выполнить `npm install`.
 
 
 

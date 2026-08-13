@@ -67,6 +67,28 @@ export interface AdminRegisterRequest {
     password: string;
 }
 
+export interface TableDataType {
+    key: number;
+    n: number;
+    doctorusername: string;
+    doctorspeciality: string;
+    date: string;
+    timeslotDatetimeStart: string;
+}
+
+export interface TableBookingDataType {
+    key: number;
+    n: number;
+    username: string;
+    speciality: string;
+    timeslotId: string;
+    isBooked: string;
+    timeslotStart: string;
+    timeslotStop: string;
+    cancel: string;
+}
+
+
 export interface DataType {
     key: number;
     n: number;
